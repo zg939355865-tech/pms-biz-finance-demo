@@ -7,6 +7,7 @@
     "site:prepare": "node scripts/hosting/prepare-site-assets.mjs",
     "prebuild": "npm run site:prepare",
     "build": "vinext build",
+    "postbuild": "node scripts/hosting/finalize-site-build.mjs",
     "dev": "npm run site:prepare && vinext dev",
     "start": "vinext start",
     "page:build": "node scripts/generate/page-from-schema.mjs",
