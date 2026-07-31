@@ -11,6 +11,10 @@ if (!relativePublic || relativePublic.startsWith('..') || path.isAbsolute(relati
 
 fs.rmSync(publicRoot, { recursive: true, force: true });
 fs.mkdirSync(publicRoot, { recursive: true });
+fs.copyFileSync(
+  path.resolve(workspaceRoot, 'hosting', 'index.html'),
+  path.join(publicRoot, 'index.html')
+);
 
 function copyDirectory(sourceRoot, targetRoot) {
   fs.mkdirSync(targetRoot, { recursive: true });
