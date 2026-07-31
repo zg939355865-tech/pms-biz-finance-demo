@@ -3,4 +3,6 @@ public/
 dist/
 .vinext/
 .vite/
+.next/
+next-env.d.ts
 *.tgz
