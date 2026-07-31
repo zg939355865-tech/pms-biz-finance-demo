@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>组件总览</title>
+  <link rel="stylesheet" href="../components/tokens.css" />
+  <link rel="stylesheet" href="../components/base.css" />
+  <link rel="stylesheet" href="../components/layout.css" />
+  <link rel="stylesheet" href="../components/components.css" />
+</head>
+<body>
+  <main class="pro-content">
+    <header class="pro-page-header">
+      <div class="pro-breadcrumb">Ant Design Pro v2 / 设计系统</div>
+      <h1 class="pro-page-title">组件总览</h1>
+      <p class="pro-page-description">展示参考包已提供的基础组件、反馈组件和 Pro 级组合组件。业务页面按需选用，不要求全部加载。</p>
+    </header>
+
+    <section class="pro-card">
+      <div class="pro-card-header">按钮与操作</div>
+      <div class="pro-card-body">
+        <button class="pro-btn pro-btn-primary">主按钮</button>
+        <button class="pro-btn">次按钮</button>
+        <button class="pro-btn pro-btn-dashed">虚线按钮</button>
+        <button class="pro-btn pro-btn-danger">危险操作</button>
+        <button class="pro-btn pro-btn-link">链接按钮</button>
+        <button class="pro-btn" disabled>禁用</button>
+        <button class="pro-btn pro-btn-sm">小按钮</button>
+        <button class="pro-btn pro-btn-lg">大按钮</button>
+        <span class="pro-divider-vertical"></span>
+        <div class="pro-dropdown">
+          <button class="pro-btn" data-action="toggle-dropdown">更多 ▾</button>
+          <div class="pro-dropdown-menu" hidden><a class="pro-dropdown-item" href="#">编辑</a><a class="pro-dropdown-item" href="#">复制</a><a class="pro-dropdown-item" href="#">删除</a></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pro-card">
+      <div class="pro-card-header">表单控件</div>
+      <div class="pro-card-body">
+        <div class="pro-form-grid">
+          <div class="pro-form-item"><label class="pro-required">文本输入</label><input class="pro-input" placeholder="请输入" /></div>
+          <div class="pro-form-item"><label>选择器</label><select class="pro-select"><option>请选择</option><option>选项一</option></select></div>
+          <div class="pro-form-item"><label>日期</label><input class="pro-date-picker" type="date" /></div>
+          <div class="pro-form-item"><label>数值</label><input class="pro-input-number" type="number" value="100" /></div>
+          <div class="pro-form-item pro-span-2"><label>文本域</label><textarea class="pro-textarea" placeholder="请输入说明"></textarea><div class="pro-help">帮助说明</div></div>
+          <div class="pro-form-item"><label>选择控件</label><label class="pro-checkbox"><input type="checkbox" checked /> 复选框</label><label class="pro-radio"><input type="radio" checked /> 单选框</label></div>
+          <div class="pro-form-item"><label>开关</label><span class="pro-switch checked"></span></div>
+          <div class="pro-form-item pro-span-2"><label>组合输入</label><div class="pro-input-group"><select class="pro-select"><option>https://</option></select><input class="pro-input" value="example.com" /><button class="pro-btn">访问</button></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pro-card">
+      <div class="pro-card-header">状态与反馈</div>
+      <div class="pro-card-body">
+        <div class="pro-grid pro-grid-2">
+          <div class="pro-alert"><strong>信息提示</strong>用于普通操作说明。</div>
+          <div class="pro-alert success"><strong>成功提示</strong>操作已成功完成。</div>
+          <div class="pro-alert warning"><strong>警告提示</strong>请关注当前业务状态。</div>
+          <div class="pro-alert error"><strong>错误提示</strong>操作失败，请检查输入。</div>
+        </div>
+        <div class="pro-divider"></div>
+        <span class="pro-tag blue">进行中</span> <span class="pro-tag green">已完成</span> <span class="pro-tag orange">待审批</span> <span class="pro-tag red">异常</span>
+        <p><span class="pro-badge success">正常</span>　<span class="pro-badge processing">处理中</span>　<span class="pro-badge warning">警告</span>　<span class="pro-badge error">失败</span></p>
+        <div class="pro-progress"><div class="pro-progress-bar pro-progress-68"></div></div>
+      </div>
+    </section>
+
+    <section class="pro-card">
+      <div class="pro-card-header">数据展示</div>
+      <div class="pro-card-body">
+        <div class="pro-grid pro-grid-4">
+          <div><div class="pro-stat-label">总资产</div><div class="pro-stat-value">12,680</div><div class="pro-stat-meta">较昨日 +8%</div></div>
+          <div><div class="pro-stat-label">运行设备</div><div class="pro-stat-value">1,286</div><div class="pro-stat-meta">运行率 96%</div></div>
+          <div><div class="pro-stat-label">待办任务</div><div class="pro-stat-value">32</div><div class="pro-stat-meta">今日新增 6</div></div>
+          <div><div class="pro-stat-label">异常数量</div><div class="pro-stat-value">8</div><div class="pro-stat-meta">较昨日 -2</div></div>
+        </div>
+        <div class="pro-divider"></div>
+        <div class="pro-table-wrap"><table class="pro-table"><thead><tr><th>编号</th><th>名称</th><th>状态</th><th class="number">数量</th><th>操作</th></tr></thead><tbody><tr><td><a href="#">NO-001</a></td><td>示例数据</td><td><span class="pro-badge success">正常</span></td><td class="number">128</td><td><button class="pro-btn pro-btn-link" type="button">删除</button></td></tr></tbody></table></div>
+        <div class="pro-pagination"><span class="pro-page-item">‹</span><span class="pro-page-item active">1</span><span class="pro-page-item">2</span><span class="pro-page-item">›</span></div>
+      </div>
+    </section>
+
+    <section class="pro-card">
+      <div class="pro-card-header">Pro 组合组件</div>
+      <div class="pro-card-body">
+        <div class="pro-grid pro-grid-3">
+          <div class="pro-card-inner"><div class="pro-card-body"><div class="pro-number-info"><div><div class="pro-stat-label">支付笔数</div><div class="pro-number-info-main">6,560</div></div><span class="pro-trend up">12%</span></div></div></div>
+          <div class="pro-card-inner"><div class="pro-card-body"><div class="pro-tag-select"><span class="pro-tag selected">全部</span><span class="pro-tag">设备</span><span class="pro-tag">工单</span><span class="pro-tag">备件</span></div></div></div>
+          <div class="pro-card-inner"><div class="pro-card-body"><div class="pro-avatar-group"><span class="pro-avatar">张</span><span class="pro-avatar">李</span><span class="pro-avatar">王</span><span class="pro-avatar">+5</span></div></div></div>
+        </div>
+        <div class="pro-divider"></div>
+        <div class="pro-grid pro-grid-2">
+          <div class="pro-notice-list"><div class="pro-notice-item unread"><span class="pro-avatar pro-avatar-sm">系</span><div><strong>系统通知</strong><div class="pro-list-description">你有一条新的审批任务。</div></div></div><div class="pro-notice-item"><span class="pro-avatar pro-avatar-sm">任</span><div><strong>任务提醒</strong><div class="pro-list-description">设备盘点任务即将到期。</div></div></div></div>
+          <div><div class="pro-header-search"><input class="pro-input" placeholder="站内搜索" /></div><div class="pro-divider"></div><div class="pro-editable-links"><a href="#">设备台账</a><a href="#">维修工单</a><a href="#">备件库存</a><a href="#">＋ 添加</a></div></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="pro-grid pro-grid-2">
+      <section class="pro-card"><div class="pro-card-header">时间轴</div><div class="pro-card-body"><ul class="pro-timeline"><li class="pro-timeline-item"><strong>提交申请</strong><div class="pro-list-description">2026-06-09 09:00</div></li><li class="pro-timeline-item"><strong>部门审批</strong><div class="pro-list-description">等待审批</div></li><li class="pro-timeline-item"><strong>完成</strong></li></ul></div></section>
+      <section class="pro-card"><div class="pro-card-header">折叠面板</div><div class="pro-card-body"><div class="pro-collapse-item"><div class="pro-collapse-header">基础信息</div><div class="pro-collapse-content">基础信息内容。</div></div><div class="pro-collapse-item"><div class="pro-collapse-header">业务信息</div><div class="pro-collapse-content" hidden>业务信息内容。</div></div></div></section>
+    </div>
+
+    <section class="pro-card">
+      <div class="pro-card-header">上传、加载与空状态</div>
+      <div class="pro-card-body">
+        <div class="pro-grid pro-grid-3">
+          <div class="pro-upload">＋ 点击或拖拽文件上传</div>
+          <div><div class="pro-skeleton-line"></div><div class="pro-skeleton-line"></div><div class="pro-skeleton-line short"></div></div>
+          <div class="pro-empty">暂无数据</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pro-card">
+      <div class="pro-card-header">弹层</div>
+      <div class="pro-card-body"><button class="pro-btn" data-action="toggle-modal" data-target="#demoModal">打开弹窗</button><button class="pro-btn" data-action="toggle-drawer" data-target="#demoDrawer">打开抽屉</button><span class="pro-tooltip">提示文字<span class="pro-tooltip-text">Tooltip 提示内容</span></span></div>
+    </section>
+  </main>
+
+  <div class="pro-modal-mask" id="demoModal" hidden><div class="pro-modal"><div class="pro-modal-header">弹窗标题</div><div class="pro-modal-body">弹窗内容区域。</div><div class="pro-modal-footer"><button class="pro-btn" data-close>取消</button><button class="pro-btn pro-btn-primary" data-close>确认</button></div></div></div>
+  <div class="pro-drawer-mask" id="demoDrawer" hidden><aside class="pro-drawer"><div class="pro-drawer-header">抽屉标题</div><div class="pro-drawer-body">抽屉内容区域。适合详情、配置和辅助操作。</div></aside></div>
+  <script src="../components/mock.js"></script>
+</body>
+</html>
+

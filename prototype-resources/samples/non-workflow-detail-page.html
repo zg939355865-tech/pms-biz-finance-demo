@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>非流程详情页模板</title>
+  <link rel="stylesheet" href="../components/tokens.css" />
+  <link rel="stylesheet" href="../components/base.css" />
+  <link rel="stylesheet" href="../components/layout.css" />
+  <link rel="stylesheet" href="../components/components.css" />
+</head>
+<body>
+  <main class="page">
+    <header class="page-header">
+      <h1 class="page-title">新增出库</h1>
+      <div class="flex items-center gap-sm">
+        <button class="btn" id="backButton">返回列表</button>
+        <button class="btn btn-primary" id="submitButton">提交</button>
+      </div>
+    </header>
+
+    <section class="detail-section">
+      <div class="detail-section-title">基础信息</div>
+      <div class="detail-form-grid">
+        <div class="detail-field">
+          <span class="label">出库单号</span>
+          <span class="value">提交后生成</span>
+        </div>
+        <div class="detail-field">
+          <span class="label required">出库类型</span>
+          <select class="form-select" id="businessType">
+            <option value="">请选择</option>
+            <option>领用出库</option>
+            <option>退货出库</option>
+          </select>
+        </div>
+        <div class="detail-field">
+          <span class="label required">仓库</span>
+          <select class="form-select" id="warehouse">
+            <option value="">请选择</option>
+            <option>原料仓</option>
+            <option>备件仓</option>
+          </select>
+        </div>
+        <div class="detail-field">
+          <span class="label required">出库日期</span>
+          <input class="form-input" id="businessDate" type="date" value="2026-06-11" />
+        </div>
+        <div class="detail-field">
+          <span class="label">创建人</span>
+          <span class="value">张工</span>
+        </div>
+        <div class="detail-field">
+          <span class="label">创建时间</span>
+          <span class="value">2026-06-11 14:34</span>
+        </div>
+        <div class="detail-field">
+          <span class="label">所属工厂</span>
+          <span class="value">光伏一厂</span>
+        </div>
+        <div class="detail-field">
+          <span class="label">状态</span>
+          <span class="value"><span class="tag tag-default">待提交</span></span>
+        </div>
+        <div class="detail-field">
+          <span class="label">备注</span>
+          <input class="form-input" id="remark" placeholder="请输入备注" />
+        </div>
+      </div>
+    </section>
+
+    <section class="detail-section">
+      <div class="detail-section-title">
+        <span>出库明细</span>
+        <button class="btn btn-primary" id="selectDataButton">选择物料</button>
+      </div>
+      <div class="table-scroll">
+        <table class="table detail-line-table">
+          <thead>
+            <tr>
+              <th class="selection-column"><input type="checkbox" id="detailSelectAll" aria-label="全选出库明细" /></th>
+              <th>序号</th>
+              <th>物料编码</th>
+              <th>物料名称</th>
+              <th>规格</th>
+              <th>单位</th>
+              <th>库位</th>
+              <th>批次</th>
+              <th class="col-right">库存数量</th>
+              <th class="col-right">申请数量</th>
+              <th class="col-right">出库数量</th>
+              <th>备注</th>
+              <th class="sticky-operation">操作</th>
+            </tr>
+          </thead>
+          <tbody id="detailBody">
+            <tr class="detail-data-row">
+              <td class="selection-column"><input class="detail-row-check" type="checkbox" aria-label="选择第 1 条明细" /></td>
+              <td>1</td>
+              <td><a href="#">M-001</a></td>
+              <td>单晶硅片</td>
+              <td>182mm</td>
+              <td>片</td>
+              <td>A-01-02</td>
+              <td>B20260601</td>
+              <td class="col-right">1200</td>
+              <td class="col-right">200</td>
+              <td class="col-right">200</td>
+              <td>-</td>
+              <td class="sticky-operation"><button class="btn btn-danger-text detail-delete" type="button">删除</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="../components/mock.js"></script>
+  <script>
+    const detailBody = document.getElementById('detailBody');
+    const detailSelectAll = document.getElementById('detailSelectAll');
+
+    function getDetailChecks() {
+      return Array.from(detailBody.querySelectorAll('.detail-row-check'));
+    }
+
+    function refreshDetailSelection() {
+      const detailChecks = getDetailChecks();
+      const selectedCount = detailChecks.filter(function (item) { return item.checked; }).length;
+      detailSelectAll.checked = detailChecks.length > 0 && selectedCount === detailChecks.length;
+      detailSelectAll.indeterminate = selectedCount > 0 && selectedCount < detailChecks.length;
+    }
+
+    function refreshDetailRows() {
+      const rows = Array.from(detailBody.querySelectorAll('.detail-data-row'));
+      rows.forEach(function (row, index) {
+        row.children[1].textContent = String(index + 1);
+      });
+      if (rows.length === 0) {
+        detailBody.innerHTML = '<tr class="empty-row"><td colspan="13"><div class="empty">暂无出库明细，请点击“选择物料”添加</div></td></tr>';
+        detailSelectAll.checked = false;
+        detailSelectAll.indeterminate = false;
+      }
+    }
+
+    detailSelectAll.addEventListener('change', function () {
+      getDetailChecks().forEach(function (item) { item.checked = detailSelectAll.checked; });
+      refreshDetailSelection();
+    });
+    detailBody.addEventListener('change', function (event) {
+      if (event.target.classList.contains('detail-row-check')) refreshDetailSelection();
+    });
+    detailBody.addEventListener('click', function (event) {
+      if (!event.target.classList.contains('detail-delete')) return;
+      if (!window.confirm('确认删除该条出库明细吗？')) return;
+      event.target.closest('.detail-data-row').remove();
+      refreshDetailRows();
+      refreshDetailSelection();
+      showMessage('明细已删除');
+    });
+    document.getElementById('backButton').addEventListener('click', function () {
+      location.href = 'list-page.html';
+    });
+    document.getElementById('selectDataButton').addEventListener('click', function () {
+      location.href = 'data-select-modal.html';
+    });
+    document.getElementById('submitButton').addEventListener('click', function () {
+      if (!document.getElementById('businessType').value || !document.getElementById('warehouse').value) {
+        showMessage('请完善必填信息');
+        return;
+      }
+      showMessage('提交成功');
+    });
+  </script>
+</body>
+</html>

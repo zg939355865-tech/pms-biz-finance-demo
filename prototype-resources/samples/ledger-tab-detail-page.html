@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>台账多页签详情模板</title>
+  <link rel="stylesheet" href="../components/tokens.css" />
+  <link rel="stylesheet" href="../components/base.css" />
+  <link rel="stylesheet" href="../components/layout.css" />
+  <link rel="stylesheet" href="../components/components.css" />
+</head>
+<body>
+  <main class="page">
+    <header class="page-header">
+      <h1 class="page-title">设备台账</h1>
+      <div class="flex items-center gap-sm">
+        <button class="btn" id="backButton">返回列表</button>
+        <button class="btn btn-primary" id="saveButton">保存</button>
+      </div>
+    </header>
+
+    <section class="detail-section detail-section-tabs">
+      <nav class="pro-tabs" aria-label="详情页签">
+        <button class="pro-tab active" data-tab="basic">基础信息</button>
+        <button class="pro-tab" data-tab="documents">技术文档</button>
+        <button class="pro-tab" data-tab="bom">BOM表</button>
+        <button class="pro-tab" data-tab="parameters">工艺参数</button>
+        <button class="pro-tab" data-tab="history">设备履历</button>
+      </nav>
+
+      <div class="detail-section-panels">
+        <section class="detail-line-panel" data-panel="basic">
+          <div class="detail-form-grid">
+            <div class="detail-field"><span class="label required">设备编码</span><input class="form-input" value="保存后生成" disabled /></div>
+            <div class="detail-field"><span class="label required">设备名称</span><input class="form-input" placeholder="请输入设备名称" /></div>
+            <div class="detail-field"><span class="label">设备状态</span><span class="value"><span class="tag tag-success">在用</span></span></div>
+            <div class="detail-field"><span class="label required">设备验收单号</span><div class="form-picker"><input class="form-input" value="YS-20260618-001" readonly /><button class="btn picker-button" type="button">选择</button></div></div>
+            <div class="detail-field"><span class="label">设备分类</span><input class="form-input" value="生产设备 / 动力设备" disabled /></div>
+            <div class="detail-field"><span class="label">规格型号</span><input class="form-input" value="AC-1000" disabled /></div>
+            <div class="detail-field"><span class="label">资产编码</span><input class="form-input" value="-" disabled /></div>
+            <div class="detail-field"><span class="label">原值</span><input class="form-input" value="-" disabled /></div>
+            <div class="detail-field"><span class="label">净值</span><input class="form-input" value="-" disabled /></div>
+            <div class="detail-field"><span class="label required">使用部门</span><div class="form-picker"><input class="form-input" placeholder="请选择使用部门" readonly /><button class="btn picker-button" type="button">选择</button></div></div>
+            <div class="detail-field"><span class="label required">安装位置</span><div class="form-picker"><input class="form-input" value="一厂 / 动力站" readonly /><button class="btn picker-button" type="button">选择</button></div></div>
+            <div class="detail-field"><span class="label required">责任人</span><div class="form-picker"><input class="form-input" value="张工" readonly /><button class="btn picker-button" type="button">选择</button></div></div>
+            <div class="detail-field pro-span-3"><span class="label">备注</span><input class="form-input" placeholder="请输入备注" /></div>
+          </div>
+        </section>
+
+        <section class="detail-line-panel" data-panel="documents" hidden>
+          <div class="template-toolbar"><span></span><div class="template-actions"><button class="btn btn-primary" id="uploadButton">新增文档</button></div></div>
+          <div class="table-scroll"><table class="table"><thead><tr><th>序号</th><th>文档名称</th><th>大小</th><th>上传人</th><th>上传时间</th><th class="sticky-operation">操作</th></tr></thead><tbody><tr><td>1</td><td>设备说明书.pdf</td><td>2.4MB</td><td>张工</td><td>2026-06-18 09:00</td><td class="sticky-operation"><button class="btn btn-danger-text">删除</button></td></tr></tbody></table></div>
+        </section>
+
+        <section class="detail-line-panel" data-panel="bom" hidden>
+          <div class="template-toolbar"><span></span><div class="template-actions"><button class="btn btn-primary" id="bomButton">BOM设置</button></div></div>
+          <div class="table-scroll"><table class="table"><thead><tr><th>序号</th><th>备件编码</th><th>备件名称</th><th>规格型号</th><th>单位</th><th class="col-right">数量</th></tr></thead><tbody><tr><td>1</td><td>SP-001</td><td>过滤芯</td><td>F-100</td><td>个</td><td class="col-right">2</td></tr></tbody></table></div>
+        </section>
+
+        <section class="detail-line-panel" data-panel="parameters" hidden>
+          <div class="template-toolbar"><span></span><div class="template-actions"><button class="btn btn-primary" id="parameterButton">新增参数</button></div></div>
+          <div class="table-scroll"><table class="table"><thead><tr><th>序号</th><th>参数编码</th><th>参数名称</th><th>单位</th><th>最新值</th><th>最新数据时间</th><th class="sticky-operation">操作</th></tr></thead><tbody><tr><td>1</td><td>PAR-001</td><td>运行压力</td><td>MPa</td><td>0.8</td><td>2026-06-18 09:00</td><td class="sticky-operation"><button class="btn btn-danger-text">删除</button></td></tr></tbody></table></div>
+        </section>
+
+        <section class="detail-line-panel" data-panel="history" hidden>
+          <div class="table-scroll"><table class="table"><thead><tr><th>序号</th><th>类型</th><th>工单号</th><th>发生时间</th><th>完成时间</th></tr></thead><tbody><tr><td>1</td><td>维修</td><td><a href="#">WX-20260618-001</a></td><td>2026-06-18 08:30</td><td>2026-06-18 10:00</td></tr></tbody></table></div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <script src="../components/mock.js"></script>
+  <script>
+    document.querySelectorAll('[data-tab]').forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        document.querySelectorAll('[data-tab]').forEach(function (item) { item.classList.remove('active'); });
+        document.querySelectorAll('[data-panel]').forEach(function (panel) { panel.hidden = panel.dataset.panel !== tab.dataset.tab; });
+        tab.classList.add('active');
+      });
+    });
+    document.getElementById('backButton').addEventListener('click', function () { location.href = 'list-page.html'; });
+    document.getElementById('saveButton').addEventListener('click', function () { showMessage('保存成功'); });
+  </script>
+</body>
+</html>

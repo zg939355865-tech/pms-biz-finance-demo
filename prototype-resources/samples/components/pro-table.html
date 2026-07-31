@@ -1,0 +1,23 @@
+<section class="card pro-table-card" data-component="ProTable" data-component-source="prototype-resources/samples/components/pro-table.html" data-page-size="5" data-row-policy="status-one-each-or-five" data-operation-column="delete-only-fixed-right" data-fixed-columns="selection-and-identifier-left" data-entry-policy="identifier-link" data-delete-policy="draft-only-for-workflow">
+  <div class="pro-table-scroll" data-scroll-axis="x">
+    <table class="table pro-table">
+      <thead>
+        <tr>{{COLUMNS}}</tr>
+      </thead>
+      <tbody>{{ROWS}}</tbody>
+      {{SUMMARY_ROW}}
+    </table>
+  </div>
+  <div class="pro-table-footer">
+    <div class="pro-table-selection">{{TOTAL_INFO}}</div>
+    <div class="pro-table-pagination">
+      <label class="pro-page-size-label">
+        <span>每页</span>
+        <select class="select page-size-select" aria-label="每页显示条数">
+          <option value="5" selected>5 条/页</option>
+        </select>
+      </label>
+      {{PAGINATION}}
+    </div>
+  </div>
+</section>

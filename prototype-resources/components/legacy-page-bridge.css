@@ -1,0 +1,128 @@
+/*
+ * PMS historical-page compatibility layer.
+ * Keeps specialized dashboard layouts intact while aligning shared controls,
+ * surfaces and tables with the project resource center.
+ */
+html[data-legacy-bridge="true"] {
+  color-scheme: light;
+}
+
+html[data-legacy-bridge="true"] body {
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-base);
+  color: var(--color-text-primary);
+  background: var(--color-bg-page);
+}
+
+html[data-legacy-bridge="true"][data-page-theme="screen"] {
+  color-scheme: dark;
+}
+
+html[data-legacy-bridge="true"][data-page-theme="screen"] body {
+  color: var(--color-screen-text);
+  background: var(--color-screen-bg);
+}
+
+html[data-legacy-bridge="true"] :is(
+  .search-panel,
+  .search-card,
+  .filter-panel,
+  .filter-card,
+  .search-area,
+  .table-card,
+  .content-card,
+  .detail-header
+) {
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+}
+
+html[data-legacy-bridge="true"] :is(input, select, textarea) {
+  border-color: var(--color-border);
+  border-radius: var(--radius-base);
+  color: var(--color-text-primary);
+  font-family: inherit;
+  font-size: var(--font-size-body);
+}
+
+html[data-legacy-bridge="true"] :is(input, select, textarea):focus {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-control-focus);
+  outline: 0;
+}
+
+html[data-legacy-bridge="true"] :is(button, .btn) {
+  border-radius: var(--radius-base);
+  font-family: inherit;
+  font-size: var(--font-size-body);
+}
+
+html[data-legacy-bridge="true"] :is(button, .btn):focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+html[data-legacy-bridge="true"] :is(.btn-primary, .btn-search, .search-btn) {
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+  color: #fff;
+}
+
+html[data-legacy-bridge="true"] :is(.btn-primary, .btn-search, .search-btn):hover {
+  border-color: var(--color-primary-hover);
+  background: var(--color-primary-hover);
+}
+
+html[data-legacy-bridge="true"] table {
+  color: var(--color-text-primary);
+  font-size: var(--font-size-body);
+}
+
+html[data-legacy-bridge="true"] table thead th {
+  height: 48px;
+  color: var(--color-text-secondary);
+  background: var(--bg-table-header);
+  font-weight: 600;
+  vertical-align: middle;
+}
+
+html[data-legacy-bridge="true"] table tbody td {
+  height: 48px;
+  border-color: var(--color-border-light);
+  vertical-align: middle;
+}
+
+html[data-legacy-bridge="true"] table tbody tr:hover > * {
+  background: var(--primary-bg);
+}
+
+html[data-legacy-bridge="true"] .legacy-cell-ellipsis {
+  max-width: var(--legacy-cell-max-width, 240px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+html[data-legacy-bridge="true"] :is(.status-tag, .status-badge, .badge) {
+  border-radius: var(--radius-tag);
+  font-weight: 400;
+}
+
+html[data-legacy-bridge="true"] :is(.page-container, .container-fluid) {
+  min-width: 0;
+}
+
+html[data-legacy-bridge="true"][data-page-theme="screen"] table {
+  color: inherit;
+}
+
+html[data-legacy-bridge="true"][data-page-theme="screen"] table thead th {
+  color: var(--color-screen-text);
+  background: var(--color-screen-panel-strong);
+}
+
+html[data-legacy-bridge="true"][data-page-theme="screen"] table tbody td {
+  border-color: var(--color-screen-panel-strong);
+}

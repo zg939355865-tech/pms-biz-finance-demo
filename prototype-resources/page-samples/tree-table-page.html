@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>树表管理页模板</title>
+  <link rel="stylesheet" href="../components/tokens.css" />
+  <link rel="stylesheet" href="../components/base.css" />
+  <link rel="stylesheet" href="../components/layout.css" />
+  <link rel="stylesheet" href="../components/components.css" />
+</head>
+<body>
+  <main class="page">
+    <header class="page-header">
+      <h1 class="page-title">位置管理</h1>
+      <div class="flex items-center gap-sm">
+        <button class="btn" id="refreshButton">刷新</button>
+        <button class="btn btn-primary" id="createButton">新增位置</button>
+      </div>
+    </header>
+
+    <section class="pro-layout-split">
+      <aside class="pro-card pro-side-card">
+        <div class="pro-card-header">位置树</div>
+        <div class="pro-card-body">
+          <div class="form-group">
+            <input class="form-input" id="treeKeyword" placeholder="搜索位置名称" />
+          </div>
+          <ul class="pro-tree" id="locationTree">
+            <li class="pro-tree-node active" data-node="factory">光伏一厂</li>
+            <li class="pro-tree-node level-1" data-node="workshop">生产车间</li>
+            <li class="pro-tree-node level-2" data-node="line">电池一线</li>
+            <li class="pro-tree-node level-1" data-node="warehouse">备件仓库</li>
+          </ul>
+        </div>
+      </aside>
+
+      <section class="pro-card pro-main-card">
+        <div class="pro-card-header">
+          <span>位置列表</span>
+          <div class="template-actions">
+            <span class="pro-list-description" id="currentNodeText">当前：光伏一厂</span>
+            <button class="btn" type="button">导出</button>
+          </div>
+        </div>
+        <div class="pro-card-body">
+          <div class="search-bar">
+            <div class="form-group">
+              <label for="locationCode">位置编码</label>
+              <input class="form-input" id="locationCode" placeholder="请输入位置编码" />
+            </div>
+            <div class="form-group">
+              <label for="locationName">位置名称</label>
+              <input class="form-input" id="locationName" placeholder="请输入位置名称" />
+            </div>
+            <div class="form-group">
+              <label for="enabledStatus">状态</label>
+              <select class="form-select" id="enabledStatus">
+                <option value="">全部状态</option>
+                <option>启用</option>
+                <option>停用</option>
+              </select>
+            </div>
+            <div class="form-actions">
+              <button class="btn" id="queryButton">查询</button>
+              <button class="btn" id="resetButton">重置</button>
+            </div>
+          </div>
+          <div class="table-scroll">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>位置编码</th>
+                  <th>位置名称</th>
+                  <th>上级位置</th>
+                  <th>位置路径</th>
+                  <th>状态</th>
+                  <th>创建人</th>
+                  <th>创建时间</th>
+                  <th class="sticky-operation">操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><a href="#">LOC-001</a></td>
+                  <td>电池一线</td>
+                  <td>生产车间</td>
+                  <td>光伏一厂 / 生产车间 / 电池一线</td>
+                  <td><span class="tag tag-success">启用</span></td>
+                  <td>张工</td>
+                  <td>2026-06-18 09:00</td>
+                  <td class="sticky-operation"><button class="btn btn-text">编辑</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script src="../components/mock.js"></script>
+  <script>
+    document.getElementById('locationTree').addEventListener('click', function (event) {
+      if (!event.target.classList.contains('pro-tree-node')) return;
+      document.querySelectorAll('.pro-tree-node').forEach(function (node) { node.classList.remove('active'); });
+      event.target.classList.add('active');
+      document.getElementById('currentNodeText').textContent = '当前：' + event.target.textContent.trim();
+    });
+    document.getElementById('queryButton').addEventListener('click', function () { showMessage('查询完成'); });
+    document.getElementById('resetButton').addEventListener('click', function () {
+      document.querySelectorAll('.search-bar input, .search-bar select').forEach(function (control) { control.value = ''; });
+      showMessage('已重置筛选条件');
+    });
+  </script>
+</body>
+</html>

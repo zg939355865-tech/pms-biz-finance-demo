@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-legacy-bridge="true" data-page-theme="screen">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>智能体驾驶舱 - PMS业财一体化</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+  <script src="../assets/mapdata.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Fira+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Fira Sans', 'PingFang SC', sans-serif;
+      background: #0a0e27;
+      color: #e2e8f0;
+      overflow: hidden;
+    }
+
+    .page-container { padding: 16px; height: 100vh; display: flex; flex-direction: column; }
+
+    /* === 顶部指标卡片区 === */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 16px;
+      flex-shrink: 0;
+    }
+
+    .stat-card {
+      background: linear-gradient(135deg, rgba(30,64,175,0.3) 0%, rgba(30,64,175,0.1) 100%);
+      border: 1px solid rgba(59,130,246,0.5);
+      border-radius: 8px;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #3B82F6, transparent);
+    }
+    .stat-card:nth-child(2)::before { background: linear-gradient(90deg, transparent, #10B981, transparent); }
+    .stat-card:nth-child(3)::before { background: linear-gradient(90deg, transparent, #F59E0B, transparent); }
+    .stat-card:nth-child(4)::before { background: linear-gradient(90deg, transparent, #8B5CF6, transparent); }
+
+    .stat-icon {
+      width: 56px; height: 56px;
+      border-radius: 8px;
+      background: rgba(59,130,246,0.2);
+      display: flex; align-items: center; justify-content: center;
+      border: 1px solid rgba(59,130,246,0.3);
+    }
+    .stat-icon i { font-size: 24px; color: #3B82F6; }
+    .stat-card:nth-child(2) .stat-icon { background: rgba(16,185,129,0.2); border-color: rgba(16,185,129,0.3); }
+    .stat-card:nth-child(2) .stat-icon i { color: #10B981; }
+    .stat-card:nth-child(3) .stat-icon { background: rgba(245,158,11,0.2); border-color: rgba(245,158,11,0.3); }
+    .stat-card:nth-child(3) .stat-icon i { color: #F59E0B; }
+    .stat-card:nth-child(4) .stat-icon { background: rgba(139,92,246,0.2); border-color: rgba(139,92,246,0.3); }
+    .stat-card:nth-child(4) .stat-icon i { color: #8B5CF6; }
+
+    .stat-info { display: flex; flex-direction: column; }
+    .stat-num {
+      font-size: 32px; font-weight: 700;
+      color: #fff;
+      font-family: 'Fira Code', monospace;
+      text-shadow: 0 0 20px rgba(59,130,246,0.5);
+      line-height: 1.2;
+    }
+    .stat-card:nth-child(2) .stat-num { text-shadow: 0 0 20px rgba(16,185,129,0.5); }
+    .stat-card:nth-child(3) .stat-num { text-shadow: 0 0 20px rgba(245,158,11,0.5); }
+    .stat-card:nth-child(4) .stat-num { text-shadow: 0 0 20px rgba(139,92,246,0.5); }
+    .stat-label { font-size: 14px; color: #94A3B8; margin-top: 4px; }
+
+    /* === 主内容区 === */
+    .main-content {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 200px 1fr 220px;
+      gap: 16px;
+      min-height: 0;
+      height: 100%;
+    }
+
+    .side-panel {
+      background: linear-gradient(180deg, rgba(30,64,175,0.2) 0%, rgba(30,64,175,0.05) 100%);
+      border: 1px solid rgba(59,130,246,0.2);
+      border-radius: 8px;
+      padding: 16px;
+      overflow-y: auto;
+    }
+    .side-panel::-webkit-scrollbar { width: 4px; }
+    .side-panel::-webkit-scrollbar-thumb { background: rgba(59,130,246,0.3); border-radius: 2px; }
+
+    .panel-title {
+      font-size: 14px; font-weight: 600;
+      color: #3B82F6;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(59,130,246,0.2);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .panel-title::before {
+      content: '';
+      width: 3px; height: 14px;
+      background: #3B82F6;
+      border-radius: 2px;
+      box-shadow: 0 0 8px #3B82F6;
+    }
+
+    .rank-list { list-style: none; padding: 0; margin: 0; }
+    .rank-item {
+      display: flex; align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .rank-item:last-child { border-bottom: none; }
+    .rank-num {
+      width: 20px; height: 20px;
+      border-radius: 4px;
+      background: rgba(59,130,246,0.2);
+      border: 1px solid rgba(59,130,246,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 600;
+      color: #64748B;
+      margin-right: 8px;
+      font-family: 'Fira Code', monospace;
+    }
+    .rank-num.top { background: #3B82F6; color: #fff; border-color: #3B82F6; box-shadow: 0 0 10px rgba(59,130,246,0.5); }
+    .rank-num.top2 { background: #10B981; color: #fff; border-color: #10B981; box-shadow: 0 0 10px rgba(16,185,129,0.5); }
+    .rank-num.top3 { background: #F59E0B; color: #fff; border-color: #F59E0B; box-shadow: 0 0 10px rgba(245,158,11,0.5); }
+    .rank-name { flex: 1; font-size: 13px; color: #CBD5E1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .rank-value { font-size: 13px; font-weight: 600; color: #3B82F6; margin-left: 8px; font-family: 'Fira Code', monospace; }
+    .rank-item:nth-child(2) .rank-value { color: #10B981; }
+    .rank-item:nth-child(3) .rank-value { color: #F59E0B; }
+
+    /* === 地图区 === */
+    .map-container {
+      background: linear-gradient(180deg, rgba(30,64,175,0.15) 0%, rgba(30,64,175,0.05) 100%);
+      border: 1px solid rgba(59,130,246,0.2);
+      border-radius: 8px;
+      padding: 16px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      min-height: 400px;
+    }
+    .map-container::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at center, rgba(59,130,246,0.05) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 1;
+    }
+    #mapChart { width: 100%; height: 100%; position: relative; z-index: 2; min-height: 350px; }
+
+    /* === 全屏按钮 === */
+    .fullscreen-btn {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      z-index: 100;
+      width: 36px;
+      height: 36px;
+      background: rgba(30,64,175,0.6);
+      border: 1px solid rgba(59,130,246,0.4);
+      border-radius: 6px;
+      color: #fff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .fullscreen-btn:hover {
+      background: rgba(59,130,246,0.8);
+      border-color: #3B82F6;
+    }
+    .fullscreen-btn i { font-size: 16px; }
+
+    /* === 全屏状态 === */
+    #cockpit-container.fullscreen {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      bottom: 0 !important;
+      z-index: 9999 !important;
+      background: #0a0e27;
+      padding: 20px;
+      overflow: hidden;
+    }
+    body.fullscreen-mode .fullscreen-btn { display: none; }
+
+    /* === 弹窗 === */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(4px);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 1000;
+    }
+    .modal-box {
+      background: linear-gradient(180deg, #1E293B 0%, #0F172A 100%);
+      border: 1px solid rgba(59,130,246,0.3);
+      border-radius: 12px;
+      width: 400px;
+      overflow: hidden;
+      box-shadow: 0 0 40px rgba(59,130,246,0.2), 0 25px 50px rgba(0,0,0,0.5);
+    }
+    .modal-header {
+      background: linear-gradient(90deg, rgba(59,130,246,0.3) 0%, rgba(59,130,246,0.1) 100%);
+      border-bottom: 1px solid rgba(59,130,246,0.2);
+      color: #fff;
+      padding: 16px 20px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .modal-header h3 { margin: 0; font-size: 16px; font-weight: 600; text-shadow: 0 0 10px rgba(59,130,246,0.5); }
+    .modal-close {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff; font-size: 16px;
+      cursor: pointer; padding: 4px 8px;
+      border-radius: 4px;
+      transition: all 0.2s;
+    }
+    .modal-close:hover { background: rgba(255,255,255,0.2); }
+    .modal-body { padding: 20px; }
+    .modal-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .modal-row:last-child { border-bottom: none; }
+    .modal-label { font-size: 14px; color: #94A3B8; }
+    .modal-value { font-size: 14px; font-weight: 600; color: #3B82F6; font-family: 'Fira Code', monospace; }
+
+    .map-loading {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      color: #3B82F6;
+      font-size: 14px;
+      z-index: 3;
+    }
+    .map-loading i { margin-right: 8px; }
+  </style>
+  <link rel="stylesheet" href="../prototype-resources/components/tokens.css">
+  <link rel="stylesheet" href="../prototype-resources/components/components.css">
+  <link rel="stylesheet" href="../prototype-resources/components/legacy-page-bridge.css">
+  <script defer src="../prototype-resources/components/legacy-page-bridge.js"></script>
+</head>
+<body>
+  <div id="app" class="page-container">
+    <button class="fullscreen-btn" @click="toggleFullscreen" :title="isFullscreen ? '退出全屏' : '全屏展示'">
+      <i :class="isFullscreen ? 'fas fa-compress-alt' : 'fas fa-expand-alt'"></i>
+    </button>
+
+    <div id="cockpit-container">
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fas fa-industry"></i></div>
+          <div class="stat-info">
+            <div class="stat-num">{{ stats.totalProjects }}</div>
+            <div class="stat-label">项目总数</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fas fa-robot"></i></div>
+          <div class="stat-info">
+            <div class="stat-num">{{ stats.deployedAgents }}</div>
+            <div class="stat-label">已部署智能体</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fas fa-microphone-alt"></i></div>
+          <div class="stat-info">
+            <div class="stat-num">{{ stats.runningAgents }}</div>
+            <div class="stat-label">控制中智能体</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fas fa-bolt"></i></div>
+          <div class="stat-info">
+            <div class="stat-num">{{ stats.savingEffect }}%</div>
+            <div class="stat-label">综合节能效果</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="main-content">
+      <div class="side-panel">
+        <div class="panel-title">区域分布 TOP10</div>
+        <ul class="rank-list">
+          <li class="rank-item" v-for="(item, index) in regionRanking" :key="index">
+            <span class="rank-num" :class="getTopClass(index)">{{ index + 1 }}</span>
+            <span class="rank-name">{{ item.province }}</span>
+            <span class="rank-value">{{ item.count }}</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="map-container" id="mapWrapper">
+        <div class="map-loading" v-if="mapLoading"><i class="fas fa-spinner fa-spin"></i>地图加载中...</div>
+        <div id="mapChart"></div>
+      </div>
+
+      <div class="side-panel">
+        <div class="panel-title">节能效果 TOP10</div>
+        <ul class="rank-list">
+          <li class="rank-item" v-for="(item, index) in savingRanking" :key="index">
+            <span class="rank-num" :class="getTopClass(index)">{{ index + 1 }}</span>
+            <span class="rank-name">{{ item.name }}</span>
+            <span class="rank-value">{{ item.effect }}%</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="modal-overlay" v-if="showModal" @click.self="showModal = false">
+      <div class="modal-box">
+        <div class="modal-header">
+          <h3>{{ currentFactory.name }}</h3>
+          <button class="modal-close" @click="showModal = false"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="modal-body">
+          <div class="modal-row"><span class="modal-label">运营规模</span><span class="modal-value">{{ currentFactory.scale }}</span></div>
+          <div class="modal-row"><span class="modal-label">部署智能体数量</span><span class="modal-value">{{ currentFactory.deployed }}</span></div>
+          <div class="modal-row"><span class="modal-label">控制智能体数量</span><span class="modal-value">{{ currentFactory.controlled }}</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 数字员工快捷入口 -->
+    <button class="digital-employee-btn" @click="openDigitalEmployee" title="打开数字员工">
+      <div class="digital-employee-icon">
+        <i class="fas fa-user-headset"></i>
+      </div>
+      <div class="digital-employee-text">
+        <div class="digital-employee-title">数字员工</div>
+        <div class="digital-employee-desc">智能问答 · 多轮对话</div>
+      </div>
+      <div class="digital-employee-arrow">
+        <i class="fas fa-chevron-right"></i>
+      </div>
+    </button>
+  </div>
+
+  <style>
+    /* 数字员工入口按钮 */
+    .digital-employee-btn {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.9) 0%, rgba(59, 130, 246, 0.9) 100%);
+      border: 1px solid rgba(59, 130, 246, 0.5);
+      border-radius: 12px;
+      color: #fff;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4);
+      transition: all 0.3s ease;
+      font-family: 'Fira Sans', 'PingFang SC', sans-serif;
+      display: none; /* 隐藏数字员工入口 */
+    }
+    .digital-employee-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(37, 99, 235, 0.5);
+      background: linear-gradient(135deg, rgba(37, 99, 235, 1) 0%, rgba(59, 130, 246, 1) 100%);
+    }
+    .digital-employee-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .digital-employee-icon i { font-size: 18px; }
+    .digital-employee-text { text-align: left; }
+    .digital-employee-title { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
+    .digital-employee-desc { font-size: 11px; opacity: 0.8; }
+    .digital-employee-arrow { margin-left: 8px; }
+    .digital-employee-arrow i { font-size: 14px; opacity: 0.8; }
+  </style>
+
+  <script>
+    const { createApp } = Vue
+    createApp({
+      data() {
+        return {
+          stats: { totalProjects: 128, deployedAgents: 384, runningAgents: 326, savingEffect: 23.5 },
+          regionRanking: [
+            { province: '广东省', count: 45 }, { province: '浙江省', count: 32 }, { province: '江苏省', count: 28 },
+            { province: '山东省', count: 21 }, { province: '河南省', count: 18 }, { province: '四川省', count: 15 },
+            { province: '湖北省', count: 12 }, { province: '湖南省', count: 10 }, { province: '安徽省', count: 8 },
+            { province: '福建省', count: 6 }
+          ],
+          savingRanking: [
+            { name: '广州水厂', effect: 28.5 }, { name: '深圳水厂', effect: 26.2 }, { name: '东莞水厂', effect: 24.8 },
+            { name: '佛山水厂', effect: 23.1 }, { name: '杭州水厂', effect: 22.5 }, { name: '宁波水厂', effect: 21.3 },
+            { name: '苏州水厂', effect: 20.8 }, { name: '南京水厂', effect: 19.5 }, { name: '青岛水厂', effect: 18.2 },
+            { name: '济南水厂', effect: 17.8 }
+          ],
+          showModal: false, mapLoading: true, isFullscreen: false,
+          currentFactory: { name: '', scale: '', deployed: 0, controlled: 0 },
+          mapChart: null
+        }
+      },
+      methods: {
+        openDigitalEmployee() {
+          // 通过postMessage通知父窗口打开数字员工标签页
+          if (window.parent !== window) {
+            window.parent.postMessage({ type: 'openTab', page: 'digital-employee', name: '数字员工' }, '*');
+          } else {
+            // 独立窗口打开
+            window.open('digital-employee.html', '_blank');
+          }
+        },
+        getTopClass(index) { if (index === 0) return 'top'; if (index === 1) return 'top2'; if (index === 2) return 'top3'; return ''; },
+        toggleFullscreen() {
+          const container = document.getElementById('cockpit-container')
+          if (!this.isFullscreen) { container.classList.add('fullscreen'); this.isFullscreen = true; document.body.classList.add('fullscreen-mode'); }
+          else { container.classList.remove('fullscreen'); this.isFullscreen = false; document.body.classList.remove('fullscreen-mode'); }
+          setTimeout(() => { this.mapChart && this.mapChart.resize(); }, 100)
+        },
+        initMap() {
+          const mapContainer = document.getElementById('mapChart')
+          if (!window.chinaMapData) { this.mapLoading = false; return; }
+          try {
+            echarts.registerMap('china', window.chinaMapData)
+            this.mapChart = echarts.init(mapContainer)
+            this.setupChart()
+            this.mapLoading = false
+          } catch(e) { this.mapLoading = false; }
+        },
+        setupChart() {
+          const factoryData = [
+            { name: '广州水厂', value: [113.28, 23.13], scale: '50万吨/日', deployed: 12, controlled: 8 },
+            { name: '深圳水厂', value: [114.07, 22.62], scale: '40万吨/日', deployed: 10, controlled: 6 },
+            { name: '东莞水厂', value: [113.75, 23.05], scale: '30万吨/日', deployed: 8, controlled: 5 },
+            { name: '佛山水厂', value: [113.12, 23.02], scale: '25万吨/日', deployed: 6, controlled: 4 },
+            { name: '杭州水厂', value: [120.15, 30.28], scale: '35万吨/日', deployed: 9, controlled: 5 },
+            { name: '宁波水厂', value: [121.55, 29.87], scale: '20万吨/日', deployed: 5, controlled: 3 },
+            { name: '苏州水厂', value: [120.62, 31.30], scale: '28万吨/日', deployed: 7, controlled: 4 },
+            { name: '南京水厂', value: [118.78, 32.06], scale: '22万吨/日', deployed: 5, controlled: 3 },
+            { name: '青岛水厂', value: [120.38, 36.07], scale: '18万吨/日', deployed: 4, controlled: 2 },
+            { name: '济南水厂', value: [116.98, 36.67], scale: '15万吨/日', deployed: 3, controlled: 2 }
+          ]
+          const option = {
+            backgroundColor: 'transparent',
+            tooltip: { trigger: 'item', backgroundColor: 'rgba(15,23,42,0.9)', borderColor: 'rgba(59,130,246,0.3)', textStyle: { color: '#E2E8F0' },
+              formatter: function(params) { if (params.data && params.data.name) return '<div style="padding:4px 0;"><div style="font-weight:600;color:#3B82F6;margin-bottom:6px;">' + params.data.name + '</div><div style="font-size:12px;">运营规模: ' + params.data.scale + '</div><div style="font-size:12px;">部署智能体: ' + params.data.deployed + '</div></div>'; return params.name; }
+            },
+            geo: { map: 'china', roam: true, zoom: 1.2, scaleLimit: { min: 0.5, max: 3 },
+              itemStyle: { areaColor: { type: 'linear', x: 0, y: 0, x2: 0, y2: 1, colorStops: [{ offset: 0, color: 'rgba(30,64,175,0.3)' }, { offset: 1, color: 'rgba(15,23,42,0.8)' }] }, borderColor: 'rgba(59,130,246,0.4)', borderWidth: 1 },
+              emphasis: { itemStyle: { areaColor: 'rgba(59,130,246,0.4)' }, label: { show: false } },
+              label: { show: false }
+            },
+            series: [{ name: '水厂分布', type: 'scatter', coordinateSystem: 'geo', data: factoryData, symbol: 'circle', symbolSize: 20,
+              itemStyle: { color: '#3B82F6', borderColor: '#fff', borderWidth: 3, shadowBlur: 15, shadowColor: 'rgba(59,130,246,0.8)' },
+              emphasis: { scale: 1.3, itemStyle: { color: '#60A5FA', borderColor: '#3B82F6', shadowBlur: 30 } },
+              label: { show: true, formatter: '{b}', position: 'right', distance: 15, fontSize: 13, color: '#ffffff', fontWeight: 600, backgroundColor: 'rgba(59,130,246,0.85)', padding: [6, 10], borderRadius: [4, 4, 4, 0] }
+            }]
+          }
+          this.mapChart.setOption(option)
+          this.mapChart.on('click', (params) => {
+            if (params.data && params.data.name) { this.currentFactory = { name: params.data.name, scale: params.data.scale, deployed: params.data.deployed, controlled: params.data.controlled }; this.showModal = true; }
+          })
+          window.addEventListener('resize', () => { this.mapChart && this.mapChart.resize(); })
+        }
+      },
+      mounted() { this.initMap(); }
+    }).mount('#app')
+  </script>
+</body>
+</html>

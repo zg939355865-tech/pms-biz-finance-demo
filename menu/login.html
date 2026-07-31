@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PMS业财一体化系统 - 登录</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <style>
+    :root {
+      color-scheme: light;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --text: #1e293b;
+      --muted: #64748b;
+      --border: #d1d5db;
+      --focus: rgba(37, 99, 235, .14);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body { min-height: 100%; }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      background: #fff;
+      color: var(--text);
+      font-family: "Alibaba PuHuiTi", "Microsoft YaHei", "PingFang SC", sans-serif;
+      font-size: 14px;
+    }
+
+    button, input, select { font: inherit; }
+
+    .login-page {
+      display: grid;
+      grid-template-columns: minmax(560px, 62%) minmax(480px, 38%);
+      min-height: 100vh;
+    }
+
+    .brand-panel {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      overflow: hidden;
+      padding: 28px 40px 40px;
+      background: #eaf2fb;
+    }
+
+    .brand-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #1e293b;
+      font-size: 22px;
+      font-weight: 600;
+    }
+
+    .brand-symbol {
+      width: 42px;
+      height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      background: #2563eb;
+      color: #fff;
+      font-size: 20px;
+      font-weight: 700;
+      box-shadow: 0 6px 14px rgba(37, 99, 235, .18);
+    }
+
+    .brand-content {
+      width: min(100%, 760px);
+      margin: auto;
+      padding: 24px 0 56px;
+      text-align: center;
+    }
+
+    .illustration-window {
+      position: relative;
+      width: min(560px, 80vw);
+      height: 330px;
+      margin: 0 auto 8px;
+      overflow: hidden;
+    }
+
+    .brand-visual {
+      position: absolute;
+      top: -280px;
+      left: -200px;
+      width: 1600px;
+      height: 1000px;
+      max-width: none;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .brand-title {
+      margin: 0 0 12px;
+      color: #1e293b;
+      font-size: 30px;
+      font-weight: 600;
+      line-height: 1.4;
+      letter-spacing: 0;
+    }
+
+    .brand-description {
+      max-width: 680px;
+      margin: 0 auto;
+      color: #52657d;
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .brand-footer {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #708399;
+      font-size: 13px;
+    }
+
+    .brand-footer::before {
+      content: "";
+      width: 32px;
+      height: 2px;
+      background: #2563eb;
+    }
+
+    .login-panel {
+      position: relative;
+      display: flex;
+      min-height: 100vh;
+      align-items: center;
+      justify-content: center;
+      padding: 56px 56px 88px;
+      background: #fff;
+      border-left: 1px solid #eef2f7;
+    }
+
+    .login-form {
+      width: min(100%, 540px);
+      transform: translateY(-4px);
+    }
+
+    .welcome-mark {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      margin: 0;
+      color: #111827;
+      font-size: 42px;
+      font-weight: 700;
+      line-height: 1.25;
+      letter-spacing: 0;
+    }
+
+    .welcome-lines {
+      position: relative;
+      width: 30px;
+      height: 30px;
+      border: 2px solid #3b82f6;
+      border-left-color: transparent;
+      border-bottom-color: transparent;
+      border-radius: 50%;
+      transform: rotate(24deg);
+    }
+
+    .welcome-lines::after {
+      content: "";
+      position: absolute;
+      inset: 6px;
+      border: 2px solid #93c5fd;
+      border-left-color: transparent;
+      border-bottom-color: transparent;
+      border-radius: 50%;
+    }
+
+    .subtitle {
+      margin: 0 0 32px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .control-wrap {
+      position: relative;
+      margin-bottom: 16px;
+    }
+
+    .form-control {
+      width: 100%;
+      height: 56px;
+      padding: 0 48px 0 16px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      outline: none;
+      background: #fff;
+      color: #1f2937;
+      font-size: 16px;
+      transition: border-color .2s ease, box-shadow .2s ease;
+    }
+
+    .form-control::placeholder { color: #b6bec9; }
+    .form-control:hover { border-color: #94a3b8; }
+
+    .form-control:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--focus);
+    }
+
+    .company-select {
+      appearance: none;
+      cursor: pointer;
+    }
+
+    .company-select:invalid { color: #94a3b8; }
+
+    .select-arrow {
+      position: absolute;
+      top: 50%;
+      right: 18px;
+      width: 9px;
+      height: 9px;
+      border-right: 2px solid #94a3b8;
+      border-bottom: 2px solid #94a3b8;
+      transform: translateY(-70%) rotate(45deg);
+      pointer-events: none;
+    }
+
+    .password-toggle {
+      position: absolute;
+      top: 50%;
+      right: 8px;
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      border: 0;
+      border-radius: 6px;
+      background: transparent;
+      color: #94a3b8;
+      cursor: pointer;
+      transform: translateY(-50%);
+    }
+
+    .password-toggle:hover { color: #475569; background: #f8fafc; }
+
+    .remember-row {
+      display: flex;
+      align-items: center;
+      min-height: 40px;
+      margin: 4px 0 20px;
+    }
+
+    .remember-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: #334155;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .remember-label input {
+      width: 18px;
+      height: 18px;
+      margin: 0;
+      accent-color: var(--primary);
+      cursor: pointer;
+    }
+
+    .login-button {
+      width: 100%;
+      height: 48px;
+      border: 0;
+      border-radius: 6px;
+      background: var(--primary);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(37, 99, 235, .18);
+      transition: background-color .2s ease, transform .15s ease, box-shadow .2s ease;
+    }
+
+    .login-button:hover {
+      background: var(--primary-hover);
+      box-shadow: 0 4px 10px rgba(37, 99, 235, .22);
+    }
+
+    .login-button:active { transform: translateY(1px); }
+
+    .login-button:focus-visible,
+    .form-control:focus-visible,
+    .password-toggle:focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    .copyright {
+      position: absolute;
+      right: 0;
+      bottom: 24px;
+      left: 0;
+      margin: 0;
+      color: #94a3b8;
+      font-size: 12px;
+      text-align: center;
+    }
+
+    @media (max-width: 980px) {
+      .login-page { grid-template-columns: 42% 58%; }
+      .login-panel { padding-right: 32px; padding-left: 32px; }
+      .brand-panel { padding-right: 24px; padding-left: 24px; }
+      .brand-header { font-size: 18px; }
+      .brand-content { transform: scale(.88); }
+    }
+
+    @media (max-width: 720px) {
+      .login-page { display: block; }
+      .brand-panel { display: none; }
+      .login-panel { min-height: 100vh; padding: 40px 24px 72px; }
+      .login-form { width: min(100%, 480px); transform: none; }
+      h1 { font-size: 32px; }
+      .subtitle { margin-bottom: 28px; }
+      .form-control { font-size: 16px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="login-page">
+    <section class="brand-panel" aria-label="PMS业财一体化系统">
+      <header class="brand-header">
+        <span class="brand-symbol" aria-hidden="true">P</span>
+        <span>PMS业财一体化系统</span>
+      </header>
+      <div class="brand-content">
+        <div class="illustration-window">
+          <img class="brand-visual" src="../outputs/reports/visual/live-project-requirement-login-state.png" alt="项目经营数据协同场景">
+        </div>
+        <h2 class="brand-title">让项目经营与财务协同更清晰</h2>
+        <p class="brand-description">以项目为主线，连接客户、合同、收支与经营数据，支撑多公司统一协作与过程管理。</p>
+      </div>
+      <footer class="brand-footer">项目在线 · 业务协同 · 数据统一</footer>
+    </section>
+
+    <section class="login-panel">
+      <form class="login-form" id="loginForm">
+        <div class="welcome-mark">
+          <h1>欢迎回来</h1>
+          <span class="welcome-lines" aria-hidden="true"></span>
+        </div>
+        <p class="subtitle">请输入您的账户信息以开始管理您的项目</p>
+
+        <div class="control-wrap">
+          <label for="companySelect" hidden>选择企业</label>
+          <select class="form-control company-select" id="companySelect" required>
+            <option value="" selected disabled>请选择企业</option>
+            <option value="昕彤赋能（长沙）人工智能行业应用系统有限公司">昕彤赋能（长沙）人工智能行业应用系统有限公司</option>
+            <option value="昕彤赋能（武汉）设计研究有限公司">昕彤赋能（武汉）设计研究有限公司</option>
+            <option value="昕彤智能装备科技（东莞）有限公司">昕彤智能装备科技（东莞）有限公司</option>
+            <option value="上海混溟智能技术有限公司">上海混溟智能技术有限公司</option>
+            <option value="昕彤赋能（无锡）运营管理有限公司">昕彤赋能（无锡）运营管理有限公司</option>
+            <option value="昕彤赋能（东莞）运营管理有限公司">昕彤赋能（东莞）运营管理有限公司</option>
+            <option value="昕彤赋能（杭州）运营管理有限公司">昕彤赋能（杭州）运营管理有限公司</option>
+            <option value="昕彤赋能（湖北）建设工程有限公司">昕彤赋能（湖北）建设工程有限公司</option>
+            <option value="武汉可利尔环保科技有限公司">武汉可利尔环保科技有限公司</option>
+            <option value="昕彤赋能（江陵）低碳科技有限公司">昕彤赋能（江陵）低碳科技有限公司</option>
+          </select>
+          <span class="select-arrow" aria-hidden="true"></span>
+        </div>
+
+        <div class="control-wrap">
+          <label for="username" hidden>用户名</label>
+          <input class="form-control" id="username" name="username" type="text" autocomplete="username" placeholder="请输入用户名">
+        </div>
+
+        <div class="control-wrap">
+          <label for="password" hidden>密码</label>
+          <input class="form-control" id="password" name="password" type="password" autocomplete="current-password" placeholder="请输入密码">
+          <button class="password-toggle" id="passwordToggle" type="button" aria-label="显示密码" title="显示密码">
+            <i class="fa-regular fa-eye-slash" aria-hidden="true"></i>
+          </button>
+        </div>
+
+        <div class="remember-row">
+          <label class="remember-label" for="rememberAccount">
+            <input id="rememberAccount" type="checkbox">
+            <span>记住账号</span>
+          </label>
+        </div>
+
+        <button class="login-button" type="submit">登录</button>
+      </form>
+
+      <p class="copyright">Copyright © 2026 PMS业财一体化系统</p>
+    </section>
+  </main>
+
+  <script>
+    const companySelect = document.getElementById('companySelect');
+    const usernameInput = document.getElementById('username');
+    const passwordInput = document.getElementById('password');
+    const passwordToggle = document.getElementById('passwordToggle');
+    const rememberAccount = document.getElementById('rememberAccount');
+    const savedUsername = localStorage.getItem('pms-remembered-username');
+
+    if (savedUsername) {
+      usernameInput.value = savedUsername;
+      rememberAccount.checked = true;
+    }
+
+    passwordToggle.addEventListener('click', () => {
+      const showPassword = passwordInput.type === 'password';
+      passwordInput.type = showPassword ? 'text' : 'password';
+      passwordToggle.setAttribute('aria-label', showPassword ? '隐藏密码' : '显示密码');
+      passwordToggle.setAttribute('title', showPassword ? '隐藏密码' : '显示密码');
+      passwordToggle.querySelector('i').className = showPassword ? 'fa-regular fa-eye' : 'fa-regular fa-eye-slash';
+    });
+
+    document.getElementById('loginForm').addEventListener('submit', (event) => {
+      event.preventDefault();
+      if (!companySelect.value) {
+        companySelect.reportValidity();
+        return;
+      }
+      localStorage.setItem('pms-current-company', companySelect.value);
+      localStorage.setItem('pms-login-state', 'authenticated');
+      if (rememberAccount.checked && usernameInput.value.trim()) {
+        localStorage.setItem('pms-remembered-username', usernameInput.value.trim());
+      } else {
+        localStorage.removeItem('pms-remembered-username');
+      }
+      window.location.href = 'index.html';
+    });
+  </script>
+</body>
+</html>

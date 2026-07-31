@@ -1,0 +1,24 @@
+{
+  "version": "pms-artifact-resources-v1",
+  "lanes": {
+    "html": {
+      "status": "active",
+      "source": "schemas/pages",
+      "resources": "prototype-resources",
+      "output": "pages",
+      "verification": "npm run harness:check"
+    },
+    "document": {
+      "status": "reserved",
+      "source": "inputs",
+      "references": "docs/PRD",
+      "output": "deliverables/documents"
+    },
+    "presentation": {
+      "status": "reserved",
+      "source": "inputs",
+      "references": "docs",
+      "output": "deliverables/presentations"
+    }
+  }
+}

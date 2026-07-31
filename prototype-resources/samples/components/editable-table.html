@@ -1,0 +1,20 @@
+<section class="card pro-editable-table" data-component="EditableTable" data-component-source="prototype-resources/samples/components/editable-table.html">
+  <div class="pro-table-toolbar">
+    <div>
+      <div class="pro-table-title">{{TITLE}}</div>
+      <div class="pro-table-subtitle">{{SUBTITLE}}</div>
+    </div>
+    <div class="pro-table-actions">
+      <button class="btn btn-primary" type="button" data-act="add-line">新增明细</button>
+      <button class="btn btn-secondary" type="button" data-act="delete-line">删除选中</button>
+      {{ACTIONS}}
+    </div>
+  </div>
+  <div class="pro-table-scroll">
+    <table class="table pro-table">
+      <thead><tr>{{COLUMNS}}</tr></thead>
+      <tbody>{{ROWS}}</tbody>
+      {{SUMMARY_ROW}}
+    </table>
+  </div>
+</section>

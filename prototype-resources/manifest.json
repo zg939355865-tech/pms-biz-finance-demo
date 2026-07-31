@@ -1,0 +1,147 @@
+{
+  "version": "pms-resource-center-v1",
+  "antDesignBaseline": "Ant Design 6.x",
+  "verifiedAt": "2026-07-20",
+  "officialSource": "https://ant.design/components/overview-cn/",
+  "categories": [
+    {
+      "key": "general",
+      "label": "通用",
+      "components": [
+        { "name": "Button", "label": "按钮", "slug": "button" },
+        { "name": "FloatButton", "label": "悬浮按钮", "slug": "float-button" },
+        { "name": "Icon", "label": "图标", "slug": "icon" },
+        { "name": "Typography", "label": "排版", "slug": "typography" }
+      ]
+    },
+    {
+      "key": "layout",
+      "label": "布局",
+      "components": [
+        { "name": "Divider", "label": "分割线", "slug": "divider" },
+        { "name": "Flex", "label": "弹性布局", "slug": "flex" },
+        { "name": "Grid", "label": "栅格", "slug": "grid" },
+        { "name": "Layout", "label": "布局", "slug": "layout" },
+        { "name": "Masonry", "label": "瀑布流", "slug": "masonry" },
+        { "name": "Space", "label": "间距", "slug": "space" },
+        { "name": "Splitter", "label": "分隔面板", "slug": "splitter" }
+      ]
+    },
+    {
+      "key": "navigation",
+      "label": "导航",
+      "components": [
+        { "name": "Anchor", "label": "锚点", "slug": "anchor" },
+        { "name": "Breadcrumb", "label": "面包屑", "slug": "breadcrumb" },
+        { "name": "Dropdown", "label": "下拉菜单", "slug": "dropdown" },
+        { "name": "Menu", "label": "导航菜单", "slug": "menu" },
+        { "name": "Pagination", "label": "分页", "slug": "pagination" },
+        { "name": "Steps", "label": "步骤条", "slug": "steps" },
+        { "name": "Tabs", "label": "标签页", "slug": "tabs" }
+      ]
+    },
+    {
+      "key": "data-entry",
+      "label": "数据录入",
+      "components": [
+        { "name": "AutoComplete", "label": "自动完成", "slug": "auto-complete" },
+        { "name": "Cascader", "label": "级联选择", "slug": "cascader" },
+        { "name": "Checkbox", "label": "多选框", "slug": "checkbox" },
+        { "name": "ColorPicker", "label": "颜色选择器", "slug": "color-picker" },
+        { "name": "DatePicker", "label": "日期选择框", "slug": "date-picker" },
+        { "name": "Form", "label": "表单", "slug": "form" },
+        { "name": "Input", "label": "输入框", "slug": "input" },
+        { "name": "InputNumber", "label": "数字输入框", "slug": "input-number" },
+        { "name": "Mentions", "label": "提及", "slug": "mentions" },
+        { "name": "Radio", "label": "单选框", "slug": "radio" },
+        { "name": "Rate", "label": "评分", "slug": "rate" },
+        { "name": "Select", "label": "选择器", "slug": "select" },
+        { "name": "Slider", "label": "滑动输入条", "slug": "slider" },
+        { "name": "Switch", "label": "开关", "slug": "switch" },
+        { "name": "TimePicker", "label": "时间选择框", "slug": "time-picker" },
+        { "name": "Transfer", "label": "穿梭框", "slug": "transfer" },
+        { "name": "TreeSelect", "label": "树选择", "slug": "tree-select" },
+        { "name": "Upload", "label": "上传", "slug": "upload" }
+      ]
+    },
+    {
+      "key": "data-display",
+      "label": "数据展示",
+      "components": [
+        { "name": "Avatar", "label": "头像", "slug": "avatar" },
+        { "name": "Badge", "label": "徽标数", "slug": "badge" },
+        { "name": "Calendar", "label": "日历", "slug": "calendar" },
+        { "name": "Card", "label": "卡片", "slug": "card" },
+        { "name": "Carousel", "label": "走马灯", "slug": "carousel" },
+        { "name": "Collapse", "label": "折叠面板", "slug": "collapse" },
+        { "name": "Descriptions", "label": "描述列表", "slug": "descriptions" },
+        { "name": "Empty", "label": "空状态", "slug": "empty" },
+        { "name": "Image", "label": "图片", "slug": "image" },
+        { "name": "List", "label": "列表", "slug": "list" },
+        { "name": "Popover", "label": "气泡卡片", "slug": "popover" },
+        { "name": "QRCode", "label": "二维码", "slug": "qr-code" },
+        { "name": "Segmented", "label": "分段控制器", "slug": "segmented" },
+        { "name": "Statistic", "label": "统计数值", "slug": "statistic" },
+        { "name": "Table", "label": "表格", "slug": "table" },
+        { "name": "Tag", "label": "标签", "slug": "tag" },
+        { "name": "Timeline", "label": "时间轴", "slug": "timeline" },
+        { "name": "Tooltip", "label": "文字提示", "slug": "tooltip" },
+        { "name": "Tour", "label": "漫游式引导", "slug": "tour" },
+        { "name": "Tree", "label": "树形控件", "slug": "tree" }
+      ]
+    },
+    {
+      "key": "feedback",
+      "label": "反馈",
+      "components": [
+        { "name": "Alert", "label": "警告提示", "slug": "alert" },
+        { "name": "Drawer", "label": "抽屉", "slug": "drawer" },
+        { "name": "Message", "label": "全局提示", "slug": "message" },
+        { "name": "Modal", "label": "对话框", "slug": "modal" },
+        { "name": "Notification", "label": "通知提醒框", "slug": "notification" },
+        { "name": "Popconfirm", "label": "气泡确认框", "slug": "popconfirm" },
+        { "name": "Progress", "label": "进度条", "slug": "progress" },
+        { "name": "Result", "label": "结果", "slug": "result" },
+        { "name": "Skeleton", "label": "骨架屏", "slug": "skeleton" },
+        { "name": "Spin", "label": "加载中", "slug": "spin" },
+        { "name": "Watermark", "label": "水印", "slug": "watermark" }
+      ]
+    },
+    {
+      "key": "other",
+      "label": "其他",
+      "components": [
+        { "name": "Affix", "label": "固钉", "slug": "affix" },
+        { "name": "App", "label": "包裹组件", "slug": "app" },
+        { "name": "BorderBeam", "label": "边框流光", "slug": "border-beam" },
+        { "name": "ConfigProvider", "label": "全局化配置", "slug": "config-provider" },
+        { "name": "Util", "label": "工具类", "slug": "util" }
+      ]
+    },
+    {
+      "key": "pro",
+      "label": "重型组件",
+      "components": [
+        { "name": "ProLayout", "label": "高级布局", "slug": "pro-layout", "docs": "https://procomponents.ant.design/components/layout" },
+        { "name": "ProForm", "label": "高级表单", "slug": "pro-form", "docs": "https://procomponents.ant.design/components/form" },
+        { "name": "ProTable", "label": "高级表格", "slug": "pro-table", "docs": "https://procomponents.ant.design/components/table" },
+        { "name": "ProDescriptions", "label": "高级定义列表", "slug": "pro-descriptions", "docs": "https://procomponents.ant.design/components/descriptions" },
+        { "name": "ProList", "label": "高级列表", "slug": "pro-list", "docs": "https://procomponents.ant.design/components/list" },
+        { "name": "EditableProTable", "label": "可编辑表格", "slug": "editable-pro-table", "docs": "https://procomponents.ant.design/components/editable-table" }
+      ]
+    }
+  ],
+  "pageSamples": [
+    { "name": "列表页", "type": "查询与表格", "path": "../pages/income/income-contract-schema.html", "template": "samples/list-page.html", "description": "筛选、批量操作、数据表格、横向宽表和分页。", "components": ["PageHeader", "ProSearchForm", "ProTable", "Pagination"] },
+    { "name": "待办工作台", "type": "审批与任务", "path": "../pages/my-approval.html", "template": "samples/workbench-page.html", "description": "我的审批和我的任务，包含紧凑筛选、状态列表、空状态及审批弹窗。", "components": ["PageHeader", "ProSearchForm", "ProTable", "Empty", "ProModalForm"] },
+    { "name": "流程详情页", "type": "流程单据", "path": "../pages/income/income-contract-schema.html?sample=detail&status=待审核&mode=审核", "template": "samples/detail-page.html", "description": "新增、草稿、审核、完成状态共用一个详情结构。", "components": ["PageHeader", "ProTabsDetail", "DetailForm", "ApprovalPanel"] },
+    { "name": "非流程详情页", "type": "普通表单", "path": "page-samples/non-workflow-detail-page.html", "template": "samples/non-workflow-detail-page.html", "description": "不涉及审批流程，仅提供返回列表和提交；提交后返回列表。", "components": ["PageHeader", "DetailForm", "EditableTable"] },
+    { "name": "台账多页签详情", "type": "台账详情", "path": "../pages/income/income-contract-schema.html?sample=detail&status=已生效&mode=查看&tab=projects", "template": "samples/ledger-tab-detail-page.html", "description": "基础信息、关联项目、收款计划和子合同等多页签结构。", "components": ["PageHeader", "ProTabsDetail", "DetailForm", "ProTable"] },
+    { "name": "树表管理页", "type": "树表管理", "path": "page-samples/tree-table-page.html", "template": "samples/tree-table-page.html", "description": "左侧树、右侧查询表格，适用于组织、位置和分类。", "components": ["Tree", "ProSearchForm", "ProTreeTable"] },
+    { "name": "主数据配置页", "type": "主数据", "path": "page-samples/master-data-config-page.html", "template": "samples/master-data-config-page.html", "description": "字典、分类、参数等主数据维护结构。", "components": ["Tabs", "ProTable", "ProModalForm"] },
+    { "name": "关系配置页", "type": "关系维护", "path": "page-samples/relation-config-page.html", "template": "samples/relation-config-page.html", "description": "项目、合同、核算维度等关系维护结构。", "components": ["Transfer", "EditableTable", "ProBatchToolbar"] },
+    { "name": "数据选择弹窗", "type": "数据选择", "path": "page-samples/data-select-modal.html", "template": "samples/data-select-modal.html", "description": "查询、勾选、分页和确认选择数据。", "components": ["Modal", "ProSearchForm", "ProTable"] },
+    { "name": "组件总览", "type": "组件检查", "path": "../pages/system/component-gallery.html", "template": "samples/component-gallery.html", "description": "基础控件、反馈状态和 Pro 组合组件的覆盖检查。", "components": ["ComponentGallery", "StateMatrix"] },
+    { "name": "页面状态矩阵", "type": "状态基线", "path": "page-samples/state-matrix.html", "template": "samples/state-matrix.html", "description": "加载、空、错误、禁用、权限和异常状态。", "components": ["Skeleton", "Empty", "Result", "Alert"] }
+  ]
+}

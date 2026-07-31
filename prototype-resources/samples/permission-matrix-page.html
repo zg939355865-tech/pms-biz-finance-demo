@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-template-source="prototype-resources/samples/permission-matrix-page.html">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{TITLE}} - PMS业财一体化</title>
+  <link rel="stylesheet" href="{{STANDARDS_PREFIX}}/tokens.css" />
+  <link rel="stylesheet" href="{{STANDARDS_PREFIX}}/base.css" />
+  <link rel="stylesheet" href="{{STANDARDS_PREFIX}}/layout.css" />
+  <link rel="stylesheet" href="{{STANDARDS_PREFIX}}/components.css" />
+  <script src="{{STANDARDS_PREFIX}}/page-runtime.js" defer></script>
+</head>
+<body>
+  <main class="page pro-page" id="app">
+    <header class="page-header pro-page-header">
+      <div>
+        <div class="pro-page-breadcrumb">{{MENU_PATH}}</div>
+        <h1 class="page-title">{{TITLE}}</h1>
+        <p class="pro-page-description">{{DESCRIPTION}}</p>
+      </div>
+      <div class="pro-page-actions">{{PAGE_ACTIONS}}</div>
+    </header>
+    {{STATUS_FLOW}}
+    <section class="card pro-permission-matrix" data-component="ProPermissionMatrix">
+      <div class="pro-section-header">
+        <h2 class="card-title">状态权限矩阵</h2>
+        <div class="pro-section-extra">{{ACTIONS}}</div>
+      </div>
+      <div class="pro-table-scroll">
+        <table class="table pro-table">
+          <thead><tr>{{COLUMNS}}</tr></thead>
+          <tbody>{{ROWS}}</tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+  <script src="{{STANDARDS_PREFIX}}/mock.js"></script>
+  <script>{{RUNTIME_SCRIPT}}</script>
+</body>
+</html>

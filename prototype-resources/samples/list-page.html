@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-template-source="prototype-resources/samples/list-page.html">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{TITLE}} - PMS业财一体化</title>
+  <link rel="stylesheet" href="{{STANDARDS_PREFIX}}/tokens.css" />
+  <link rel="stylesheet" href="{{STANDARDS_PREFIX}}/base.css" />
+  <link rel="stylesheet" href="{{STANDARDS_PREFIX}}/layout.css" />
+  <link rel="stylesheet" href="{{STANDARDS_PREFIX}}/components.css" />
+  <script src="{{STANDARDS_PREFIX}}/page-runtime.js" defer></script>
+</head>
+<body class="pro-list-page-body schema-page-body">
+  <main class="page pro-page pro-list-page" id="app">
+    <header class="page-header pro-page-header">
+      <div>
+        <h1 class="page-title">{{TITLE}}</h1>
+      </div>
+      <div class="pro-page-actions" data-action-placement="page-end">{{PAGE_ACTIONS}}</div>
+    </header>
+    {{BIZFIN_CHAIN}}
+    {{STATUS_FLOW}}
+    {{SEARCH_FORM}}
+    {{PRO_TABLE}}
+  </main>
+  {{MODAL_ROOT}}
+  <script src="{{STANDARDS_PREFIX}}/mock.js"></script>
+  <script>{{RUNTIME_SCRIPT}}</script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>主数据配置页模板</title>
+  <link rel="stylesheet" href="../components/tokens.css" />
+  <link rel="stylesheet" href="../components/base.css" />
+  <link rel="stylesheet" href="../components/layout.css" />
+  <link rel="stylesheet" href="../components/components.css" />
+</head>
+<body>
+  <main class="page">
+    <header class="page-header">
+      <h1 class="page-title">设备分类</h1>
+      <div class="flex items-center gap-sm">
+        <button class="btn" id="importButton">导入</button>
+        <button class="btn btn-primary" id="createButton">新增分类</button>
+      </div>
+    </header>
+
+    <section class="card search-bar">
+      <div class="form-group"><label for="categoryCode">分类编码</label><input class="form-input" id="categoryCode" placeholder="请输入分类编码" /></div>
+      <div class="form-group"><label for="categoryName">分类名称</label><input class="form-input" id="categoryName" placeholder="请输入分类名称" /></div>
+      <div class="form-group"><label for="status">状态</label><select class="form-select" id="status"><option value="">全部状态</option><option>启用</option><option>停用</option></select></div>
+      <div class="form-actions"><button class="btn" id="queryButton">查询</button><button class="btn" id="resetButton">重置</button></div>
+    </section>
+
+    <section class="eam-table-wrapper">
+      <table class="eam-table">
+        <thead><tr><th>分类编码</th><th>分类名称</th><th>上级分类</th><th>分类路径</th><th>状态</th><th>创建人</th><th>创建时间</th><th class="sticky-operation">操作</th></tr></thead>
+        <tbody>
+          <tr><td><a href="#">CAT-001</a></td><td>动力设备</td><td>生产设备</td><td>生产设备 / 动力设备</td><td><span class="tag tag-success">启用</span></td><td>张工</td><td>2026-06-18 09:00</td><td class="sticky-operation"><button class="btn btn-text">编辑</button><button class="btn btn-danger-text">停用</button></td></tr>
+        </tbody>
+      </table>
+      <div class="pagination"><span class="pagination-total">共 1 条</span><button class="pagination-btn active">1</button></div>
+    </section>
+
+    <div class="modal-mask" id="editModal" hidden>
+      <section class="modal" role="dialog" aria-modal="true" aria-labelledby="editModalTitle">
+        <header class="modal-header"><span class="modal-title" id="editModalTitle">新增分类</span><button class="modal-close" id="closeModal" aria-label="关闭">×</button></header>
+        <div class="modal-body">
+          <div class="detail-form-grid">
+            <div class="detail-field"><span class="label required">分类编码</span><input class="form-input" placeholder="保存后生成" disabled /></div>
+            <div class="detail-field"><span class="label required">分类名称</span><input class="form-input" placeholder="请输入分类名称" /></div>
+            <div class="detail-field"><span class="label">上级分类</span><div class="form-picker"><input class="form-input" placeholder="请选择上级分类" readonly /><button class="btn picker-button" type="button">选择</button></div></div>
+            <div class="detail-field"><span class="label">状态</span><span class="value"><span class="tag tag-success">启用</span></span></div>
+            <div class="detail-field pro-span-3"><span class="label">备注</span><input class="form-input" placeholder="请输入备注" /></div>
+          </div>
+        </div>
+        <footer class="modal-footer"><button class="btn" id="cancelModal">取消</button><button class="btn btn-primary" id="confirmModal">确认</button></footer>
+      </section>
+    </div>
+  </main>
+
+  <script src="../components/mock.js"></script>
+  <script>
+    const modal = document.getElementById('editModal');
+    document.getElementById('createButton').addEventListener('click', function () { modal.hidden = false; });
+    document.getElementById('closeModal').addEventListener('click', function () { modal.hidden = true; });
+    document.getElementById('cancelModal').addEventListener('click', function () { modal.hidden = true; });
+    document.getElementById('confirmModal').addEventListener('click', function () { modal.hidden = true; showMessage('保存成功'); });
+    document.getElementById('queryButton').addEventListener('click', function () { showMessage('查询完成'); });
+  </script>
+</body>
+</html>

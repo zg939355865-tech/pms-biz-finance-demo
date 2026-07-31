@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>页面状态矩阵</title>
+  <link rel="stylesheet" href="../components/tokens.css" />
+  <link rel="stylesheet" href="../components/base.css" />
+  <link rel="stylesheet" href="../components/layout.css" />
+  <link rel="stylesheet" href="../components/components.css" />
+</head>
+<body>
+  <main class="pro-content">
+    <header class="pro-page-header">
+      <div class="pro-breadcrumb">设计系统 / 页面状态</div>
+      <h1 class="pro-page-title">页面状态矩阵</h1>
+      <p class="pro-page-description">生成业务页面时必须按场景选择并实现对应状态。</p>
+    </header>
+
+    <section class="pro-grid pro-grid-3">
+      <div class="pro-card"><div class="pro-card-header">加载状态</div><div class="pro-card-body"><div class="pro-skeleton-line"></div><div class="pro-skeleton-line"></div><div class="pro-skeleton-line short"></div></div></div>
+      <div class="pro-card"><div class="pro-card-header">内容为空</div><div class="pro-card-body"><div class="pro-state-panel"><strong>暂无数据</strong><p>创建第一条业务数据后将在此展示。</p><button class="pro-btn pro-btn-primary">新增</button></div></div></div>
+      <div class="pro-card"><div class="pro-card-header">查询无结果</div><div class="pro-card-body"><div class="pro-state-panel"><strong>未查询到相关数据</strong><p>请调整查询条件后重试。</p><button class="pro-btn">重置条件</button></div></div></div>
+      <div class="pro-card"><div class="pro-card-header">校验错误</div><div class="pro-card-body"><div class="pro-form-item"><label class="pro-required">设备名称</label><input class="pro-input is-error" value="" /><div class="pro-error">请输入设备名称</div></div></div></div>
+      <div class="pro-card"><div class="pro-card-header">禁用状态</div><div class="pro-card-body"><div class="pro-form-item"><label>所属工厂</label><input class="pro-input" value="华东一厂" disabled /><div class="pro-help">由当前用户组织自动带入，不可修改。</div></div></div></div>
+      <div class="pro-card"><div class="pro-card-header">无权限</div><div class="pro-card-body"><div class="pro-permission"><strong>暂无处理权限</strong><p>您不是当前责任人，不能执行流程操作。</p></div></div></div>
+      <div class="pro-card"><div class="pro-card-header">服务异常</div><div class="pro-card-body"><div class="pro-alert error"><strong>数据加载失败</strong>服务暂时不可用，请稍后重试。</div><div class="pro-form-actions"><span>错误编号：E500-001</span><button class="pro-btn">重新加载</button></div></div></div>
+      <div class="pro-card"><div class="pro-card-header">成功反馈</div><div class="pro-card-body"><div class="pro-alert success"><strong>提交成功</strong>单据已进入部门审批，当前责任人为李工程师。</div></div></div>
+      <div class="pro-card"><div class="pro-card-header">危险确认</div><div class="pro-card-body"><p>删除后数据无法恢复，关联记录将保留。</p><button class="pro-btn pro-btn-danger" data-action="delete">删除</button></div></div></div>
+    </section>
+  </main>
+  <script src="../components/mock.js"></script>
+</body>
+</html>
+

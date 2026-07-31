@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-legacy-bridge="true">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>数字员工 - PMS业财一体化</title>
+  <script src="../assets/vendor/vue.global.prod.js"></script>
+  <link href="../assets/vendor/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+  <script src="../assets/vendor/tailwindcss.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; background: #F1F5F9; }
+
+    /* 玻璃态效果 */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+    }
+
+    /* 聊天消息气泡 */
+    .msg-user {
+      background: linear-gradient(135deg, #2563EB 0%, #3B82F6 100%);
+      color: #fff;
+      border-radius: 16px 16px 4px 16px;
+    }
+    .msg-ai {
+      background: #fff;
+      color: #1E293B;
+      border-radius: 16px 16px 16px 4px;
+      border: 1px solid #E2E8F0;
+    }
+
+    /* 输入框聚焦效果 */
+    .input-focus:focus {
+      border-color: #2563EB;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    /* 历史列表项悬停 */
+    .history-item:hover {
+      background: rgba(37, 99, 235, 0.05);
+    }
+
+    /* 滚动条样式 */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:active { background: #94A1B8; }
+
+    /* 右侧对话框滚动条永远显示 */
+    .msg-scroll { overflow-y: scroll; }
+    .msg-scroll::-webkit-scrollbar { visibility: visible; opacity: 1; }
+
+    /* 卡片悬浮效果 */
+    .result-card:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      transform: translateY(-1px);
+    }
+  </style>
+  <link rel="stylesheet" href="../prototype-resources/components/tokens.css">
+  <link rel="stylesheet" href="../prototype-resources/components/components.css">
+  <link rel="stylesheet" href="../prototype-resources/components/legacy-page-bridge.css">
+  <script defer src="../prototype-resources/components/legacy-page-bridge.js"></script>
+</head>
+<body style="height: 100vh; overflow: hidden;">
+  <div id="app" class="flex flex-col" style="height: 100vh;">
+    <!-- 主内容区 -->
+    <div class="flex-1 flex overflow-hidden">
+      <!-- 左侧：对话内容区 -->
+      <div class="flex-1 flex flex-col bg-gray-50" style="height: 100%;">
+        <!-- 对话消息列表 -->
+        <div ref="messageList" class="flex-1 overflow-y-auto p-6 space-y-4 msg-scroll" style="flex: 1; min-height: 0;">
+          <!-- 空状态 -->
+          <div v-if="currentSessionData.length === 0" class="h-full flex items-center justify-center">
+            <div class="text-center">
+              <!-- 头像图标 -->
+              <div class="w-20 h-20 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center mx-auto mb-6 shadow-lg">
+                <i class="fas fa-robot text-white text-3xl"></i>
+              </div>
+              <!-- 欢迎语 -->
+              <h2 class="text-xl font-semibold text-gray-700 mb-4">欢迎使用数字员工！</h2>
+              <!-- 功能列表 -->
+              <div class="text-sm text-gray-500 mb-5 space-y-2">
+                <p class="text-base mb-3">我可以帮您：</p>
+                <div class="flex items-center justify-center gap-2">
+                  <span>📋</span><span>管理项目任务和进度</span>
+                </div>
+                <div class="flex items-center justify-center gap-2">
+                  <span>📑</span><span>生成专业的处置/技术方案</span>
+                </div>
+                <div class="flex items-center justify-center gap-2">
+                  <span>⚡</span><span>评估能耗和节能效益</span>
+                </div>
+              </div>
+              <!-- 使用说明 -->
+              <div class="text-sm text-gray-500 space-y-1 bg-gray-50 rounded-lg p-4 inline-block">
+                <p>您可以：</p>
+                <p>① 直接提问，我会自动匹配最合适的能力</p>
+                <p>② 点击专用智能体，获取更专业的深度服务</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 消息列表 -->
+          <div v-for="(msg, index) in currentSessionData" :key="index">
+            <!-- 用户消息 -->
+            <div v-if="msg.role === 'user'" class="flex justify-end">
+              <div class="max-w-lg msg-user px-4 py-3 text-sm">
+                {{ msg.content }}
+              </div>
+            </div>
+
+            <!-- AI消息 -->
+            <div v-else class="flex justify-start">
+              <div class="max-w-2xl msg-ai px-4 py-3 text-sm">
+                <div v-if="msg.isLoading" class="flex items-center gap-2 text-gray-400">
+                  <i class="fas fa-circle-notch fa-spin text-sm"></i>
+                  <span class="text-xs">AI思考中...</span>
+                </div>
+                <div v-else>
+                  <!-- 文字回复 -->
+                  <div v-if="msg.type === 'text'" class="text-sm leading-relaxed">
+                    {{ msg.content }}
+                  </div>
+
+                  <!-- 结构化卡片结果 -->
+                  <div v-else-if="msg.type === 'card'" class="space-y-3">
+                    <div class="text-xs text-gray-500 mb-2">{{ msg.cardTitle }}</div>
+                    <div
+                      v-for="(item, idx) in msg.cardData"
+                      :key="idx"
+                      class="result-card bg-white rounded-lg p-4 border border-gray-100 transition-all duration-200 cursor-pointer"
+                    >
+                      <div class="flex items-start gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-blue-400 flex items-center justify-center shrink-0">
+                          <i class="fas fa-building text-white text-sm"></i>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                          <div class="text-sm font-medium text-gray-800">{{ item.name }}</div>
+                          <div class="flex flex-wrap gap-x-4 gap-y-1 mt-2 text-xs text-gray-500">
+                            <span><i class="fas fa-map-marker-alt mr-1 text-gray-400"></i>{{ item.region }}</span>
+                            <span><i class="fas fa-industry mr-1 text-gray-400"></i>{{ item.industry }}</span>
+                            <span><i class="fas fa-chart-line mr-1 text-gray-400"></i>{{ item.scale }}</span>
+                          </div>
+                          <div class="flex items-center gap-4 mt-2 text-xs text-gray-400">
+                            <span><i class="fas fa-user mr-1"></i>{{ item.contact }}</span>
+                            <span><i class="fas fa-phone mr-1"></i>{{ item.phone }}</span>
+                          </div>
+                        </div>
+                        <div class="shrink-0">
+                          <span
+                            class="px-2 py-1 rounded text-xs font-medium"
+                            :class="{
+                              'bg-green-100 text-green-700': item.status === '活跃',
+                              'bg-yellow-100 text-yellow-700': item.status === '沉默',
+                              'bg-gray-100 text-gray-600': item.status === '流失'
+                            }"
+                          >
+                            {{ item.status }}
+                          </span>
+                        </div>
+                      </div>
+                      <div v-if="item.stats" class="flex items-center gap-6 mt-3 pt-3 border-t border-gray-100 text-xs text-gray-500">
+                        <span><i class="fas fa-project-diagram mr-1 text-blue-500"></i>关联项目：{{ item.stats.projects }}</span>
+                        <span><i class="fas fa-file-contract mr-1 text-blue-500"></i>合同金额：{{ item.stats.amount }}</span>
+                        <span><i class="fas fa-clock mr-1 text-blue-500"></i>最近跟进：{{ item.stats.lastFollow }}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 澄清追问 -->
+                  <div v-else-if="msg.type === 'clarify'" class="space-y-2">
+                    <div class="text-sm text-gray-600">{{ msg.content }}</div>
+                    <div class="flex flex-wrap gap-2 mt-3">
+                      <button
+                        v-for="option in msg.options"
+                        :key="option"
+                        @click="useQuickQuestion(option)"
+                        class="px-3 py-1.5 rounded-full bg-blue-50 text-blue-600 text-xs hover:bg-blue-100 transition-colors duration-200 cursor-pointer"
+                      >
+                        {{ option }}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 底部固定输入区 -->
+        <div class="bg-white border-t border-gray-200 p-4 shrink-0" style="flex-shrink: 0;">
+          <!-- 智能体选择 -->
+          <div class="mb-3 flex items-center gap-3">
+            <span class="text-xs font-medium text-gray-500 shrink-0">智能体：</span>
+            <div class="flex flex-wrap gap-2">
+              <button
+                v-for="agent in agents"
+                :key="agent.id"
+                @click="selectAgent(agent.id)"
+                class="px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1.5 transition-all duration-200 cursor-pointer"
+                :class="currentAgent === agent.id
+                  ? 'bg-blue-600 text-white shadow-sm'
+                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'"
+              >
+                <i :class="agent.icon" class="text-xs"></i>
+                {{ agent.name }}
+              </button>
+            </div>
+          </div>
+          <!-- 附件预览 -->
+          <div v-if="attachments.length > 0" class="mb-3 flex flex-wrap gap-2">
+            <div
+              v-for="(file, index) in attachments"
+              :key="index"
+              class="flex items-center gap-2 px-3 py-2 bg-gray-100 rounded-lg text-xs"
+            >
+              <i class="fas fa-file text-gray-500"></i>
+              <span class="text-gray-600 max-w-32 truncate">{{ file.name }}</span>
+              <button @click="removeAttachment(index)" class="text-gray-400 hover:text-red-500 cursor-pointer" aria-label="移除附件" title="移除附件">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+          <!-- 输入框和发送按钮 -->
+          <div class="flex gap-3">
+            <div class="relative">
+              <button
+                @click="toggleAttachmentMenu"
+                class="p-3 rounded-lg border border-gray-200 text-gray-500 hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 cursor-pointer"
+                :class="showAttachmentMenu ? 'bg-gray-50 border-gray-300' : ''"
+                aria-label="添加附件"
+                title="添加附件"
+              >
+                <i class="fas fa-paperclip"></i>
+              </button>
+              <!-- 附件菜单 -->
+              <div v-if="showAttachmentMenu" class="absolute bottom-full left-0 mb-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-10">
+                <label class="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 cursor-pointer">
+                  <i class="fas fa-file-upload text-blue-500"></i>
+                  <span>上传文件</span>
+                  <input type="file" multiple class="hidden" @change="handleFileUpload" />
+                </label>
+                <div class="border-t border-gray-100"></div>
+                <label class="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 cursor-pointer">
+                  <i class="fas fa-image text-green-500"></i>
+                  <span>上传图片</span>
+                  <input type="file" accept="image/*" multiple class="hidden" @change="handleFileUpload" />
+                </label>
+              </div>
+            </div>
+            <textarea
+              v-model="userInput"
+              @keydown.enter.exact.prevent="sendMessage"
+              placeholder="请描述您要查询的内容..."
+              rows="2"
+              class="flex-1 p-3 border border-gray-200 rounded-lg text-sm resize-none input-focus transition-all duration-200 focus:outline-none"
+            ></textarea>
+            <button
+              @click="sendMessage"
+              :disabled="!userInput.trim() && attachments.length === 0"
+              class="px-6 py-2.5 rounded-lg bg-blue-600 text-white text-sm font-medium flex items-center gap-2 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 shrink-0"
+            >
+              <i class="fas fa-paper-plane text-xs"></i>
+              发送
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 右侧：快捷操作 -->
+      <div class="w-80 bg-white border-l border-gray-200 flex flex-col p-4 shrink-0" style="height: calc(100vh - 0px);">
+        <!-- 快捷问题 -->
+        <div class="mb-4">
+          <div class="flex items-center justify-between mb-2">
+            <label class="text-xs font-medium text-gray-500">快捷问题</label>
+            <button @click="openQuickSetup" class="text-xs text-blue-600 hover:text-blue-700 cursor-pointer">
+              <i class="fas fa-cog mr-1"></i>设置
+            </button>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <button
+              v-for="q in quickQuestions"
+              :key="q"
+              @click="useQuickQuestion(q)"
+              class="px-3 py-1.5 rounded-full bg-gray-100 text-gray-600 text-xs hover:bg-blue-50 hover:text-blue-600 transition-colors duration-200 cursor-pointer"
+            >
+              {{ q }}
+            </button>
+          </div>
+        </div>
+
+        <!-- 历史会话列表 -->
+        <div class="mt-4 pt-4 border-t border-gray-100">
+          <div class="flex items-center justify-between mb-3">
+            <label class="text-xs font-medium text-gray-500">历史会话</label>
+            <button
+              @click="createNewSession"
+              class="px-3 py-1.5 rounded-lg bg-blue-600 text-white text-xs font-medium flex items-center gap-1.5 hover:bg-blue-700 transition-colors duration-200 cursor-pointer"
+            >
+              <i class="fas fa-plus text-xs"></i>
+              新建对话
+            </button>
+          </div>
+          <div class="overflow-y-auto" style="max-height: 140px;">
+            <div
+              v-for="(session, index) in sessions.slice(0, 5)"
+              :key="index"
+              @click="switchSession(index)"
+              class="p-3 rounded-lg cursor-pointer transition-all duration-200 history-item"
+              :class="currentSession === index ? 'bg-blue-50 border border-blue-200' : 'hover:bg-gray-50'"
+            >
+              <div class="text-sm text-gray-800 truncate">{{ session.title }}</div>
+              <div class="text-xs text-gray-400 mt-1">{{ session.time }}</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 快捷问题设置弹窗 -->
+        <div v-if="showQuickSetup" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50" @click.self="showQuickSetup = false">
+          <div class="bg-white rounded-xl w-96 shadow-xl">
+            <div class="flex items-center justify-between p-4 border-b border-gray-200">
+              <span class="text-sm font-medium text-gray-800">快捷问题设置</span>
+              <button @click="showQuickSetup = false" class="text-gray-400 hover:text-gray-600 cursor-pointer" aria-label="关闭" title="关闭">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+            <div class="p-4">
+              <div class="text-xs text-gray-500 mb-3">每行一个问题</div>
+              <textarea
+                v-model="quickQuestionsText"
+                rows="8"
+                placeholder="查一下广州的客户&#10;有哪些大客户？&#10;查询北京项目进度"
+                class="w-full p-3 border border-gray-200 rounded-lg text-sm resize-none focus:outline-none focus:border-blue-500"
+              ></textarea>
+            </div>
+            <div class="flex justify-end gap-3 p-4 border-t border-gray-200">
+              <button @click="showQuickSetup = false" class="px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 rounded-lg cursor-pointer">取消</button>
+              <button @click="saveQuickQuestions" class="px-4 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 cursor-pointer">保存</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const { createApp } = Vue
+    createApp({
+      data() {
+        return {
+          userInput: '',
+          showQuickSetup: false,
+          quickQuestionsText: '',
+          attachments: [],
+          showAttachmentMenu: false,
+          currentAgent: 'project',
+          agents: [
+            { id: 'project', name: '项目管理', icon: 'fas fa-project-diagram' },
+            { id: 'solution', name: '方案预编', icon: 'fas fa-file-alt' },
+            { id: 'energy', name: '节能评估', icon: 'fas fa-bolt' }
+          ],
+          currentSession: 0,
+          sessions: [
+            { title: '查询广州客户', time: '今天 14:30' },
+            { title: '北京项目进展', time: '今天 10:15' },
+            { title: '水务集团合同', time: '昨天 16:40' }
+          ],
+          currentSessionData: [
+            {
+              role: 'user',
+              content: '查一下广州的客户'
+            },
+            {
+              role: 'ai',
+              type: 'card',
+              cardTitle: '查询结果：广州地区客户（共3个）',
+              cardData: [
+                {
+                  name: '广州水务集团有限公司',
+                  region: '广州',
+                  industry: '水务',
+                  scale: '大型',
+                  contact: '张经理',
+                  phone: '138****1234',
+                  status: '活跃',
+                  stats: { projects: 3, amount: '500万', lastFollow: '2026-05-10' }
+                },
+                {
+                  name: '广州环保科技有限公司',
+                  region: '广州',
+                  industry: '环保',
+                  scale: '中型',
+                  contact: '李总监',
+                  phone: '139****5678',
+                  status: '活跃',
+                  stats: { projects: 2, amount: '280万', lastFollow: '2026-05-08' }
+                },
+                {
+                  name: '广州建设工程有限公司',
+                  region: '广州',
+                  industry: '建筑',
+                  scale: '大型',
+                  contact: '王总',
+                  phone: '137****9012',
+                  status: '沉默',
+                  stats: { projects: 1, amount: '150万', lastFollow: '2026-04-20' }
+                }
+              ]
+            },
+            {
+              role: 'user',
+              content: '水务集团的相关项目有哪些？'
+            },
+            {
+              role: 'ai',
+              type: 'text',
+              content: '广州水务集团当前有以下3个在跟项目：\n\n1. **广州水务集团数据中心建设项目** - 进度75%，预计2026年6月完工\n2. **水质监测系统升级项目** - 进度45%，预计2026年8月完工\n3. **智慧水务管理平台项目** - 进度20%，预计2026年12月完工'
+            },
+            {
+              role: 'user',
+              content: '这些项目的负责人是谁？'
+            },
+            {
+              role: 'ai',
+              type: 'text',
+              content: '项目负责人信息：\n\n| 项目名称 | 负责人 | 职位 | 联系电话 |\n|---------|-------|------|----------|\n| 数据中心建设 | 陈明 | 项目总监 | 135****2345 |\n| 水质监测升级 | 林小红 | 技术经理 | 136****6789 |\n| 智慧水务平台 | 赵强 | 高级工程师 | 137****0123 |'
+            }
+          ],
+          quickQuestions: [
+            '查一下广州的客户',
+            '有哪些大客户？',
+            '查询北京项目进度',
+            '最近签约的合同'
+          ]
+        }
+      },
+      methods: {
+        selectAgent(agentId) {
+          this.currentAgent = agentId
+        },
+        getCurrentAgentName() {
+          const agent = this.agents.find(a => a.id === this.currentAgent)
+          return agent ? agent.name : ''
+        },
+        createNewSession() {
+          this.currentSessionData = []
+          this.sessions.unshift({
+            title: '新对话',
+            time: '刚刚'
+          })
+          this.currentSession = 0
+        },
+        handleFileUpload(event) {
+          const files = Array.from(event.target.files)
+          files.forEach(file => {
+            this.attachments.push(file)
+          })
+          this.showAttachmentMenu = false
+        },
+        removeAttachment(index) {
+          this.attachments.splice(index, 1)
+        },
+        toggleAttachmentMenu() {
+          this.showAttachmentMenu = !this.showAttachmentMenu
+        },
+        sendMessage() {
+          if (!this.userInput.trim()) return
+
+          // 添加用户消息
+          this.currentSessionData.push({
+            role: 'user',
+            content: this.userInput
+          })
+
+          // 模拟AI正在输入
+          this.$nextTick(() => {
+            this.scrollToBottom()
+          })
+
+          const input = this.userInput
+          this.userInput = ''
+
+          // 模拟AI回复
+          setTimeout(() => {
+            this.currentSessionData.push({
+              role: 'ai',
+              type: 'text',
+              content: '您的问题"' + input + '"已收到，正在处理中...\n\n[模拟回复：这是一条测试回复，实际对接LLM后将返回真实结果]'
+            })
+            this.$nextTick(() => {
+              this.scrollToBottom()
+            })
+          }, 1000)
+        },
+        saveQuickQuestions() {
+          // 按换行分割并过滤空行
+          this.quickQuestions = this.quickQuestionsText
+            .split('\n')
+            .map(s => s.trim())
+            .filter(s => s.length > 0);
+          this.showQuickSetup = false;
+        },
+        openQuickSetup() {
+          this.quickQuestionsText = this.quickQuestions.join('\n');
+          this.showQuickSetup = true;
+        },
+        useQuickQuestion(q) {
+          this.userInput = q
+          this.sendMessage()
+        },
+        switchSession(index) {
+          this.currentSession = index
+        },
+        scrollToBottom() {
+          this.$nextTick(() => {
+            const el = this.$refs.messageList
+            if (el) {
+              el.scrollTop = el.scrollHeight
+              // 强制保持滚动条在底部
+              el.scrollTo({ top: el.scrollHeight, behavior: 'instant' })
+            }
+          })
+        },
+        scrollToTop() {
+          this.$nextTick(() => {
+            const el = this.$refs.messageList
+            if (el) {
+              el.scrollTop = 0
+            }
+          })
+        }
+      },
+      mounted() {
+        this.$nextTick(() => {
+          this.scrollToBottom()
+        })
+      }
+    }).mount('#app')
+  </script>
+</body>
+</html>

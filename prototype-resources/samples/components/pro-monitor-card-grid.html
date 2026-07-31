@@ -1,0 +1,17 @@
+<section class="pro-monitor-card-grid-shell" data-component="ProMonitorCardGrid" data-component-source="prototype-resources/samples/components/pro-monitor-card-grid.html">
+  <div class="pro-monitor-card-grid">
+    <article class="card pro-monitor-card status-online">
+      <header class="pro-monitor-card-header">
+        <h2 class="pro-monitor-card-title">{{PROJECT_NAME}}</h2>
+        <span class="tag tag-success">{{STATUS}}</span>
+      </header>
+      <dl class="pro-monitor-card-content">
+        <div><dt>项目编码</dt><dd>{{PROJECT_CODE}}</dd></div>
+        <div><dt>智能体控制</dt><dd>{{CONTROLLED_COUNT}}/{{TOTAL_COUNT}}</dd></div>
+        <div><dt>最新检测</dt><dd>{{LAST_CHECK_TIME}}</dd></div>
+      </dl>
+      <footer class="pro-monitor-card-actions">{{CARD_ACTIONS}}</footer>
+    </article>
+  </div>
+  <div class="pro-table-footer">{{PAGINATION}}</div>
+</section>

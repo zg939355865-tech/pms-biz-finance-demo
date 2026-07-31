@@ -1,0 +1,17 @@
+<section class="card pro-approval-panel" data-component="ApprovalPanel" data-component-source="prototype-resources/samples/components/approval-panel.html">
+  <div class="pro-section-header">
+    <h2 class="card-title">审批处理</h2>
+    <span class="tag tag-warning">{{CURRENT_STATUS}}</span>
+  </div>
+  <div class="pro-approval-grid">
+    <label class="form-item pro-span-3">
+      <span class="form-label required">审批意见</span>
+      <textarea class="textarea" placeholder="请输入审批意见"></textarea>
+    </label>
+  </div>
+  <div class="pro-approval-actions">
+    <button class="btn" type="button" data-act="close">取消</button>
+    <button class="btn btn-danger-ghost" type="button" data-act="reject">驳回</button>
+    <button class="btn btn-primary" type="button" data-act="approve">审核通过</button>
+  </div>
+</section>

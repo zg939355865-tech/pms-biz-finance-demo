@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>关系配置页模板</title>
+  <link rel="stylesheet" href="../components/tokens.css" />
+  <link rel="stylesheet" href="../components/base.css" />
+  <link rel="stylesheet" href="../components/layout.css" />
+  <link rel="stylesheet" href="../components/components.css" />
+</head>
+<body>
+  <main class="page">
+    <header class="page-header">
+      <h1 class="page-title">设备分类BOM配置</h1>
+      <div class="flex items-center gap-sm">
+        <button class="btn" id="backButton">返回列表</button>
+        <button class="btn btn-primary" id="saveButton">保存</button>
+      </div>
+    </header>
+
+    <section class="detail-section">
+      <div class="detail-section-title">配置对象</div>
+      <div class="detail-form-grid">
+        <div class="detail-field"><span class="label required">设备分类</span><div class="form-picker"><input class="form-input" value="生产设备 / 动力设备" readonly /><button class="btn picker-button" type="button">选择</button></div></div>
+        <div class="detail-field"><span class="label">分类编码</span><input class="form-input" value="CAT-001" disabled /></div>
+        <div class="detail-field"><span class="label">状态</span><span class="value"><span class="tag tag-success">启用</span></span></div>
+      </div>
+    </section>
+
+    <section class="detail-section detail-section-tabs">
+      <div class="tab-action-bar">
+        <nav class="pro-tabs" aria-label="关系配置页签">
+          <button class="pro-tab active" data-tab="bom">BOM明细</button>
+          <button class="pro-tab" data-tab="rule">适用规则</button>
+        </nav>
+        <div class="template-actions" data-tab-actions="bom"><button class="btn btn-primary" id="selectPartButton">选择备件</button></div>
+      </div>
+      <div class="detail-section-panels">
+        <section class="detail-line-panel" data-panel="bom">
+          <div class="table-scroll">
+            <table class="table detail-line-table">
+              <thead><tr><th class="selection-column"><input type="checkbox" id="selectAll" /></th><th>序号</th><th>备件编码</th><th>备件名称</th><th>规格型号</th><th>单位</th><th class="col-right">数量</th><th>是否关键件</th><th class="sticky-operation">操作</th></tr></thead>
+              <tbody id="bomBody"><tr class="detail-data-row"><td class="selection-column"><input class="row-check" type="checkbox" /></td><td>1</td><td>SP-001</td><td>过滤芯</td><td>F-100</td><td>个</td><td class="col-right"><input class="form-input" value="2" /></td><td><select class="form-select"><option>是</option><option>否</option></select></td><td class="sticky-operation"><button class="btn btn-danger-text">删除</button></td></tr></tbody>
+            </table>
+          </div>
+        </section>
+        <section class="detail-line-panel" data-panel="rule" hidden>
+          <div class="detail-form-grid">
+            <div class="detail-field"><span class="label">适用工厂</span><div class="form-picker"><input class="form-input" value="全部工厂" readonly /><button class="btn picker-button" type="button">选择</button></div></div>
+            <div class="detail-field"><span class="label">生效日期</span><input class="form-input" type="date" value="2026-06-18" /></div>
+            <div class="detail-field"><span class="label">失效日期</span><input class="form-input" type="date" /></div>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <script src="../components/mock.js"></script>
+  <script>
+    document.querySelectorAll('[data-tab]').forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        document.querySelectorAll('[data-tab]').forEach(function (item) { item.classList.remove('active'); });
+        document.querySelectorAll('[data-panel]').forEach(function (panel) { panel.hidden = panel.dataset.panel !== tab.dataset.tab; });
+        document.querySelectorAll('[data-tab-actions]').forEach(function (actions) { actions.hidden = actions.dataset.tabActions !== tab.dataset.tab; });
+        tab.classList.add('active');
+      });
+    });
+    document.getElementById('saveButton').addEventListener('click', function () { showMessage('保存成功'); });
+    document.getElementById('backButton').addEventListener('click', function () { location.href = 'list-page.html'; });
+  </script>
+</body>
+</html>
