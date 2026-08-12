@@ -1,0 +1,41 @@
+{
+  "version": "pms-component-registry-v2",
+  "style": "Ant Design Pro inspired static HTML",
+  "categories": {
+    "layout": ["PageHeader", "Breadcrumb", "Card", "Space", "Divider", "Tabs", "Steps", "Collapse"],
+    "form": ["Form", "FormSection", "Input", "TextArea", "InputNumber", "Select", "MultiSelect", "RadioGroup", "Checkbox", "Switch", "DatePicker", "DateRangePicker", "TreeSelect", "Cascader", "Upload"],
+    "data": ["ProSearchForm", "ProTable", "EditableTable", "Descriptions", "ProDescriptionList", "Tag", "Badge", "Statistic", "Progress", "Timeline", "ProTimeline", "Empty", "Result", "ProResult"],
+    "business": ["DetailForm", "AmountSummary", "StatusFlow", "BizfinChain", "ApprovalPanel", "HistoryTable", "UploadList", "ProUploadList", "ProStatCard", "ProChartCard", "ProMonitorCardGrid", "ProTreeTable", "ProTabsDetail", "ProFilterTabs", "ProBatchToolbar", "ProColumnSetting", "ProImportPanel"],
+    "feedback": ["Alert", "Modal", "ProModalForm", "Drawer", "ProDetailDrawer", "DataSelectModal", "ProDataSelectModal", "Popconfirm", "Spin", "Skeleton"]
+  },
+  "fieldComponents": ["input", "textarea", "number", "select", "multi-select", "radio", "checkbox", "switch", "date", "date-range", "tree-select", "cascader", "upload", "picker"],
+  "columnComponents": ["text", "input", "number", "select", "link", "tag", "bizfin-tag", "badge", "progress", "money", "date", "datetime", "actions"],
+  "pageTypes": ["list", "detail", "list-detail", "workflow-detail", "non-workflow-detail", "ledger-tab-detail", "tree-table", "master-data-config", "relation-config", "data-select-modal", "component-gallery", "state-matrix", "master-detail", "tabs-detail", "approval", "dashboard", "workbench", "config", "import-task", "result", "permission-matrix"],
+  "requiredComponentProperties": {
+    "ProSearchForm": ["fields"],
+    "ProTable": ["columns"],
+    "DetailForm": ["fields"],
+    "EditableTable": ["columns"],
+    "ProTabsDetail": ["tabs"],
+    "ProFilterTabs": ["items", "field", "target"],
+    "ProStatCard": ["items"],
+    "ProMonitorCardGrid": ["rows"],
+    "Descriptions": ["fields"],
+    "ProDescriptionList": ["fields"],
+    "StatusFlow": ["items"],
+    "BizfinChain": ["items"],
+    "AmountSummary": ["items"],
+    "ProTimeline": ["items"],
+    "Alert": ["message"],
+    "Progress": ["percent"]
+  },
+  "optionalComponentProperties": {
+    "EditableTable": {
+      "table": ["pageSize", "selectable", "keepOperationColumn", "operationColumnWidth", "minWidth"],
+      "column": ["width", "required", "placeholder", "editable", "align"]
+    },
+    "DetailForm": {
+      "field": ["actionCode", "actionLabel"]
+    }
+  }
+}

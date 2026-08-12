@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PMS业财一体化</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      background: #f1f5f9;
+      color: #1e293b;
+      font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+      font-size: 14px;
+    }
+    .shell { display: flex; height: 100vh; }
+    .sidebar {
+      width: 232px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      background: #1e3a5f;
+      color: #fff;
+      overflow: hidden;
+    }
+    .brand {
+      height: 60px;
+      display: flex;
+      align-items: center;
+      padding: 0 18px;
+      border-bottom: 1px solid rgba(255,255,255,.12);
+      font-size: 16px;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+    .menu {
+      flex: 1;
+      min-height: 0;
+      padding: 8px 0;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255,255,255,.28) transparent;
+    }
+    .menu::-webkit-scrollbar { width: 6px; }
+    .menu::-webkit-scrollbar-thumb { border-radius: 6px; background: rgba(255,255,255,.28); }
+    .menu-primary {
+      width: 100%;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 16px;
+      border: 0;
+      background: transparent;
+      color: rgba(255,255,255,.78);
+      text-align: left;
+      cursor: pointer;
+    }
+    .menu-primary:hover, .menu-primary.active { background: rgba(255,255,255,.10); color: #fff; }
+    .menu-primary i:first-child { width: 18px; text-align: center; }
+    .menu-primary .arrow { margin-left: auto; transition: transform .2s ease; font-size: 11px; }
+    .menu-section.open .arrow { transform: rotate(90deg); }
+    .submenu { display: none; background: rgba(0,0,0,.14); padding: 4px 0; }
+    .menu-section.open .submenu { display: block; }
+    .submenu button {
+      width: 100%;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 16px 0 44px;
+      border: 0;
+      background: transparent;
+      color: rgba(255,255,255,.68);
+      text-align: left;
+      cursor: pointer;
+    }
+    .submenu button:hover, .submenu button.active { background: rgba(255,255,255,.10); color: #fff; }
+    .main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+    .topbar {
+      height: 60px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 18px;
+      background: #fff;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .breadcrumb { display: flex; align-items: center; gap: 8px; min-width: 0; font-size: 14px; }
+    .breadcrumb-home { color: #64748b; }
+    .breadcrumb-separator { color: #cbd5e1; }
+    .breadcrumb-current { min-width: 0; overflow: hidden; color: #1e293b; font-weight: 600; text-overflow: ellipsis; white-space: nowrap; }
+    .topbar-actions { display: flex; align-items: center; gap: 16px; min-width: 0; }
+    .company-select-wrap { position: relative; display: flex; align-items: center; }
+    .company-select-wrap > i { position: absolute; left: 12px; z-index: 1; color: #64748b; pointer-events: none; }
+    .company-select {
+      width: min(360px, 34vw);
+      height: 36px;
+      padding: 0 34px 0 34px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      outline: none;
+      background: #fff;
+      color: #334155;
+      font: inherit;
+      cursor: pointer;
+    }
+    .company-select:hover { border-color: #94a3b8; }
+    .company-select:focus { border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37,99,235,.12); }
+    .user-menu { position: relative; }
+    .user {
+      display: flex;
+      min-height: 40px;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 8px;
+      border: 0;
+      border-radius: 6px;
+      background: transparent;
+      color: #64748b;
+      cursor: pointer;
+    }
+    .user:hover, .user[aria-expanded="true"] { background: #f1f5f9; color: #334155; }
+    .user:focus-visible, .menu-primary:focus-visible, .submenu button:focus-visible, .logout-button:focus-visible {
+      outline: 2px solid #3b82f6;
+      outline-offset: -2px;
+    }
+    .user .fa-angle-down { font-size: 11px; transition: transform .2s ease; }
+    .user[aria-expanded="true"] .fa-angle-down { transform: rotate(180deg); }
+    .avatar {
+      width: 28px;
+      height: 28px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: #2563eb;
+      color: #fff;
+      font-size: 12px;
+    }
+    .user-dropdown {
+      position: absolute;
+      z-index: 30;
+      top: calc(100% + 8px);
+      right: 0;
+      width: 152px;
+      padding: 6px;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 0 10px 24px rgba(15, 23, 42, .12);
+    }
+    .user-dropdown[hidden] { display: none; }
+    .logout-button {
+      width: 100%;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 12px;
+      border: 0;
+      border-radius: 6px;
+      background: transparent;
+      color: #ef4444;
+      text-align: left;
+      cursor: pointer;
+    }
+    .logout-button:hover { background: #fef2f2; }
+    .content { flex: 1; min-height: 0; padding: 12px; }
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 0 1px 2px rgba(0,0,0,.05);
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand">PMS业财一体化</div>
+      <nav class="menu" id="menu"></nav>
+    </aside>
+    <main class="main">
+      <header class="topbar">
+        <nav class="breadcrumb" aria-label="面包屑">
+          <span class="breadcrumb-home"><i class="fas fa-house"></i> 首页</span>
+          <span class="breadcrumb-separator">/</span>
+          <span id="breadcrumbModule">流程指引</span>
+          <span class="breadcrumb-separator" id="breadcrumbPageSeparator">/</span>
+          <span class="breadcrumb-current" id="breadcrumbPage">流程指引</span>
+        </nav>
+        <div class="topbar-actions">
+          <label class="company-select-wrap">
+            <span hidden>当前公司</span>
+            <i class="fas fa-building"></i>
+            <select class="company-select" id="companySelect" aria-label="选择公司"><option value="昕彤赋能（长沙）人工智能行业应用系统有限公司" selected>昕彤赋能（长沙）人工智能行业应用系统有限公司</option><option value="昕彤赋能（武汉）设计研究有限公司">昕彤赋能（武汉）设计研究有限公司</option><option value="昕彤智能装备科技（东莞）有限公司">昕彤智能装备科技（东莞）有限公司</option><option value="上海混溟智能技术有限公司">上海混溟智能技术有限公司</option><option value="昕彤赋能（无锡）运营管理有限公司">昕彤赋能（无锡）运营管理有限公司</option><option value="昕彤赋能（东莞）运营管理有限公司">昕彤赋能（东莞）运营管理有限公司</option><option value="昕彤赋能（杭州）运营管理有限公司">昕彤赋能（杭州）运营管理有限公司</option><option value="昕彤赋能（湖北）建设工程有限公司">昕彤赋能（湖北）建设工程有限公司</option><option value="武汉可利尔环保科技有限公司">武汉可利尔环保科技有限公司</option><option value="昕彤赋能（江陵）低碳科技有限公司">昕彤赋能（江陵）低碳科技有限公司</option></select>
+          </label>
+          <div class="user-menu">
+            <button class="user" id="userMenuTrigger" type="button" aria-expanded="false" aria-haspopup="menu">
+              <span class="avatar">管</span><span>管理员</span><i class="fas fa-angle-down" aria-hidden="true"></i>
+            </button>
+            <div class="user-dropdown" id="userDropdown" role="menu" hidden>
+              <button class="logout-button" id="logoutButton" type="button" role="menuitem">
+                <i class="fas fa-right-from-bracket" aria-hidden="true"></i><span>退出登录</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+      <section class="content">
+        <iframe id="contentFrame" src="../pages/process-guide.html"></iframe>
+      </section>
+    </main>
+  </div>
+  <script>
+    const menuData = [
+      {
+            "name": "流程指引",
+            "icon": "compass",
+            "path": "process-guide.html",
+            "children": []
+      },
+      {
+            "name": "智能体驾驶舱",
+            "icon": "robot",
+            "path": "agent-cockpit.html",
+            "children": []
+      },
+      {
+            "name": "数字员工",
+            "icon": "headset",
+            "path": "digital-employee.html",
+            "children": []
+      },
+      {
+            "name": "代办事项",
+            "icon": "list-check",
+            "path": "",
+            "children": [
+                  {
+                        "name": "我的审批",
+                        "path": "my-approval.html",
+                        "icon": "circle"
+                  },
+                  {
+                        "name": "我的任务",
+                        "path": "my-task.html",
+                        "icon": "circle"
+                  }
+            ]
+      },
+      {
+            "name": "跨司协同台账",
+            "icon": "people-arrows",
+            "path": "cross-company-ledger.html",
+            "children": []
+      },
+      {
+            "name": "项目前期",
+            "icon": "clipboard-list",
+            "path": "",
+            "children": [
+                  {
+                        "name": "项目需求",
+                        "path": "project-requirement.html",
+                        "icon": "circle"
+                  },
+                  {
+                        "name": "调研问卷",
+                        "path": "survey-questionnaire.html",
+                        "icon": "circle"
+                  },
+                  {
+                        "name": "项目方案",
+                        "path": "project-proposal.html",
+                        "icon": "circle"
+                  },
+                  {
+                        "name": "项目实施通知",
+                        "path": "project-notice.html",
+                        "icon": "circle"
+                  }
+            ]
+      },
+      {
+            "name": "项目管理",
+            "icon": "diagram-project",
+            "path": "",
+            "children": [
+                  {
+                        "name": "项目类型",
+                        "path": "project-type.html",
+                        "icon": "circle"
+                  },
+                  {
+                        "name": "计划模版",
+                        "path": "plan-template.html",
+                        "icon": "circle"
+                  },
+                  {
+                        "name": "项目立项",
+                        "path": "project-setup.html",
+                        "icon": "circle"
+                  },
+                  {
+                        "name": "项目计划",
+                        "path": "project-plan.html",
+                        "icon": "circle"
+                  },
+                  {
+                        "name": "项目进度填报",
+                        "path": "project-progress.html",
+                        "icon": "circle"
+                  }
+            ]
+      },
+      {
+            "name": "采购管理",
+            "icon": "cart-shopping",
+            "path": "",
+            "children": [
+                  {
+                        "name": "采购申请",
+                        "path": "procurement/purchase-requisition.html",
+                        "icon": "circle"
+                  },
+                  {
+                        "name": "支出合同",
+                        "path": "procurement/expense-contract.html",
+                        "icon": "circle"
+                  },
+                  {
+                        "name": "采购订单",
+                        "path": "#",
+                        "icon": "circle"
+                  },
+                  {
+                        "name": "采购入库",
+                        "path": "#",
+                        "icon": "circle"
+                  },
+                  {
+                        "name": "固资入库",
+                        "path": "#",
+                        "icon": "circle"
+                  },
+                  {
+                        "name": "支出付款台账",
+                        "path": "#",
+                        "icon": "circle"
+                  },
+                  {
+                        "name": "采购收票",
+                        "path": "#",
+                        "icon": "circle"
+                  },
+                  {
+                        "name": "付款申请",
+                        "path": "#",
+                        "icon": "circle"
+                  },
+                  {
+                        "name": "付款单",
+                        "path": "#",
+                        "icon": "circle"
+                  }
+            ]
+      },
+      {
+            "name": "收入管理",
+            "icon": "coins",
+            "path": "",
+            "children": [
+                  {
+                        "name": "收入合同",
+                        "path": "income/income-contract-schema.html",
+                        "icon": "circle"
+                  },
+                  {
+                        "name": "项目验收单",
+                        "path": "#",
+                        "icon": "circle"
+                  },
+                  {
+                        "name": "收入回款台账",
+                        "path": "#",
+                        "icon": "circle"
+                  },
+                  {
+                        "name": "销项开票",
+                        "path": "#",
+                        "icon": "circle"
+                  },
+                  {
+                        "name": "收款单",
+                        "path": "#",
+                        "icon": "circle"
+                  },
+                  {
+                        "name": "收款核销",
+                        "path": "#",
+                        "icon": "circle"
+                  }
+            ]
+      },
+      {
+            "name": "物资管理",
+            "icon": "warehouse",
+            "path": "",
+            "children": [
+                  {
+                        "name": "物资台账",
+                        "path": "#",
+                        "icon": "circle"
+                  },
+                  {
+                        "name": "即时物资",
+                        "path": "#",
+                        "icon": "circle"
+                  },
+                  {
+                        "name": "物资流水",
+                        "path": "#",
+                        "icon": "circle"
+                  },
+                  {
+                        "name": "物料领用",
+                        "path": "#",
+                        "icon": "circle"
+                  },
+                  {
+                        "name": "固资领用",
+                        "path": "#",
+                        "icon": "circle"
+                  }
+            ]
+      },
+      {
+            "name": "费用报销",
+            "icon": "receipt",
+            "path": "",
+            "children": [
+                  {
+                        "name": "差旅申请",
+                        "path": "#",
+                        "icon": "circle"
+                  },
+                  {
+                        "name": "差旅报销",
+                        "path": "#",
+                        "icon": "circle"
+                  },
+                  {
+                        "name": "招待申请",
+                        "path": "#",
+                        "icon": "circle"
+                  },
+                  {
+                        "name": "招待报销",
+                        "path": "#",
+                        "icon": "circle"
+                  },
+                  {
+                        "name": "日常报销",
+                        "path": "#",
+                        "icon": "circle"
+                  }
+            ]
+      },
+      {
+            "name": "成本分析",
+            "icon": "chart-line",
+            "path": "",
+            "children": [
+                  {
+                        "name": "项目成本分析",
+                        "path": "#",
+                        "icon": "circle"
+                  },
+                  {
+                        "name": "部门成本分析",
+                        "path": "#",
+                        "icon": "circle"
+                  },
+                  {
+                        "name": "成本调整单",
+                        "path": "#",
+                        "icon": "circle"
+                  }
+            ]
+      },
+      {
+            "name": "主数据",
+            "icon": "database",
+            "path": "",
+            "children": [
+                  {
+                        "name": "供应商管理",
+                        "path": "#",
+                        "icon": "circle"
+                  },
+                  {
+                        "name": "客户管理",
+                        "path": "customer.html",
+                        "icon": "circle"
+                  }
+            ]
+      },
+      {
+            "name": "报表管理",
+            "icon": "chart-column",
+            "path": "",
+            "children": [
+                  {
+                        "name": "WBS任务看板",
+                        "path": "wbs-kanban.html",
+                        "icon": "circle"
+                  },
+                  {
+                        "name": "智能体运营分析",
+                        "path": "project-overview.html",
+                        "icon": "circle"
+                  },
+                  {
+                        "name": "智能体运行监控",
+                        "path": "agent-monitor.html",
+                        "icon": "circle"
+                  },
+                  {
+                        "name": "智能体状态监控",
+                        "path": "agent-status-monitor.html",
+                        "icon": "circle"
+                  },
+                  {
+                        "name": "需求跟踪表",
+                        "path": "requirement-trace.html",
+                        "icon": "circle"
+                  }
+            ]
+      },
+      {
+            "name": "使用指南",
+            "icon": "book-open",
+            "path": "user-guide.html",
+            "children": []
+      }
+];
+    const menuRoot = document.getElementById('menu');
+    const frame = document.getElementById('contentFrame');
+    const breadcrumbModule = document.getElementById('breadcrumbModule');
+    const breadcrumbPage = document.getElementById('breadcrumbPage');
+    const breadcrumbPageSeparator = document.getElementById('breadcrumbPageSeparator');
+    const companySelect = document.getElementById('companySelect');
+
+    function pageSrc(path) {
+      if (!path || path === '#') return '';
+      return path.startsWith('../') ? path : '../pages/' + path;
+    }
+
+    function updateBreadcrumb(moduleName, pageName) {
+      const isSinglePage = moduleName === pageName;
+      breadcrumbModule.textContent = moduleName;
+      breadcrumbPage.textContent = pageName;
+      breadcrumbPage.hidden = isSinglePage;
+      breadcrumbPageSeparator.hidden = isSinglePage;
+    }
+
+    function openPage(moduleName, name, path) {
+      const src = pageSrc(path);
+      if (!src) return;
+      frame.src = src;
+      updateBreadcrumb(moduleName, name);
+      document.querySelectorAll('.submenu button, .menu-primary').forEach((el) => el.classList.remove('active'));
+      const menuPath = path.split(/[?#]/)[0];
+      const active = document.querySelector('[data-path="' + CSS.escape(menuPath) + '"]');
+      if (active) active.classList.add('active');
+    }
+
+    function renderMenu() {
+      menuRoot.innerHTML = '';
+      menuData.forEach((menu, index) => {
+        const section = document.createElement('section');
+        section.className = 'menu-section';
+        if (index === 0 && menu.children.length) section.classList.add('open');
+
+        const primary = document.createElement('button');
+        primary.type = 'button';
+        primary.className = 'menu-primary';
+        primary.dataset.path = menu.path || '';
+        primary.innerHTML = '<i class="fas fa-' + (menu.icon || 'folder') + '"></i><span>' + menu.name + '</span>' + (menu.children.length ? '<i class="fas fa-chevron-right arrow"></i>' : '');
+        primary.addEventListener('click', () => {
+          if (!menu.children.length) {
+            openPage(menu.name, menu.name, menu.path);
+            return;
+          }
+          section.classList.toggle('open');
+        });
+        section.appendChild(primary);
+
+        if (menu.children.length) {
+          const submenu = document.createElement('div');
+          submenu.className = 'submenu';
+          menu.children.forEach((child) => {
+            const item = document.createElement('button');
+            item.type = 'button';
+            item.dataset.path = child.path || '';
+            item.innerHTML = '<span>' + child.name + '</span>';
+            item.addEventListener('click', () => openPage(menu.name, child.name, child.path));
+            submenu.appendChild(item);
+          });
+          section.appendChild(submenu);
+        }
+        menuRoot.appendChild(section);
+      });
+    }
+
+    renderMenu();
+    updateBreadcrumb("流程指引", "流程指引");
+
+    window.addEventListener('message', (event) => {
+      const message = event.data || {};
+      if (message.type !== 'pms-open-page' || !message.path) return;
+      openPage(message.moduleName || message.pageName || '', message.pageName || message.moduleName || '', message.path);
+    });
+
+    const savedCompany = localStorage.getItem('pms-current-company');
+    if (savedCompany && [...companySelect.options].some((option) => option.value === savedCompany)) {
+      companySelect.value = savedCompany;
+    }
+    companySelect.addEventListener('change', () => {
+      localStorage.setItem('pms-current-company', companySelect.value);
+    });
+
+    const userMenuTrigger = document.getElementById('userMenuTrigger');
+    const userDropdown = document.getElementById('userDropdown');
+
+    function closeUserMenu() {
+      userDropdown.hidden = true;
+      userMenuTrigger.setAttribute('aria-expanded', 'false');
+    }
+
+    userMenuTrigger.addEventListener('click', (event) => {
+      event.stopPropagation();
+      const opening = userDropdown.hidden;
+      userDropdown.hidden = !opening;
+      userMenuTrigger.setAttribute('aria-expanded', String(opening));
+    });
+
+    document.addEventListener('click', closeUserMenu);
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') closeUserMenu();
+    });
+
+    document.getElementById('logoutButton').addEventListener('click', () => {
+      localStorage.removeItem('pms-login-state');
+      window.location.href = 'login.html';
+    });
+  </script>
+</body>
+</html>
