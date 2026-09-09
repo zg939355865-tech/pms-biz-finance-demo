@@ -244,6 +244,33 @@
     .progress-bar-fill { height: 100%; background: #2563EB; border-radius: 4px; transition: width 0.3s; }
     .exec-empty td { height: 236px; text-align: center; color: #CBD5E1; }
     .exec-empty i { display: block; margin-bottom: 14px; font-size: 64px; color: #E5E7EB; }
+    .document-table th:first-child { width: 40%; }
+    .document-table th:last-child { width: 60%; }
+    .document-name-cell {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .document-download-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      min-width: 72px;
+      height: 32px;
+      padding: 0 12px;
+      border: 1px solid #2563EB;
+      border-radius: 6px;
+      background: #FFFFFF;
+      color: #2563EB;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.2s, color 0.2s;
+    }
+    .document-download-btn:hover { background: #EFF6FF; color: #1D4ED8; }
+    .document-download-btn:focus-visible { outline: 2px solid #2563EB; outline-offset: 2px; }
 
     @media (max-width: 900px) {
       .requirement-trace-search .pro-search-form-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -625,6 +652,34 @@
                 </tbody>
               </table>
             </div>
+            <div class="info-section" data-section="document-attachments">
+              <div class="section-title"><i class="fas fa-folder-open"></i> 文档附件</div>
+              <table class="exec-table document-table pro-table" data-component="ProTable" aria-label="文档附件">
+                <thead>
+                  <tr>
+                    <th>文档类型</th>
+                    <th>文档名称</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="item in getDocumentList()" :key="item.type">
+                    <td>{{ item.type }}</td>
+                    <td>
+                      <div class="document-name-cell">
+                        <span>{{ item.name }}</span>
+                        <button
+                          class="document-download-btn"
+                          type="button"
+                          :aria-label="'下载文档：' + item.name"
+                          :title="'下载 ' + item.name"
+                          @click="downloadDocument(item)"
+                        ><i class="fas fa-download" aria-hidden="true"></i>下载</button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </template>
         </div>
       </div>
@@ -681,6 +736,13 @@
           // 项目执行列表
           execList: [
             
+          ],
+          documentList: [
+            { type: '设备验收单', name: '设备验收单.pdf' },
+            { type: '点位采集表', name: '点位采集表.xlsx' },
+            { type: '算法上传', name: '曝气智能体算法包.zip' },
+            { type: '培训记录表', name: '培训记录表.xlsx' },
+            { type: '验收报告', name: '项目验收报告.pdf' }
           ]
         }
       },
@@ -713,11 +775,23 @@
           this.detailVisible = false
           document.body.style.overflow = ''
         },
+        downloadDocument(item) {
+          const blob = new Blob([`PMS静态原型示例文件：${item.name}`], { type: 'application/octet-stream' })
+          const url = URL.createObjectURL(blob)
+          const link = document.createElement('a')
+          link.href = url
+          link.download = item.name
+          document.body.appendChild(link)
+          link.click()
+          link.remove()
+          URL.revokeObjectURL(url)
+        },
         getAttachments() { return this.attachData[this.currentTab] || [] },
         getApprovals() { return this.approveData[this.currentTab] || [] },
         getSurveyInfo() { return this.surveyInfo },
         getProjectSchemeInfo() { return this.projectSchemeInfo },
         getImplementNoticeInfo() { return this.implementNoticeInfo },
+        getDocumentList() { return this.documentList },
         getProjectApproveInfo() { return this.projectApproveInfo },
         getExecList() { return this.execList }
       },

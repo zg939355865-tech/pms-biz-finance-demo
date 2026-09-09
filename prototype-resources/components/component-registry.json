@@ -8,7 +8,7 @@
     "business": ["DetailForm", "AmountSummary", "StatusFlow", "BizfinChain", "ApprovalPanel", "HistoryTable", "UploadList", "ProUploadList", "ProStatCard", "ProChartCard", "ProMonitorCardGrid", "ProTreeTable", "ProTabsDetail", "ProFilterTabs", "ProBatchToolbar", "ProColumnSetting", "ProImportPanel"],
     "feedback": ["Alert", "Modal", "ProModalForm", "Drawer", "ProDetailDrawer", "DataSelectModal", "ProDataSelectModal", "Popconfirm", "Spin", "Skeleton"]
   },
-  "fieldComponents": ["input", "textarea", "number", "select", "multi-select", "radio", "checkbox", "switch", "date", "date-range", "tree-select", "cascader", "upload", "picker"],
+  "fieldComponents": ["input", "hidden", "textarea", "number", "select", "multi-select", "radio", "checkbox", "switch", "date", "date-range", "tree-select", "cascader", "upload", "picker"],
   "columnComponents": ["text", "input", "number", "select", "link", "tag", "bizfin-tag", "badge", "progress", "money", "date", "datetime", "actions"],
   "pageTypes": ["list", "detail", "list-detail", "workflow-detail", "non-workflow-detail", "ledger-tab-detail", "tree-table", "master-data-config", "relation-config", "data-select-modal", "component-gallery", "state-matrix", "master-detail", "tabs-detail", "approval", "dashboard", "workbench", "config", "import-task", "result", "permission-matrix"],
   "requiredComponentProperties": {
