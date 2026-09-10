@@ -190,11 +190,11 @@
     <main class="main">
       <header class="topbar">
         <nav class="breadcrumb" aria-label="面包屑">
-          <span class="breadcrumb-home"><i class="fas fa-house"></i> 首页</span>
-          <span class="breadcrumb-separator">/</span>
-          <span id="breadcrumbModule">流程指引</span>
+          <span class="breadcrumb-home"><i class="fas fa-house"></i> 项目驾驶舱</span>
+          <span class="breadcrumb-separator" id="breadcrumbModuleSeparator">/</span>
+          <span id="breadcrumbModule">项目驾驶舱</span>
           <span class="breadcrumb-separator" id="breadcrumbPageSeparator">/</span>
-          <span class="breadcrumb-current" id="breadcrumbPage">流程指引</span>
+          <span class="breadcrumb-current" id="breadcrumbPage">项目驾驶舱</span>
         </nav>
         <div class="topbar-actions">
           <label class="company-select-wrap">
@@ -215,16 +215,16 @@
         </div>
       </header>
       <section class="content">
-        <iframe id="contentFrame" src="../pages/process-guide.html"></iframe>
+        <iframe id="contentFrame" src="../pages/report/project-lifecycle-dashboard.html"></iframe>
       </section>
     </main>
   </div>
   <script>
     const menuData = [
       {
-            "name": "流程指引",
-            "icon": "compass",
-            "path": "process-guide.html",
+            "name": "项目驾驶舱",
+            "icon": "house",
+            "path": "report/project-lifecycle-dashboard.html",
             "children": []
       },
       {
@@ -240,7 +240,7 @@
             "children": []
       },
       {
-            "name": "代办事项",
+            "name": "待办事项",
             "icon": "list-check",
             "path": "",
             "children": [
@@ -449,18 +449,18 @@
             "path": "",
             "children": [
                   {
-                        "name": "项目成本分析",
-                        "path": "#",
+                        "name": "项目成本",
+                        "path": "cost/project-cost-analysis.html",
                         "icon": "circle"
                   },
                   {
-                        "name": "部门成本分析",
-                        "path": "#",
+                        "name": "部门成本",
+                        "path": "cost/department-cost-analysis.html",
                         "icon": "circle"
                   },
                   {
                         "name": "成本调整单",
-                        "path": "#",
+                        "path": "cost/cost-adjustment.html",
                         "icon": "circle"
                   }
             ]
@@ -556,6 +556,7 @@
     const menuRoot = document.getElementById('menu');
     const frame = document.getElementById('contentFrame');
     const breadcrumbModule = document.getElementById('breadcrumbModule');
+    const breadcrumbModuleSeparator = document.getElementById('breadcrumbModuleSeparator');
     const breadcrumbPage = document.getElementById('breadcrumbPage');
     const breadcrumbPageSeparator = document.getElementById('breadcrumbPageSeparator');
     const companySelect = document.getElementById('companySelect');
@@ -566,11 +567,14 @@
     }
 
     function updateBreadcrumb(moduleName, pageName) {
+      const isHome = moduleName === '项目驾驶舱';
       const isSinglePage = moduleName === pageName;
       breadcrumbModule.textContent = moduleName;
       breadcrumbPage.textContent = pageName;
-      breadcrumbPage.hidden = isSinglePage;
-      breadcrumbPageSeparator.hidden = isSinglePage;
+      breadcrumbModule.hidden = isHome;
+      breadcrumbModuleSeparator.hidden = isHome;
+      breadcrumbPage.hidden = isHome || isSinglePage;
+      breadcrumbPageSeparator.hidden = isHome || isSinglePage;
     }
 
     function openPage(moduleName, name, path) {
@@ -623,7 +627,7 @@
     }
 
     renderMenu();
-    updateBreadcrumb("流程指引", "流程指引");
+    updateBreadcrumb("项目驾驶舱", "项目驾驶舱");
 
     window.addEventListener('message', (event) => {
       const message = event.data || {};
