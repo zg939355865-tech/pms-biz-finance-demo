@@ -2,3 +2,16 @@ node_modules/
 *.tgz
 pub/
 outputs/
+.tmp/
+.claude/
+scripts/
+tools/
+docs/
+inputs/
+policies/
+schemas/
+rules/
+prd-assets/
+design-qa.md
+publish.ps1
+AGENTS.md
