@@ -1,0 +1,482 @@
+{
+  "run_status": "slides_recorded",
+  "deck_name": "PMS跨公司协同处理方案-咨询汇报风",
+  "selected_backend": "built-in image tool",
+  "sample_generation_method": {
+    "backend_used": "built-in image tool",
+    "tool_name": "image_gen",
+    "mode": "edit",
+    "prompt_source": "用户确认的旧版清爽咨询汇报风成品封面",
+    "size": "16:9 landscape",
+    "quality": "built-in default",
+    "approved_sample_path": "D:\\项目AI协作\\4、PMS业财一体化\\inputs\\PMS跨公司协同处理方案-咨询汇报风\\origin_image\\slide_01.png",
+    "input_context_preparation": "inspect the approved sample with view_image and pass it as a style-only reference",
+    "handoff_rule": "Subagents must use the built-in image_gen tool in edit/reference mode and return a blocker if unavailable."
+  },
+  "max_concurrent_slides": 6,
+  "slides": [
+    {
+      "slide_id": "slide_01",
+      "number": 1,
+      "title": "PMS集团跨公司协同处理方案",
+      "job": "prompts/slide_01.json",
+      "out": "origin_image/slide_01.png",
+      "input_images": [
+        {
+          "path": "D:\\项目AI协作\\4、PMS业财一体化\\inputs\\PMS跨公司协同处理方案-咨询汇报风\\origin_image\\slide_01.png",
+          "role": "approved sample slide style reference",
+          "fidelity": "match white background, deep navy typography, blue-teal line icons, light cool-gray panels, restrained orange handoff accents, spacing and information density; do not copy exact layout or outdated content"
+        }
+      ],
+      "requires_context_images": true,
+      "status": "accepted",
+      "dispatch": null,
+      "result": {
+        "final_image": "origin_image/slide_01.png",
+        "accepted_sample": true
+      },
+      "blocker": null
+    },
+    {
+      "slide_id": "slide_02",
+      "number": 2,
+      "title": "本次需要解决的核心问题",
+      "job": "prompts/slide_02.json",
+      "out": "origin_image/slide_02.png",
+      "input_images": [
+        {
+          "path": "D:\\项目AI协作\\4、PMS业财一体化\\inputs\\PMS跨公司协同处理方案-咨询汇报风\\origin_image\\slide_01.png",
+          "role": "approved sample slide style reference",
+          "fidelity": "match white background, deep navy typography, blue-teal line icons, light cool-gray panels, restrained orange handoff accents, spacing and information density; do not copy exact layout or outdated content"
+        }
+      ],
+      "requires_context_images": true,
+      "status": "recorded",
+      "dispatch": {
+        "agent_id": "019f8a76-7573-7910-ad06-62698d9e049c",
+        "agent_nickname": "Peirce",
+        "prompt": "prompts/slide_02.json",
+        "prompt_sha256": "13134ef7628faa38c121230db05ccf7cceed4af14e93c59a4abec8f64aaec485",
+        "dispatched_at": "2026-07-22T15:35:20Z"
+      },
+      "result": {
+        "agent_id": "019f8a76-7573-7910-ad06-62698d9e049c",
+        "backend_used": "built-in image tool",
+        "selected_source": "D:\\Program Files\\.codex\\generated_images\\019f8a76-7573-7910-ad06-62698d9e049c\\exec-7ab6253b-78d0-46d9-8486-6a668cb7ff33.png",
+        "selected_source_sha256": "4ba51f9536892ad4282dc65355bdd5bd80666b18efe864e0796394fed4d77e45",
+        "final_image": "origin_image/slide_02.png",
+        "final_image_sha256": "4ba51f9536892ad4282dc65355bdd5bd80666b18efe864e0796394fed4d77e45",
+        "expected_backend": "built-in image tool",
+        "expected_backend_labels": [
+          "built-in image tool",
+          "image_gen"
+        ],
+        "sample_generation_method_matched": true,
+        "qa_note": "中文准确，布局清晰，旧版咨询汇报风一致。",
+        "recorded_at": "2026-07-22T15:39:03Z"
+      },
+      "blocker": null
+    },
+    {
+      "slide_id": "slide_03",
+      "number": 3,
+      "title": "典型场景暴露出的管理难题",
+      "job": "prompts/slide_03.json",
+      "out": "origin_image/slide_03.png",
+      "input_images": [
+        {
+          "path": "D:\\项目AI协作\\4、PMS业财一体化\\inputs\\PMS跨公司协同处理方案-咨询汇报风\\origin_image\\slide_01.png",
+          "role": "approved sample slide style reference",
+          "fidelity": "match white background, deep navy typography, blue-teal line icons, light cool-gray panels, restrained orange handoff accents, spacing and information density; do not copy exact layout or outdated content"
+        }
+      ],
+      "requires_context_images": true,
+      "status": "recorded",
+      "dispatch": {
+        "agent_id": "019f8a76-b4bf-75f3-9497-01c76e8a03ed",
+        "agent_nickname": "Helmholtz",
+        "prompt": "prompts/slide_03.json",
+        "prompt_sha256": "6d4a588b5497c65815550591b8676d9fddcc81d25ee1607c9b98a3637792926c",
+        "dispatched_at": "2026-07-22T15:35:20Z"
+      },
+      "result": {
+        "agent_id": "019f8a76-b4bf-75f3-9497-01c76e8a03ed",
+        "backend_used": "built-in image tool",
+        "selected_source": "D:\\Program Files\\.codex\\generated_images\\019f8a76-b4bf-75f3-9497-01c76e8a03ed\\exec-1bddc16b-568d-4824-b987-5faa19fd10bb.png",
+        "selected_source_sha256": "8d54b29d70d925430303c21ab17e901064e50ab918de10ceac18caf0c69dcbf7",
+        "final_image": "origin_image/slide_03.png",
+        "final_image_sha256": "8d54b29d70d925430303c21ab17e901064e50ab918de10ceac18caf0c69dcbf7",
+        "expected_backend": "built-in image tool",
+        "expected_backend_labels": [
+          "built-in image tool",
+          "image_gen"
+        ],
+        "sample_generation_method_matched": true,
+        "qa_note": "中文准确，布局与业务规则校验通过，咨询汇报风一致。",
+        "recorded_at": "2026-07-22T15:40:34Z"
+      },
+      "blocker": null
+    },
+    {
+      "slide_id": "slide_04",
+      "number": 4,
+      "title": "未来业务形态：一条主线、两类任务、一个跟踪视图",
+      "job": "prompts/slide_04.json",
+      "out": "origin_image/slide_04.png",
+      "input_images": [
+        {
+          "path": "D:\\项目AI协作\\4、PMS业财一体化\\inputs\\PMS跨公司协同处理方案-咨询汇报风\\origin_image\\slide_01.png",
+          "role": "approved sample slide style reference",
+          "fidelity": "match white background, deep navy typography, blue-teal line icons, light cool-gray panels, restrained orange handoff accents, spacing and information density; do not copy exact layout or outdated content"
+        }
+      ],
+      "requires_context_images": true,
+      "status": "recorded",
+      "dispatch": {
+        "agent_id": "019f8a76-c5cf-7593-8c2b-bf4a4169a3b9",
+        "agent_nickname": "Noether",
+        "prompt": "prompts/slide_04.json",
+        "prompt_sha256": "4e19add7c1153587b8885ca650db0f0011cc91c9cdebb2ada36e1c142b0ef3c0",
+        "dispatched_at": "2026-07-22T15:35:20Z"
+      },
+      "result": {
+        "agent_id": "019f8a76-c5cf-7593-8c2b-bf4a4169a3b9",
+        "backend_used": "built-in image tool",
+        "selected_source": "D:\\Program Files\\.codex\\generated_images\\019f8a76-c5cf-7593-8c2b-bf4a4169a3b9\\exec-b6f7ed8c-cd68-4aa4-98c8-8ec3a48be14c.png",
+        "selected_source_sha256": "2558ce44a52f30d529b9ebb34658cd363024d62f9746e7576eac6fb0caf3b992",
+        "final_image": "origin_image/slide_04.png",
+        "final_image_sha256": "2558ce44a52f30d529b9ebb34658cd363024d62f9746e7576eac6fb0caf3b992",
+        "expected_backend": "built-in image tool",
+        "expected_backend_labels": [
+          "built-in image tool",
+          "image_gen"
+        ],
+        "sample_generation_method_matched": true,
+        "qa_note": "中文准确，布局与业务规则校验通过，咨询汇报风一致。",
+        "recorded_at": "2026-07-22T15:40:34Z"
+      },
+      "blocker": null
+    },
+    {
+      "slide_id": "slide_05",
+      "number": 5,
+      "title": "项目需求坚持一个入口、一张单据",
+      "job": "prompts/slide_05.json",
+      "out": "origin_image/slide_05.png",
+      "input_images": [
+        {
+          "path": "D:\\项目AI协作\\4、PMS业财一体化\\inputs\\PMS跨公司协同处理方案-咨询汇报风\\origin_image\\slide_01.png",
+          "role": "approved sample slide style reference",
+          "fidelity": "match white background, deep navy typography, blue-teal line icons, light cool-gray panels, restrained orange handoff accents, spacing and information density; do not copy exact layout or outdated content"
+        }
+      ],
+      "requires_context_images": true,
+      "status": "recorded",
+      "dispatch": {
+        "agent_id": "019f8a76-f146-7f50-be84-815ee654551c",
+        "agent_nickname": "Epicurus",
+        "prompt": "prompts/slide_05.json",
+        "prompt_sha256": "65f5e452e2c74c5fa7a17a2258678ddc1356e73d02b3f453b303910d0642f2c3",
+        "dispatched_at": "2026-07-22T15:35:20Z"
+      },
+      "result": {
+        "agent_id": "019f8a76-f146-7f50-be84-815ee654551c",
+        "backend_used": "built-in image tool",
+        "selected_source": "D:\\Program Files\\.codex\\generated_images\\019f8a76-f146-7f50-be84-815ee654551c\\exec-2c11d876-bd08-47fe-b3a1-00207516de5f.png",
+        "selected_source_sha256": "efe44af8ae48a09881a2faa01f150dec75ad940ebffd8e25d2a26dd720580544",
+        "final_image": "origin_image/slide_05.png",
+        "final_image_sha256": "efe44af8ae48a09881a2faa01f150dec75ad940ebffd8e25d2a26dd720580544",
+        "expected_backend": "built-in image tool",
+        "expected_backend_labels": [
+          "built-in image tool",
+          "image_gen"
+        ],
+        "sample_generation_method_matched": true,
+        "qa_note": "中文准确，单一入口规则清晰，风格一致。",
+        "recorded_at": "2026-07-22T15:41:45Z"
+      },
+      "blocker": null
+    },
+    {
+      "slide_id": "slide_06",
+      "number": 6,
+      "title": "项目主责公司：管理完整项目链路",
+      "job": "prompts/slide_06.json",
+      "out": "origin_image/slide_06.png",
+      "input_images": [
+        {
+          "path": "D:\\项目AI协作\\4、PMS业财一体化\\inputs\\PMS跨公司协同处理方案-咨询汇报风\\origin_image\\slide_01.png",
+          "role": "approved sample slide style reference",
+          "fidelity": "match white background, deep navy typography, blue-teal line icons, light cool-gray panels, restrained orange handoff accents, spacing and information density; do not copy exact layout or outdated content"
+        }
+      ],
+      "requires_context_images": true,
+      "status": "recorded",
+      "dispatch": {
+        "agent_id": "019f8a77-1590-7242-a99a-3f234c239439",
+        "agent_nickname": "Linnaeus",
+        "prompt": "prompts/slide_06.json",
+        "prompt_sha256": "05049da652920e783fab6922a31cf9fa3023f3718119347ae01285a1b8871dc3",
+        "dispatched_at": "2026-07-22T15:35:20Z"
+      },
+      "result": {
+        "agent_id": "019f8a77-1590-7242-a99a-3f234c239439",
+        "backend_used": "built-in image tool",
+        "selected_source": "D:\\Program Files\\.codex\\generated_images\\019f8a77-1590-7242-a99a-3f234c239439\\exec-df9b038f-1acb-4e60-b5ff-629d147a22a1.png",
+        "selected_source_sha256": "93208d4ba9b77bee42f9bf44035103cebdae7518a1cf3c0718b3bd94a9b2cf43",
+        "final_image": "origin_image/slide_06.png",
+        "final_image_sha256": "93208d4ba9b77bee42f9bf44035103cebdae7518a1cf3c0718b3bd94a9b2cf43",
+        "expected_backend": "built-in image tool",
+        "expected_backend_labels": [
+          "built-in image tool",
+          "image_gen"
+        ],
+        "sample_generation_method_matched": true,
+        "qa_note": "中文准确，布局与业务规则校验通过，咨询汇报风一致。",
+        "recorded_at": "2026-07-22T15:40:33Z"
+      },
+      "blocker": null
+    },
+    {
+      "slide_id": "slide_07",
+      "number": 7,
+      "title": "跨公司协同方：只接任务，不进入主流程",
+      "job": "prompts/slide_07.json",
+      "out": "origin_image/slide_07.png",
+      "input_images": [
+        {
+          "path": "D:\\项目AI协作\\4、PMS业财一体化\\inputs\\PMS跨公司协同处理方案-咨询汇报风\\origin_image\\slide_01.png",
+          "role": "approved sample slide style reference",
+          "fidelity": "match white background, deep navy typography, blue-teal line icons, light cool-gray panels, restrained orange handoff accents, spacing and information density; do not copy exact layout or outdated content"
+        }
+      ],
+      "requires_context_images": true,
+      "status": "recorded",
+      "dispatch": {
+        "agent_id": "019f8a77-3d10-73a0-8933-8afe9ee76a8b",
+        "agent_nickname": "Dirac",
+        "prompt": "prompts/slide_07.json",
+        "prompt_sha256": "ca92a63594387e241460f27d3e24b07deea3f70015eade84076b44cec3d47952",
+        "dispatched_at": "2026-07-22T15:35:20Z"
+      },
+      "result": {
+        "agent_id": "019f8a77-3d10-73a0-8933-8afe9ee76a8b",
+        "backend_used": "built-in image tool",
+        "selected_source": "D:\\Program Files\\.codex\\generated_images\\019f8a77-3d10-73a0-8933-8afe9ee76a8b\\exec-cefebab3-a087-449d-8a6b-47825f371818.png",
+        "selected_source_sha256": "98760d0665f521a35fb999cd325cf799861eb9f1c69ad27d1230147714e08fe4",
+        "final_image": "origin_image/slide_07.png",
+        "final_image_sha256": "98760d0665f521a35fb999cd325cf799861eb9f1c69ad27d1230147714e08fe4",
+        "expected_backend": "built-in image tool",
+        "expected_backend_labels": [
+          "built-in image tool",
+          "image_gen"
+        ],
+        "sample_generation_method_matched": true,
+        "qa_note": "中文准确，任务闭环清晰，风格一致。",
+        "recorded_at": "2026-07-22T15:39:44Z"
+      },
+      "blocker": null
+    },
+    {
+      "slide_id": "slide_08",
+      "number": 8,
+      "title": "任务级资料包：调研问卷如何安全共享",
+      "job": "prompts/slide_08.json",
+      "out": "origin_image/slide_08.png",
+      "input_images": [
+        {
+          "path": "D:\\项目AI协作\\4、PMS业财一体化\\inputs\\PMS跨公司协同处理方案-咨询汇报风\\origin_image\\slide_01.png",
+          "role": "approved sample slide style reference",
+          "fidelity": "match white background, deep navy typography, blue-teal line icons, light cool-gray panels, restrained orange handoff accents, spacing and information density; do not copy exact layout or outdated content"
+        }
+      ],
+      "requires_context_images": true,
+      "status": "recorded",
+      "dispatch": {
+        "agent_id": "019f8a7a-ff2e-7803-b73e-73494ad23d23",
+        "agent_nickname": "Rawls",
+        "prompt": "prompts/slide_08.json",
+        "prompt_sha256": "b884b4bce7c342efa70ca77c22ba38c50ccbf102d2f1878f5cbdf3e4fa6970d4",
+        "dispatched_at": "2026-07-22T15:39:18Z"
+      },
+      "result": {
+        "agent_id": "019f8a7a-ff2e-7803-b73e-73494ad23d23",
+        "backend_used": "built-in image tool",
+        "selected_source": "D:\\Program Files\\.codex\\generated_images\\019f8a7a-ff2e-7803-b73e-73494ad23d23\\exec-cd57c042-0227-4355-92d3-71d57b8f8acd.png",
+        "selected_source_sha256": "eecd6448654aa204870915ddd6e9d7b63eefe82c2b1aaabd271ba0f7567e6c47",
+        "final_image": "origin_image/slide_08.png",
+        "final_image_sha256": "eecd6448654aa204870915ddd6e9d7b63eefe82c2b1aaabd271ba0f7567e6c47",
+        "expected_backend": "built-in image tool",
+        "expected_backend_labels": [
+          "built-in image tool",
+          "image_gen"
+        ],
+        "sample_generation_method_matched": true,
+        "qa_note": "中文准确，权限边界与任务资料规则清晰，风格一致。",
+        "recorded_at": "2026-07-22T15:45:03Z"
+      },
+      "blocker": null
+    },
+    {
+      "slide_id": "slide_09",
+      "number": 9,
+      "title": "需求来源公司：知道过程，不介入内部管理",
+      "job": "prompts/slide_09.json",
+      "out": "origin_image/slide_09.png",
+      "input_images": [
+        {
+          "path": "D:\\项目AI协作\\4、PMS业财一体化\\inputs\\PMS跨公司协同处理方案-咨询汇报风\\origin_image\\slide_01.png",
+          "role": "approved sample slide style reference",
+          "fidelity": "match white background, deep navy typography, blue-teal line icons, light cool-gray panels, restrained orange handoff accents, spacing and information density; do not copy exact layout or outdated content"
+        }
+      ],
+      "requires_context_images": true,
+      "status": "recorded",
+      "dispatch": {
+        "agent_id": "019f8a7b-9fbf-7b63-8ae1-05f2fde3057d",
+        "agent_nickname": "Boole",
+        "prompt": "prompts/slide_09.json",
+        "prompt_sha256": "d2a5a2934ffd4f8c5aca4ddc4513545ac43137befeaa3c295023ceb67c2eb219",
+        "dispatched_at": "2026-07-22T15:39:53Z"
+      },
+      "result": {
+        "agent_id": "019f8a7b-9fbf-7b63-8ae1-05f2fde3057d",
+        "backend_used": "built-in image tool",
+        "selected_source": "D:\\Program Files\\.codex\\generated_images\\019f8a7b-9fbf-7b63-8ae1-05f2fde3057d\\exec-a5f6d4c2-f3e8-4fb7-8ad2-277c73181b89.png",
+        "selected_source_sha256": "226b60cfec90ade4e0acafbac94ff2b2604084b4f587a377754d459ec0f6c73b",
+        "final_image": "origin_image/slide_09.png",
+        "final_image_sha256": "226b60cfec90ade4e0acafbac94ff2b2604084b4f587a377754d459ec0f6c73b",
+        "expected_backend": "built-in image tool",
+        "expected_backend_labels": [
+          "built-in image tool",
+          "image_gen"
+        ],
+        "sample_generation_method_matched": true,
+        "qa_note": "中文准确，权限边界与任务资料规则清晰，风格一致。",
+        "recorded_at": "2026-07-22T15:45:03Z"
+      },
+      "blocker": null
+    },
+    {
+      "slide_id": "slide_10",
+      "number": 10,
+      "title": "典型场景全流程：无锡、武汉、长沙如何协同",
+      "job": "prompts/slide_10.json",
+      "out": "origin_image/slide_10.png",
+      "input_images": [
+        {
+          "path": "D:\\项目AI协作\\4、PMS业财一体化\\inputs\\PMS跨公司协同处理方案-咨询汇报风\\origin_image\\slide_01.png",
+          "role": "approved sample slide style reference",
+          "fidelity": "match white background, deep navy typography, blue-teal line icons, light cool-gray panels, restrained orange handoff accents, spacing and information density; do not copy exact layout or outdated content"
+        }
+      ],
+      "requires_context_images": true,
+      "status": "recorded",
+      "dispatch": {
+        "agent_id": "019f8a7c-6632-73e3-8cb4-b8445a52c813",
+        "agent_nickname": "Confucius",
+        "prompt": "prompts/slide_10.json",
+        "prompt_sha256": "3a13a5ebd34068d187bf98150ec90210f8da424de74f297aa5a99bb1fe3ec8fc",
+        "dispatched_at": "2026-07-22T15:41:45Z"
+      },
+      "result": {
+        "agent_id": "019f8a7c-6632-73e3-8cb4-b8445a52c813",
+        "backend_used": "built-in image tool",
+        "selected_source": "D:\\Program Files\\.codex\\generated_images\\019f8a7c-6632-73e3-8cb4-b8445a52c813\\exec-4145c425-1b7b-4ffd-b7c3-55d62765a00d.png",
+        "selected_source_sha256": "0744b94c77c67a3cb6f8a8c1a6f11537ac2a86ae1f1378d7ebfe5e9d18a7d422",
+        "final_image": "origin_image/slide_10.png",
+        "final_image_sha256": "0744b94c77c67a3cb6f8a8c1a6f11537ac2a86ae1f1378d7ebfe5e9d18a7d422",
+        "expected_backend": "built-in image tool",
+        "expected_backend_labels": [
+          "built-in image tool",
+          "image_gen"
+        ],
+        "sample_generation_method_matched": true,
+        "qa_note": "中文准确，典型场景或落地建议规则清晰，风格一致。",
+        "recorded_at": "2026-07-22T15:45:45Z"
+      },
+      "blocker": null
+    },
+    {
+      "slide_id": "slide_11",
+      "number": 11,
+      "title": "权限与数据边界",
+      "job": "prompts/slide_11.json",
+      "out": "origin_image/slide_11.png",
+      "input_images": [
+        {
+          "path": "D:\\项目AI协作\\4、PMS业财一体化\\inputs\\PMS跨公司协同处理方案-咨询汇报风\\origin_image\\slide_01.png",
+          "role": "approved sample slide style reference",
+          "fidelity": "match white background, deep navy typography, blue-teal line icons, light cool-gray panels, restrained orange handoff accents, spacing and information density; do not copy exact layout or outdated content"
+        }
+      ],
+      "requires_context_images": true,
+      "status": "recorded",
+      "dispatch": {
+        "agent_id": "019f8a7c-7df1-72f2-a8b8-505990aee852",
+        "agent_nickname": "Hilbert",
+        "prompt": "prompts/slide_11.json",
+        "prompt_sha256": "c85307e5ff6c191c5d991a37c0c0edbf1a0b05d917178043f1229b1fe0260a7b",
+        "dispatched_at": "2026-07-22T15:41:45Z"
+      },
+      "result": {
+        "agent_id": "019f8a7c-7df1-72f2-a8b8-505990aee852",
+        "backend_used": "built-in image tool",
+        "selected_source": "D:\\Program Files\\.codex\\generated_images\\019f8a7c-7df1-72f2-a8b8-505990aee852\\exec-2d20787a-766d-4d89-8cbd-b9bf6f1b8c23.png",
+        "selected_source_sha256": "948c4f496d4149507cff2cf927bd3011ed4fd73c22976debbc291089872b3207",
+        "final_image": "origin_image/slide_11.png",
+        "final_image_sha256": "948c4f496d4149507cff2cf927bd3011ed4fd73c22976debbc291089872b3207",
+        "expected_backend": "built-in image tool",
+        "expected_backend_labels": [
+          "built-in image tool",
+          "image_gen"
+        ],
+        "sample_generation_method_matched": true,
+        "qa_note": "中文准确，权限矩阵和敏感数据授权规则清晰，风格一致。",
+        "recorded_at": "2026-07-22T15:48:23Z"
+      },
+      "blocker": null
+    },
+    {
+      "slide_id": "slide_12",
+      "number": 12,
+      "title": "落地后的管理价值与实施建议",
+      "job": "prompts/slide_12.json",
+      "out": "origin_image/slide_12.png",
+      "input_images": [
+        {
+          "path": "D:\\项目AI协作\\4、PMS业财一体化\\inputs\\PMS跨公司协同处理方案-咨询汇报风\\origin_image\\slide_01.png",
+          "role": "approved sample slide style reference",
+          "fidelity": "match white background, deep navy typography, blue-teal line icons, light cool-gray panels, restrained orange handoff accents, spacing and information density; do not copy exact layout or outdated content"
+        }
+      ],
+      "requires_context_images": true,
+      "status": "recorded",
+      "dispatch": {
+        "agent_id": "019f8a7c-97f1-75b2-87cd-9625b19ab2e7",
+        "agent_nickname": "Singer",
+        "prompt": "prompts/slide_12.json",
+        "prompt_sha256": "83fc7cb8ac7b6e1e30fd153ea7e106dbe30c1c83f6ddcfead577aaed2f4226f5",
+        "dispatched_at": "2026-07-22T15:41:45Z"
+      },
+      "result": {
+        "agent_id": "019f8a7c-97f1-75b2-87cd-9625b19ab2e7",
+        "backend_used": "built-in image tool",
+        "selected_source": "D:\\Program Files\\.codex\\generated_images\\019f8a7c-97f1-75b2-87cd-9625b19ab2e7\\exec-e00522fe-36cd-4dce-a3a9-0fdba6a30af1.png",
+        "selected_source_sha256": "74740b97b57f7387da37eacdbfff903f63ad9b9ab15743ca3bc3886bf9e07c6c",
+        "final_image": "origin_image/slide_12.png",
+        "final_image_sha256": "74740b97b57f7387da37eacdbfff903f63ad9b9ab15743ca3bc3886bf9e07c6c",
+        "expected_backend": "built-in image tool",
+        "expected_backend_labels": [
+          "built-in image tool",
+          "image_gen"
+        ],
+        "sample_generation_method_matched": true,
+        "qa_note": "中文准确，典型场景或落地建议规则清晰，风格一致。",
+        "recorded_at": "2026-07-22T15:45:45Z"
+      },
+      "blocker": null
+    }
+  ],
+  "updated_at": "2026-07-22T15:48:23Z"
+}

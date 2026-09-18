@@ -1,0 +1,132 @@
+﻿
+SLIDE 1 shapeCount 2 tableCount 0 chartCount 0 imageCount 1
+shape 4 "Team onsite \nand planning" title e {}
+shape 5 "August Team Onsite \nSan Francisco" subtitle e {}
+
+SLIDE 2 shapeCount 3 tableCount 1 chartCount 0 imageCount 0
+shape 2 "2" slideNumber e {}
+shape 3 "Today’s Agenda" title e {}
+shape 5 "" footer e {}
+table 6 undefined undefined 6
+
+SLIDE 8 shapeCount 11 tableCount 0 chartCount 0 imageCount 0
+shape 532 "8" slideNumber e {}
+shape 533 "Intro with two comparison cards" title e {}
+shape 2 ""  e {}
+shape 3 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ultricies quam ut massa luctus cursus. Nullam pharetra mauris tortor. "  e {}
+shape 4 "Detail goes here\nDetail goes here\nDetail goes here"  e {}
+shape 8 ""  e {}
+shape 11 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ultricies quam ut massa luctus cursus. Nullam pharetra mauris tortor. "  e {}
+shape 13 "Detail goes here\nDetail goes here\nDetail goes here"  e {}
+shape 14 "Topic\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ultricies quam ut massa luctus cursus. Nullam pharetra mauris tortor. In hac habitasse platea dictumst. Proin mattis nibh risus. Nulla tempor ut massa elementum dapibus. Nam non ante quis enim fringilla tempus nec in lectus. In hac habitasse platea dictumst. \nLorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ultricies quam ut massa luctus cursus. \n"  e {}
+shape 26 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ultricies quam ut massa luctus cursus. Nullam pharetra mauris tortor. In hac habitasse platea dictumst. Proin mattis nibh risus. Nulla tempor ut massa elementum dapibus. "  e {}
+shape 5 "" footer e {}
+
+SLIDE 9 shapeCount 4 tableCount 1 chartCount 0 imageCount 0
+shape 532 "9" slideNumber e {}
+shape 533 "Intro and data table" title e {}
+shape 14 "Topic\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ultricies quam ut massa luctus cursus. Nullam pharetra mauris tortor. In hac habitasse platea dictumst. Proin mattis nibh risus. Nulla tempor ut massa elementum dapibus. "  e {}
+shape 3 "" footer e {}
+table 534 undefined undefined 9
+
+SLIDE 10 shapeCount 12 tableCount 0 chartCount 0 imageCount 0
+shape 532 "10" slideNumber e {}
+shape 533 "Intro and 2x2 card grid" title e {}
+shape 7 ""  e {}
+shape 8 "Title goes here\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ultricies quam ut massa luctus. "  e {}
+shape 9 ""  e {}
+shape 10 "Title goes here\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ultricies quam ut massa luctus. "  e {}
+shape 2 ""  e {}
+shape 3 "Title goes here\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ultricies quam ut massa luctus. "  e {}
+shape 4 ""  e {}
+shape 5 "Title goes here\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ultricies quam ut massa luctus. "  e {}
+shape 6 "Topic\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ultricies quam ut massa luctus cursus. Nullam pharetra mauris tortor. In hac habitasse platea dictumst. Proin mattis nibh risus. Nulla tempor ut massa elementum dapibus. "  e {}
+shape 11 "" footer e {}
+
+SLIDE 11 shapeCount 7 tableCount 0 chartCount 0 imageCount 0
+shape 10 "Title goes here\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ultricies quam ut massa luctus cursus. "  e {}
+shape 2 "11" slideNumber e {}
+shape 11 "Title goes here\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ultricies quam ut massa luctus cursus. "  e {}
+shape 3 "Four points grid layout " title e {}
+shape 4 "Title goes here\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ultricies quam ut massa luctus cursus. "  e {}
+shape 5 "Title goes here\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ultricies quam ut massa luctus cursus. "  e {}
+shape 6 "" footer e {}
+
+SLIDE 13 shapeCount 12 tableCount 0 chartCount 0 imageCount 0
+shape 532 "13" slideNumber e {}
+shape 533 "Intro with four topics" title e {}
+shape 12 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ultricies quam ut massa luctus. "  e {}
+shape 15 "Item or topic \ntitle goes here"  e {}
+shape 16 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ultricies quam ut massa luctus. "  e {}
+shape 17 "Item or topic \ntitle goes here"  e {}
+shape 18 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ultricies quam ut massa luctus. "  e {}
+shape 19 "Item or topic \ntitle goes here"  e {}
+shape 20 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ultricies quam ut massa luctus. "  e {}
+shape 21 "Item or topic \ntitle goes here"  e {}
+shape 3 "Title here\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ultricies quam ut massa luctus cursus. Nullam pharetra mauris tortor. In hac habitasse platea dictumst. \nQuam ut massa luctus cursus. Nullam pharetra mauris tortor. In hac habitasse platea dictumst."  e {}
+shape 2 "" footer e {}
+
+SLIDE 14 shapeCount 13 tableCount 0 chartCount 0 imageCount 0
+shape 16 "Title here\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ultricies quam."  e {}
+shape 4 "14" slideNumber e {}
+shape 11 "Timeline with three text only milestones" title e {}
+shape 17 "Title here\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ultricies quam." body e {}
+shape 18 "Title here\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ultricies quam."  e {}
+shape 2 ""  e {}
+shape 3 ""  e {}
+shape 5 ""  e {}
+shape 6 ""  e {}
+shape 9 "Date"  e {}
+shape 13 "Date"  e {}
+shape 14 "Date"  e {}
+shape 7 "" footer e {}
+
+SLIDE 15 shapeCount 16 tableCount 0 chartCount 0 imageCount 0
+shape 16 "Date"  e {}
+shape 4 "15" slideNumber e {}
+shape 11 "Timeline with three card milestones" title e {}
+shape 17 "Date" body e {}
+shape 18 "Date"  e {}
+shape 2 ""  e {}
+shape 3 ""  e {}
+shape 5 ""  e {}
+shape 6 ""  e {}
+shape 20 ""  e {}
+shape 21 "Title here\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ultricies quam ut massa luctus cursus. Nullam pharetra mauris tortor. In hac habitasse platea dictumst. "  e {}
+shape 22 ""  e {}
+shape 23 "Title here\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ultricies quam ut massa luctus cursus. Nullam pharetra mauris tortor. In hac habitasse platea dictumst. "  e {}
+shape 24 ""  e {}
+shape 25 "Title here\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ultricies quam ut massa luctus cursus. Nullam pharetra mauris tortor. In hac habitasse platea dictumst. "  e {}
+shape 7 "" footer e {}
+
+SLIDE 19 shapeCount 13 tableCount 0 chartCount 0 imageCount 0
+shape 3 "" footer e {}
+shape 4 "19" slideNumber e {}
+shape 8 "Three card layout" title e {}
+shape 5 ""  e {}
+shape 6 ""  e {}
+shape 7 ""  e {}
+shape 9 "Title here\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ultricies quam ut massa luctus cursus. Nullam pharetra mauris tortor."  e {}
+shape 10 "Title here\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ultricies quam ut massa luctus cursus. Nullam pharetra mauris tortor."  e {}
+shape 11 "Title here\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ultricies quam ut massa luctus cursus. Nullam pharetra mauris tortor."  e {}
+shape 2 ""  e {}
+shape 12 ""  e {}
+shape 13 ""  e {}
+shape 14 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ultricies quam ut massa luctus cursus. Nullam pharetra mauris tortor. In hac habitasse platea dictumst. Proin mattis nibh risus. Nulla tempor ut massa elementum dapibus. Nam non ante quis enim fringilla tempus nec in lectus."  e {}
+
+SLIDE 23 shapeCount 9 tableCount 0 chartCount 0 imageCount 0
+shape 558 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ultricies quam ut massa luctus cursus. "  e {}
+shape 556 "23" slideNumber e {}
+shape 559 "Nulla tempor ut massa elementum dapibus. Nam non ante quis enim fringilla tempus nec in lectus."  e {}
+shape 560 "Nulla tempor ut massa elementum dapibus. Nam non ante quis enim fringilla tempus nec in lectus."  e {}
+shape 557 "Three column layout with icons" title e {}
+shape 561 ""  e {}
+shape 562 ""  e {}
+shape 563 ""  e {}
+shape 2 "" footer e {}
+
+SLIDE 24 shapeCount 4 tableCount 0 chartCount 0 imageCount 1
+shape 4 "Thank you" title e {}
+shape 5 "August Team Onsite \nSan Francisco" subtitle e {}
+shape 2 ""  e {}
+shape 6 ""  e {}

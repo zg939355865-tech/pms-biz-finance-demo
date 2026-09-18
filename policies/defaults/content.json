@@ -1,0 +1,41 @@
+{
+  "version": "pms-content-policy-v5",
+  "actionLabels": {
+    "nonWorkflowSubmit": "提交"
+  },
+  "detailOnlyFields": {
+    "excludeFromSearch": true,
+    "excludeFromPrimaryList": true
+  },
+  "informationalAlerts": {
+    "hideByDefault": true
+  },
+  "fieldHelperText": {
+    "hideByDefault": true
+  },
+  "statusField": {
+    "normalizeLabel": "状态",
+    "placeAfterBusinessIdentifier": true
+  },
+  "attachmentList": {
+    "hideInnerTitle": true,
+    "inheritDetailEditability": true,
+    "keepOperationColumn": true,
+    "operationColumnWidth": 96,
+    "rowActions": [
+      {
+        "code": "remove-row",
+        "label": "删除",
+        "type": "link"
+      }
+    ]
+  },
+  "editableTable": {
+    "batchDeleteLabel": "删除选中明细",
+    "rowDeleteAction": {
+      "code": "remove-row",
+      "label": "删除",
+      "type": "link"
+    }
+  }
+}

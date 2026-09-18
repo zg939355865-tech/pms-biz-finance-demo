@@ -1,0 +1,42 @@
+{
+  "slide": 10,
+  "title": "业财融合数据整体交互",
+  "prompt": "# Codex PPT Slide Image Prompt\n\n## Canvas\n{\n  \"type\": \"16:9 full-slide PowerPoint image\",\n  \"language\": \"Chinese\",\n  \"slide_number\": 10,\n  \"render_slide_number\": false\n}\n\n## Deck Goal\n面向管理层汇报PMS业财融合蓝图，准确还原源MD重点，统一呈现建设背景、总体架构、业务场景、迭代推广和待决策事项。\n\n## Global Style\n{\n  \"name\": \"IBM式企业咨询汇报风格\",\n  \"visual_direction\": \"premium enterprise consulting deck, structured diagrams, conclusion-first, restrained technology feel, no marketing poster styling\",\n  \"color_palette\": \"deep navy #1E3A5F, IBM blue #0F62FE, cool gray #F4F7FB, white panels, subtle cyan accents, status accents green/amber/red only when needed\",\n  \"typography\": \"modern Chinese enterprise sans-serif, strong hierarchy, left-aligned body text, large clean titles, compact readable labels\",\n  \"texture_and_finish\": \"crisp vector-like infographic, clean grid, thin connectors, slight card shadows, no decorative blobs or photo backgrounds\",\n  \"deck_consistency\": \"same palette, typography, icon language, line style, diagram density and consulting tone across all slides; vary composition by slide role\"\n}\n\n## Approved Style Reference\n- Image 1: D:\\项目AI协作\\4、PMS业财一体化\\input\\业财融合蓝图汇报方案_准确还原优化版\\origin_image\\slide_08.png — approved IBM-style consulting slide reference. Match palette, typography, icon language, spacing, and clean enterprise tone. Do not copy the exact layout.\n\n## Slide\n{\n  \"number\": 10,\n  \"title\": \"业财融合数据整体交互\",\n  \"role\": \"flow\",\n  \"intent\": \"按源MD准确还原重点，同时统一排版并降低复杂度\"\n}\n\n## Source Of Truth\n以下内容来自 input/业财融合PPT汇报.md，是本页唯一内容来源。必须以此为准，不得新增源文档没有的流程、规则或结论。\n\n```text\n标题：业财融合数据整体交互\n围绕主数据、业务单据、经营台账、发票收付和凭证结果建立双向一致\n主数据先统一\n客户、供应商、部门、员工、科目、核算主体等基础信息在 PMS 和用友之间同步，避免同一个客户、项目、供应商在两个系统里口径不一致。\nPMS 产生业务事实\n项目、合同、采购、物资、报销、研发等业务在 PMS 发生，形成业务单据。\n这些是后续台账、开票、收款、付款和分析的业务源头。\n业务事实沉淀到台账中心\n收入合同、收款计划、采购订单、支出合同、入库验收、付款申请等，沉淀为收入回款台账、支出付款台账。\n台账的作用是把零散业务单据变成可跟踪、可对账、可分析的经营数据。\n发票收付形成财务关键动作\n开票、收票、收款、付款、核销等动作围绕台账发生。\n例如收入侧：收入合同 → 收款计划 → 开票申请 → 销项开票 → 收款核销。\n支出侧：采购订单/支出合同 → 入库验收/服务结算 → 采购收票 → 付款申请 → 付款核销。\n用友完成财务核算\nPMS 把业务单据、台账、发票、收付款结果推送给用友；用友生成凭证、总账、辅助核算、资产卡片等财务结果。\n财务结果回写 PMS\n用友把凭证号、凭证状态、核算结果、付款/收款状态等回写 PMS。\n这样业务人员在 PMS 里就能看到这笔业务是否已入账、是否已付款、是否已开票、是否已核销。\n经营分析基于闭环数据输出\n最终看收入、成本、费用、现金流、预算、税负、回报率等，不是单看业务系统，也不是单看财务系统，而是看两边对齐后的统一结果。\n```\n\n## Required Content Rule\n准确保留源文档中的主线、层级、闭环和系统名称；减少长段落，保留重要名词。\n\n## Layout Rule\n统一架构/交互页版式：顶部标题和一句核心结论；中部用流程或分层结构展示主线；右侧放3-5个关键要点或闭环结果。\n\n## Visual Requirements\n- 采用同一套咨询页组件：深蓝标题、浅灰白底、细线分隔、蓝色线性图标、少量卡片、清晰流程箭头。\n- 每页最多 3-4 个内容区域，重要信息要出现，但不要把源文档逐字塞满。\n- 文本必须是中文，必须清晰可读，不能乱码、不能重叠、不能贴边。\n- 标题必须准确显示为：业财融合数据整体交互\n\n## Constraints\n- 只使用 Source Of Truth 中的信息。\n- 不要新增公司、系统、流程节点、公式、规则或业务结论。\n- 不要使用密集大表格；如源文档有表格，压缩为关键卡片或短表。\n- 不要出现水印、无关logo、额外页码。\n- 与第8页样张保持统一的IBM咨询风格。\n",
+  "out": "slide_10.png",
+  "input_images": [
+    {
+      "path": "D:\\项目AI协作\\4、PMS业财一体化\\input\\业财融合蓝图汇报方案_准确还原优化版\\origin_image\\slide_08.png",
+      "role": "approved sample slide style reference",
+      "fidelity": "match style only; do not copy exact layout"
+    }
+  ],
+  "requires_context_images": true,
+  "expected_backend": "built-in image tool",
+  "sample_generation_method": {
+    "backend_used": "built-in image tool",
+    "tool_name": "image_gen",
+    "mode": "generate",
+    "prompt_source": "approved sample prompt for Slide 8 业务融合整体架构",
+    "size": "16:9 landscape, built-in default",
+    "quality": "built-in default",
+    "approved_sample_path": "D:\\项目AI协作\\4、PMS业财一体化\\input\\业财融合蓝图汇报方案_准确还原优化版\\origin_image\\slide_08.png",
+    "input_context_preparation": "approved sample is passed as style reference",
+    "handoff_rule": "Subagents must use this same backend/tool/mode and return a blocker if unavailable."
+  },
+  "generation_contract": {
+    "must_use_selected_image_backend": true,
+    "must_match_sample_generation_method": true,
+    "forbidden_final_image_methods": [
+      "local drawing/rendering scripts",
+      "Pillow-generated slides",
+      "SVG/HTML/CSS/canvas screenshots",
+      "python-pptx/PptxGenJS/native PPT layout screenshots",
+      "manually composited text/image overlays"
+    ],
+    "must_return": [
+      "backend_used",
+      "selected_source",
+      "qa_note"
+    ]
+  }
+}

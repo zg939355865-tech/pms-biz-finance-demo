@@ -1,0 +1,12 @@
+{
+  "id": "non-workflow-list-detail",
+  "pageTypes": ["list-detail"],
+  "workflowActions": false,
+  "auditFields": true,
+  "saveDraft": false,
+  "detailSaveEnabled": false,
+  "detailSubmitEnabled": true,
+  "submitReturnsToList": true,
+  "saveReturnsToList": true,
+  "toastEnabled": false
+}

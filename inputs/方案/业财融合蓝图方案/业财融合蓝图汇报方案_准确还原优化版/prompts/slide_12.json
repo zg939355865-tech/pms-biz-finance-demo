@@ -1,0 +1,42 @@
+{
+  "slide": 12,
+  "title": "场景2：收入回款主线-收入确认",
+  "prompt": "# Codex PPT Slide Image Prompt\n\n## Canvas\n{\n  \"type\": \"16:9 full-slide PowerPoint image\",\n  \"language\": \"Chinese\",\n  \"slide_number\": 12,\n  \"render_slide_number\": false\n}\n\n## Deck Goal\n面向管理层汇报PMS业财融合蓝图，准确还原源MD重点，统一呈现建设背景、总体架构、业务场景、迭代推广和待决策事项。\n\n## Global Style\n{\n  \"name\": \"IBM式企业咨询汇报风格\",\n  \"visual_direction\": \"premium enterprise consulting deck, structured diagrams, conclusion-first, restrained technology feel, no marketing poster styling\",\n  \"color_palette\": \"deep navy #1E3A5F, IBM blue #0F62FE, cool gray #F4F7FB, white panels, subtle cyan accents, status accents green/amber/red only when needed\",\n  \"typography\": \"modern Chinese enterprise sans-serif, strong hierarchy, left-aligned body text, large clean titles, compact readable labels\",\n  \"texture_and_finish\": \"crisp vector-like infographic, clean grid, thin connectors, slight card shadows, no decorative blobs or photo backgrounds\",\n  \"deck_consistency\": \"same palette, typography, icon language, line style, diagram density and consulting tone across all slides; vary composition by slide role\"\n}\n\n## Approved Style Reference\n- Image 1: D:\\项目AI协作\\4、PMS业财一体化\\input\\业财融合蓝图汇报方案_准确还原优化版\\origin_image\\slide_08.png — approved IBM-style consulting slide reference. Match palette, typography, icon language, spacing, and clean enterprise tone. Do not copy the exact layout.\n\n## Slide\n{\n  \"number\": 12,\n  \"title\": \"场景2：收入回款主线-收入确认\",\n  \"role\": \"scenario\",\n  \"intent\": \"按源MD准确还原重点，同时统一排版并降低复杂度\"\n}\n\n## Source Of Truth\n以下内容来自 input/业财融合PPT汇报.md，是本页唯一内容来源。必须以此为准，不得新增源文档没有的流程、规则或结论。\n\n```text\n标题：场景2：收入回款主线-收入确认\n收入合同记录业务事实，再按收款计划触发收入回款台账，形成合同、项目、开票、收款的统一事实\n收入确认 5 步：\n① 签订收入合同 → PMS 录入合同（金额/条款/收款计划）\n② 拆分收款计划 → 按里程碑/分期/一次性\n③ 业务确认收入 → 验收/履约达成时点/定时\n④ 形成收入回款台账 → 业务侧台账（≠财务应收）\n⑤ 用友生成凭证\n触发条件：合同签订或生效、收款计划到期、验收节点达成\n数据来源：收入合同、收款计划、项目归属、客户信息\n业务处理：收入合同必须归属一个项目，合同金额、收款计划、开票和回款均归集到该项目。合同签订时项目暂未明确的，可先进入待归属合同池；合同归属一般由合同负责人沟通完善\n规范条件：收入合同原则上必须关联唯一项目，一个项目可关联多个收入合同；验收、开票、收入确认、收款核销前必须完成项目归属\n经营洞察：可按项目查看合同金额、收款计划、已开票、已收款、未收款和到期风险，支撑领导判断项目收入进度、回款压力和客户履约情况\n```\n\n## Required Content Rule\n必须从源文档准确提取：场景介绍、主流程、触发条件/数据来源/规范条件/校验规则中最关键的控制点、经营洞察或价值。不要新增源文档没有的节点、业务词或结论。\n\n## Layout Rule\n统一场景页版式：顶部标题；标题下方一行场景介绍；中部一条主流程，最多保留源文档中的关键节点；右侧或下方展示关键规则/控制要点；底部展示经营洞察或流程价值。\n\n## Visual Requirements\n- 采用同一套咨询页组件：深蓝标题、浅灰白底、细线分隔、蓝色线性图标、少量卡片、清晰流程箭头。\n- 每页最多 3-4 个内容区域，重要信息要出现，但不要把源文档逐字塞满。\n- 文本必须是中文，必须清晰可读，不能乱码、不能重叠、不能贴边。\n- 标题必须准确显示为：场景2：收入回款主线-收入确认\n\n## Constraints\n- 只使用 Source Of Truth 中的信息。\n- 不要新增公司、系统、流程节点、公式、规则或业务结论。\n- 不要使用密集大表格；如源文档有表格，压缩为关键卡片或短表。\n- 不要出现水印、无关logo、额外页码。\n- 与第8页样张保持统一的IBM咨询风格。\n",
+  "out": "slide_12.png",
+  "input_images": [
+    {
+      "path": "D:\\项目AI协作\\4、PMS业财一体化\\input\\业财融合蓝图汇报方案_准确还原优化版\\origin_image\\slide_08.png",
+      "role": "approved sample slide style reference",
+      "fidelity": "match style only; do not copy exact layout"
+    }
+  ],
+  "requires_context_images": true,
+  "expected_backend": "built-in image tool",
+  "sample_generation_method": {
+    "backend_used": "built-in image tool",
+    "tool_name": "image_gen",
+    "mode": "generate",
+    "prompt_source": "approved sample prompt for Slide 8 业务融合整体架构",
+    "size": "16:9 landscape, built-in default",
+    "quality": "built-in default",
+    "approved_sample_path": "D:\\项目AI协作\\4、PMS业财一体化\\input\\业财融合蓝图汇报方案_准确还原优化版\\origin_image\\slide_08.png",
+    "input_context_preparation": "approved sample is passed as style reference",
+    "handoff_rule": "Subagents must use this same backend/tool/mode and return a blocker if unavailable."
+  },
+  "generation_contract": {
+    "must_use_selected_image_backend": true,
+    "must_match_sample_generation_method": true,
+    "forbidden_final_image_methods": [
+      "local drawing/rendering scripts",
+      "Pillow-generated slides",
+      "SVG/HTML/CSS/canvas screenshots",
+      "python-pptx/PptxGenJS/native PPT layout screenshots",
+      "manually composited text/image overlays"
+    ],
+    "must_return": [
+      "backend_used",
+      "selected_source",
+      "qa_note"
+    ]
+  }
+}

@@ -1,0 +1,1440 @@
+{
+  "schemaVersion": "pms-page-schema-v2",
+  "policyProfile": "auditable-list-detail-save",
+  "pageCode": "other-outbound",
+  "pageName": "其他出库",
+  "domain": "material",
+  "module": "物资管理",
+  "menuPath": "物资管理/其他出库",
+  "pageType": "list-detail",
+  "template": "tabs-detail-page",
+  "outputPath": "pages/material/other-outbound.html",
+  "businessScenario": "盘亏、报废及其他非标准来源出库从即时库存选择物资，必须维护项目、成本归集部门和业务类型；项目默认通用项目并支持编辑，备注按需维护，业务依据附件仍为必传；提交审核不扣库存，审核后扣减库存并记录物资流水。",
+  "saveDraftEnabled": true,
+  "detailSaveEnabled": true,
+  "saveActionLabel": "保存",
+  "detailSubmitEnabled": true,
+  "submitActionLabel": "提交",
+  "submitNextStatus": "审核",
+  "detailReviewEnabled": false,
+  "detailWorkflowLinksEnabled": false,
+  "detailEditableStatuses": [
+    "新增"
+  ],
+  "auditPendingStatus": "新增",
+  "auditCompletedStatus": "审核",
+  "reverseAuditNextStatus": "新增",
+  "detailOnlyFields": [
+    "purchaseCategory",
+    "purchaseName",
+    "specification",
+    "unit",
+    "storageBin",
+    "availableQuantity",
+    "outboundQuantity",
+    "lineRemark"
+  ],
+  "uiConstraints": {
+    "listPageSize": 5,
+    "detailFormColumns": 3,
+    "tabSectionTitles": true
+  },
+  "resourceReference": {
+    "center": "prototype-resources/index.html",
+    "baseline": "pms-resource-center-v1",
+    "pageSamples": [
+      "列表详情一体",
+      "物资出库",
+      "即时物资",
+      "数据选择弹窗"
+    ],
+    "components": [
+      "PageHeader",
+      "ProSearchForm",
+      "ProTable",
+      "ProTabsDetail",
+      "DetailForm",
+      "EditableTable",
+      "ProUploadList",
+      "ProDataSelectModal",
+      "Card",
+      "Modal",
+      "Result",
+      "Tag"
+    ]
+  },
+  "pageActions": [
+    {
+      "code": "audit",
+      "requiresSingleSelection": true,
+      "enabledSelectionStatuses": [
+        "新增"
+      ],
+      "nextStatus": "审核",
+      "label": "审核",
+      "type": "primary",
+      "fieldUpdates": {
+        "auditUser": "管理员",
+        "auditTime": "$currentDateTime"
+      }
+    },
+    {
+      "code": "reverse-audit",
+      "requiresSingleSelection": true,
+      "enabledSelectionStatuses": [
+        "审核"
+      ],
+      "nextStatus": "新增",
+      "label": "反审核",
+      "fieldUpdates": {
+        "auditUser": "",
+        "auditTime": ""
+      }
+    },
+    {
+      "code": "create",
+      "label": "新增",
+      "type": "primary",
+      "target": "other-outbound-detail"
+    }
+  ],
+  "regions": [
+    {
+      "id": "other-outbound-search",
+      "component": "ProSearchForm",
+      "fields": [
+        {
+          "code": "outboundNo",
+          "label": "出库单号",
+          "component": "input"
+        },
+        {
+          "code": "status",
+          "label": "状态",
+          "component": "select",
+          "options": [
+            "新增",
+            "审核",
+            "审核"
+          ]
+        },
+        {
+          "code": "outboundDate",
+          "label": "出库日期",
+          "component": "date-range"
+        },
+        {
+          "code": "businessType",
+          "label": "业务类型",
+          "component": "select",
+          "options": [
+            "盘亏出库",
+            "报废出库",
+            "其他出库"
+          ]
+        },
+        {
+          "code": "responsibilityDepartment",
+          "label": "成本归集部门",
+          "component": "select",
+          "options": [
+            "数字化中心",
+            "采购管理部",
+            "工程管理部",
+            "综合管理部"
+          ]
+        },
+        {
+          "code": "projectName",
+          "label": "项目",
+          "component": "input"
+        }
+      ]
+    },
+    {
+      "id": "other-outbound-table",
+      "component": "ProTable",
+      "dataSource": "otherOutboundDocuments",
+      "pageSize": 5,
+      "statusCode": "status",
+      "representativeByStatus": false,
+      "showRecordCount": true,
+      "showPageSize": true,
+      "selectable": true,
+      "rowActions": [
+        {
+          "code": "delete",
+          "label": "删除",
+          "type": "link",
+          "enabledStatuses": [
+            "新增"
+          ]
+        }
+      ],
+      "columns": [
+        {
+          "code": "outboundNo",
+          "label": "出库单号",
+          "component": "link",
+          "fixed": "left",
+          "width": 176
+        },
+        {
+          "code": "status",
+          "label": "状态",
+          "component": "tag",
+          "align": "center",
+          "width": 104
+        },
+        {
+          "code": "outboundDate",
+          "label": "出库日期",
+          "component": "date",
+          "width": 136
+        },
+        {
+          "code": "businessType",
+          "label": "业务类型",
+          "component": "text",
+          "width": 120
+        },
+        {
+          "code": "warehouse",
+          "label": "库存地点",
+          "component": "text",
+          "width": 160
+        },
+        {
+          "code": "responsibilityDepartment",
+          "label": "成本归集部门",
+          "component": "text",
+          "width": 136
+        },
+        {
+          "code": "projectName",
+          "label": "项目",
+          "component": "text",
+          "width": 220
+        },
+        {
+          "code": "creator",
+          "label": "创建人",
+          "component": "text",
+          "width": 128
+        },
+        {
+          "code": "createdAt",
+          "label": "创建时间",
+          "component": "datetime",
+          "width": 168
+        }
+      ],
+      "keepOperationColumn": true
+    },
+    {
+      "id": "other-outbound-detail",
+      "component": "ProTabsDetail",
+      "tabs": [
+        {
+          "key": "outbound-info",
+          "label": "出库信息",
+          "children": [
+            {
+              "id": "other-outbound-basic",
+              "component": "DetailForm",
+              "showTitle": false,
+              "fields": [
+                {
+                  "code": "outboundNo",
+                  "label": "出库单号",
+                  "component": "input",
+                  "readonly": true,
+                  "value": "QTCK20260902001"
+                },
+                {
+                  "code": "status",
+                  "label": "状态",
+                  "component": "select",
+                  "readonly": true,
+                  "preserveOnCreate": true,
+                  "options": [
+                    "新增",
+                    "审核",
+                    "审核"
+                  ],
+                  "value": "新增"
+                },
+                {
+                  "code": "outboundDate",
+                  "label": "出库日期",
+                  "component": "date",
+                  "required": true,
+                  "defaultToday": true,
+                  "preserveOnCreate": true,
+                  "value": "2026-09-02"
+                },
+                {
+                  "code": "businessType",
+                  "label": "业务类型",
+                  "component": "select",
+                  "required": true,
+                  "placeholder": "请选择业务类型",
+                  "options": [
+                    "盘亏出库",
+                    "报废出库",
+                    "其他出库"
+                  ],
+                  "value": ""
+                },
+                {
+                  "code": "warehouse",
+                  "label": "库存地点",
+                  "component": "select",
+                  "required": true,
+                  "placeholder": "请选择库存地点",
+                  "options": [
+                    "武汉中心仓",
+                    "长沙项目仓",
+                    "德清项目仓",
+                    "现场临时仓"
+                  ],
+                  "value": "武汉中心仓"
+                },
+                {
+                  "code": "responsibilityDepartment",
+                  "label": "成本归集部门",
+                  "component": "select",
+                  "required": true,
+                  "placeholder": "请选择成本归集部门",
+                  "options": [
+                    "数字化中心",
+                    "采购管理部",
+                    "工程管理部",
+                    "综合管理部"
+                  ],
+                  "value": "工程管理部"
+                },
+                {
+                  "code": "projectName",
+                  "label": "项目",
+                  "component": "select",
+                  "required": true,
+                  "preserveOnCreate": true,
+                  "placeholder": "请选择项目",
+                  "dependsOn": "responsibilityDepartment",
+                  "optionsBy": {
+                    "": [
+                      "通用项目"
+                    ],
+                    "数字化中心": [
+                      "通用项目",
+                      "PMS业财一体化建设项目",
+                      "数据治理平台建设项目"
+                    ],
+                    "采购管理部": [
+                      "通用项目",
+                      "采购协同优化项目"
+                    ],
+                    "工程管理部": [
+                      "通用项目",
+                      "沙河市污水厂智能化改造项目",
+                      "长沙水务设备改造项目",
+                      "德清智能控制升级项目",
+                      "现场安装保障项目"
+                    ],
+                    "综合管理部": [
+                      "通用项目",
+                      "总部运营保障项目"
+                    ]
+                  },
+                  "value": "通用项目"
+                },
+                {
+                  "code": "creator",
+                  "label": "创建人",
+                  "component": "input",
+                  "readonly": true,
+                  "preserveOnCreate": true,
+                  "value": "栗磊"
+                },
+                {
+                  "code": "createdAt",
+                  "label": "创建时间",
+                  "component": "input",
+                  "readonly": true,
+                  "preserveOnCreate": true,
+                  "value": "2026-09-02 09:18:26"
+                },
+                {
+                  "code": "auditUser",
+                  "label": "审核人",
+                  "component": "input",
+                  "readonly": true,
+                  "value": ""
+                },
+                {
+                  "code": "auditTime",
+                  "label": "审核时间",
+                  "component": "input",
+                  "readonly": true,
+                  "value": ""
+                },
+                {
+                  "code": "company",
+                  "label": "所属公司",
+                  "component": "input",
+                  "readonly": true,
+                  "preserveOnCreate": true,
+                  "value": "昕彤赋能（武汉）设计研究有限公司"
+                },
+                {
+                  "code": "outboundReason",
+                  "label": "备注",
+                  "component": "input",
+                  "required": false,
+                  "placeholder": "请输入备注，最多500字"
+                }
+              ]
+            },
+            {
+              "id": "other-outbound-items",
+              "component": "EditableTable",
+              "showTitle": true,
+              "dataSource": "otherOutboundItems",
+              "pagination": false,
+              "selectable": true,
+              "minWidth": 1240,
+              "footerSummary": {
+                "label": "合计",
+                "columns": [
+                  {
+                    "column": "outboundQuantity",
+                    "precision": 2
+                  }
+                ]
+              },
+              "actions": [
+                {
+                  "code": "open",
+                  "label": "选择即时库存",
+                  "type": "primary",
+                  "target": "other-inventory-picker",
+                  "requiresDetailFields": [
+                    "warehouse"
+                  ]
+                },
+                {
+                  "code": "batch-delete",
+                  "type": "danger",
+                  "ghost": true,
+                  "requiresSelection": true
+                }
+              ],
+              "columns": [
+                {
+                  "code": "sequence",
+                  "label": "序号",
+                  "component": "text",
+                  "editable": false,
+                  "align": "center",
+                  "width": 72,
+                  "fixed": "left"
+                },
+                {
+                  "code": "purchaseCategory",
+                  "label": "物资类型",
+                  "component": "text",
+                  "editable": false,
+                  "width": 128
+                },
+                {
+                  "code": "purchaseName",
+                  "label": "物资名称",
+                  "component": "text",
+                  "editable": false,
+                  "width": 200
+                },
+                {
+                  "code": "specification",
+                  "label": "规格",
+                  "component": "text",
+                  "editable": false,
+                  "width": 200
+                },
+                {
+                  "code": "unit",
+                  "label": "单位",
+                  "component": "text",
+                  "editable": false,
+                  "width": 80
+                },
+                {
+                  "code": "storageBin",
+                  "label": "库位",
+                  "component": "text",
+                  "editable": false,
+                  "width": 128
+                },
+                {
+                  "code": "availableQuantity",
+                  "label": "可出库数量",
+                  "component": "number",
+                  "editable": false,
+                  "align": "right",
+                  "precision": 2,
+                  "width": 120
+                },
+                {
+                  "code": "outboundQuantity",
+                  "label": "出库数量",
+                  "component": "number",
+                  "required": true,
+                  "min": 0.01,
+                  "maxField": "availableQuantity",
+                  "step": 0.01,
+                  "align": "right",
+                  "precision": 2,
+                  "width": 120
+                },
+                {
+                  "code": "lineRemark",
+                  "label": "备注",
+                  "component": "input",
+                  "width": 180
+                }
+              ],
+              "title": "出库明细"
+            }
+          ]
+        },
+        {
+          "key": "attachments",
+          "label": "附件",
+          "children": [
+            {
+              "component": "Card",
+              "showTitle": false,
+              "children": [
+                {
+                  "id": "other-outbound-attachments",
+                  "component": "ProUploadList",
+                  "showTitle": false,
+                  "dataSource": "attachments",
+                  "columns": [
+                    {
+                      "code": "sequence",
+                      "label": "序号",
+                      "component": "text",
+                      "align": "center",
+                      "width": 72,
+                      "fixed": "left"
+                    },
+                    {
+                      "code": "name",
+                      "label": "文件名",
+                      "component": "text",
+                      "width": 300
+                    },
+                    {
+                      "code": "size",
+                      "label": "大小",
+                      "component": "text",
+                      "width": 100
+                    },
+                    {
+                      "code": "uploader",
+                      "label": "上传人",
+                      "component": "text",
+                      "width": 128
+                    },
+                    {
+                      "code": "uploadedAt",
+                      "label": "上传时间",
+                      "component": "datetime",
+                      "width": 168
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "overlays": [
+    {
+      "id": "other-inventory-picker",
+      "component": "ProDataSelectModal",
+      "size": "wide",
+      "appendSelectionTo": "otherOutboundItems",
+      "contextFilterMap": {
+        "warehouse": "warehouse"
+      },
+      "children": [
+        {
+          "id": "other-inventory-picker-search",
+          "component": "ProSearchForm",
+          "fields": [
+            {
+              "code": "purchaseCategory",
+              "label": "物资类型",
+              "component": "select",
+              "options": [
+                "原材料",
+                "备品备件",
+                "办公用品",
+                "固定资产",
+                "低值易耗品"
+              ]
+            },
+            {
+              "code": "purchaseName",
+              "label": "物资名称",
+              "component": "input"
+            }
+          ]
+        },
+        {
+          "id": "other-available-inventory-table",
+          "component": "ProTable",
+          "dataSource": "inventoryRows",
+          "pageSize": 5,
+          "showRecordCount": true,
+          "showPageSize": true,
+          "selectable": true,
+          "rowActions": [],
+          "columns": [
+            {
+              "code": "purchaseCategory",
+              "label": "物资类型",
+              "component": "text",
+              "width": 128
+            },
+            {
+              "code": "purchaseName",
+              "label": "物资名称",
+              "component": "text",
+              "width": 200
+            },
+            {
+              "code": "specification",
+              "label": "规格",
+              "component": "text",
+              "width": 200
+            },
+            {
+              "code": "unit",
+              "label": "单位",
+              "component": "text",
+              "width": 80
+            },
+            {
+              "code": "availableQuantity",
+              "label": "库存余量",
+              "component": "number",
+              "align": "right",
+              "precision": 2,
+              "width": 120
+            },
+            {
+              "code": "storageBin",
+              "label": "库位",
+              "component": "text",
+              "width": 128
+            }
+          ]
+        }
+      ],
+      "actions": [
+        {
+          "code": "close",
+          "label": "取消"
+        },
+        {
+          "code": "confirm-inventory",
+          "label": "确认选择",
+          "type": "primary",
+          "requiresSelection": true
+        }
+      ]
+    }
+  ],
+  "detailLinkages": [
+    {
+      "trigger": "responsibilityDepartment",
+      "records": {
+        "数字化中心": {
+          "fields": {
+            "projectName": "通用项目"
+          }
+        },
+        "采购管理部": {
+          "fields": {
+            "projectName": "通用项目"
+          }
+        },
+        "工程管理部": {
+          "fields": {
+            "projectName": "通用项目"
+          }
+        },
+        "综合管理部": {
+          "fields": {
+            "projectName": "通用项目"
+          }
+        }
+      }
+    }
+  ],
+  "interactions": [
+    {
+      "trigger": "responsibilityDepartment.change",
+      "effect": "项目新增默认通用项目并支持编辑，成本归集部门变更后仅展示关联项目。"
+    },
+    {
+      "trigger": "warehouse.change",
+      "effect": "即时库存选择弹窗仅展示当前库存地点库存；已有明细时重新选择将按当前地点过滤。"
+    },
+    {
+      "trigger": "inventory.select",
+      "effect": "将即时库存来源字段带入明细，库存余量作为可出库上限，出库数量由用户填写。"
+    },
+    {
+      "trigger": "submit.click",
+      "effect": "校验业务类型、项目、成本归集部门及明细后进入审核，不扣减库存。"
+    },
+    {
+      "trigger": "audit.click",
+      "effect": "列表单选审核单据后审核，状态变为审核并扣减库存。"
+    },
+    {
+      "trigger": "reverseAudit.click",
+      "effect": "列表单选审核单据后反审核，冲回库存影响并回到新增。"
+    }
+  ],
+  "rules": [
+    {
+      "id": "R01",
+      "action": "save",
+      "type": "tableMinimumRows",
+      "table": "otherOutboundItems",
+      "minimum": 1,
+      "message": "请至少选择一条出库明细"
+    },
+    {
+      "id": "R02",
+      "description": "项目、成本归集部门、业务类型和业务依据附件必填；项目默认通用项目并支持编辑；备注非必填。"
+    },
+    {
+      "id": "R03",
+      "description": "出库数量必须大于0且不大于即时库存余量。"
+    },
+    {
+      "id": "R04",
+      "description": "保存新增不扣库存；提交进入审核；审核后扣减库存；反审核冲回库存并回到新增。"
+    }
+  ],
+  "relations": [
+    {
+      "from": "即时物资",
+      "to": "其他出库明细",
+      "type": "库存参照",
+      "description": "按库存地点选择正库存记录，库存余量作为出库上限。"
+    },
+    {
+      "from": "其他出库单",
+      "to": "物资流水",
+      "type": "审核记账",
+      "description": "审核确认后记录出库事实并扣减即时库存。"
+    }
+  ],
+  "mockData": {
+    "otherOutboundDocuments": [
+      {
+        "id": "OO001",
+        "outboundNo": "QTCK2026090001",
+        "status": "新增",
+        "outboundDate": "2026-09-02",
+        "businessType": "盘亏出库",
+        "warehouse": "武汉中心仓",
+        "responsibilityDepartment": "数字化中心",
+        "projectName": "PMS业财一体化建设项目",
+        "totalQuantity": 1,
+        "creator": "栗磊",
+        "createdAt": "2026-09-02 09:18:26",
+        "auditUser": "",
+        "auditTime": "",
+        "outboundReason": "月末盘点发现账实差异",
+        "otherOutboundItems": [
+          {
+            "id": "INV001",
+            "warehouse": "武汉中心仓",
+            "purchaseCategory": "原材料",
+            "purchaseName": "不锈钢管",
+            "specification": "DN50×3.0mm",
+            "unit": "支",
+            "storageBin": "A-01-0101",
+            "availableQuantity": 42,
+            "outboundQuantity": 1,
+            "inboundDate": "2026-08-08",
+            "supplierName": "武汉鑫源管业有限公司",
+            "lineRemark": "月末盘点发现账实差异",
+            "sourceProjectName": "PMS业财一体化建设项目"
+          }
+        ]
+      },
+      {
+        "id": "OO002",
+        "outboundNo": "QTCK2026090002",
+        "status": "审核",
+        "outboundDate": "2026-09-02",
+        "businessType": "报废出库",
+        "warehouse": "长沙项目仓",
+        "responsibilityDepartment": "采购管理部",
+        "projectName": "采购协同优化项目",
+        "totalQuantity": 2,
+        "creator": "周敏",
+        "createdAt": "2026-09-02 10:18:26",
+        "auditUser": "",
+        "auditTime": "",
+        "outboundReason": "设备损坏且无修复价值",
+        "otherOutboundItems": [
+          {
+            "id": "INV002",
+            "warehouse": "长沙项目仓",
+            "purchaseCategory": "原材料",
+            "purchaseName": "不锈钢管",
+            "specification": "DN50×3.0mm",
+            "unit": "支",
+            "storageBin": "B-02-0203",
+            "availableQuantity": 18,
+            "outboundQuantity": 2,
+            "inboundDate": "2026-08-18",
+            "supplierName": "湖南恒通管材有限公司",
+            "lineRemark": "设备损坏且无修复价值",
+            "sourceProjectName": "长沙水务设备改造项目"
+          }
+        ]
+      },
+      {
+        "id": "OO003",
+        "outboundNo": "QTCK2026090003",
+        "status": "审核",
+        "outboundDate": "2026-09-02",
+        "businessType": "其他出库",
+        "warehouse": "武汉中心仓",
+        "responsibilityDepartment": "工程管理部",
+        "projectName": "沙河市污水厂智能化改造项目",
+        "totalQuantity": 3,
+        "creator": "刘洋",
+        "createdAt": "2026-09-02 11:18:26",
+        "auditUser": "李主管",
+        "auditTime": "2026-09-02 16:20:18",
+        "outboundReason": "研发样品消耗",
+        "otherOutboundItems": [
+          {
+            "id": "INV003",
+            "warehouse": "武汉中心仓",
+            "purchaseCategory": "原材料",
+            "purchaseName": "控制电缆",
+            "specification": "KVVP 4×1.5mm²",
+            "unit": "卷",
+            "storageBin": "A-03-0302",
+            "availableQuantity": 11,
+            "outboundQuantity": 3,
+            "inboundDate": "2026-08-12",
+            "supplierName": "湖北华缆电气有限公司",
+            "lineRemark": "研发样品消耗",
+            "sourceProjectName": "PMS业财一体化建设项目"
+          }
+        ]
+      },
+      {
+        "id": "OO004",
+        "outboundNo": "QTCK2026090004",
+        "status": "新增",
+        "outboundDate": "2026-09-02",
+        "businessType": "盘亏出库",
+        "warehouse": "武汉中心仓",
+        "responsibilityDepartment": "综合管理部",
+        "projectName": "总部运营保障项目",
+        "totalQuantity": 4,
+        "creator": "王工",
+        "createdAt": "2026-09-02 12:18:26",
+        "auditUser": "",
+        "auditTime": "",
+        "outboundReason": "现场损耗处理",
+        "otherOutboundItems": [
+          {
+            "id": "INV004",
+            "warehouse": "武汉中心仓",
+            "purchaseCategory": "备品备件",
+            "purchaseName": "机械密封",
+            "specification": "MG1/35-G60",
+            "unit": "套",
+            "storageBin": "B-01-0104",
+            "availableQuantity": 9,
+            "outboundQuantity": 4,
+            "inboundDate": "2026-08-15",
+            "supplierName": "武汉泵联机电有限公司",
+            "lineRemark": "现场损耗处理",
+            "sourceProjectName": "PMS业财一体化建设项目"
+          }
+        ]
+      },
+      {
+        "id": "OO005",
+        "outboundNo": "QTCK2026090005",
+        "status": "审核",
+        "outboundDate": "2026-09-02",
+        "businessType": "报废出库",
+        "warehouse": "德清项目仓",
+        "responsibilityDepartment": "数字化中心",
+        "projectName": "PMS业财一体化建设项目",
+        "totalQuantity": 3,
+        "creator": "栗磊",
+        "createdAt": "2026-09-02 13:18:26",
+        "auditUser": "",
+        "auditTime": "",
+        "outboundReason": "过期物资报废",
+        "otherOutboundItems": [
+          {
+            "id": "INV005",
+            "warehouse": "德清项目仓",
+            "purchaseCategory": "备品备件",
+            "purchaseName": "变频器",
+            "specification": "15kW 380V",
+            "unit": "台",
+            "storageBin": "C-01-0102",
+            "availableQuantity": 3,
+            "outboundQuantity": 3,
+            "inboundDate": "2026-08-20",
+            "supplierName": "浙江智控自动化有限公司",
+            "lineRemark": "过期物资报废",
+            "sourceProjectName": "德清智能控制升级项目"
+          }
+        ]
+      },
+      {
+        "id": "OO006",
+        "outboundNo": "QTCK2026090006",
+        "status": "审核",
+        "outboundDate": "2026-09-02",
+        "businessType": "盘亏出库",
+        "warehouse": "武汉中心仓",
+        "responsibilityDepartment": "采购管理部",
+        "projectName": "采购协同优化项目",
+        "totalQuantity": 1,
+        "creator": "周敏",
+        "createdAt": "2026-09-02 14:18:26",
+        "auditUser": "李主管",
+        "auditTime": "2026-09-02 16:20:18",
+        "outboundReason": "盘点发现探头数量短缺",
+        "otherOutboundItems": [
+          {
+            "id": "INV006",
+            "warehouse": "武汉中心仓",
+            "purchaseCategory": "备品备件",
+            "purchaseName": "溶氧仪探头",
+            "specification": "DO-700 光学型",
+            "unit": "个",
+            "storageBin": "B-04-0401",
+            "availableQuantity": 7,
+            "outboundQuantity": 1,
+            "inboundDate": "2026-08-17",
+            "supplierName": "上海清源仪器有限公司",
+            "lineRemark": "盘点短缺处理",
+            "sourceProjectName": "PMS业财一体化建设项目"
+          }
+        ]
+      },
+      {
+        "id": "OO007",
+        "outboundNo": "QTCK2026090007",
+        "status": "新增",
+        "outboundDate": "2026-09-01",
+        "businessType": "盘亏出库",
+        "warehouse": "武汉中心仓",
+        "responsibilityDepartment": "工程管理部",
+        "projectName": "沙河市污水厂智能化改造项目",
+        "totalQuantity": 2,
+        "creator": "刘洋",
+        "createdAt": "2026-09-01 15:18:26",
+        "auditUser": "",
+        "auditTime": "",
+        "outboundReason": "月末盘点发现账实差异",
+        "otherOutboundItems": [
+          {
+            "id": "INV007",
+            "warehouse": "武汉中心仓",
+            "purchaseCategory": "办公用品",
+            "purchaseName": "打印纸",
+            "specification": "A4 80g 500张",
+            "unit": "箱",
+            "storageBin": "D-01-0101",
+            "availableQuantity": 15,
+            "outboundQuantity": 2,
+            "inboundDate": "2026-08-19",
+            "supplierName": "武汉文汇办公用品有限公司",
+            "lineRemark": "月末盘点发现账实差异",
+            "sourceProjectName": "PMS业财一体化建设项目"
+          }
+        ]
+      },
+      {
+        "id": "OO008",
+        "outboundNo": "QTCK2026090008",
+        "status": "审核",
+        "outboundDate": "2026-09-01",
+        "businessType": "报废出库",
+        "warehouse": "现场临时仓",
+        "responsibilityDepartment": "综合管理部",
+        "projectName": "总部运营保障项目",
+        "totalQuantity": 3,
+        "creator": "王工",
+        "createdAt": "2026-09-01 16:18:26",
+        "auditUser": "",
+        "auditTime": "",
+        "outboundReason": "设备损坏且无修复价值",
+        "otherOutboundItems": [
+          {
+            "id": "INV008",
+            "warehouse": "现场临时仓",
+            "purchaseCategory": "办公用品",
+            "purchaseName": "控制柜标识牌",
+            "specification": "亚克力激光雕刻",
+            "unit": "套",
+            "storageBin": "T-01-0003",
+            "availableQuantity": 6,
+            "outboundQuantity": 3,
+            "inboundDate": "2026-08-22",
+            "supplierName": "长沙铭牌标识有限公司",
+            "lineRemark": "设备损坏且无修复价值",
+            "sourceProjectName": "现场安装保障项目"
+          }
+        ]
+      },
+      {
+        "id": "OO009",
+        "outboundNo": "QTCK2026090009",
+        "status": "审核",
+        "outboundDate": "2026-09-01",
+        "businessType": "报废出库",
+        "warehouse": "武汉中心仓",
+        "responsibilityDepartment": "数字化中心",
+        "projectName": "PMS业财一体化建设项目",
+        "totalQuantity": 2,
+        "creator": "栗磊",
+        "createdAt": "2026-09-01 09:18:26",
+        "auditUser": "李主管",
+        "auditTime": "2026-09-02 16:20:18",
+        "outboundReason": "设备损坏且无修复价值",
+        "otherOutboundItems": [
+          {
+            "id": "INV009",
+            "warehouse": "武汉中心仓",
+            "purchaseCategory": "固定资产",
+            "purchaseName": "边缘计算服务器",
+            "specification": "2U机架式 32核",
+            "unit": "台",
+            "storageBin": "E-01-0101",
+            "availableQuantity": 2,
+            "outboundQuantity": 2,
+            "inboundDate": "2026-08-25",
+            "supplierName": "武汉云帆智能科技有限公司",
+            "lineRemark": "研发样品消耗",
+            "sourceProjectName": "PMS业财一体化建设项目"
+          }
+        ]
+      },
+      {
+        "id": "OO010",
+        "outboundNo": "QTCK2026090010",
+        "status": "新增",
+        "outboundDate": "2026-09-01",
+        "businessType": "盘亏出库",
+        "warehouse": "武汉中心仓",
+        "responsibilityDepartment": "采购管理部",
+        "projectName": "采购协同优化项目",
+        "totalQuantity": 4,
+        "creator": "周敏",
+        "createdAt": "2026-09-01 10:18:26",
+        "auditUser": "",
+        "auditTime": "",
+        "outboundReason": "现场损耗处理",
+        "otherOutboundItems": [
+          {
+            "id": "INV010",
+            "warehouse": "武汉中心仓",
+            "purchaseCategory": "固定资产",
+            "purchaseName": "工业交换机",
+            "specification": "千兆管理型24口",
+            "unit": "台",
+            "storageBin": "E-02-0102",
+            "availableQuantity": 4,
+            "outboundQuantity": 4,
+            "inboundDate": "2026-08-24",
+            "supplierName": "武汉联创网络有限公司",
+            "lineRemark": "现场损耗处理",
+            "sourceProjectName": "PMS业财一体化建设项目"
+          }
+        ]
+      },
+      {
+        "id": "OO011",
+        "outboundNo": "QTCK2026090011",
+        "status": "审核",
+        "outboundDate": "2026-09-01",
+        "businessType": "报废出库",
+        "warehouse": "长沙项目仓",
+        "responsibilityDepartment": "工程管理部",
+        "projectName": "沙河市污水厂智能化改造项目",
+        "totalQuantity": 1,
+        "creator": "刘洋",
+        "createdAt": "2026-09-01 11:18:26",
+        "auditUser": "",
+        "auditTime": "",
+        "outboundReason": "过期物资报废",
+        "otherOutboundItems": [
+          {
+            "id": "INV011",
+            "warehouse": "长沙项目仓",
+            "purchaseCategory": "低值易耗品",
+            "purchaseName": "安全帽",
+            "specification": "ABS V型 白色",
+            "unit": "个",
+            "storageBin": "D-02-0202",
+            "availableQuantity": 36,
+            "outboundQuantity": 1,
+            "inboundDate": "2026-08-21",
+            "supplierName": "湖南安盾劳保用品有限公司",
+            "lineRemark": "过期物资报废",
+            "sourceProjectName": "长沙水务设备改造项目"
+          }
+        ]
+      },
+      {
+        "id": "OO012",
+        "outboundNo": "QTCK2026090012",
+        "status": "审核",
+        "outboundDate": "2026-09-01",
+        "businessType": "其他出库",
+        "warehouse": "现场临时仓",
+        "responsibilityDepartment": "综合管理部",
+        "projectName": "总部运营保障项目",
+        "totalQuantity": 2,
+        "creator": "王工",
+        "createdAt": "2026-09-01 12:18:26",
+        "auditUser": "李主管",
+        "auditTime": "2026-09-02 16:20:18",
+        "outboundReason": "特殊业务领用",
+        "otherOutboundItems": [
+          {
+            "id": "INV012",
+            "warehouse": "现场临时仓",
+            "purchaseCategory": "低值易耗品",
+            "purchaseName": "绝缘手套",
+            "specification": "12kV",
+            "unit": "双",
+            "storageBin": "T-02-0001",
+            "availableQuantity": 20,
+            "outboundQuantity": 2,
+            "inboundDate": "2026-08-23",
+            "supplierName": "湖北安泰劳保有限公司",
+            "lineRemark": "特殊业务领用",
+            "sourceProjectName": "现场安装保障项目"
+          }
+        ]
+      }
+    ],
+    "projects": [
+      {
+        "id": "PJ-GEN-DIG",
+        "department": "数字化中心",
+        "projectCode": "PRJ-GENERAL",
+        "projectName": "通用项目"
+      },
+      {
+        "id": "PJ-GEN-PUR",
+        "department": "采购管理部",
+        "projectCode": "PRJ-GENERAL",
+        "projectName": "通用项目"
+      },
+      {
+        "id": "PJ-GEN-ENG",
+        "department": "工程管理部",
+        "projectCode": "PRJ-GENERAL",
+        "projectName": "通用项目"
+      },
+      {
+        "id": "PJ-GEN-ADM",
+        "department": "综合管理部",
+        "projectCode": "PRJ-GENERAL",
+        "projectName": "通用项目"
+      },
+      {
+        "id": "PJ001",
+        "department": "数字化中心",
+        "projectCode": "PRJ20260801001",
+        "projectName": "PMS业财一体化建设项目"
+      },
+      {
+        "id": "PJ002",
+        "department": "数字化中心",
+        "projectCode": "PRJ20260812002",
+        "projectName": "数据治理平台建设项目"
+      },
+      {
+        "id": "PJ003",
+        "department": "采购管理部",
+        "projectCode": "PRJ20260718001",
+        "projectName": "采购协同优化项目"
+      },
+      {
+        "id": "PJ004",
+        "department": "工程管理部",
+        "projectCode": "PRJ20260715001",
+        "projectName": "沙河市污水厂智能化改造项目"
+      },
+      {
+        "id": "PJ005",
+        "department": "工程管理部",
+        "projectCode": "PRJ20260722002",
+        "projectName": "长沙水务设备改造项目"
+      },
+      {
+        "id": "PJ006",
+        "department": "工程管理部",
+        "projectCode": "PRJ20260805003",
+        "projectName": "德清智能控制升级项目"
+      },
+      {
+        "id": "PJ007",
+        "department": "工程管理部",
+        "projectCode": "PRJ20260820004",
+        "projectName": "现场安装保障项目"
+      },
+      {
+        "id": "PJ008",
+        "department": "综合管理部",
+        "projectCode": "PRJ20260101001",
+        "projectName": "总部运营保障项目"
+      }
+    ],
+    "inventoryRows": [
+      {
+        "id": "INV001",
+        "warehouse": "武汉中心仓",
+        "purchaseCategory": "原材料",
+        "purchaseName": "不锈钢管",
+        "specification": "DN50×3.0mm",
+        "unit": "支",
+        "storageBin": "A-01-0101",
+        "availableQuantity": 42,
+        "outboundQuantity": "",
+        "inboundDate": "2026-08-08",
+        "supplierName": "武汉鑫源管业有限公司",
+        "lineRemark": "",
+        "sourceProjectName": "PMS业财一体化建设项目"
+      },
+      {
+        "id": "INV002",
+        "warehouse": "长沙项目仓",
+        "purchaseCategory": "原材料",
+        "purchaseName": "不锈钢管",
+        "specification": "DN50×3.0mm",
+        "unit": "支",
+        "storageBin": "B-02-0203",
+        "availableQuantity": 18,
+        "outboundQuantity": "",
+        "inboundDate": "2026-08-18",
+        "supplierName": "湖南恒通管材有限公司",
+        "lineRemark": "",
+        "sourceProjectName": "长沙水务设备改造项目"
+      },
+      {
+        "id": "INV003",
+        "warehouse": "武汉中心仓",
+        "purchaseCategory": "原材料",
+        "purchaseName": "控制电缆",
+        "specification": "KVVP 4×1.5mm²",
+        "unit": "卷",
+        "storageBin": "A-03-0302",
+        "availableQuantity": 11,
+        "outboundQuantity": "",
+        "inboundDate": "2026-08-12",
+        "supplierName": "湖北华缆电气有限公司",
+        "lineRemark": "",
+        "sourceProjectName": "PMS业财一体化建设项目"
+      },
+      {
+        "id": "INV004",
+        "warehouse": "武汉中心仓",
+        "purchaseCategory": "备品备件",
+        "purchaseName": "机械密封",
+        "specification": "MG1/35-G60",
+        "unit": "套",
+        "storageBin": "B-01-0104",
+        "availableQuantity": 9,
+        "outboundQuantity": "",
+        "inboundDate": "2026-08-15",
+        "supplierName": "武汉泵联机电有限公司",
+        "lineRemark": "",
+        "sourceProjectName": "PMS业财一体化建设项目"
+      },
+      {
+        "id": "INV005",
+        "warehouse": "德清项目仓",
+        "purchaseCategory": "备品备件",
+        "purchaseName": "变频器",
+        "specification": "15kW 380V",
+        "unit": "台",
+        "storageBin": "C-01-0102",
+        "availableQuantity": 3,
+        "outboundQuantity": "",
+        "inboundDate": "2026-08-20",
+        "supplierName": "浙江智控自动化有限公司",
+        "lineRemark": "",
+        "sourceProjectName": "德清智能控制升级项目"
+      },
+      {
+        "id": "INV006",
+        "warehouse": "武汉中心仓",
+        "purchaseCategory": "备品备件",
+        "purchaseName": "溶氧仪探头",
+        "specification": "DO-700 光学型",
+        "unit": "个",
+        "storageBin": "B-04-0401",
+        "availableQuantity": 7,
+        "outboundQuantity": "",
+        "inboundDate": "2026-08-17",
+        "supplierName": "上海清源仪器有限公司",
+        "lineRemark": "",
+        "sourceProjectName": "PMS业财一体化建设项目"
+      },
+      {
+        "id": "INV007",
+        "warehouse": "武汉中心仓",
+        "purchaseCategory": "办公用品",
+        "purchaseName": "打印纸",
+        "specification": "A4 80g 500张",
+        "unit": "箱",
+        "storageBin": "D-01-0101",
+        "availableQuantity": 15,
+        "outboundQuantity": "",
+        "inboundDate": "2026-08-19",
+        "supplierName": "武汉文汇办公用品有限公司",
+        "lineRemark": "",
+        "sourceProjectName": "PMS业财一体化建设项目"
+      },
+      {
+        "id": "INV008",
+        "warehouse": "现场临时仓",
+        "purchaseCategory": "办公用品",
+        "purchaseName": "控制柜标识牌",
+        "specification": "亚克力激光雕刻",
+        "unit": "套",
+        "storageBin": "T-01-0003",
+        "availableQuantity": 6,
+        "outboundQuantity": "",
+        "inboundDate": "2026-08-22",
+        "supplierName": "长沙铭牌标识有限公司",
+        "lineRemark": "",
+        "sourceProjectName": "现场安装保障项目"
+      },
+      {
+        "id": "INV009",
+        "warehouse": "武汉中心仓",
+        "purchaseCategory": "固定资产",
+        "purchaseName": "边缘计算服务器",
+        "specification": "2U机架式 32核",
+        "unit": "台",
+        "storageBin": "E-01-0101",
+        "availableQuantity": 2,
+        "outboundQuantity": "",
+        "inboundDate": "2026-08-25",
+        "supplierName": "武汉云帆智能科技有限公司",
+        "lineRemark": "",
+        "sourceProjectName": "PMS业财一体化建设项目"
+      },
+      {
+        "id": "INV010",
+        "warehouse": "武汉中心仓",
+        "purchaseCategory": "固定资产",
+        "purchaseName": "工业交换机",
+        "specification": "千兆管理型24口",
+        "unit": "台",
+        "storageBin": "E-02-0102",
+        "availableQuantity": 4,
+        "outboundQuantity": "",
+        "inboundDate": "2026-08-24",
+        "supplierName": "武汉联创网络有限公司",
+        "lineRemark": "",
+        "sourceProjectName": "PMS业财一体化建设项目"
+      },
+      {
+        "id": "INV011",
+        "warehouse": "长沙项目仓",
+        "purchaseCategory": "低值易耗品",
+        "purchaseName": "安全帽",
+        "specification": "ABS V型 白色",
+        "unit": "个",
+        "storageBin": "D-02-0202",
+        "availableQuantity": 36,
+        "outboundQuantity": "",
+        "inboundDate": "2026-08-21",
+        "supplierName": "湖南安盾劳保用品有限公司",
+        "lineRemark": "",
+        "sourceProjectName": "长沙水务设备改造项目"
+      },
+      {
+        "id": "INV012",
+        "warehouse": "现场临时仓",
+        "purchaseCategory": "低值易耗品",
+        "purchaseName": "绝缘手套",
+        "specification": "12kV",
+        "unit": "双",
+        "storageBin": "T-02-0001",
+        "availableQuantity": 20,
+        "outboundQuantity": "",
+        "inboundDate": "2026-08-23",
+        "supplierName": "湖北安泰劳保有限公司",
+        "lineRemark": "",
+        "sourceProjectName": "现场安装保障项目"
+      }
+    ],
+    "otherOutboundItems": [
+      {
+        "id": "INV001",
+        "warehouse": "武汉中心仓",
+        "purchaseCategory": "原材料",
+        "purchaseName": "不锈钢管",
+        "specification": "DN50×3.0mm",
+        "unit": "支",
+        "storageBin": "A-01-0101",
+        "availableQuantity": 42,
+        "outboundQuantity": 1,
+        "inboundDate": "2026-08-08",
+        "supplierName": "武汉鑫源管业有限公司",
+        "lineRemark": "月末盘点发现账实差异",
+        "sourceProjectName": "PMS业财一体化建设项目"
+      }
+    ],
+    "attachments": [
+      {
+        "id": "ATT-OO-001",
+        "name": "盘点差异处理说明.pdf",
+        "size": "426 KB",
+        "uploader": "栗磊",
+        "uploadedAt": "2026-09-02 09:20:16"
+      }
+    ]
+  },
+  "createStatus": "新增",
+  "primaryDeleteEnabledStatuses": [
+    "新增"
+  ],
+  "workflowActions": false,
+  "approvalOverlay": false
+}

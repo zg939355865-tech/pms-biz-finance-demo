@@ -1,0 +1,10 @@
+{
+  "id": "approval-workbench",
+  "pageTypes": ["list"],
+  "workflowActions": false,
+  "auditFields": false,
+  "saveDraft": false,
+  "toastEnabled": false,
+  "identifierClickable": false,
+  "rowAction": "handle"
+}

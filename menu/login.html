@@ -359,11 +359,11 @@
           <h1>欢迎回来</h1>
           <span class="welcome-lines" aria-hidden="true"></span>
         </div>
-        <p class="subtitle">请输入您的账户信息以开始管理您的项目</p>
+        <p class="subtitle">点击登录即可进入项目管理</p>
 
         <div class="control-wrap">
           <label for="companySelect" hidden>选择企业</label>
-          <select class="form-control company-select" id="companySelect" required>
+          <select class="form-control company-select" id="companySelect">
             <option value="" selected disabled>请选择企业</option>
             <option value="昕彤赋能（长沙）人工智能行业应用系统有限公司">昕彤赋能（长沙）人工智能行业应用系统有限公司</option>
             <option value="昕彤赋能（武汉）设计研究有限公司">昕彤赋能（武汉）设计研究有限公司</option>
@@ -429,11 +429,8 @@
 
     document.getElementById('loginForm').addEventListener('submit', (event) => {
       event.preventDefault();
-      if (!companySelect.value) {
-        companySelect.reportValidity();
-        return;
-      }
-      localStorage.setItem('pms-current-company', companySelect.value);
+      const company = companySelect.value || companySelect.options[1].value;
+      localStorage.setItem('pms-current-company', company);
       localStorage.setItem('pms-login-state', 'authenticated');
       if (rememberAccount.checked && usernameInput.value.trim()) {
         localStorage.setItem('pms-remembered-username', usernameInput.value.trim());

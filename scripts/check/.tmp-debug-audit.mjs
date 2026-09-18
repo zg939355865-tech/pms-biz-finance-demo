@@ -1,0 +1,23 @@
+import path from 'node:path';
+import { pathToFileURL } from 'node:url';
+import { chromium } from '../lib/playwright-smoke.mjs';
+
+const file = process.argv[2] || 'pages/procurement/purchase-order.html';
+const browser = await chromium.launch({ executablePath: 'C:/Program Files (x86)/Microsoft Edge/Application/msedge.exe', headless: true });
+const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
+page.on('pageerror', (e) => console.log('PAGEERROR', e.message));
+await page.goto(pathToFileURL(path.resolve(file)).href, { waitUntil: 'domcontentloaded' });
+await page.waitForTimeout(400);
+const rows = page.locator('tbody > tr[data-row-status="新增"]:visible');
+console.log('visible 新增 rows', await rows.count());
+const row = rows.first();
+console.log('row idx', await row.getAttribute('data-row-index'));
+const box = row.locator('[data-row-select]');
+console.log('checkbox disabled', await box.isDisabled());
+await box.check();
+await page.waitForTimeout(300);
+console.log('checked count', await page.locator('[data-row-select]:checked').count());
+const audit = page.locator('[data-page-view="list"] [data-act="audit"]').first();
+console.log('audit disabled', await audit.isDisabled());
+console.log('selected count span', await page.locator('[data-selected-count]').first().textContent());
+await browser.close();

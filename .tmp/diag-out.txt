@@ -1,0 +1,118 @@
+pages/material: current-inventory.html, inout-ledger.html, inventory-location.html, material-outbound.html, material-outbound.html.bak2, other-inbound.html, other-inbound.html.bak2, other-outbound.html, other-outbound.html.bak2
+schemas/pages/material: current-inventory.json, inout-ledger.json, inventory-location.json, material-outbound.json, other-inbound.json, other-outbound.json
+.tmp files: add-detail-titles.cjs, add-detail-titles.js, add-row-buttons.cjs, agg.txt, anch3.mjs, anchor.mjs, anchor2.mjs, aoa.cjs, bp1.mjs, bp2.mjs, bp3.mjs, c1.mjs, c2c-flow-full.png, cand.mjs, chk1.mjs, closing-assistant-option, cockpit-baseline, cockpit-cleanup, cockpit-current-owner.mjs, cockpit-dialog-layout, cockpit-dialogs, col.mjs, col2.mjs, css1.mjs, css2.mjs, debug-audit.mjs, department-cost-optimization, department-cost-update, diag-out.txt, diag.cjs, digest.cjs, docs.mjs, extract.txt, fix-audit-direct.cjs, fix-picker-confirm-v2.cjs, fix-picker-confirm-v3.cjs, fix-picker-confirm.cjs, fix-sales-invoice.cjs, fix-script-tags.cjs, fix-smoke.mjs, fix2.mjs, fix3.mjs, fix4.mjs, fix5.mjs, fix6.mjs, fix7.mjs, fixed-asset-change-menu, fmt.mjs, form.mjs, g1.mjs, g10.mjs, g11.mjs, g12.mjs, g13.mjs, g14.mjs, g15.mjs, g2.mjs, g3.mjs, g4.mjs, g5.mjs, g6.mjs, g7.mjs, g8.mjs, g9.mjs, h1.mjs, h2.mjs, hdr.mjs, hook-metrics, hook-state, inout-ledger-menu, inout-ledger-option, inspect-buttons.cjs, inspect-check.mjs, inspect-current.cjs, inspect-fields.cjs, inspect-menu-workbook.mjs, inspect-meta.mjs, inspect-radio.cjs, inspect-schema.cjs, inspect-tables.cjs, inspect.cjs, inspect2.cjs, inspect3.cjs, login-direct-smoke.mjs, look.mjs, material-outbound-summary.json, menu-blueprints, menu-edit, menu-home-20260910, menu-label-preview.png, menu-label-update, menu-order, menu-rename, node_modules, patch-audit-save.cjs, patch-fa-return.cjs, patch-mock.mjs, patch-mock2.mjs, patch-mock3.mjs, patch-mock4.mjs, patch-runtime.mjs, patch-schema.mjs, pi.mjs, pi2.mjs, pi3.mjs, pi4.mjs, pi5.mjs, pi6.mjs, pi7.mjs, pms-team-alignment-20260812, po.mjs, ppv.mjs, probe-authoritative.mjs, probe-create-status.mjs, probe-detail-editability.mjs, probe-radios.mjs, probe-sequence.mjs, probe-viewport.mjs, project-cost-baseline, project-cost-refinement-baseline, project-lifecycle-dashboard, project-operations-menu, pub.mjs, r1.mjs, re-add-titles.cjs, reg.mjs, reg2.mjs, reg3.mjs, reg4.mjs, reg5.mjs, remove-modals.cjs, roadmap-full.png, rr.mjs, rr2.mjs, scan-audit.cjs, scan-schemas.cjs, scan-scripts.mjs, scan2.mjs, schema-backup-audit-direct, shot-c2c.mjs, shot-roadmap.mjs, signed.mjs, sm1.mjs, sm2.mjs, smoke-return-only.mjs, spreadsheet-menu, supplier-menu, update-menu-label.mjs, verify.txt, verify1.mjs, _summary_probe.md, _verify_probe.txt
+
+############ pages/material/material-outbound.html len=283587
+OPENS:
+  @824 <script src="../../prototype-resources/components/page-runtime.js" defer>
+  @126721 <script>
+CLOSES: 897,283559
+script@126721 len=156830 SYNTAX OK [IIFE]
+standalone injections: 0
+
+--- occurrences of confirm-inventory: 1
+[0] @95134
+    er"><button class="btn " type="button" data-act="close" aria-label="取消" title="取消">取消</button><button class="btn btn-primary" type="button" data-act="confirm-inventory" aria-label="确认选择" title="确认选择" data-requires-selection disabled aria-disabled="true">确认选择</button></footer></section></div>⏎<div class="schema-overlay" hidden data-component="ProDataSelectModal" id="blue-outbound-picker" data-overlay="blue-outbound-picker" data-append-selection-to="outboundItems" data-context-filter-map='{&quot;warehouse&quot;:&quot;warehouse
+
+--- occurrences of confirm-blue-outbound: 1
+[0] @125853
+    er"><button class="btn " type="button" data-act="close" aria-label="取消" title="取消">取消</button><button class="btn btn-primary" type="button" data-act="confirm-blue-outbound" aria-label="确认选择" title="确认选择" data-requires-selection disabled aria-disabled="true">确认选择</button></footer></section></div>⏎  <div class="schema-overlay" hidden data-component="Modal" data-overlay="shared-delete-confirm" data-delete-confirm>⏎    <section class="pro-modal" role="dialog" aria-modal="true" aria-labelledby="shared-delete-confirm-title">⏎     
+
+--- replaceEditableTableRows x14
+    def ctx: s(detail,row,tableFilter);});⏎      if(retainedRows.length!==currentRows.length)replaceEditableTableRows(detail,destinationDataSource,retainedRows);⏎    });⏎  }⏎  function contextFilterRuleMatches(detail,value,rule,showAll){⏎    if(showAll&&rule.always!==true)return true;⏎    if(rule.activeWhen&&!conditionMatches(detail,rule.activeWhen))return true;⏎    var actual=value[rule.rowField];⏎    if(rule.operator==='absGreaterThan'){⏎      var numericActual=Number(actual);var numericLimit=Number(rule.v
+
+--- data-selection-mode x5
+    @5805: Table" id="material-outbound-table" data-page-size="5" data-current-page="1" data-selectable="true" data-selection-mode="multiple" data-data-source="outboundDocuments" data-fixed-identifier="outboundNo" data-keep-operation-column="true"><div class="pro-table-scroll"><table class="table pro-table" style="width:max(100%,
+    @55821: ard schema-card pro-editable-table" data-page-size="5" data-current-page="1" data-selectable="true" data-selection-mode="multiple" data-data-source="outboundItems"><div class="pro-table-toolbar"><span></span><div class="pro-table-actions"><button class="btn btn-primary" type="button" data-act="open" aria-label="选择即时库存"
+    @66215: le-card" data-component="ProTable" data-page-size="5" data-current-page="1" data-selectable="false" data-selection-mode="multiple" data-keep-operation-column="true"><div class="pro-table-scroll"><table class="table pro-table" style="width:max(100%, 864px);min-width:864px;table-layout:fixed"><thead><tr><th class="align-
+    @70469: ble" id="available-inventory-table" data-page-size="5" data-current-page="1" data-selectable="true" data-selection-mode="multiple" data-data-source="inventoryRows"><div class="pro-table-scroll"><table class="table pro-table" style="width:max(100%, 912px);min-width:912px;table-layout:fixed"><thead><tr><th class="schema-
+
+--- data-append-selection-to x5
+    @68732: y" hidden data-component="ProDataSelectModal" id="inventory-picker" data-overlay="inventory-picker" data-append-selection-to="outboundItems" data-context-filter-map='{&quot;warehouse&quot;:&quot;warehouse&quot;}'><section class="pro-modal pro-data-select-modal pro-modal-wide" role="dialog" aria-modal="true" aria-labell
+    @95410: n data-component="ProDataSelectModal" id="blue-outbound-picker" data-overlay="blue-outbound-picker" data-append-selection-to="outboundItems" data-context-filter-map='{&quot;warehouse&quot;:&quot;warehouse&quot;}'><section class="pro-modal pro-data-select-modal pro-modal-wide" role="dialog" aria-modal="true" aria-labell
+    @156168: eturn;⏎    var sourceDataSource=sourceTable.dataset.dataSource||'';⏎    document.querySelectorAll('[data-append-selection-to][data-context-table-filter]').forEach(function(overlay){⏎      var tableFilter={};try{tableFilter=JSON.parse(overlay.dataset.contextTableFilter||'{}');}catch(error){return;}⏎      if(tableFilter.
+    @182554: dy.appendChild(emptyTemplate.content.firstElementChild.cloneNode(true));document.querySelectorAll('[data-append-selection-to="'+CSS.escape(dataSource)+'"] [data-selection-locked="true"]').forEach(function(checkbox){checkbox.dataset.selectionLocked='false';checkbox.disabled=false;});}renumberEditableRows(table);updateTa
+
+--- appendSelectionTo x2
+    @156475: (tableFilter.sourceTable!==sourceDataSource)return;⏎      var destinationDataSource=overlay.dataset.appendSelectionTo||'';var destination=detail.querySelector('[data-component="EditableTable"][data-data-source="'+CSS.escape(destinationDataSource)+'"]');if(!destination)return;⏎      var currentRows=tableRowsAsValues(des
+    @249344: onTable.dataset.restoreRows=JSON.stringify(sourceRows);});var appendTarget=selectionOverlay.dataset.appendSelectionTo;if(appendTarget){var appendTable=destinationScope.querySelector('[data-component="EditableTable"][data-data-source="'+CSS.escape(appendTarget)+'"]');replaceEditableTableRows(destinationScope,appendTarge
+
+--- row-select x52
+    @8351: -col schema-fixed-left"><input type="checkbox" name="schema-selection-material-outbound-table" data-row-select aria-label="选择第1行"></td><td class="align-left schema-fixed-left schema-fixed-left-data schema-primary-identifier schema-cell-ellipsis" data-column="outboundNo" data-cell-component="link" style="width:176px;min
+    @11784: -col schema-fixed-left"><input type="checkbox" name="schema-selection-material-outbound-table" data-row-select aria-label="选择第2行"></td><td class="align-left schema-fixed-left schema-fixed-left-data schema-primary-identifier schema-cell-ellipsis" data-column="outboundNo" data-cell-component="link" style="width:176px;min
+    @15277: -col schema-fixed-left"><input type="checkbox" name="schema-selection-material-outbound-table" data-row-select aria-label="选择第3行"></td><td class="align-left schema-fixed-left schema-fixed-left-data schema-primary-identifier schema-cell-ellipsis" data-column="outboundNo" data-cell-component="link" style="width:176px;min
+    @18789: -col schema-fixed-left"><input type="checkbox" name="schema-selection-material-outbound-table" data-row-select aria-label="选择第4行"></td><td class="align-left schema-fixed-left schema-fixed-left-data schema-primary-identifier schema-cell-ellipsis" data-column="outboundNo" data-cell-component="link" style="width:176px;min
+
+############ pages/material/other-outbound.html len=252607
+OPENS:
+  @821 <script src="../../prototype-resources/components/page-runtime.js" defer>
+  @96208 <script>
+CLOSES: 894,252579
+script@96208 len=156363 SYNTAX OK [IIFE]
+standalone injections: 0
+
+--- occurrences of confirm-inventory: 1
+[0] @95344
+    er"><button class="btn " type="button" data-act="close" aria-label="取消" title="取消">取消</button><button class="btn btn-primary" type="button" data-act="confirm-inventory" aria-label="确认选择" title="确认选择" data-requires-selection disabled aria-disabled="true">确认选择</button></footer></section></div>⏎  <div class="schema-overlay" hidden data-component="Modal" data-overlay="shared-delete-confirm" data-delete-confirm>⏎    <section class="pro-modal" role="dialog" aria-modal="true" aria-labelledby="shared-delete-confirm-title">⏎      <he
+
+--- occurrences of confirm-blue-outbound: 0
+
+--- replaceEditableTableRows x14
+    def ctx: s(detail,row,tableFilter);});⏎      if(retainedRows.length!==currentRows.length)replaceEditableTableRows(detail,destinationDataSource,retainedRows);⏎    });⏎  }⏎  function contextFilterRuleMatches(detail,value,rule,showAll){⏎    if(showAll&&rule.always!==true)return true;⏎    if(rule.activeWhen&&!conditionMatches(detail,rule.activeWhen))return true;⏎    var actual=value[rule.rowField];⏎    if(rule.operator==='absGreaterThan'){⏎      var numericActual=Number(actual);var numericLimit=Number(rule.v
+
+--- data-selection-mode x4
+    @5439: ProTable" id="other-outbound-table" data-page-size="5" data-current-page="1" data-selectable="true" data-selection-mode="multiple" data-data-source="otherOutboundDocuments" data-fixed-identifier="outboundNo" data-keep-operation-column="true"><div class="pro-table-scroll"><table class="table pro-table" style="width:max(
+    @57052: ard schema-card pro-editable-table" data-page-size="5" data-current-page="1" data-selectable="true" data-selection-mode="multiple" data-data-source="otherOutboundItems"><div class="pro-table-toolbar"><span></span><div class="pro-table-actions"><button class="btn btn-primary" type="button" data-act="open" aria-label="选择
+    @65526: le-card" data-component="ProTable" data-page-size="5" data-current-page="1" data-selectable="false" data-selection-mode="multiple" data-keep-operation-column="true"><div class="pro-table-scroll"><table class="table pro-table" style="width:max(100%, 864px);min-width:864px;table-layout:fixed"><thead><tr><th class="align-
+    @69835: d="other-available-inventory-table" data-page-size="5" data-current-page="1" data-selectable="true" data-selection-mode="multiple" data-data-source="inventoryRows"><div class="pro-table-scroll"><table class="table pro-table" style="width:max(100%, 912px);min-width:912px;table-layout:fixed"><thead><tr><th class="schema-
+
+--- data-append-selection-to x4
+    @68069: ta-component="ProDataSelectModal" id="other-inventory-picker" data-overlay="other-inventory-picker" data-append-selection-to="otherOutboundItems" data-context-filter-map='{&quot;warehouse&quot;:&quot;warehouse&quot;}'><section class="pro-modal pro-data-select-modal pro-modal-wide" role="dialog" aria-modal="true" aria-l
+    @125188: eturn;⏎    var sourceDataSource=sourceTable.dataset.dataSource||'';⏎    document.querySelectorAll('[data-append-selection-to][data-context-table-filter]').forEach(function(overlay){⏎      var tableFilter={};try{tableFilter=JSON.parse(overlay.dataset.contextTableFilter||'{}');}catch(error){return;}⏎      if(tableFilter.
+    @151574: dy.appendChild(emptyTemplate.content.firstElementChild.cloneNode(true));document.querySelectorAll('[data-append-selection-to="'+CSS.escape(dataSource)+'"] [data-selection-locked="true"]').forEach(function(checkbox){checkbox.dataset.selectionLocked='false';checkbox.disabled=false;});}renumberEditableRows(table);updateTa
+    @215257: closest('[data-overlay][data-selection-map],[data-overlay][data-selection-table-map],[data-overlay][data-append-selection-to]')){var selectionOverlay=target.closest('[data-overlay]');var checkedRows=Array.from(selectionOverlay.querySelectorAll('[data-row-select]:checked:not(:disabled)'));if(!checkedRows.length)return;v
+
+--- appendSelectionTo x2
+    @125495: (tableFilter.sourceTable!==sourceDataSource)return;⏎      var destinationDataSource=overlay.dataset.appendSelectionTo||'';var destination=detail.querySelector('[data-component="EditableTable"][data-data-source="'+CSS.escape(destinationDataSource)+'"]');if(!destination)return;⏎      var currentRows=tableRowsAsValues(des
+    @218364: onTable.dataset.restoreRows=JSON.stringify(sourceRows);});var appendTarget=selectionOverlay.dataset.appendSelectionTo;if(appendTarget){var appendTable=destinationScope.querySelector('[data-component="EditableTable"][data-data-source="'+CSS.escape(appendTarget)+'"]');replaceEditableTableRows(destinationScope,appendTarge
+
+--- row-select x43
+    @8105: ect-col schema-fixed-left"><input type="checkbox" name="schema-selection-other-outbound-table" data-row-select aria-label="选择第1行"></td><td class="align-left schema-fixed-left schema-fixed-left-data schema-primary-identifier schema-cell-ellipsis" data-column="outboundNo" data-cell-component="link" style="width:176px;min
+    @11684: ect-col schema-fixed-left"><input type="checkbox" name="schema-selection-other-outbound-table" data-row-select aria-label="选择第2行"></td><td class="align-left schema-fixed-left schema-fixed-left-data schema-primary-identifier schema-cell-ellipsis" data-column="outboundNo" data-cell-component="link" style="width:176px;min
+    @15309: ect-col schema-fixed-left"><input type="checkbox" name="schema-selection-other-outbound-table" data-row-select aria-label="选择第3行"></td><td class="align-left schema-fixed-left schema-fixed-left-data schema-primary-identifier schema-cell-ellipsis" data-column="outboundNo" data-cell-component="link" style="width:176px;min
+    @18914: ect-col schema-fixed-left"><input type="checkbox" name="schema-selection-other-outbound-table" data-row-select aria-label="选择第4行"></td><td class="align-left schema-fixed-left schema-fixed-left-data schema-primary-identifier schema-cell-ellipsis" data-column="outboundNo" data-cell-component="link" style="width:176px;min
+
+############ pages/material/other-inbound.html len=218631
+OPENS:
+  @820 <script src="../../prototype-resources/components/page-runtime.js" defer>
+  @62415 <script>
+CLOSES: 893,218603
+script@62415 len=156180 SYNTAX OK [IIFE]
+standalone injections: 0
+
+--- occurrences of confirm-inventory: 0
+
+--- occurrences of confirm-blue-outbound: 0
+
+--- replaceEditableTableRows x14
+    def ctx: s(detail,row,tableFilter);});⏎      if(retainedRows.length!==currentRows.length)replaceEditableTableRows(detail,destinationDataSource,retainedRows);⏎    });⏎  }⏎  function contextFilterRuleMatches(detail,value,rule,showAll){⏎    if(showAll&&rule.always!==true)return true;⏎    if(rule.activeWhen&&!conditionMatches(detail,rule.activeWhen))return true;⏎    var actual=value[rule.rowField];⏎    if(rule.operator==='absGreaterThan'){⏎      var numericActual=Number(actual);var numericLimit=Number(rule.v
+
+--- data-selection-mode x3
+    @5187: "ProTable" id="other-inbound-table" data-page-size="5" data-current-page="1" data-selectable="true" data-selection-mode="multiple" data-data-source="otherInboundDocuments" data-fixed-identifier="inboundNo" data-keep-operation-column="true"><div class="pro-table-scroll"><table class="table pro-table" style="width:max(10
+    @47959: ard schema-card pro-editable-table" data-page-size="5" data-current-page="1" data-selectable="true" data-selection-mode="multiple" data-data-source="otherInboundItems"><div class="pro-table-toolbar"><span></span><div class="pro-table-actions"><button class="btn btn-primary" type="button" data-act="add-row" aria-label="
+    @59290: le-card" data-component="ProTable" data-page-size="5" data-current-page="1" data-selectable="false" data-selection-mode="multiple" data-keep-operation-column="true"><div class="pro-table-scroll"><table class="table pro-table" style="width:max(100%, 864px);min-width:864px;table-layout:fixed"><thead><tr><th class="align-
+
+--- data-append-selection-to x3
+    @91212: eturn;⏎    var sourceDataSource=sourceTable.dataset.dataSource||'';⏎    document.querySelectorAll('[data-append-selection-to][data-context-table-filter]').forEach(function(overlay){⏎      var tableFilter={};try{tableFilter=JSON.parse(overlay.dataset.contextTableFilter||'{}');}catch(error){return;}⏎      if(tableFilter.
+    @117598: dy.appendChild(emptyTemplate.content.firstElementChild.cloneNode(true));document.querySelectorAll('[data-append-selection-to="'+CSS.escape(dataSource)+'"] [data-selection-locked="true"]').forEach(function(checkbox){checkbox.dataset.selectionLocked='false';checkbox.disabled=false;});}renumberEditableRows(table);updateTa
+    @181281: closest('[data-overlay][data-selection-map],[data-overlay][data-selection-table-map],[data-overlay][data-append-selection-to]')){var selectionOverlay=target.closest('[data-overlay]');var checkedRows=Array.from(selectionOverlay.querySelectorAll('[data-row-select]:checked:not(:disabled)'));if(!checkedRows.length)return;v
+
+--- appendSelectionTo x2
+    @91519: (tableFilter.sourceTable!==sourceDataSource)return;⏎      var destinationDataSource=overlay.dataset.appendSelectionTo||'';var destination=detail.querySelector('[data-component="EditableTable"][data-data-source="'+CSS.escape(destinationDataSource)+'"]');if(!destination)return;⏎      var currentRows=tableRowsAsValues(des
+    @184388: onTable.dataset.restoreRows=JSON.stringify(sourceRows);});var appendTarget=selectionOverlay.dataset.appendSelectionTo;if(appendTarget){var appendTable=destinationScope.querySelector('[data-component="EditableTable"][data-data-source="'+CSS.escape(appendTarget)+'"]');replaceEditableTableRows(destinationScope,appendTarge
+
+--- row-select x31
+    @7467: lect-col schema-fixed-left"><input type="checkbox" name="schema-selection-other-inbound-table" data-row-select aria-label="选择第1行"></td><td class="align-left schema-fixed-left schema-fixed-left-data schema-primary-identifier schema-cell-ellipsis" data-column="inboundNo" data-cell-component="link" style="width:176px;min-
+    @10426: lect-col schema-fixed-left"><input type="checkbox" name="schema-selection-other-inbound-table" data-row-select aria-label="选择第2行"></td><td class="align-left schema-fixed-left schema-fixed-left-data schema-primary-identifier schema-cell-ellipsis" data-column="inboundNo" data-cell-component="link" style="width:176px;min-
+    @13434: lect-col schema-fixed-left"><input type="checkbox" name="schema-selection-other-inbound-table" data-row-select aria-label="选择第3行"></td><td class="align-left schema-fixed-left schema-fixed-left-data schema-primary-identifier schema-cell-ellipsis" data-column="inboundNo" data-cell-component="link" style="width:176px;min-
+    @16425: lect-col schema-fixed-left"><input type="checkbox" name="schema-selection-other-inbound-table" data-row-select aria-label="选择第4行"></td><td class="align-left schema-fixed-left schema-fixed-left-data schema-primary-identifier schema-cell-ellipsis" data-column="inboundNo" data-cell-component="link" style="width:176px;min-

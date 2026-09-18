@@ -1,0 +1,65 @@
+{
+  "run_status": "slides_recorded",
+  "deck_name": "slide_06-20260721",
+  "selected_backend": "built-in image tool",
+  "sample_generation_method": {
+    "backend_used": "built-in image tool",
+    "tool_name": "image_gen",
+    "mode": "edit",
+    "prompt_source": "Slide 6 revision task confirmed by user",
+    "size": "16:9 landscape",
+    "quality": "built-in default",
+    "approved_sample_path": "D:\\项目AI协作\\4、PMS业财一体化\\PMS跨公司协同与需求闭环方案\\origin_image\\slide_05.png",
+    "input_context_preparation": "inspect the current slide 6 edit target and approved slide 5 style reference with view_image, then pass both through referenced_image_paths",
+    "handoff_rule": "Use built-in image_gen in edit/reference mode; return a blocker if unavailable."
+  },
+  "max_concurrent_slides": 1,
+  "slides": [
+    {
+      "slide_id": "slide_06",
+      "number": 6,
+      "title": "场景二：实施协作型协作",
+      "job": "prompts/slide_06.json",
+      "out": "origin_image/slide_06.png",
+      "input_images": [
+        {
+          "path": "D:\\项目AI协作\\4、PMS业财一体化\\PMS跨公司协同与需求闭环方案\\origin_image\\slide_05.png",
+          "role": "approved sample slide style reference",
+          "fidelity": "match palette, typography, line icon language and consulting quality only"
+        },
+        {
+          "path": "D:\\项目AI协作\\4、PMS业财一体化\\PMS跨公司协同与需求闭环方案\\origin_image\\slide_06.png",
+          "role": "edit target; preserve overall slide title system, visual language and 16:9 structure while replacing the business content",
+          "fidelity": "use as the page being revised, not as a strict content source"
+        }
+      ],
+      "requires_context_images": true,
+      "status": "recorded",
+      "dispatch": {
+        "agent_id": "019f8410-ab1a-73a2-b482-acef9ccbe58c",
+        "agent_nickname": "Bohr",
+        "prompt": "prompts/slide_06.json",
+        "prompt_sha256": "499ff64c9fd4ce9ecb139cbec1503228e56c5adabdba00c09c9ea9d596d7da1c",
+        "dispatched_at": "2026-07-21T09:47:12Z"
+      },
+      "result": {
+        "agent_id": "019f8410-ab1a-73a2-b482-acef9ccbe58c",
+        "backend_used": "built-in image tool",
+        "selected_source": "D:\\Program Files\\.codex\\generated_images\\019f8410-ab1a-73a2-b482-acef9ccbe58c\\exec-f3b2c3e5-80e3-4f71-a7a1-034e929faaf7.png",
+        "selected_source_sha256": "b8398043e6f3011ed9a4d7ae5036749376950d1a7963c62de573f6940b278516",
+        "final_image": "origin_image/slide_06.png",
+        "final_image_sha256": "b8398043e6f3011ed9a4d7ae5036749376950d1a7963c62de573f6940b278516",
+        "expected_backend": "built-in image tool",
+        "expected_backend_labels": [
+          "built-in image tool",
+          "image_gen"
+        ],
+        "sample_generation_method_matched": true,
+        "qa_note": "九步流程完整；四个控制点连接正确；权限为整链可查看、相关部分可操作、其余只读。",
+        "recorded_at": "2026-07-21T10:10:21Z"
+      },
+      "blocker": null
+    }
+  ],
+  "updated_at": "2026-07-21T10:10:21Z"
+}

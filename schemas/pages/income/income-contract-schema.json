@@ -1,0 +1,1434 @@
+{
+  "schemaVersion": "pms-page-schema-v2",
+  "policyProfile": "auditable-list-detail-save",
+  "pageCode": "income-contract-schema",
+  "pageName": "收入合同",
+  "domain": "income",
+  "module": "收入管理",
+  "menuPath": "收入管理/收入合同",
+  "pageType": "list-detail",
+  "template": "tabs-detail-page",
+  "outputPath": "pages/income/income-contract-schema.html",
+  "businessScenario": "收入合同基础信息、服务明细、收款计划、附件及项目结算关联信息的统一维护；不发起审批流程。",
+  "detailReviewEnabled": false,
+  "detailSaveEnabled": true,
+  "detailSubmitEnabled": true,
+  "submitActionLabel": "提交",
+  "resourceReference": {
+    "center": "prototype-resources/index.html",
+    "baseline": "pms-resource-center-v1",
+    "pageSamples": [
+      "收入合同",
+      "支出合同",
+      "客户管理"
+    ],
+    "components": [
+      "ProSearchForm",
+      "ProTable",
+      "ProTabsDetail",
+      "DetailForm",
+      "EditableTable",
+      "ProUploadList",
+      "ProDataSelectModal"
+    ]
+  },
+  "pageActions": [
+    {
+      "code": "audit",
+      "label": "审核",
+      "type": "primary",
+      "requiresSingleSelection": true,
+      "enabledSelectionStatuses": [
+        "新增"
+      ],
+      "nextStatus": "审核",
+      "fieldUpdates": {
+        "reviewer": "管理员",
+        "reviewedAt": "$currentDateTime"
+      }
+    },
+    {
+      "code": "reverse-audit",
+      "label": "反审核",
+      "requiresSingleSelection": true,
+      "enabledSelectionStatuses": [
+        "审核"
+      ],
+      "enabledSelectionWhen": {
+        "businessStatus": [
+          "未生效",
+          "已生效"
+        ]
+      },
+      "nextStatus": "新增",
+      "fieldUpdates": {
+        "reviewer": "",
+        "reviewedAt": ""
+      }
+    },
+    {
+      "code": "close-contract",
+      "label": "关闭",
+      "type": "danger",
+      "ghost": true,
+      "requiresSingleSelection": true,
+      "enabledSelectionWhen": {
+        "businessStatus": "履约中"
+      },
+      "rowFieldUpdate": true,
+      "fieldUpdates": {
+        "businessStatus": "已关闭"
+      }
+    },
+    {
+      "code": "batch-delete",
+      "label": "批量删除",
+      "type": "danger",
+      "ghost": true,
+      "requiresSelection": true
+    },
+    {
+      "code": "create",
+      "label": "新增",
+      "type": "primary",
+      "target": "contract-form"
+    }
+  ],
+  "regions": [
+    {
+      "id": "contract-search",
+      "component": "ProSearchForm",
+      "fields": [
+        {
+          "code": "keyword",
+          "label": "合同编号或名称",
+          "component": "input"
+        },
+        {
+          "code": "status",
+          "label": "状态",
+          "component": "select",
+          "options": [
+            "新增",
+            "审核"
+          ]
+        },
+        {
+          "code": "businessStatus",
+          "label": "业务状态",
+          "component": "select",
+          "options": [
+            "未生效",
+            "已生效",
+            "履约中",
+            "已关闭"
+          ]
+        },
+        {
+          "code": "customer",
+          "label": "客户名称",
+          "component": "input"
+        },
+        {
+          "code": "nature",
+          "label": "合同性质",
+          "component": "select",
+          "options": [
+            "试用合同",
+            "正式合同"
+          ]
+        },
+        {
+          "code": "contractLevel",
+          "label": "合同层级",
+          "component": "select",
+          "options": [
+            "主合同",
+            "子合同"
+          ]
+        },
+        {
+          "code": "signDate",
+          "label": "签订日期",
+          "component": "date-range"
+        }
+      ],
+      "firstFieldAlignment": "selection-control"
+    },
+    {
+      "id": "contract-table",
+      "component": "ProTable",
+      "representativeByStatus": false,
+      "dataSource": "contracts",
+      "pageSize": 5,
+      "selectable": true,
+      "actions": [],
+      "batchActions": [
+        {
+          "code": "batch-delete",
+          "label": "批量删除",
+          "type": "danger"
+        }
+      ],
+      "rowActions": [
+        {
+          "code": "delete",
+          "label": "删除",
+          "type": "link",
+          "enabledStatuses": [
+            "新增"
+          ]
+        }
+      ],
+      "columns": [
+        {
+          "code": "code",
+          "label": "合同编号",
+          "component": "link",
+          "fixed": "left",
+          "width": 176
+        },
+        {
+          "code": "status",
+          "label": "状态",
+          "component": "tag",
+          "align": "center",
+          "width": 104
+        },
+        {
+          "code": "businessStatus",
+          "label": "业务状态",
+          "component": "tag",
+          "align": "center",
+          "width": 104
+        },
+        {
+          "code": "name",
+          "label": "合同名称",
+          "component": "text",
+          "width": 220
+        },
+        {
+          "code": "nature",
+          "label": "合同性质",
+          "component": "text",
+          "align": "center",
+          "width": 112
+        },
+        {
+          "code": "contractLevel",
+          "label": "合同层级",
+          "component": "text",
+          "align": "center",
+          "width": 112
+        },
+        {
+          "code": "amount",
+          "label": "合同金额",
+          "component": "money",
+          "format": "money",
+          "align": "right",
+          "width": 140
+        },
+        {
+          "code": "signDate",
+          "label": "签订日期",
+          "component": "date",
+          "width": 136
+        },
+        {
+          "code": "effectiveDate",
+          "label": "生效日期",
+          "component": "date",
+          "width": 136
+        },
+        {
+          "code": "customer",
+          "label": "客户名称",
+          "component": "text",
+          "width": 220
+        },
+        {
+          "code": "creator",
+          "label": "创建人",
+          "component": "text",
+          "width": 112
+        },
+        {
+          "code": "createdAt",
+          "label": "创建时间",
+          "component": "text",
+          "width": 168
+        }
+      ],
+      "keepOperationColumn": true
+    },
+    {
+      "id": "contract-form",
+      "component": "ProTabsDetail",
+      "tabs": [
+        {
+          "key": "basic",
+          "label": "基础信息",
+          "children": [
+            {
+              "component": "DetailForm",
+              "statusAfterField": "name",
+              "fields": [
+                {
+                  "code": "code",
+                  "label": "合同编号",
+                  "component": "input",
+                  "required": true,
+                  "value": "SR20260716001"
+                },
+                {
+                  "code": "name",
+                  "label": "合同名称",
+                  "component": "input",
+                  "required": true,
+                  "value": "水务智能化年度框架合作协议"
+                },
+                {
+                  "code": "status",
+                  "label": "状态",
+                  "component": "input",
+                  "readonly": true,
+                  "value": "新增",
+                  "preserveOnCreate": true
+                },
+                {
+                  "code": "customerCode",
+                  "label": "客户编码",
+                  "component": "input",
+                  "readonly": true,
+                  "value": "CUS00001"
+                },
+                {
+                  "code": "customer",
+                  "label": "客户名称",
+                  "component": "picker",
+                  "required": true,
+                  "inputReadonly": true,
+                  "target": "customer-picker",
+                  "value": "武汉东湖水务有限公司",
+                  "actionLabel": "选择"
+                },
+                {
+                  "code": "currency",
+                  "label": "结算币别",
+                  "component": "select",
+                  "readonly": true,
+                  "preserveOnCreate": true,
+                  "value": "CNY",
+                  "options": [
+                    "CNY"
+                  ]
+                },
+                {
+                  "code": "customerContact",
+                  "label": "客户联系人",
+                  "component": "select",
+                  "required": true,
+                  "value": "张建国",
+                  "dependsOn": "customerCode",
+                  "optionsBy": {
+                    "CUS00001": [
+                      "张建国",
+                      "刘莉"
+                    ],
+                    "CUS00002": [
+                      "周海波",
+                      "陈静"
+                    ]
+                  }
+                },
+                {
+                  "code": "contactPhone",
+                  "label": "联系电话",
+                  "component": "input",
+                  "readonly": true,
+                  "value": "13800001234"
+                },
+                {
+                  "code": "owner",
+                  "label": "销售负责人",
+                  "component": "select",
+                  "required": true,
+                  "value": "陆志军",
+                  "options": [
+                    "陆志军",
+                    "钱斌",
+                    "宋琳"
+                  ]
+                },
+                {
+                  "code": "nature",
+                  "label": "合同性质",
+                  "component": "radio",
+                  "required": true,
+                  "value": "正式合同",
+                  "options": [
+                    "试用合同",
+                    "正式合同"
+                  ],
+                  "initialValue": "正式合同"
+                },
+                {
+                  "code": "contractLevel",
+                  "label": "合同层级",
+                  "component": "radio",
+                  "required": true,
+                  "value": "主合同",
+                  "options": [
+                    "主合同",
+                    "子合同"
+                  ],
+                  "initialValue": "主合同"
+                },
+                {
+                  "code": "parentContract",
+                  "label": "主合同",
+                  "component": "select",
+                  "options": [
+                    "SR20260716001 水务智能化年度框架合作协议",
+                    "SR20260621011 能耗分析年度服务合同"
+                  ],
+                  "readonlyWhen": {
+                    "contractLevel": "主合同"
+                  },
+                  "requiredWhen": {
+                    "contractLevel": "子合同"
+                  }
+                },
+                {
+                  "code": "amount",
+                  "label": "合同总金额",
+                  "component": "number",
+                  "readonly": true,
+                  "precision": 2,
+                  "summarySource": {
+                    "table": "services",
+                    "column": "amount",
+                    "precision": 2
+                  },
+                  "value": 2800000
+                },
+                {
+                  "code": "contractOwner",
+                  "label": "合同负责人",
+                  "component": "select",
+                  "required": true,
+                  "value": "陆志军",
+                  "options": [
+                    "陆志军",
+                    "钱斌",
+                    "宋琳"
+                  ]
+                },
+                {
+                  "code": "signDate",
+                  "label": "签订日期",
+                  "component": "date",
+                  "required": true,
+                  "value": "2026-07-01"
+                },
+                {
+                  "code": "effectiveDate",
+                  "label": "生效日期",
+                  "component": "date",
+                  "required": true,
+                  "value": "2026-07-01"
+                },
+                {
+                  "code": "expiryDate",
+                  "label": "截止日期",
+                  "component": "date",
+                  "value": "2026-12-31"
+                },
+                {
+                  "code": "creator",
+                  "label": "创建人",
+                  "component": "input",
+                  "readonly": true,
+                  "value": "陆志军"
+                },
+                {
+                  "code": "createdAt",
+                  "label": "创建时间",
+                  "component": "input",
+                  "readonly": true,
+                  "value": "2026-09-07 10:00:00"
+                },
+                {
+                  "code": "reviewer",
+                  "label": "审核人",
+                  "component": "input",
+                  "readonly": true
+                },
+                {
+                  "code": "reviewedAt",
+                  "label": "审核时间",
+                  "component": "input",
+                  "readonly": true
+                },
+                {
+                  "code": "company",
+                  "label": "所属公司",
+                  "component": "input",
+                  "readonly": true,
+                  "preserveOnCreate": true,
+                  "value": "昕彤赋能（武汉）设计研究有限公司"
+                },
+                {
+                  "code": "remark",
+                  "label": "备注",
+                  "component": "input",
+                  "value": ""
+                }
+              ]
+            },
+            {
+              "id": "service-table",
+              "title": "服务明细",
+              "component": "EditableTable",
+              "dataSource": "services",
+              "pagination": false,
+              "selectable": true,
+              "keepOperationColumn": true,
+              "operationColumnWidth": 88,
+              "footerSummary": {
+                "label": "合计",
+                "columns": [
+                  {
+                    "column": "quantity",
+                    "precision": 2
+                  },
+                  {
+                    "column": "amount",
+                    "precision": 2
+                  }
+                ]
+              },
+              "actions": [
+                {
+                  "code": "add-row",
+                  "label": "新增明细",
+                  "type": "default"
+                },
+                {
+                  "code": "batch-delete",
+                  "type": "danger",
+                  "ghost": true,
+                  "requiresSelection": true
+                }
+              ],
+              "columns": [
+                {
+                  "code": "sequence",
+                  "label": "序号",
+                  "component": "text",
+                  "editable": false,
+                  "align": "center",
+                  "width": 72,
+                  "fixed": "left"
+                },
+                {
+                  "code": "purchaseCategory",
+                  "label": "物资类型",
+                  "component": "select",
+                  "required": true,
+                  "options": [
+                    "硬件采购",
+                    "软件采购",
+                    "服务采购",
+                    "其他"
+                  ],
+                  "width": 140
+                },
+                {
+                  "code": "purchaseName",
+                  "label": "物资名称",
+                  "component": "input",
+                  "required": true,
+                  "width": 200
+                },
+                {
+                  "code": "specification",
+                  "label": "规格",
+                  "component": "input",
+                  "width": 180
+                },
+                {
+                  "code": "quantity",
+                  "label": "数量",
+                  "component": "number",
+                  "required": true,
+                  "precision": 2,
+                  "align": "right",
+                  "width": 100
+                },
+                {
+                  "code": "unitPrice",
+                  "label": "含税单价",
+                  "component": "number",
+                  "required": true,
+                  "precision": 4,
+                  "align": "right",
+                  "width": 130
+                },
+                {
+                  "code": "amount",
+                  "label": "价税合计",
+                  "component": "money",
+                  "editable": false,
+                  "align": "right",
+                  "calculatedBy": {
+                    "type": "multiply",
+                    "fields": [
+                      "quantity",
+                      "unitPrice"
+                    ],
+                    "precision": 2,
+                    "recalculateOn": [
+                      "quantity",
+                      "unitPrice"
+                    ]
+                  },
+                  "width": 130
+                },
+                {
+                  "code": "remark",
+                  "label": "备注",
+                  "component": "input",
+                  "width": 200
+                }
+              ]
+            },
+            {
+              "id": "receipt-plan-table",
+              "title": "收款计划",
+              "component": "EditableTable",
+              "dataSource": "plans",
+              "pagination": false,
+              "selectable": true,
+              "keepOperationColumn": true,
+              "operationColumnWidth": 88,
+              "footerSummary": {
+                "label": "合计",
+                "column": "amount",
+                "precision": 2
+              },
+              "actions": [
+                {
+                  "code": "add-row",
+                  "label": "新增计划",
+                  "type": "default"
+                },
+                {
+                  "code": "batch-delete",
+                  "type": "danger",
+                  "ghost": true,
+                  "requiresSelection": true
+                }
+              ],
+              "columns": [
+                {
+                  "code": "name",
+                  "label": "计划名称",
+                  "component": "input",
+                  "required": true,
+                  "width": 240
+                },
+                {
+                  "code": "trigger",
+                  "label": "触发方式",
+                  "component": "select",
+                  "required": true,
+                  "options": [
+                    "固定日期",
+                    "项目结算"
+                  ],
+                  "width": 160
+                },
+                {
+                  "code": "receiptDate",
+                  "label": "计划收款日期",
+                  "component": "date",
+                  "required": true,
+                  "editableWhen": {
+                    "trigger": "固定日期"
+                  },
+                  "clearWhenDisabled": true,
+                  "width": 160
+                },
+                {
+                  "code": "amount",
+                  "label": "计划金额",
+                  "component": "number",
+                  "required": true,
+                  "precision": 2,
+                  "align": "right",
+                  "width": 160
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "attachments",
+          "label": "附件",
+          "children": [
+            {
+              "id": "contract-attachments",
+              "component": "ProUploadList",
+              "dataSource": "attachments",
+              "columns": [
+                {
+                  "code": "sequence",
+                  "label": "序号",
+                  "component": "text",
+                  "align": "center",
+                  "width": 72,
+                  "fixed": "left"
+                },
+                {
+                  "code": "name",
+                  "label": "文件名",
+                  "component": "text",
+                  "width": 300
+                },
+                {
+                  "code": "size",
+                  "label": "大小",
+                  "component": "text",
+                  "width": 100
+                },
+                {
+                  "code": "uploader",
+                  "label": "上传人",
+                  "component": "text",
+                  "width": 112
+                },
+                {
+                  "code": "uploadedAt",
+                  "label": "上传时间",
+                  "component": "text",
+                  "width": 168
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "relations",
+          "label": "关联信息",
+          "children": [
+            {
+              "component": "EditableTable",
+              "title": "项目",
+              "dataSource": "projects",
+              "pagination": false,
+              "selectable": false,
+              "rowActions": [],
+              "columns": [
+                {
+                  "code": "sequence",
+                  "label": "序号",
+                  "component": "text",
+                  "editable": false,
+                  "align": "center",
+                  "width": 72,
+                  "fixed": "left"
+                },
+                {
+                  "code": "company",
+                  "label": "项目所属公司",
+                  "component": "text",
+                  "width": 260
+                },
+                {
+                  "code": "code",
+                  "label": "项目编号",
+                  "component": "text",
+                  "width": 176
+                },
+                {
+                  "code": "name",
+                  "label": "项目名称",
+                  "component": "text",
+                  "width": 240
+                },
+                {
+                  "code": "manager",
+                  "label": "项目经理",
+                  "component": "text",
+                  "width": 128
+                },
+                {
+                  "code": "amount",
+                  "label": "归集金额",
+                  "component": "money",
+                  "format": "money",
+                  "align": "right",
+                  "width": 140
+                }
+              ]
+            },
+            {
+              "component": "EditableTable",
+              "title": "子合同",
+              "dataSource": "children",
+              "pagination": false,
+              "selectable": false,
+              "rowActions": [],
+              "columns": [
+                {
+                  "code": "sequence",
+                  "label": "序号",
+                  "component": "text",
+                  "editable": false,
+                  "align": "center",
+                  "width": 72,
+                  "fixed": "left"
+                },
+                {
+                  "code": "code",
+                  "label": "合同编号",
+                  "component": "text",
+                  "width": 176
+                },
+                {
+                  "code": "name",
+                  "label": "合同名称",
+                  "component": "text",
+                  "width": 260
+                },
+                {
+                  "code": "amount",
+                  "label": "合同金额",
+                  "component": "money",
+                  "format": "money",
+                  "align": "right",
+                  "width": 140
+                },
+                {
+                  "code": "status",
+                  "label": "合同状态",
+                  "component": "tag",
+                  "align": "center",
+                  "width": 112
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "overlays": [
+    {
+      "id": "customer-picker",
+      "component": "ProDataSelectModal",
+      "title": "选择客户",
+      "size": "wide",
+      "selectionMode": "single",
+      "selectionMap": {
+        "customerCode": "customerCode",
+        "customer": "customerName",
+        "customerContact": "contactName",
+        "contactPhone": "contactPhone",
+        "owner": "salesOwner",
+        "currency": "settlementCurrency"
+      },
+      "children": [
+        {
+          "component": "ProSearchForm",
+          "fields": [
+            {
+              "code": "customerKeyword",
+              "label": "客户编码或名称",
+              "component": "input",
+              "searchCodes": [
+                "customerCode",
+                "customerName"
+              ]
+            }
+          ]
+        },
+        {
+          "component": "ProTable",
+          "dataSource": "customers",
+          "selectionMode": "single",
+          "columns": [
+            {
+              "code": "customerCode",
+              "label": "客户编码",
+              "component": "text",
+              "width": 176
+            },
+            {
+              "code": "customerName",
+              "label": "客户名称",
+              "component": "text",
+              "width": 260
+            }
+          ],
+          "pagination": false
+        }
+      ],
+      "actions": [
+        {
+          "code": "close",
+          "label": "取消"
+        },
+        {
+          "code": "confirm-customer",
+          "label": "确认选择",
+          "type": "primary",
+          "requiresSelection": true
+        }
+      ]
+    }
+  ],
+  "detailLinkages": [
+    {
+      "trigger": "customerContact",
+      "records": {
+        "张建国": {
+          "fields": {
+            "contactPhone": "13800001234"
+          }
+        },
+        "刘莉": {
+          "fields": {
+            "contactPhone": "13900005678"
+          }
+        },
+        "周海波": {
+          "fields": {
+            "contactPhone": "13700004567"
+          }
+        },
+        "陈静": {
+          "fields": {
+            "contactPhone": "13600007890"
+          }
+        }
+      }
+    }
+  ],
+  "interactions": [
+    {
+      "trigger": "customer.select",
+      "effect": "单选客户后回填客户编码、客户名称、默认联系人、联系电话、销售负责人和结算币别；联系人可在该客户联系人范围内下拉调整。"
+    },
+    {
+      "trigger": "customerContact.change",
+      "effect": "根据所选客户联系人自动带出联系电话。"
+    },
+    {
+      "trigger": "contractLevel.change",
+      "effect": "主合同字段始终显示；合同层级为主合同时置灰不可编辑，子合同时可选且必填。"
+    },
+    {
+      "trigger": "serviceDetail.change",
+      "effect": "价税合计、税额、不含税金额和不含税单价按数量、含税单价和税率计算；合同总金额汇总服务明细价税合计。"
+    },
+    {
+      "trigger": "projectSettlement.callback",
+      "effect": "项目结算单自动回传项目所属公司、项目编号、项目名称、项目经理和归集金额至关联信息；不允许在收入合同手工选择项目。"
+    },
+    {
+      "trigger": "submit.click",
+      "effect": "校验基础必填项及子合同主合同；保存业务数据并返回列表，不发起审批流程。"
+    },
+    {
+      "trigger": "audit.click",
+      "effect": "列表单选新增状态合同后审核，状态变为审核，记录审核人和审核时间。"
+    },
+    {
+      "trigger": "reverseAudit.click",
+      "effect": "列表单选审核状态合同后反审核，状态回到新增，清空审核人和审核时间。"
+    },
+    {
+      "trigger": "close-contract.click",
+      "effect": "列表单选业务状态为履约中的合同后关闭，业务状态变为已关闭。"
+    }
+  ],
+  "rules": [
+    {
+      "code": "service-amount-summary",
+      "type": "sumEquals",
+      "left": "services.amount",
+      "right": "amount",
+      "message": "合同总金额等于服务明细价税合计"
+    },
+    {
+      "code": "receipt-plan-summary",
+      "type": "sum",
+      "source": "plans.amount",
+      "label": "合计计划金额"
+    },
+    {
+      "code": "no-workflow",
+      "description": "收入合同不创建审批流程；提交后状态置为审核，审核可反审核回到新增；合同状态为只读信息。"
+    },
+    {
+      "id": "IC-R01",
+      "description": "业务状态为履约中的合同可关闭，关闭后业务状态变为已关闭；非履约中状态的合同不可关闭。状态为审核且业务状态为履约中或已关闭的合同不可反审核。"
+    }
+  ],
+  "mockData": {
+    "contracts": [
+      {
+        "id": "1",
+        "code": "SR20260716001",
+        "name": "水务智能化年度框架合作协议",
+        "status": "审核",
+        "businessStatus": "履约中",
+        "nature": "正式合同",
+        "contractLevel": "主合同",
+        "customer": "武汉东湖水务有限公司",
+        "amount": 2800000,
+        "signDate": "2026-07-01",
+        "effectiveDate": "2026-07-01",
+        "creator": "陆志军",
+        "createdAt": "2026-07-01 09:30:00",
+        "reviewer": "管理员",
+        "reviewedAt": "2026-07-01 14:30:00"
+      },
+      {
+        "id": "2",
+        "code": "SR20260715002",
+        "name": "曝气系统节能优化服务合同",
+        "status": "审核",
+        "businessStatus": "已关闭",
+        "nature": "正式合同",
+        "contractLevel": "子合同",
+        "customer": "武汉东湖水务有限公司",
+        "amount": 680000,
+        "signDate": "2026-07-15",
+        "effectiveDate": "2026-07-15",
+        "creator": "钱斌",
+        "createdAt": "2026-07-15 14:20:00",
+        "reviewer": "管理员",
+        "reviewedAt": "2026-07-15 19:20:00"
+      },
+      {
+        "id": "3",
+        "code": "SR20260714003",
+        "name": "设备预测维护试用协议",
+        "status": "新增",
+        "businessStatus": "未生效",
+        "nature": "试用合同",
+        "contractLevel": "子合同",
+        "customer": "武汉东湖水务有限公司",
+        "amount": 0,
+        "signDate": "2026-07-14",
+        "effectiveDate": "2026-07-14",
+        "creator": "宋琳",
+        "createdAt": "2026-07-14 10:12:00",
+        "reviewer": "",
+        "reviewedAt": ""
+      },
+      {
+        "id": "4",
+        "code": "SR20260628004",
+        "name": "智慧泵站控制服务合同",
+        "status": "审核",
+        "businessStatus": "已生效",
+        "nature": "正式合同",
+        "contractLevel": "主合同",
+        "customer": "长沙水务有限公司",
+        "amount": 360000,
+        "signDate": "2026-06-28",
+        "effectiveDate": "2026-06-28",
+        "creator": "陆志军",
+        "createdAt": "2026-06-28 11:08:00",
+        "reviewer": "管理员",
+        "reviewedAt": "2026-06-28 16:08:00"
+      },
+      {
+        "id": "5",
+        "code": "SR20260627005",
+        "name": "数字孪生平台服务合同",
+        "status": "审核",
+        "businessStatus": "未生效",
+        "nature": "正式合同",
+        "contractLevel": "子合同",
+        "customer": "长沙水务有限公司",
+        "amount": 480000,
+        "signDate": "2026-06-27",
+        "effectiveDate": "2026-06-27",
+        "creator": "钱斌",
+        "createdAt": "2026-06-27 16:45:00",
+        "reviewer": "管理员",
+        "reviewedAt": "2026-06-27 21:45:00"
+      }
+    ],
+    "services": [
+      {
+        "specification": "模型配置与联调",
+        "quantity": 1,
+        "unitPrice": 508928.5714,
+        "amount": 540000,
+        "remark": "一期实施",
+        "purchaseName": "曝气控制策略优化",
+        "purchaseCategory": "服务采购"
+      },
+      {
+        "specification": "月度运行分析",
+        "quantity": 10,
+        "unitPrice": 22600,
+        "amount": 226000,
+        "remark": "按月交付",
+        "purchaseName": "运行优化服务",
+        "purchaseCategory": "服务采购"
+      },
+      {
+        "specification": "全年运维支持",
+        "quantity": 1,
+        "unitPrice": 2034000,
+        "amount": 2034000,
+        "remark": "含技术支持",
+        "purchaseName": "平台运维服务",
+        "purchaseCategory": "服务采购"
+      }
+    ],
+    "plans": [
+      {
+        "name": "首期收款",
+        "trigger": "固定日期",
+        "receiptDate": "2026-07-15",
+        "amount": 840000
+      },
+      {
+        "name": "项目结算收款",
+        "trigger": "项目结算",
+        "receiptDate": "",
+        "amount": 1960000
+      }
+    ],
+    "attachments": [
+      {
+        "name": "水务智能化年度框架合作协议.pdf",
+        "size": "6.8 MB",
+        "uploader": "陆志军",
+        "uploadedAt": "2026-07-01 09:26:18"
+      }
+    ],
+    "projects": [
+      {
+        "company": "昕彤赋能（武汉）设计研究有限公司",
+        "code": "PRJ20260701001",
+        "name": "武汉东湖水厂智能化改造",
+        "manager": "王敏",
+        "amount": 2800000
+      }
+    ],
+    "children": [
+      {
+        "code": "SR20260715002",
+        "name": "曝气系统节能优化服务合同",
+        "amount": 680000,
+        "status": "未生效"
+      },
+      {
+        "code": "SR20260712013",
+        "name": "长沙水厂节能执行合同",
+        "amount": 760000,
+        "status": "履约中"
+      }
+    ],
+    "customers": [
+      {
+        "customerCode": "CUS00001",
+        "customerName": "武汉东湖水务有限公司",
+        "contactName": "张建国",
+        "contactPhone": "13800001234",
+        "salesOwner": "陆志军",
+        "settlementCurrency": "CNY"
+      },
+      {
+        "customerCode": "CUS00002",
+        "customerName": "长沙水务有限公司",
+        "contactName": "周海波",
+        "contactPhone": "13700004567",
+        "salesOwner": "钱斌",
+        "settlementCurrency": "CNY"
+      }
+    ]
+  },
+  "saveDraftEnabled": true,
+  "detailWorkflowLinksEnabled": false,
+  "policyTrace": {
+    "registryVersion": "pms-policy-v5",
+    "profile": "auditable-list-detail",
+    "sourceSchema": "schemas\\pages\\income\\income-contract-schema.json",
+    "appliedRules": [
+      "policy.version",
+      "interaction.toast",
+      "workflow.save-draft",
+      "detail.detailWorkflowLinksEnabled",
+      "content.hide-field-helper-text",
+      "search.columns",
+      "search.expanded",
+      "search.first-field-alignment",
+      "detail.three-column-layout",
+      "attachment.inherit-detail-editability",
+      "attachment.operation-column",
+      "attachment.operation-column-width",
+      "attachment.draft-delete",
+      "list.audit-actions.page-level",
+      "list.audit.selection-all-statuses",
+      "list.batch-delete.page-level",
+      "delete.confirmation"
+    ],
+    "changes": [
+      {
+        "rule": "policy.version",
+        "target": "policyVersion",
+        "action": "override",
+        "previous": "pms-policy-v4",
+        "value": "pms-policy-v5"
+      },
+      {
+        "rule": "interaction.toast",
+        "target": "toastEnabled",
+        "action": "default",
+        "value": false
+      },
+      {
+        "rule": "workflow.save-draft",
+        "target": "saveDraftEnabled",
+        "action": "default",
+        "value": true
+      },
+      {
+        "rule": "detail.detailWorkflowLinksEnabled",
+        "target": "detailWorkflowLinksEnabled",
+        "action": "default",
+        "value": false
+      },
+      {
+        "rule": "content.hide-field-helper-text",
+        "target": "schema.regions[2].tabs[0].children[0].fields.amount.help",
+        "action": "remove",
+        "previous": "根据服务明细价税合计自动汇总"
+      },
+      {
+        "rule": "search.columns",
+        "target": "collapsedFieldCount",
+        "action": "default",
+        "value": 4
+      },
+      {
+        "rule": "search.expanded",
+        "target": "collapsible",
+        "action": "default",
+        "value": false
+      },
+      {
+        "rule": "search.first-field-alignment",
+        "target": "firstFieldAlignment",
+        "action": "default",
+        "value": "selection-control"
+      },
+      {
+        "rule": "detail.three-column-layout",
+        "target": "layoutColumns",
+        "action": "default",
+        "value": 3
+      },
+      {
+        "rule": "attachment.inherit-detail-editability",
+        "target": "inheritDetailEditability",
+        "action": "default",
+        "value": true
+      },
+      {
+        "rule": "attachment.operation-column",
+        "target": "keepOperationColumn",
+        "action": "default",
+        "value": true
+      },
+      {
+        "rule": "attachment.operation-column-width",
+        "target": "operationColumnWidth",
+        "action": "default",
+        "value": 96
+      },
+      {
+        "rule": "attachment.draft-delete",
+        "target": "contract-attachments.rowActions",
+        "action": "default",
+        "value": [
+          {
+            "code": "remove-row",
+            "label": "删除",
+            "type": "link"
+          }
+        ]
+      },
+      {
+        "rule": "list.audit-actions.page-level",
+        "target": "undefined.pageActions",
+        "action": "override",
+        "previous": [
+          {
+            "code": "batch-delete",
+            "label": "批量删除",
+            "type": "danger",
+            "ghost": true,
+            "requiresSelection": true
+          },
+          {
+            "code": "create",
+            "label": "新增",
+            "type": "primary",
+            "target": "contract-form"
+          }
+        ],
+        "value": [
+          {
+            "code": "audit",
+            "label": "审核",
+            "type": "primary",
+            "requiresSingleSelection": true,
+            "enabledSelectionStatuses": [
+              "审核"
+            ],
+            "nextStatus": "审核"
+          },
+          {
+            "code": "reverse-audit",
+            "label": "反审核",
+            "requiresSingleSelection": true,
+            "enabledSelectionStatuses": [
+              "审核"
+            ],
+            "nextStatus": "新增"
+          },
+          {
+            "code": "batch-delete",
+            "label": "批量删除",
+            "type": "danger",
+            "ghost": true,
+            "requiresSelection": true
+          },
+          {
+            "code": "create",
+            "label": "新增",
+            "type": "primary",
+            "target": "contract-form"
+          }
+        ]
+      },
+      {
+        "rule": "list.audit.selection-all-statuses",
+        "target": "contract-table.selectableStatuses",
+        "action": "remove",
+        "previous": [
+          "新增"
+        ]
+      },
+      {
+        "rule": "list.batch-delete.page-level",
+        "target": "undefined.pageActions",
+        "action": "override",
+        "previous": [
+          {
+            "code": "audit",
+            "label": "审核",
+            "type": "primary",
+            "requiresSingleSelection": true,
+            "enabledSelectionStatuses": [
+              "审核"
+            ],
+            "nextStatus": "审核"
+          },
+          {
+            "code": "reverse-audit",
+            "label": "反审核",
+            "requiresSingleSelection": true,
+            "enabledSelectionStatuses": [
+              "审核"
+            ],
+            "nextStatus": "新增"
+          },
+          {
+            "code": "batch-delete",
+            "label": "批量删除",
+            "type": "danger",
+            "ghost": true,
+            "requiresSelection": true
+          },
+          {
+            "code": "create",
+            "label": "新增",
+            "type": "primary",
+            "target": "contract-form"
+          }
+        ],
+        "value": [
+          {
+            "code": "batch-delete",
+            "label": "批量删除",
+            "type": "danger",
+            "ghost": true,
+            "requiresSelection": true,
+            "enabledSelectionStatuses": [
+              "新增"
+            ]
+          },
+          {
+            "code": "audit",
+            "label": "审核",
+            "type": "primary",
+            "requiresSingleSelection": true,
+            "enabledSelectionStatuses": [
+              "审核"
+            ],
+            "nextStatus": "审核"
+          },
+          {
+            "code": "reverse-audit",
+            "label": "反审核",
+            "requiresSingleSelection": true,
+            "enabledSelectionStatuses": [
+              "审核"
+            ],
+            "nextStatus": "新增"
+          },
+          {
+            "code": "create",
+            "label": "新增",
+            "type": "primary",
+            "target": "contract-form"
+          }
+        ]
+      },
+      {
+        "rule": "delete.confirmation",
+        "target": "deleteConfirmationEnabled",
+        "action": "default",
+        "value": true
+      }
+    ]
+  },
+  "detailEditableStatuses": [
+    "新增"
+  ],
+  "primaryDeleteEnabledStatuses": [
+    "新增"
+  ],
+  "submitNextStatus": "新增",
+  "auditPendingStatus": "新增",
+  "auditCompletedStatus": "审核",
+  "reverseAuditNextStatus": "新增",
+  "createStatus": "新增",
+  "saveActionLabel": "保存",
+  "workflowActions": false,
+  "approvalOverlay": false
+}

@@ -1,0 +1,43 @@
+{
+  "slide": 5,
+  "title": "一套能力，三种启用深度",
+  "prompt": "# Codex PPT Slide Image Prompt\n\n## Canvas\n{\n  \"type\": \"16:9 full-slide PowerPoint image\",\n  \"language\": \"Chinese\",\n  \"slide_number\": 5,\n  \"render_slide_number\": false\n}\n\n## Required Background\n{\n  \"deck_context\": {\n    \"source_summary\": \"面向初创企业内部试点、推广、标准复制和产品上市的业财融合端到端流程重构。以经营主链和采购、费用、库存资产研发三条支撑链贯通项目、合同、预算、发票、资金、凭证和经营分析。\",\n    \"core_claim\": \"默认最短路径，风险触发加严，数据自动继承；先形成使用习惯，再形成管理规范和可复制产品。\",\n    \"canonical_terms\": [\n      \"经营主链\",\n      \"三条支撑链\",\n      \"默认最短路径\",\n      \"风险触发加严\",\n      \"数据自动继承\",\n      \"业务财务双向穿透\"\n    ],\n    \"audience\": \"公司管理层、业务负责人、财务负责人和产品实施团队\"\n  }\n}\n\n## Global Style\n{\n  \"name\": \"IBM enterprise consulting V2\",\n  \"visual_direction\": \"IBM enterprise design language: white and cool-gray canvas, IBM Blue scale, limited cyan/teal accents, strict 2x modular grid, thin rules, square corners, flat vector information graphics, restrained whitespace, no IBM logo\",\n  \"color_palette\": \"#FFFFFF, #F4F4F4, #E0E0E0, #0F62FE, #0043CE, #001D6C, #009D9A\",\n  \"typography\": \"IBM Plex Sans CJK-like, left aligned, strong weight contrast, large executive headlines, compact supporting copy\",\n  \"texture_and_finish\": \"flat, precise, editorial consulting infographic; no glassmorphism, no 3D, no heavy shadow\",\n  \"deck_consistency\": \"same palette, typography, line icon language and engineering mood; vary layout by page role\"\n}\n\n## Input Images\n\n- Image 1: D:\\项目AI协作\\4、PMS业财一体化\\docs\\需求\\业财融合端到端场景梳理\\origin_image\\slide_04.png — approved sample slide style reference; match palette, typography, line language and density only; do not copy layout\n\n\n## Slide\n{\n  \"number\": 5,\n  \"title\": \"一套能力，三种启用深度\",\n  \"role\": \"maturity model\",\n  \"intent\": \"展示从内部试用到产品上市的能力递进而非三套系统\"\n}\n\n## Text\n{\n  \"title\": \"一套能力，三种启用深度\",\n  \"key_points\": [\n    \"内部试用版：合同、收付款、报销、项目、基础核算\",\n    \"标准推广版：预算、采购比价、验收、库存、应收应付、自动凭证\",\n    \"产品上市版：多组织、规则配置、权限审计、经营分析、行业模板\"\n  ],\n  \"speaker_focus\": null\n}\n\n## Layout\n{\n  \"composition\": \"三级向右上递进的开放式阶梯，每级标注启用能力与管理目标\",\n  \"content_zones\": \"标题区、阶梯主体、底部配置开关结论\"\n}\n\n## Visual Elements\n{\n  \"main_visual\": \"三层蓝色色阶成熟度阶梯\",\n  \"supporting_elements\": \"易用、规范、规模化、可审计四个关键词\"\n}\n\n## Constraints\n[\n  \"No repeated rounded cards\",\n  \"No logo\",\n  \"Exact Chinese\"\n]\n\n## Style Reference Rule\nUse Image 1 as the approved sample-slide style reference. Match its palette, typography mood, density, texture, and overall visual identity. Do not copy its exact layout unless this slide's layout explicitly asks for it.\n\n## Input Image Handling Rules\nFor any input image marked as a strict input asset, include it visibly and preserve its content. Do not redraw, replace, relabel, or invent a similar figure. Scale and crop only as needed for composition while keeping the important labels, arrows, data, and relationships recognizable.\n\n## Universal Constraints\n- The final image itself must contain the title and key points.\n- Render Chinese text exactly and legibly; avoid garbled characters.\n- Keep the confirmed deck style consistent while varying layout by slide role.\n- No watermark, unrelated logo, or extra slide number.\n",
+  "out": "slide_05.png",
+  "input_images": [
+    {
+      "path": "D:\\项目AI协作\\4、PMS业财一体化\\docs\\需求\\业财融合端到端场景梳理\\origin_image\\slide_04.png",
+      "role": "approved sample slide style reference; match palette, typography, line language and density only; do not copy layout",
+      "strict": false
+    }
+  ],
+  "requires_context_images": true,
+  "expected_backend": "built-in image tool",
+  "sample_generation_method": {
+    "backend_used": "built-in image tool",
+    "tool_name": "image_gen",
+    "mode": "generate",
+    "model_config": "built-in gpt-image-2 default",
+    "size": "2048x1152",
+    "quality": "built-in default",
+    "prompt_source": "sample-prompt-v2.md",
+    "approved_sample_path": "D:\\项目AI协作\\4、PMS业财一体化\\docs\\需求\\业财融合端到端场景梳理\\origin_image\\slide_04.png",
+    "input_context_preparation": "approved sample generated from text prompt; local style reference inspected before delegated generation",
+    "handoff_rule": "use the same built-in image_gen tool in generate mode; return blocker if unavailable"
+  },
+  "generation_contract": {
+    "must_use_selected_image_backend": true,
+    "must_match_sample_generation_method": true,
+    "forbidden_final_image_methods": [
+      "local drawing/rendering scripts",
+      "Pillow-generated slides",
+      "SVG/HTML/CSS/canvas screenshots",
+      "python-pptx/PptxGenJS/native PPT layout screenshots",
+      "manually composited text/image overlays"
+    ],
+    "must_return": [
+      "backend_used",
+      "selected_source",
+      "qa_note"
+    ]
+  }
+}

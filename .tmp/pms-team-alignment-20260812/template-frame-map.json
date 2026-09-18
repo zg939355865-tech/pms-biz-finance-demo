@@ -1,0 +1,466 @@
+{
+    "outputSlides":  [
+                         {
+                             "narrativeRole":  "opening title",
+                             "editTargets":  [
+                                                 {
+                                                     "shapeId":  "sh/7qp4be9c",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/65g3298r",
+                                                     "action":  "rewrite"
+                                                 }
+                                             ],
+                             "outputSlide":  1,
+                             "reuseMode":  "duplicate-slide",
+                             "sourceSlide":  1
+                         },
+                         {
+                             "narrativeRole":  "agenda and shared framing",
+                             "editTargets":  [
+                                                 {
+                                                     "shapeId":  "sh/9072xkry",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/ozy1ofad",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "tb/sjil0vu9",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/a10jqpsj",
+                                                     "action":  "delete"
+                                                 }
+                                             ],
+                             "outputSlide":  2,
+                             "reuseMode":  "duplicate-slide",
+                             "sourceSlide":  2
+                         },
+                         {
+                             "narrativeRole":  "business value and alignment",
+                             "editTargets":  [
+                                                 {
+                                                     "shapeId":  "sh/983ap0ru",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/87atgfq9",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/g72x4zyd",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/ri9g7uhw",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/98rehwve",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/n6pwfmd8",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/0jydkreh",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/jq5w365o",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/6h0fypgb",
+                                                     "action":  "delete"
+                                                 }
+                                             ],
+                             "outputSlide":  3,
+                             "reuseMode":  "duplicate-slide",
+                             "sourceSlide":  8
+                         },
+                         {
+                             "narrativeRole":  "functional landscape",
+                             "editTargets":  [
+                                                 {
+                                                     "shapeId":  "sh/l8z690ji",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/k7q50v2x",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/725onyl4",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/s7yt4b21",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/cbu58j2h",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/ydcnatkn",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/l036l83y",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/d87uxg3m",
+                                                     "action":  "delete"
+                                                 }
+                                             ],
+                             "outputSlide":  4,
+                             "reuseMode":  "duplicate-slide",
+                             "sourceSlide":  10
+                         },
+                         {
+                             "narrativeRole":  "end to end business finance chain",
+                             "editTargets":  [
+                                                 {
+                                                     "shapeId":  "sh/y5wjitgj",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/jepwf2pc",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/x4ni9ofy",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/z650byxo",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/0buh8zy5",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/ehwvat8n",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/b2507exs",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/kre1k3y9",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/kfidonqx",
+                                                     "action":  "delete"
+                                                 }
+                                             ],
+                             "outputSlide":  5,
+                             "reuseMode":  "duplicate-slide",
+                             "sourceSlide":  14
+                         },
+                         {
+                             "narrativeRole":  "project lifecycle capability",
+                             "editTargets":  [
+                                                 {
+                                                     "shapeId":  "sh/i1czm1oj",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/j2l0f6p4",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/vaxg7ulo",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/876xwfmx",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/7mdg3als",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/6l4fu547",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/lkvy103m",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/kjmxsfm1",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/cnqh8fux",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/xozyhkbi",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/bq9orito",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/q50nydsj",
+                                                     "action":  "delete"
+                                                 }
+                                             ],
+                             "outputSlide":  6,
+                             "reuseMode":  "duplicate-slide",
+                             "sourceSlide":  13
+                         },
+                         {
+                             "narrativeRole":  "core financial controls",
+                             "editTargets":  [
+                                                 {
+                                                     "shapeId":  "sh/ofqtgnyt",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/xcryxg7y",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/9gza9sze",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/wbih4b6d",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/n69grmpw",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/250zy18b",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/98rytw72",
+                                                     "action":  "delete"
+                                                 }
+                                             ],
+                             "outputSlide":  7,
+                             "reuseMode":  "duplicate-slide",
+                             "sourceSlide":  11
+                         },
+                         {
+                             "narrativeRole":  "collaboration monitoring and analytics",
+                             "editTargets":  [
+                                                 {
+                                                     "shapeId":  "sh/p0rel8vu",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/ozydc3u9",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/rm1k7yt4",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/sna103ap",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/1cj2d8b6",
+                                                     "action":  "delete"
+                                                 }
+                                             ],
+                             "outputSlide":  8,
+                             "reuseMode":  "duplicate-slide",
+                             "sourceSlide":  4
+                         },
+                         {
+                             "narrativeRole":  "implementation principles",
+                             "editTargets":  [
+                                                 {
+                                                     "shapeId":  "sh/94zaxgfa",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/83qtobep",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/cnu1kzyd",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "tb/2x0ne10r",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/0b65obm9",
+                                                     "action":  "delete"
+                                                 }
+                                             ],
+                             "outputSlide":  9,
+                             "reuseMode":  "duplicate-slide",
+                             "sourceSlide":  9
+                         },
+                         {
+                             "narrativeRole":  "delivery roadmap",
+                             "editTargets":  [
+                                                 {
+                                                     "shapeId":  "sh/jepwf2pc",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/x4ni9ofy",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/ehwvat8n",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/b2507exs",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/kre1k3y9",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/y5wjitgj",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/z650byxo",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/0buh8zy5",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/kfidonqx",
+                                                     "action":  "delete"
+                                                 }
+                                             ],
+                             "outputSlide":  10,
+                             "reuseMode":  "duplicate-slide",
+                             "sourceSlide":  14
+                         },
+                         {
+                             "narrativeRole":  "immediate action items",
+                             "editTargets":  [
+                                                 {
+                                                     "shapeId":  "sh/fuhsnq5s",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/ut8bul4n",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/pkjut03a",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/4jat0fmp",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/8filc3yx",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/90vqdczq",
+                                                     "action":  "delete"
+                                                 }
+                                             ],
+                             "outputSlide":  11,
+                             "reuseMode":  "duplicate-slide",
+                             "sourceSlide":  23
+                         },
+                         {
+                             "narrativeRole":  "closing",
+                             "editTargets":  [
+                                                 {
+                                                     "shapeId":  "sh/nux8zidc",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/2to76dcr",
+                                                     "action":  "rewrite"
+                                                 }
+                                             ],
+                             "outputSlide":  12,
+                             "reuseMode":  "duplicate-slide",
+                             "sourceSlide":  24
+                         }
+                     ],
+    "omittedSourceSlides":  [
+                                {
+                                    "reason":  "Layout pattern not required for this concise functional introduction",
+                                    "sourceSlide":  3
+                                },
+                                {
+                                    "reason":  "Layout pattern not required for this concise functional introduction",
+                                    "sourceSlide":  5
+                                },
+                                {
+                                    "reason":  "Layout pattern not required for this concise functional introduction",
+                                    "sourceSlide":  6
+                                },
+                                {
+                                    "reason":  "Layout pattern not required for this concise functional introduction",
+                                    "sourceSlide":  7
+                                },
+                                {
+                                    "reason":  "Layout pattern not required for this concise functional introduction",
+                                    "sourceSlide":  12
+                                },
+                                {
+                                    "reason":  "Layout pattern not required for this concise functional introduction",
+                                    "sourceSlide":  15
+                                },
+                                {
+                                    "reason":  "Layout pattern not required for this concise functional introduction",
+                                    "sourceSlide":  16
+                                },
+                                {
+                                    "reason":  "Layout pattern not required for this concise functional introduction",
+                                    "sourceSlide":  17
+                                },
+                                {
+                                    "reason":  "Layout pattern not required for this concise functional introduction",
+                                    "sourceSlide":  18
+                                },
+                                {
+                                    "reason":  "Layout pattern not required for this concise functional introduction",
+                                    "sourceSlide":  19
+                                },
+                                {
+                                    "reason":  "Layout pattern not required for this concise functional introduction",
+                                    "sourceSlide":  20
+                                },
+                                {
+                                    "reason":  "Layout pattern not required for this concise functional introduction",
+                                    "sourceSlide":  21
+                                },
+                                {
+                                    "reason":  "Layout pattern not required for this concise functional introduction",
+                                    "sourceSlide":  22
+                                }
+                            ]
+}

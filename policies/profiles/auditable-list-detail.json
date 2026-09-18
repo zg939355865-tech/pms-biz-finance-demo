@@ -1,0 +1,16 @@
+{
+  "id": "auditable-list-detail",
+  "pageTypes": ["list-detail"],
+  "workflowActions": false,
+  "auditFields": true,
+  "saveDraft": true,
+  "detailSaveEnabled": true,
+  "detailSubmitEnabled": true,
+  "detailReviewEnabled": false,
+  "detailWorkflowLinksEnabled": false,
+  "listAuditActions": true,
+  "reverseAuditNextStatus": "草稿",
+  "submitReturnsToList": true,
+  "saveReturnsToList": true,
+  "toastEnabled": false
+}

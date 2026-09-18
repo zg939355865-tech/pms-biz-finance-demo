@@ -9,14 +9,13 @@
     </table>
   </div>
   <div class="pro-table-footer">
-    <div class="pro-table-selection">{{TOTAL_INFO}}</div>
-    <div class="pro-table-pagination">
+    <div class="pro-table-selection">
+      {{TOTAL_INFO}}
       <label class="pro-page-size-label">
-        <span>每页</span>
-        <select class="select page-size-select" aria-label="每页显示条数">
-          <option value="5" selected>5 条/页</option>
-        </select>
+        <span class="select page-size-select" data-fixed-page-size role="status" aria-label="每页5条">5条/页</span>
       </label>
+    </div>
+    <div class="pro-table-pagination">
       {{PAGINATION}}
     </div>
   </div>

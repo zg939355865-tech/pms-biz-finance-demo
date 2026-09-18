@@ -1,0 +1,1175 @@
+{
+  "schemaVersion": "pms-page-schema-v2",
+  "policyProfile": "auditable-list-detail-save",
+  "pageCode": "expense-contract",
+  "pageName": "支出合同",
+  "domain": "procurement",
+  "module": "采购管理",
+  "menuPath": "采购管理/支出合同",
+  "pageType": "list-detail",
+  "template": "tabs-detail-page",
+  "outputPath": "pages/procurement/expense-contract.html",
+  "businessScenario": "登记、查询和维护支出合同档案，采购订单可按需关联合同，合同不直接关联项目；提交送审后支持审核与反审核，不创建审批流程实例。",
+  "approvalOverlay": false,
+  "saveDraftEnabled": true,
+  "detailSaveEnabled": true,
+  "detailSubmitEnabled": true,
+  "detailEditableStatuses": [
+    "新增"
+  ],
+  "detailReviewEnabled": false,
+  "detailWorkflowLinksEnabled": false,
+  "primaryDeleteEnabledStatuses": [
+    "新增"
+  ],
+  "resourceReference": {
+    "center": "prototype-resources/index.html",
+    "baseline": "pms-resource-center-v1",
+    "pageSamples": [
+      "列表详情一体",
+      "业务表单"
+    ],
+    "components": [
+      "PageHeader",
+      "ProSearchForm",
+      "ProTable",
+      "ProTabsDetail",
+      "DetailForm",
+      "EditableTable",
+      "ProUploadList",
+      "ProDataSelectModal"
+    ]
+  },
+  "pageActions": [
+    {
+      "code": "audit",
+      "label": "审核",
+      "type": "primary",
+      "requiresSingleSelection": true,
+      "enabledSelectionStatuses": [
+        "新增"
+      ],
+      "nextStatus": "审核",
+      "fieldUpdates": {
+        "reviewer": "管理员",
+        "reviewedAt": "$currentDateTime"
+      }
+    },
+    {
+      "code": "reverse-audit",
+      "label": "反审核",
+      "requiresSingleSelection": true,
+      "enabledSelectionStatuses": [
+        "审核"
+      ],
+      "enabledSelectionWhen": {
+        "businessStatus": [
+          "未生效",
+          "已生效"
+        ]
+      },
+      "nextStatus": "新增",
+      "fieldUpdates": {
+        "reviewer": "",
+        "reviewedAt": ""
+      }
+    },
+    {
+      "code": "close-contract",
+      "label": "关闭",
+      "type": "danger",
+      "ghost": true,
+      "requiresSingleSelection": true,
+      "enabledSelectionWhen": {
+        "businessStatus": "履约中"
+      },
+      "rowFieldUpdate": true,
+      "fieldUpdates": {
+        "businessStatus": "已关闭"
+      }
+    },
+    {
+      "code": "batch-delete",
+      "label": "批量删除",
+      "type": "danger",
+      "ghost": true,
+      "requiresSelection": true
+    },
+    {
+      "code": "create",
+      "label": "新增",
+      "type": "primary",
+      "target": "expense-contract-detail"
+    }
+  ],
+  "regions": [
+    {
+      "id": "expense-contract-search",
+      "component": "ProSearchForm",
+      "collapsible": true,
+      "fields": [
+        {
+          "code": "keyword",
+          "label": "合同编号或名称",
+          "component": "input"
+        },
+        {
+          "code": "status",
+          "label": "状态",
+          "component": "select",
+          "options": [
+            "新增",
+            "审核"
+          ]
+        },
+        {
+          "code": "businessStatus",
+          "label": "业务状态",
+          "component": "select",
+          "options": [
+            "未生效",
+            "已生效",
+            "履约中",
+            "已关闭"
+          ]
+        },
+        {
+          "code": "supplierName",
+          "label": "供应商",
+          "component": "input"
+        },
+        {
+          "code": "owner",
+          "label": "合同负责人",
+          "component": "input"
+        },
+        {
+          "code": "signDate",
+          "label": "签订日期",
+          "component": "date-range"
+        }
+      ]
+    },
+    {
+      "id": "expense-contract-table",
+      "component": "ProTable",
+      "representativeByStatus": false,
+      "dataSource": "contracts",
+      "pageSize": 5,
+      "showRecordCount": true,
+      "showPageSize": true,
+      "selectable": true,
+      "operationColumnWidth": 88,
+      "rowActions": [
+        {
+          "code": "delete",
+          "label": "删除",
+          "type": "link",
+          "enabledStatuses": [
+            "新增"
+          ]
+        }
+      ],
+      "columns": [
+        {
+          "code": "contractNo",
+          "label": "合同编号",
+          "component": "link",
+          "fixed": "left",
+          "width": 168
+        },
+        {
+          "code": "status",
+          "label": "状态",
+          "component": "tag",
+          "align": "center",
+          "width": 104
+        },
+        {
+          "code": "businessStatus",
+          "label": "业务状态",
+          "component": "tag",
+          "align": "center",
+          "width": 104
+        },
+        {
+          "code": "contractName",
+          "label": "合同名称",
+          "component": "text",
+          "width": 230
+        },
+        {
+          "code": "supplierName",
+          "label": "供应商",
+          "component": "text",
+          "width": 220
+        },
+        {
+          "code": "owner",
+          "label": "合同负责人",
+          "component": "text",
+          "width": 112
+        },
+        {
+          "code": "signDate",
+          "label": "签订日期",
+          "component": "date",
+          "width": 116
+        },
+        {
+          "code": "effectiveDate",
+          "label": "生效日期",
+          "component": "date",
+          "width": 116
+        },
+        {
+          "code": "expiryDate",
+          "label": "截止日期",
+          "component": "date",
+          "width": 116
+        },
+        {
+          "code": "creator",
+          "label": "创建人",
+          "component": "text",
+          "width": 112
+        },
+        {
+          "code": "createdAt",
+          "label": "创建时间",
+          "component": "text",
+          "width": 168
+        }
+      ],
+      "keepOperationColumn": true
+    },
+    {
+      "id": "expense-contract-detail",
+      "component": "ProTabsDetail",
+      "tabs": [
+        {
+          "key": "basic",
+          "label": "基础信息",
+          "children": [
+            {
+              "component": "DetailForm",
+              "fields": [
+                {
+                  "code": "contractNo",
+                  "label": "合同编号",
+                  "component": "input",
+                  "required": true,
+                  "value": "EC20260804001",
+                  "placeholder": "请输入合同编号"
+                },
+                {
+                  "code": "contractName",
+                  "label": "合同名称",
+                  "component": "input",
+                  "required": true,
+                  "value": "2026年度工业电气元件框架采购合同"
+                },
+                {
+                  "code": "status",
+                  "label": "状态",
+                  "component": "input",
+                  "readonly": true,
+                  "preserveOnCreate": true,
+                  "value": "新增"
+                },
+                {
+                  "code": "contractAmount",
+                  "label": "合同总金额",
+                  "component": "number",
+                  "readonly": true,
+                  "precision": 2,
+                  "summarySource": {
+                    "table": "contractItems",
+                    "column": "amount",
+                    "precision": 2
+                  },
+                  "value": "1280000.00",
+                  "help": "根据标的明细行金额自动汇总"
+                },
+                {
+                  "code": "signDate",
+                  "label": "签订日期",
+                  "component": "date",
+                  "required": true,
+                  "value": "2026-08-01"
+                },
+                {
+                  "code": "effectiveDate",
+                  "label": "生效日期",
+                  "component": "date",
+                  "required": true,
+                  "value": "2026-08-01"
+                },
+                {
+                  "code": "expiryDate",
+                  "label": "截止日期",
+                  "component": "date",
+                  "value": "2027-07-31"
+                },
+                {
+                  "code": "owner",
+                  "label": "合同负责人",
+                  "component": "select",
+                  "required": true,
+                  "value": "王磊",
+                  "options": [
+                    "王磊",
+                    "李娜",
+                    "张敏",
+                    "周强",
+                    "陈杰",
+                    "刘洋",
+                    "孙倩"
+                  ]
+                },
+                {
+                  "code": "supplierName",
+                  "label": "供应商",
+                  "component": "picker",
+                  "required": true,
+                  "inputReadonly": true,
+                  "target": "supplier-picker",
+                  "value": "武汉智控电气有限公司",
+                  "actionLabel": "选择",
+                  "help": "选定供应商后保存为合同快照"
+                },
+                {
+                  "code": "supplierCode",
+                  "label": "供应商编码",
+                  "component": "hidden",
+                  "value": "SUP00018"
+                },
+                {
+                  "code": "settlementCurrency",
+                  "label": "结算币别",
+                  "component": "select",
+                  "readonly": true,
+                  "value": "CNY",
+                  "options": [
+                    "CNY",
+                    "USD",
+                    "EUR",
+                    "HKD",
+                    "JPY"
+                  ],
+                  "preserveOnCreate": true
+                },
+                {
+                  "code": "supplierTaxId",
+                  "label": "统一社会信用代码",
+                  "component": "input",
+                  "readonly": true,
+                  "value": "91420100MA4KX8P23Q"
+                },
+                {
+                  "code": "payeeAccount",
+                  "label": "收款账户",
+                  "component": "select",
+                  "value": "42001876108051501234",
+                  "options": [
+                    "42001876108051501234",
+                    "42001876108051505678"
+                  ],
+                  "dependsOn": "supplierCode",
+                  "optionsBy": {
+                    "SUP00018": [
+                      "42001876108051501234",
+                      "42001876108051505678"
+                    ],
+                    "SUP00023": [
+                      "31001558861050001234",
+                      "31001558861050006789"
+                    ],
+                    "SUP00031": [
+                      "75590102101800012345"
+                    ],
+                    "SUP00042": [
+                      "33001618808050001234",
+                      "33001618808050004321"
+                    ],
+                    "SUP00057": [
+                      "42001027100053001234"
+                    ]
+                  }
+                },
+                {
+                  "code": "payeeBank",
+                  "label": "收款银行",
+                  "component": "input",
+                  "readonly": true,
+                  "value": "中国建设银行武汉光谷支行"
+                },
+                {
+                  "code": "paymentMethod",
+                  "label": "付款方式",
+                  "component": "select",
+                  "required": true,
+                  "value": "电汇",
+                  "options": [
+                    "电汇",
+                    "承兑"
+                  ]
+                },
+                {
+                  "code": "invoiceType",
+                  "label": "发票类型",
+                  "component": "select",
+                  "required": true,
+                  "value": "专票",
+                  "options": [
+                    "专票",
+                    "普票",
+                    "电子票"
+                  ]
+                },
+                {
+                  "code": "creator",
+                  "label": "创建人",
+                  "component": "input",
+                  "readonly": true,
+                  "value": "王磊"
+                },
+                {
+                  "code": "createdAt",
+                  "label": "创建时间",
+                  "component": "input",
+                  "readonly": true,
+                  "value": "2026-08-04 09:26:18"
+                },
+                {
+                  "code": "reviewer",
+                  "label": "审核人",
+                  "component": "input",
+                  "readonly": true
+                },
+                {
+                  "code": "reviewedAt",
+                  "label": "审核时间",
+                  "component": "input",
+                  "readonly": true
+                },
+                {
+                  "code": "company",
+                  "label": "所属公司",
+                  "component": "input",
+                  "readonly": true,
+                  "preserveOnCreate": true,
+                  "value": "昕诺飞智能科技有限公司"
+                },
+                {
+                  "code": "remark",
+                  "label": "备注",
+                  "component": "input",
+                  "placeholder": "请输入备注"
+                }
+              ]
+            },
+            {
+              "id": "contract-item-table",
+              "component": "EditableTable",
+              "dataSource": "contractItems",
+              "pagination": false,
+              "selectable": true,
+              "operationColumnWidth": 88,
+              "minWidth": 1360,
+              "footerSummary": {
+                "label": "合计",
+                "columns": [
+                  {
+                    "column": "quantity",
+                    "precision": 2
+                  },
+                  {
+                    "column": "amount",
+                    "precision": 2
+                  }
+                ]
+              },
+              "actions": [
+                {
+                  "code": "add-row",
+                  "label": "新增明细",
+                  "type": "default"
+                },
+                {
+                  "code": "batch-delete",
+                  "type": "danger",
+                  "ghost": true,
+                  "requiresSelection": true
+                }
+              ],
+              "columns": [
+                {
+                  "code": "sequence",
+                  "label": "序号",
+                  "component": "text",
+                  "editable": false,
+                  "align": "center",
+                  "width": 72,
+                  "fixed": "left"
+                },
+                {
+                  "code": "purchaseCategory",
+                  "label": "物资类型",
+                  "component": "select",
+                  "required": true,
+                  "width": 190,
+                  "options": [
+                    "原材料",
+                    "软件（包含AI智能体）",
+                    "烟、酒、茶",
+                    "礼品",
+                    "办公用品",
+                    "固定资产",
+                    "其他"
+                  ]
+                },
+                {
+                  "code": "itemName",
+                  "label": "物资名称",
+                  "component": "input",
+                  "required": true,
+                  "width": 200
+                },
+                {
+                  "code": "specification",
+                  "label": "规格",
+                  "component": "input",
+                  "required": true,
+                  "width": 220
+                },
+                {
+                  "code": "unit",
+                  "label": "单位",
+                  "component": "select",
+                  "required": true,
+                  "width": 100,
+                  "options": [
+                    "件",
+                    "套",
+                    "台",
+                    "项",
+                    "次",
+                    "月",
+                    "人日"
+                  ]
+                },
+                {
+                  "code": "quantity",
+                  "label": "数量",
+                  "component": "number",
+                  "required": true,
+                  "align": "right",
+                  "width": 110
+                },
+                {
+                  "code": "unitPrice",
+                  "label": "含税单价",
+                  "component": "number",
+                  "required": true,
+                  "min": 0,
+                  "step": 0.01,
+                  "align": "right",
+                  "width": 140
+                },
+                {
+                  "code": "amount",
+                  "label": "金额",
+                  "component": "money",
+                  "editable": false,
+                  "align": "right",
+                  "width": 140,
+                  "calculatedBy": {
+                    "type": "multiply",
+                    "fields": [
+                      "quantity",
+                      "unitPrice"
+                    ],
+                    "precision": 2
+                  }
+                },
+                {
+                  "code": "remark",
+                  "label": "备注",
+                  "component": "input",
+                  "width": 220
+                }
+              ],
+              "title": "合同明细",
+              "showTitle": true
+            }
+          ]
+        },
+        {
+          "key": "attachments",
+          "label": "附件",
+          "children": [
+            {
+              "id": "contract-attachments",
+              "component": "ProUploadList",
+              "dataSource": "attachments",
+              "columns": [
+                {
+                  "code": "sequence",
+                  "label": "序号",
+                  "component": "text",
+                  "align": "center",
+                  "width": 72,
+                  "fixed": "left"
+                },
+                {
+                  "code": "name",
+                  "label": "文件名",
+                  "component": "text",
+                  "width": 300
+                },
+                {
+                  "code": "size",
+                  "label": "大小",
+                  "component": "text",
+                  "width": 100
+                },
+                {
+                  "code": "uploader",
+                  "label": "上传人",
+                  "component": "text",
+                  "width": 100
+                },
+                {
+                  "code": "uploadedAt",
+                  "label": "上传时间",
+                  "component": "text",
+                  "width": 180
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "overlays": [
+    {
+      "id": "supplier-picker",
+      "component": "ProDataSelectModal",
+      "size": "wide",
+      "selectionMode": "single",
+      "selectionMap": {
+        "supplierCode": "supplierCode",
+        "supplierName": "supplierName",
+        "settlementCurrency": "settlementCurrency",
+        "supplierTaxId": "supplierTaxId",
+        "payeeAccount": "account",
+        "payeeBank": "bank"
+      },
+      "children": [
+        {
+          "component": "ProSearchForm",
+          "fields": [
+            {
+              "code": "supplierKeyword",
+              "label": "供应商编码或名称",
+              "component": "input",
+              "searchCodes": [
+                "supplierCode",
+                "supplierName"
+              ]
+            }
+          ]
+        },
+        {
+          "component": "ProTable",
+          "dataSource": "suppliers",
+          "pageSize": 5,
+          "showPageSize": true,
+          "selectable": true,
+          "selectionMode": "single",
+          "rowActions": [],
+          "columns": [
+            {
+              "code": "supplierCode",
+              "label": "供应商编码",
+              "component": "text",
+              "width": 176
+            },
+            {
+              "code": "supplierName",
+              "label": "供应商名称",
+              "component": "text",
+              "width": 260
+            }
+          ]
+        }
+      ],
+      "actions": [
+        {
+          "code": "close",
+          "label": "取消"
+        },
+        {
+          "code": "confirm-supplier",
+          "label": "确认选择",
+          "type": "primary",
+          "requiresSelection": true
+        }
+      ]
+    }
+  ],
+  "detailLinkages": [
+    {
+      "trigger": "payeeAccount",
+      "records": {
+        "42001876108051501234": {
+          "fields": {
+            "payeeBank": "中国建设银行武汉光谷支行"
+          }
+        },
+        "42001876108051505678": {
+          "fields": {
+            "payeeBank": "招商银行武汉光谷科技支行"
+          }
+        },
+        "31001558861050001234": {
+          "fields": {
+            "payeeBank": "招商银行上海张江支行"
+          }
+        },
+        "31001558861050006789": {
+          "fields": {
+            "payeeBank": "浦发银行上海科技支行"
+          }
+        },
+        "75590102101800012345": {
+          "fields": {
+            "payeeBank": "平安银行深圳科技园支行"
+          }
+        },
+        "33001618808050001234": {
+          "fields": {
+            "payeeBank": "中国工商银行杭州高新支行"
+          }
+        },
+        "33001618808050004321": {
+          "fields": {
+            "payeeBank": "杭州银行滨江支行"
+          }
+        },
+        "42001027100053001234": {
+          "fields": {
+            "payeeBank": "中国农业银行武汉武昌支行"
+          }
+        }
+      }
+    }
+  ],
+  "interactions": [
+    {
+      "trigger": "supplier.select",
+      "effect": "未选择供应商时收款账户无可选数据且不可下拉，收款银行为空；选择供应商后带出供应商名称、结算币别、统一社会信用代码，加载该供应商的收款账户并默认首个账户，收款银行按默认账户自动带出；结算币别缺失时默认 CNY。"
+    },
+    {
+      "trigger": "payeeAccount.change",
+      "effect": "在当前供应商的收款账户中重新选择后，自动带出对应收款银行。"
+    },
+    {
+      "trigger": "quantity_or_unitPrice.input",
+      "effect": "按数量乘以含税单价实时计算明细金额，并将全部明细金额自动汇总到合同总金额。"
+    },
+    {
+      "trigger": "submit.click",
+      "effect": "校验合同编号、合同名称、供应商、合同负责人、日期、付款方式和发票类型等必填字段；无明细时校验至少一个附件；校验通过后保存合同，状态置为审核并返回列表，不创建审批流程实例。"
+    },
+    {
+      "trigger": "purchaseOrder.reference",
+      "effect": "采购订单引用后锁定合同核心字段和全部标的明细，仍可维护负责人、备注并追加附件。"
+    },
+    {
+      "trigger": "audit.click",
+      "effect": "列表单选状态为新增的合同后审核，状态变为审核，记录审核人和审核时间。"
+    },
+    {
+      "trigger": "reverseAudit.click",
+      "effect": "列表单选审核合同后反审核，状态回到新增，清空审核人和审核时间。"
+    },
+    {
+      "trigger": "close-contract.click",
+      "effect": "列表单选业务状态为履约中的合同后关闭，业务状态变为已关闭。"
+    }
+  ],
+  "rules": [
+    {
+      "id": "R01",
+      "description": "支出合同不创建审批流程；仅状态为新增的合同可审核，审核后状态为审核并记录审核人和审核时间；审核可反审核回到新增；提交后状态置为审核；合同状态为只读信息。"
+    },
+    {
+      "id": "R02",
+      "description": "支出合同不直接关联项目；采购订单负责关联项目，并可选关联合同。"
+    },
+    {
+      "id": "R03",
+      "description": "未选择供应商时收款账户下拉禁用且无可选数据，收款银行为空；选择供应商后加载该供应商账户并默认首个账户，允许重新选择，收款银行随账户自动带出并只读。"
+    },
+    {
+      "id": "R04",
+      "description": "合同编号由用户手工录入；新增时必填，不由系统自动生成。"
+    },
+    {
+      "id": "R05",
+      "description": "合同总金额只读，按全部标的明细行金额自动汇总；明细金额等于数量乘以含税单价。"
+    },
+    {
+      "id": "R06",
+      "description": "合同标的明细选填；无明细时至少上传一份合同附件。"
+    },
+    {
+      "id": "R07",
+      "description": "基础信息与标的明细位于同一基础信息页签，合同附件保留独立页签。"
+    },
+    {
+      "id": "R08",
+      "description": "合同被采购订单引用后不可删除，供应商、合同日期和标的明细不可修改。"
+    },
+    {
+      "id": "R09",
+      "description": "合同被引用后仍可维护合同负责人、备注和补充附件，已上传附件不得删除。"
+    },
+    {
+      "id": "R10",
+      "description": "发票类型必填，只能选择专票、普票或电子票。"
+    },
+    {
+      "id": "R11",
+      "description": "结算币别根据供应商自动带出且不可手工修改；供应商未配置时默认 CNY。"
+    },
+    {
+      "id": "R12",
+      "description": "付款方式必填，只能选择电汇或承兑。"
+    },
+    {
+      "id": "R13",
+      "description": "业务状态为履约中的合同可关闭，关闭后业务状态变为已关闭；非履约中状态的合同不可关闭。状态为审核且业务状态为履约中或已关闭的合同不可反审核。"
+    }
+  ],
+  "relations": [
+    {
+      "from": "支出合同",
+      "to": "采购订单",
+      "type": "可选关联",
+      "description": "普通采购订单和紧急采购订单均可按需关联合同。"
+    },
+    {
+      "from": "采购订单",
+      "to": "项目",
+      "type": "业务归属",
+      "description": "项目关联由采购订单承担。"
+    }
+  ],
+  "mockData": {
+    "contracts": [
+      {
+        "id": "1",
+        "contractNo": "EC20260804001",
+        "contractName": "2026年度工业电气元件框架采购合同",
+        "status": "审核",
+        "businessStatus": "履约中",
+        "supplierName": "武汉智控电气有限公司",
+        "contractAmount": 1280000,
+        "signDate": "2026-08-01",
+        "effectiveDate": "2026-08-01",
+        "expiryDate": "2027-07-31",
+        "owner": "王磊",
+        "creator": "王磊",
+        "createdAt": "2026-08-04 09:26:18",
+        "reviewer": "管理员",
+        "reviewedAt": "2026-08-04 14:43:18"
+      },
+      {
+        "id": "2",
+        "contractNo": "EC20260803002",
+        "contractName": "自动化控制设备年度框架合同",
+        "status": "审核",
+        "businessStatus": "未生效",
+        "supplierName": "上海自动化系统有限公司",
+        "contractAmount": 860000,
+        "signDate": "2026-08-03",
+        "effectiveDate": "2026-08-05",
+        "expiryDate": "2027-08-04",
+        "owner": "李娜",
+        "creator": "李娜",
+        "createdAt": "2026-08-03 15:08:42",
+        "reviewer": "",
+        "reviewedAt": ""
+      },
+      {
+        "id": "3",
+        "contractNo": "EC20260728003",
+        "contractName": "数据平台技术服务合同",
+        "status": "新增",
+        "businessStatus": "未生效",
+        "supplierName": "杭州云启科技有限公司",
+        "contractAmount": 98000,
+        "signDate": "2026-07-28",
+        "effectiveDate": "2026-08-01",
+        "expiryDate": "2026-12-31",
+        "owner": "张敏",
+        "creator": "张敏",
+        "createdAt": "2026-07-28 10:35:16",
+        "reviewer": "",
+        "reviewedAt": ""
+      },
+      {
+        "id": "4",
+        "contractNo": "EC20260726004",
+        "contractName": "边缘计算服务器采购合同",
+        "status": "审核",
+        "businessStatus": "已生效",
+        "supplierName": "深圳算力设备有限公司",
+        "contractAmount": 186000,
+        "signDate": "2026-07-26",
+        "effectiveDate": "2026-07-28",
+        "expiryDate": "2027-07-27",
+        "owner": "周强",
+        "creator": "周强",
+        "createdAt": "2026-07-26 16:20:03",
+        "reviewer": "管理员",
+        "reviewedAt": "2026-07-26 21:37:03"
+      },
+      {
+        "id": "5",
+        "contractNo": "EC20260722005",
+        "contractName": "进口水质分析仪采购合同",
+        "status": "审核",
+        "businessStatus": "已关闭",
+        "supplierName": "EuroSense GmbH",
+        "contractAmount": 46800,
+        "signDate": "2026-07-22",
+        "effectiveDate": "2026-07-25",
+        "expiryDate": "2027-07-24",
+        "owner": "陈杰",
+        "creator": "陈杰",
+        "createdAt": "2026-07-22 11:14:29",
+        "reviewer": "管理员",
+        "reviewedAt": "2026-07-22 16:31:29"
+      },
+      {
+        "id": "6",
+        "contractNo": "EC20260718006",
+        "contractName": "软件许可及升级服务合同",
+        "status": "审核",
+        "businessStatus": "履约中",
+        "supplierName": "新加坡智云软件有限公司",
+        "contractAmount": 52000,
+        "signDate": "2026-07-18",
+        "effectiveDate": "2026-08-01",
+        "expiryDate": "2027-07-31",
+        "owner": "刘洋",
+        "creator": "刘洋",
+        "createdAt": "2026-07-18 14:42:55",
+        "reviewer": "管理员",
+        "reviewedAt": "2026-07-18 19:59:55"
+      },
+      {
+        "id": "7",
+        "contractNo": "EC20260715007",
+        "contractName": "工程安装辅材框架合同",
+        "status": "审核",
+        "businessStatus": "履约中",
+        "supplierName": "湖北工程物资有限公司",
+        "contractAmount": 720000,
+        "signDate": "2026-07-15",
+        "effectiveDate": "2026-07-15",
+        "expiryDate": "2027-07-14",
+        "owner": "王磊",
+        "creator": "王磊",
+        "createdAt": "2026-07-15 09:18:07",
+        "reviewer": "管理员",
+        "reviewedAt": "2026-07-15 14:35:07"
+      },
+      {
+        "id": "8",
+        "contractNo": "EC20260710008",
+        "contractName": "算法模型优化服务合同",
+        "status": "审核",
+        "businessStatus": "未生效",
+        "supplierName": "北京智算研究院有限公司",
+        "contractAmount": 240000,
+        "signDate": "2026-07-10",
+        "effectiveDate": "2026-07-15",
+        "expiryDate": "2027-01-14",
+        "owner": "孙倩",
+        "creator": "孙倩",
+        "createdAt": "2026-07-10 13:06:31",
+        "reviewer": "",
+        "reviewedAt": ""
+      },
+      {
+        "id": "9",
+        "contractNo": "EC20260706009",
+        "contractName": "香港数据中心设备采购合同",
+        "status": "审核",
+        "businessStatus": "履约中",
+        "supplierName": "HK Data Systems Limited",
+        "contractAmount": 680000,
+        "signDate": "2026-07-06",
+        "effectiveDate": "2026-07-10",
+        "expiryDate": "2027-07-09",
+        "owner": "周强",
+        "creator": "周强",
+        "createdAt": "2026-07-06 10:11:46",
+        "reviewer": "管理员",
+        "reviewedAt": "2026-07-06 15:28:46"
+      },
+      {
+        "id": "10",
+        "contractNo": "EC20260628010",
+        "contractName": "工业网络设备集中采购合同",
+        "status": "审核",
+        "businessStatus": "已生效",
+        "supplierName": "南京工业网络有限公司",
+        "contractAmount": 356000,
+        "signDate": "2026-06-28",
+        "effectiveDate": "2026-07-01",
+        "expiryDate": "2027-06-30",
+        "owner": "李娜",
+        "creator": "李娜",
+        "createdAt": "2026-06-28 17:25:14",
+        "reviewer": "管理员",
+        "reviewedAt": "2026-06-28 22:42:14"
+      },
+      {
+        "id": "11",
+        "contractNo": "EC20260620011",
+        "contractName": "年度设备巡检服务框架合同",
+        "status": "审核",
+        "businessStatus": "履约中",
+        "supplierName": "武汉安维技术服务有限公司",
+        "contractAmount": 300000,
+        "signDate": "2026-06-20",
+        "effectiveDate": "2026-07-01",
+        "expiryDate": "2027-06-30",
+        "owner": "张敏",
+        "creator": "张敏",
+        "createdAt": "2026-06-20 08:47:23",
+        "reviewer": "管理员",
+        "reviewedAt": "2026-06-20 14:04:23"
+      },
+      {
+        "id": "12",
+        "contractNo": "EC20260612012",
+        "contractName": "其他零星采购归档合同",
+        "status": "审核",
+        "businessStatus": "已关闭",
+        "supplierName": "武汉综合供应链有限公司",
+        "contractAmount": 32000,
+        "signDate": "2026-06-12",
+        "effectiveDate": "2026-06-15",
+        "expiryDate": "2026-08-30",
+        "owner": "陈杰",
+        "creator": "陈杰",
+        "createdAt": "2026-06-12 15:39:08",
+        "reviewer": "管理员",
+        "reviewedAt": "2026-06-12 20:56:08"
+      }
+    ],
+    "contractItems": [
+      {
+        "purchaseCategory": "原材料",
+        "itemName": "PLC控制模块",
+        "specification": "16DI/16DO，工业级",
+        "unit": "件",
+        "quantity": 40,
+        "unitPrice": 9800,
+        "amount": 392000,
+        "remark": "按订单分批交付"
+      },
+      {
+        "purchaseCategory": "办公用品",
+        "itemName": "工业交换机",
+        "specification": "8口千兆，导轨式",
+        "unit": "台",
+        "quantity": 80,
+        "unitPrice": 3600,
+        "amount": 288000,
+        "remark": "含标准配件"
+      },
+      {
+        "purchaseCategory": "固定资产",
+        "itemName": "变频器",
+        "specification": "15kW，380V",
+        "unit": "台",
+        "quantity": 50,
+        "unitPrice": 12000,
+        "amount": 600000,
+        "remark": "三年质保"
+      }
+    ],
+    "attachments": [
+      {
+        "name": "2026年度工业电气元件框架采购合同.pdf",
+        "size": "6.8 MB",
+        "uploader": "王磊",
+        "uploadedAt": "2026-08-04 09:18:36"
+      },
+      {
+        "name": "合同技术附件.xlsx",
+        "size": "328 KB",
+        "uploader": "王磊",
+        "uploadedAt": "2026-08-04 09:21:05"
+      }
+    ],
+    "suppliers": [
+      {
+        "supplierCode": "SUP00018",
+        "supplierName": "武汉智控电气有限公司",
+        "settlementCurrency": "CNY",
+        "supplierTaxId": "91420100MA4KX8P23Q",
+        "account": "42001876108051501234",
+        "bank": "中国建设银行武汉光谷支行"
+      },
+      {
+        "supplierCode": "SUP00023",
+        "supplierName": "上海自动化系统有限公司",
+        "settlementCurrency": "CNY",
+        "supplierTaxId": "91310115MA1H9D7X6K",
+        "account": "31001558861050001234",
+        "bank": "招商银行上海张江支行"
+      },
+      {
+        "supplierCode": "SUP00031",
+        "supplierName": "深圳算力设备有限公司",
+        "settlementCurrency": "USD",
+        "supplierTaxId": "91440300MA5F2R9C8Y",
+        "account": "75590102101800012345",
+        "bank": "平安银行深圳科技园支行"
+      },
+      {
+        "supplierCode": "SUP00042",
+        "supplierName": "杭州云启科技有限公司",
+        "settlementCurrency": "CNY",
+        "supplierTaxId": "91330108MA2B1L6T4P",
+        "account": "33001618808050001234",
+        "bank": "中国工商银行杭州高新支行"
+      },
+      {
+        "supplierCode": "SUP00057",
+        "supplierName": "湖北工程物资有限公司",
+        "settlementCurrency": "CNY",
+        "supplierTaxId": "91420106MA49Q3N12A",
+        "account": "42001027100053001234",
+        "bank": "中国农业银行武汉武昌支行"
+      }
+    ]
+  },
+  "submitNextStatus": "审核",
+  "auditPendingStatus": "新增",
+  "auditCompletedStatus": "审核",
+  "reverseAuditNextStatus": "新增",
+  "createStatus": "新增",
+  "saveActionLabel": "保存",
+  "workflowActions": false
+}

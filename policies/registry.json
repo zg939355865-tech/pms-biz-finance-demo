@@ -1,0 +1,20 @@
+{
+  "version": "pms-policy-v5",
+  "defaultProfile": "business-list",
+  "profiles": {
+    "workflow-list-detail": "policies/profiles/workflow-list-detail.json",
+    "auditable-list-detail": "policies/profiles/auditable-list-detail.json",
+    "auditable-list-detail-save": "policies/profiles/auditable-list-detail-save.json",
+    "system-generated-auditable-list-detail": "policies/profiles/system-generated-auditable-list-detail.json",
+    "non-workflow-list-detail": "policies/profiles/non-workflow-list-detail.json",
+    "business-list": "policies/profiles/business-list.json",
+    "approval-workbench": "policies/profiles/approval-workbench.json",
+    "utility-page": "policies/profiles/utility-page.json"
+  },
+  "defaults": {
+    "auditFields": "policies/defaults/audit-fields.json",
+    "interaction": "policies/defaults/interaction.json",
+    "content": "policies/defaults/content.json"
+  },
+  "exceptions": "policies/exceptions.json"
+}

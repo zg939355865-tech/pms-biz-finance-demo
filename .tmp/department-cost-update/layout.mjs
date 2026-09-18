@@ -1,0 +1,11 @@
+import fs from 'node:fs';
+const f = 'schemas/pages/cost/department-cost-analysis.json';
+const s = JSON.parse(fs.readFileSync(f));
+s.regions[0].fields.find(f => f.code === 'costCategory').placeholder = '成本总计';
+s.regions[1].showLegend = false;
+s.regions[2].headerActions = true;
+fs.writeFileSync(f, JSON.stringify(s, null, 2) + '\n');
+const b = 'inputs/md/pages/cost/department-cost-analysis.md';
+let t = fs.readFileSync(b, 'utf8').replaceAll('图例显示部门名称', '不显示图例，曲线按部门查询条件显示');
+t += '\n### 2026-09-10 展示细节调整\n\n- 移除趋势图图例，继续按部门多选查询条件显示曲线。\n- 成本类型空值选项显示“成本总计”，表示不限制成本类型；查询和重置保持该口径。\n- 导出按钮放在部门成本列表标题右侧，与标题同行。\n';
+fs.writeFileSync(b, t);

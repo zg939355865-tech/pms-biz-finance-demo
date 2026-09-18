@@ -1,0 +1,12 @@
+import fs from "node:fs";
+import { registeredComponents, componentRegistry } from "../scripts/lib/component-registry.mjs";
+console.log("registered:", [...registeredComponents].sort().join(", "));
+const req = componentRegistry.requiredComponentProperties||{};
+["Modal","Alert","EditableTable","ProTable"].forEach(n=>console.log(n,"req:",JSON.stringify(req[n]||null)));
+const p = "schemas/pages/procurement/purchase-invoice.json";
+const raw = fs.readFileSync(p,"utf8");
+const crlf = raw.includes("\r\n");
+const obj = JSON.parse(raw);
+const out = JSON.stringify(obj,null,2)+"\n";
+const normalized = crlf ? out.replace(/\n/g,"\r\n") : out;
+console.log("crlf:",crlf,"roundtrip identical:", normalized===raw, "rawLen",raw.length,"newLen",normalized.length);

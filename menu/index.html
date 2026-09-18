@@ -190,11 +190,11 @@
     <main class="main">
       <header class="topbar">
         <nav class="breadcrumb" aria-label="面包屑">
-          <span class="breadcrumb-home"><i class="fas fa-house"></i> 首页</span>
-          <span class="breadcrumb-separator">/</span>
-          <span id="breadcrumbModule">流程指引</span>
+          <span class="breadcrumb-home"><i class="fas fa-house"></i> 项目驾驶舱</span>
+          <span class="breadcrumb-separator" id="breadcrumbModuleSeparator">/</span>
+          <span id="breadcrumbModule">项目驾驶舱</span>
           <span class="breadcrumb-separator" id="breadcrumbPageSeparator">/</span>
-          <span class="breadcrumb-current" id="breadcrumbPage">流程指引</span>
+          <span class="breadcrumb-current" id="breadcrumbPage">项目驾驶舱</span>
         </nav>
         <div class="topbar-actions">
           <label class="company-select-wrap">
@@ -215,16 +215,16 @@
         </div>
       </header>
       <section class="content">
-        <iframe id="contentFrame" src="../pages/process-guide.html"></iframe>
+        <iframe id="contentFrame" src="../pages/report/project-lifecycle-dashboard.html"></iframe>
       </section>
     </main>
   </div>
   <script>
     const menuData = [
       {
-            "name": "流程指引",
-            "icon": "compass",
-            "path": "process-guide.html",
+            "name": "项目驾驶舱",
+            "icon": "house",
+            "path": "report/project-lifecycle-dashboard.html",
             "children": []
       },
       {
@@ -240,7 +240,7 @@
             "children": []
       },
       {
-            "name": "代办事项",
+            "name": "待办事项",
             "icon": "list-check",
             "path": "",
             "children": [
@@ -255,12 +255,6 @@
                         "icon": "circle"
                   }
             ]
-      },
-      {
-            "name": "跨司协同台账",
-            "icon": "people-arrows",
-            "path": "cross-company-ledger.html",
-            "children": []
       },
       {
             "name": "项目前期",
@@ -327,48 +321,38 @@
             "path": "",
             "children": [
                   {
-                        "name": "采购申请",
-                        "path": "#",
-                        "icon": "circle"
-                  },
-                  {
                         "name": "支出合同",
-                        "path": "#",
+                        "path": "procurement/expense-contract.html",
                         "icon": "circle"
                   },
                   {
                         "name": "采购订单",
-                        "path": "#",
+                        "path": "procurement/purchase-order.html",
                         "icon": "circle"
                   },
                   {
                         "name": "采购入库",
-                        "path": "#",
+                        "path": "procurement/purchase-receipt.html",
                         "icon": "circle"
                   },
                   {
-                        "name": "固资入库",
-                        "path": "#",
-                        "icon": "circle"
-                  },
-                  {
-                        "name": "支出付款台账",
-                        "path": "#",
+                        "name": "服务结算",
+                        "path": "procurement/service-settlement.html",
                         "icon": "circle"
                   },
                   {
                         "name": "采购收票",
-                        "path": "#",
-                        "icon": "circle"
-                  },
-                  {
-                        "name": "付款申请",
-                        "path": "#",
+                        "path": "procurement/purchase-invoice.html",
                         "icon": "circle"
                   },
                   {
                         "name": "付款单",
-                        "path": "#",
+                        "path": "expense/payment-order.html",
+                        "icon": "circle"
+                  },
+                  {
+                        "name": "票款核销",
+                        "path": "expense/invoice-payment-reconciliation.html",
                         "icon": "circle"
                   }
             ]
@@ -384,28 +368,23 @@
                         "icon": "circle"
                   },
                   {
-                        "name": "项目验收单",
-                        "path": "#",
-                        "icon": "circle"
-                  },
-                  {
-                        "name": "收入回款台账",
-                        "path": "#",
+                        "name": "项目结算单",
+                        "path": "income/project-settlement.html",
                         "icon": "circle"
                   },
                   {
                         "name": "销项开票",
-                        "path": "#",
+                        "path": "income/sales-invoice.html",
                         "icon": "circle"
                   },
                   {
                         "name": "收款单",
-                        "path": "#",
+                        "path": "income/receipt.html",
                         "icon": "circle"
                   },
                   {
                         "name": "收款核销",
-                        "path": "#",
+                        "path": "income/receipt-reconciliation.html",
                         "icon": "circle"
                   }
             ]
@@ -416,60 +395,50 @@
             "path": "",
             "children": [
                   {
-                        "name": "物资台账",
-                        "path": "#",
+                        "name": "库存地点",
+                        "path": "material/inventory-location.html",
                         "icon": "circle"
                   },
                   {
-                        "name": "即时物资",
-                        "path": "#",
+                        "name": "即时汇总库存",
+                        "path": "material/current-inventory.html",
                         "icon": "circle"
                   },
                   {
-                        "name": "物资流水",
-                        "path": "#",
+                        "name": "出入库流水",
+                        "path": "material/inout-ledger.html",
                         "icon": "circle"
                   },
                   {
-                        "name": "物料领用",
-                        "path": "#",
+                        "name": "物资出库",
+                        "path": "material/material-outbound.html",
                         "icon": "circle"
                   },
                   {
-                        "name": "固资领用",
-                        "path": "#",
+                        "name": "其他出库",
+                        "path": "material/other-outbound.html",
+                        "icon": "circle"
+                  },
+                  {
+                        "name": "其他入库",
+                        "path": "material/other-inbound.html",
                         "icon": "circle"
                   }
             ]
       },
       {
-            "name": "费用报销",
-            "icon": "receipt",
+            "name": "固资管理",
+            "icon": "building-columns",
             "path": "",
             "children": [
                   {
-                        "name": "差旅申请",
-                        "path": "#",
+                        "name": "固资台账",
+                        "path": "fixed-asset/fixed-asset-ledger.html",
                         "icon": "circle"
                   },
                   {
-                        "name": "差旅报销",
-                        "path": "#",
-                        "icon": "circle"
-                  },
-                  {
-                        "name": "招待申请",
-                        "path": "#",
-                        "icon": "circle"
-                  },
-                  {
-                        "name": "招待报销",
-                        "path": "#",
-                        "icon": "circle"
-                  },
-                  {
-                        "name": "日常报销",
-                        "path": "#",
+                        "name": "固资变更",
+                        "path": "fixed-asset/fixed-asset-return.html",
                         "icon": "circle"
                   }
             ]
@@ -480,18 +449,18 @@
             "path": "",
             "children": [
                   {
-                        "name": "项目成本分析",
-                        "path": "#",
+                        "name": "项目成本",
+                        "path": "cost/project-cost-analysis.html",
                         "icon": "circle"
                   },
                   {
-                        "name": "部门成本分析",
-                        "path": "#",
+                        "name": "部门成本",
+                        "path": "cost/department-cost-analysis.html",
                         "icon": "circle"
                   },
                   {
-                        "name": "成本调整单",
-                        "path": "#",
+                        "name": "成本调整",
+                        "path": "cost/purchase-price-variance.html",
                         "icon": "circle"
                   }
             ]
@@ -503,12 +472,34 @@
             "children": [
                   {
                         "name": "供应商管理",
-                        "path": "#",
+                        "path": "supplier.html",
                         "icon": "circle"
                   },
                   {
                         "name": "客户管理",
                         "path": "customer.html",
+                        "icon": "circle"
+                  },
+                  {
+                        "name": "会计期间",
+                        "path": "master-data/accounting-period.html",
+                        "icon": "circle"
+                  }
+            ]
+      },
+      {
+            "name": "期末结账",
+            "icon": "calendar-check",
+            "path": "",
+            "children": [
+                  {
+                        "name": "结账助手",
+                        "path": "period-close/closing-assistant.html",
+                        "icon": "circle"
+                  },
+                  {
+                        "name": "期末结算",
+                        "path": "period-close/period-close.html",
                         "icon": "circle"
                   }
             ]
@@ -529,6 +520,11 @@
                         "icon": "circle"
                   },
                   {
+                        "name": "项目运维记录",
+                        "path": "report/project-operations-record.html",
+                        "icon": "circle"
+                  },
+                  {
                         "name": "智能体运行监控",
                         "path": "agent-monitor.html",
                         "icon": "circle"
@@ -541,6 +537,16 @@
                   {
                         "name": "需求跟踪表",
                         "path": "requirement-trace.html",
+                        "icon": "circle"
+                  },
+                  {
+                        "name": "库存价格汇总",
+                        "path": "report/inventory-price-summary.html",
+                        "icon": "circle"
+                  },
+                  {
+                        "name": "入库未开票",
+                        "path": "report/received-unbilled.html",
                         "icon": "circle"
                   }
             ]
@@ -555,6 +561,7 @@
     const menuRoot = document.getElementById('menu');
     const frame = document.getElementById('contentFrame');
     const breadcrumbModule = document.getElementById('breadcrumbModule');
+    const breadcrumbModuleSeparator = document.getElementById('breadcrumbModuleSeparator');
     const breadcrumbPage = document.getElementById('breadcrumbPage');
     const breadcrumbPageSeparator = document.getElementById('breadcrumbPageSeparator');
     const companySelect = document.getElementById('companySelect');
@@ -565,11 +572,14 @@
     }
 
     function updateBreadcrumb(moduleName, pageName) {
+      const isHome = moduleName === '项目驾驶舱';
       const isSinglePage = moduleName === pageName;
       breadcrumbModule.textContent = moduleName;
       breadcrumbPage.textContent = pageName;
-      breadcrumbPage.hidden = isSinglePage;
-      breadcrumbPageSeparator.hidden = isSinglePage;
+      breadcrumbModule.hidden = isHome;
+      breadcrumbModuleSeparator.hidden = isHome;
+      breadcrumbPage.hidden = isHome || isSinglePage;
+      breadcrumbPageSeparator.hidden = isHome || isSinglePage;
     }
 
     function openPage(moduleName, name, path) {
@@ -622,7 +632,7 @@
     }
 
     renderMenu();
-    updateBreadcrumb("流程指引", "流程指引");
+    updateBreadcrumb("项目驾驶舱", "项目驾驶舱");
 
     window.addEventListener('message', (event) => {
       const message = event.data || {};

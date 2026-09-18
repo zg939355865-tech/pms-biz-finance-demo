@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "pms-page-schema-v2.schema.json",
+  "title": "PMS Page Schema v2",
+  "type": "object",
+  "required": ["schemaVersion", "pageCode", "pageName", "domain", "module", "pageType", "template", "outputPath", "resourceReference"],
+  "properties": {
+    "schemaVersion": { "const": "pms-page-schema-v2" },
+    "pageCode": { "type": "string", "minLength": 1 },
+    "pageName": { "type": "string", "minLength": 1 },
+    "domain": { "type": "string", "minLength": 1 },
+    "module": { "type": "string", "minLength": 1 },
+    "menuPath": { "type": "string" },
+    "pageType": { "type": "string" },
+    "template": { "type": "string" },
+    "outputPath": { "type": "string", "pattern": "^pages/" },
+    "detailOnlyFields": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+    "resourceReference": {
+      "type": "object",
+      "required": ["center", "baseline", "pageSamples", "components"],
+      "properties": {
+        "center": { "const": "prototype-resources/index.html" },
+        "baseline": { "type": "string" },
+        "pageSamples": { "type": "array", "items": { "type": "string" } },
+        "components": { "type": "array", "items": { "type": "string" }, "minItems": 1 }
+      }
+    },
+    "pageActions": { "type": "array", "items": { "$ref": "#/$defs/action" } },
+    "regions": { "type": "array", "items": { "$ref": "#/$defs/component" } },
+    "overlays": { "type": "array", "items": { "$ref": "#/$defs/component" } },
+    "interactions": { "type": "array" },
+    "rules": { "type": "array" },
+    "mockData": { "type": "object" }
+  },
+  "$defs": {
+    "action": {
+      "type": "object",
+      "required": ["code", "label"],
+      "properties": {
+        "code": { "type": "string" },
+        "label": { "type": "string" },
+        "type": { "enum": ["primary", "default", "danger", "link", "text"] },
+        "icon": { "type": "string" },
+        "event": { "type": "string" },
+        "target": { "type": "string" },
+        "statuses": { "type": "array", "items": { "type": "string" } },
+        "enabledStatuses": { "type": "array", "items": { "type": "string" } },
+        "disabledStatuses": { "type": "array", "items": { "type": "string" } },
+        "disabled": { "type": "boolean" },
+        "requiresSelection": { "type": "boolean" },
+        "ghost": { "type": "boolean" }
+      }
+    },
+    "field": {
+      "type": "object",
+      "required": ["code", "label"],
+      "properties": {
+        "code": { "type": "string" },
+        "label": { "type": "string" },
+        "component": { "type": "string" },
+        "required": { "type": "boolean" },
+        "readonly": { "type": "boolean" },
+        "disabled": { "type": "boolean" },
+        "options": { "type": "array" },
+        "visibleWhen": { "type": "object" },
+        "requiredWhen": { "type": "object" },
+        "signByFieldValue": {
+          "type": "object",
+          "required": ["field", "negativeValue"],
+          "properties": {
+            "field": { "type": "string" },
+            "negativeValue": {},
+            "positiveValue": {}
+          }
+        }
+      }
+    },
+    "component": {
+      "type": "object",
+      "required": ["component"],
+      "properties": {
+        "id": { "type": "string" },
+        "component": { "type": "string" },
+        "title": { "type": "string" },
+        "hidden": { "type": "boolean" },
+        "fields": { "type": "array", "items": { "$ref": "#/$defs/field" } },
+        "columns": { "type": "array" },
+        "actions": { "type": "array", "items": { "$ref": "#/$defs/action" } },
+        "children": { "type": "array", "items": { "$ref": "#/$defs/component" } },
+        "tabs": { "type": "array" }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

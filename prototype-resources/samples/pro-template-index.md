@@ -22,7 +22,7 @@ This index maps page types and business components to the static templates used 
 | Schema Component | Fragment | Notes |
 | --- | --- | --- |
 | `ProSearchForm` | `components/pro-search-form.html` | 4-column query form with search/reset/advanced actions. |
-| `ProTable` | `components/pro-table.html` | Table + bottom-right pagination; standard business lists do not show refresh, fullscreen, or column-setting tools, show one row per real business status or 5 rows without status, and use horizontal-only scrolling. |
+| `ProTable` | `components/pro-table.html` | Table + footer pagination; the left side shows total records and a fixed page-capacity component (default `5条/页`), while the right side shows page navigation. Standard business lists use horizontal-only scrolling. |
 | `DetailForm` | `components/detail-form.html` | Three-column sectioned detail fields inside a single content panel. |
 | `EditableTable` | `components/editable-table.html` | Editable line item table. |
 | `BizfinChain` | `components/bizfin-chain.html` | Project -> contract -> budget -> receipt -> voucher. |

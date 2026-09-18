@@ -1,8 +1,4 @@
 node_modules/
-public/
-dist/
-.vinext/
-.vite/
-.next/
-next-env.d.ts
 *.tgz
+pub/
+outputs/

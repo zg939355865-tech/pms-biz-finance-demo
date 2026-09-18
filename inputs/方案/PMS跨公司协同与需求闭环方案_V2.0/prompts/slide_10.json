@@ -1,0 +1,42 @@
+{
+  "slide": 10,
+  "title": "感谢聆听｜请指导",
+  "prompt": "# Codex PPT Slide Image Prompt\n\n## Canvas\n{\n  \"type\": \"16:9 full-slide PowerPoint image\",\n  \"language\": \"Chinese\",\n  \"slide_number\": 10,\n  \"render_slide_number\": false\n}\n\n## Deck Goal\n面向集团人员和领导，清晰说明PMS项目主线中的跨公司协调机制，以及上线后需求持续改进闭环。\n\n## Required Background\n{\n  \"deck_context\": {\n    \"source_summary\": \"集团下设多层级、多家公司。PMS已上线项目需求、调研问卷、项目方案、项目实施通知、项目立项、项目计划、项目进度填报、项目监控。当前数据隔离以公司为基础，需要支持需求委托型和实施协作型两类跨公司协调。\",\n    \"core_claim\": \"跨公司协作不应打破公司数据隔离，而应通过唯一项目主责、明确任务责任和按项目阶段任务授权，实现责任清晰、协作可控、过程可追踪。\",\n    \"collaboration_types\": [\n      \"需求委托型：需求获取公司保留客户维护，承接公司负责需求评审、调研和后续项目闭环\",\n      \"实施协作型：项目仍归主责公司，协作公司只承担被授权的实施阶段或任务\"\n    ],\n    \"current_project_flow\": [\n      \"项目需求\",\n      \"调研问卷\",\n      \"项目方案\",\n      \"项目实施通知\",\n      \"项目立项\",\n      \"项目计划\",\n      \"项目进度填报\",\n      \"项目监控\"\n    ],\n    \"permission_principles\": [\n      \"公司权限是基础隔离边界\",\n      \"项目主责公司查看项目全貌并负责闭环\",\n      \"协作公司只查看授权任务及必要上下文\",\n      \"预算成本和无关阶段默认不可见\",\n      \"集团按管理职责查看汇总或穿透明细\"\n    ],\n    \"requirements_loop\": [\n      \"用户提出需求\",\n      \"需求池统一登记或项目组代录\",\n      \"需求分析与沟通\",\n      \"需求设计\",\n      \"需求评审\",\n      \"需求上线\",\n      \"需求通知与反馈\"\n    ],\n    \"canonical_terms\": [\n      \"需求提出公司\",\n      \"项目主责公司\",\n      \"协作公司\",\n      \"需求委托型\",\n      \"实施协作型\",\n      \"调研闭环\",\n      \"需求池\"\n    ]\n  }\n}\n\n## Global Style\n{\n  \"name\": \"清爽咨询汇报风\",\n  \"visual_direction\": \"面向集团领导的专业咨询报告，结论先行、结构清晰、克制稳重，以流程、责任关系和权限架构为核心视觉，不做产品宣传海报。\",\n  \"color_palette\": \"白色和浅冷灰背景；深蓝表示项目主责和主流程；青绿色表示需求来源或协作公司；橙色仅用于交接、风险或关键节点。\",\n  \"typography\": \"现代中文无衬线字体，深蓝粗体标题，正文简洁清晰，所有中文必须准确可读。\",\n  \"texture_and_finish\": \"明亮、平整、少阴影、细线连接、适度留白，不使用大面积深色背景和装饰性渐变。\",\n  \"deck_consistency\": \"保持与已确认第5页相同的配色、字体气质、线性图标、流程箭头和信息密度，同时按页面角色变化构图。\"\n}\n\n## Input Images\n\n- Image 1: D:\\项目AI协作\\4、PMS业财一体化\\PMS跨公司协同与需求闭环方案\\origin_image\\slide_05.png — approved sample slide style reference; match palette, typography mood, spacing, line icon language and consulting quality only; do not copy the exact layout or content\n\n\n## Slide\n{\n  \"number\": 10,\n  \"title\": \"感谢聆听｜请指导\",\n  \"role\": \"closing\",\n  \"intent\": \"正式结束汇报并进入领导交流讨论。\"\n}\n\n## Text\n{\n  \"title\": \"感谢聆听｜请指导\",\n  \"key_points\": [\n    \"PMS跨公司协同与需求闭环方案\"\n  ],\n  \"speaker_focus\": null\n}\n\n## Layout\n{\n  \"composition\": \"中央大号致谢标题，底部小号项目名称，背景用多公司节点汇聚并形成闭环的淡色线稿，与封面首尾呼应。\"\n}\n\n## Visual Elements\n{\n  \"main_visual\": \"组织节点与闭环线条的轻量抽象图。\"\n}\n\n## Constraints\n[\n  \"页面极简\",\n  \"只使用感谢和项目名称相关文字\",\n  \"无Logo、无页码、无联系方式\"\n]\n\n## Style Reference Rule\nUse Image 1 as the approved sample-slide style reference. Match its palette, typography mood, density, texture, and overall visual identity. Do not copy its exact layout unless this slide's layout explicitly asks for it.\n\n## Input Image Handling Rules\nFor any input image marked as a strict input asset, include it visibly and preserve its content. Do not redraw, replace, relabel, or invent a similar figure. Scale and crop only as needed for composition while keeping the important labels, arrows, data, and relationships recognizable.\n\n## Universal Constraints\n- The final image itself must contain the title and key points.\n- Render Chinese text exactly and legibly; avoid garbled characters.\n- Keep the confirmed deck style consistent while varying layout by slide role.\n- No watermark, unrelated logo, or extra slide number.\n",
+  "out": "slide_10.png",
+  "input_images": [
+    {
+      "path": "D:\\项目AI协作\\4、PMS业财一体化\\PMS跨公司协同与需求闭环方案\\origin_image\\slide_05.png",
+      "role": "approved sample slide style reference",
+      "fidelity": "match palette, typography mood, spacing, line icon language and consulting quality only; do not copy the exact layout or content"
+    }
+  ],
+  "requires_context_images": true,
+  "expected_backend": "built-in image tool",
+  "sample_generation_method": {
+    "backend_used": "built-in image tool",
+    "tool_name": "image_gen",
+    "mode": "edit",
+    "prompt_source": "approved Slide 5 revision prompt in the parent task",
+    "size": "16:9 landscape",
+    "quality": "built-in default",
+    "approved_sample_path": "D:\\项目AI协作\\4、PMS业财一体化\\PMS跨公司协同与需求闭环方案\\origin_image\\slide_05.png",
+    "input_context_preparation": "inspect the approved sample with view_image and pass it through referenced_image_paths as a style-only reference",
+    "handoff_rule": "Subagents must use the built-in image_gen tool in edit/reference mode and return a blocker if unavailable."
+  },
+  "generation_contract": {
+    "must_use_selected_image_backend": true,
+    "must_match_sample_generation_method": true,
+    "forbidden_final_image_methods": [
+      "local drawing/rendering scripts",
+      "Pillow-generated slides",
+      "SVG/HTML/CSS/canvas screenshots",
+      "python-pptx/PptxGenJS/native PPT layout screenshots",
+      "manually composited text/image overlays"
+    ],
+    "must_return": [
+      "backend_used",
+      "selected_source",
+      "qa_note"
+    ]
+  }
+}

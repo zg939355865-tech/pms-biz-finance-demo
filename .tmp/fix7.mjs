@@ -1,0 +1,11 @@
+import fs from "node:fs";
+const p="scripts/check/purchase-payment-pages-smoke.mjs";
+let t=fs.readFileSync(p,"utf8");
+const withBlue="'验票数量', '暂估单价', '含税单价', '价税合计', '税率', '不含税单价', '税额', '不含税金额', '采购订单', '订单行', '采购入库单（蓝字）'";
+const settlement="'验票数量', '暂估单价', '含税单价', '价税合计', '税率', '不含税单价', '税额', '不含税金额', '采购订单', '订单行', '采购入库单', '入库行', '服务结算单', '结算行'";
+const fixedSettlement="'验票数量', '含税单价', '价税合计', '税率', '不含税单价', '税额', '不含税金额', '采购订单', '订单行', '采购入库单', '入库行', '服务结算单', '结算行'";
+console.log("blue ok:", t.includes(withBlue), "| settlement wrong:", t.includes(settlement));
+if(!t.includes(settlement)) throw new Error("settlement anchor missing");
+t=t.replace(settlement, fixedSettlement);
+fs.writeFileSync(p,t,"utf8");
+console.log("settlement expectation restored");

@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "pms-page-schema-v2",
+  "policyProfile": "workflow-list-detail",
+  "policyVersion": "pms-policy-v1",
+  "pageCode": "detail-content-policy-fixture",
+  "pageName": "详情内容策略测试",
+  "domain": "test",
+  "module": "测试",
+  "pageType": "list-detail",
+  "template": "tabs-detail-page",
+  "outputPath": "pages/test/detail-content-policy-fixture.html",
+  "detailOnlyFields": ["purchaseCategory"],
+  "resourceReference": {
+    "center": "prototype-resources/index.html",
+    "baseline": "pms-resource-center-v1",
+    "pageSamples": [],
+    "components": ["ProSearchForm", "ProTable", "ProTabsDetail", "DetailForm", "EditableTable", "ProUploadList"]
+  },
+  "regions": [
+    {
+      "id": "fixture-search",
+      "component": "ProSearchForm",
+      "fields": [
+        { "code": "keyword", "label": "关键字", "component": "input" },
+        { "code": "purchaseCategory", "label": "采购类别", "component": "select" }
+      ]
+    },
+    {
+      "id": "fixture-table",
+      "component": "ProTable",
+      "columns": [
+        { "code": "businessNo", "label": "单号", "component": "link" },
+        { "code": "purchaseCategory", "label": "采购类别", "component": "text" },
+        { "code": "status", "label": "业务状态", "component": "tag" },
+        { "code": "owner", "label": "负责人", "component": "text" }
+      ],
+      "rowActions": [{ "code": "delete", "label": "删除", "type": "link", "enabledStatuses": ["草稿"] }],
+      "statusCode": "status",
+      "keepOperationColumn": true
+    },
+    {
+      "id": "fixture-detail",
+      "component": "ProTabsDetail",
+      "tabs": [
+        {
+          "key": "basic",
+          "label": "基础信息",
+          "children": [
+            { "component": "Alert", "type": "info", "message": "固定规则说明" },
+            { "component": "DetailForm", "fields": [{ "code": "businessNo", "label": "单号", "component": "input" }, { "code": "owner", "label": "负责人", "component": "input" }, { "code": "status", "label": "入库状态", "component": "select" }, { "code": "subject", "label": "主题", "component": "input", "help": "字段下方不应展示的规则说明" }] }
+          ]
+        },
+        {
+          "key": "items",
+          "label": "采购明细",
+          "children": [{
+            "component": "EditableTable",
+            "actions": [{ "code": "batch-delete", "label": "移除选中明细", "requiresSelection": true }],
+            "rowActions": [{ "code": "remove-row", "label": "移除", "type": "link" }],
+            "columns": [{ "code": "purchaseCategory", "label": "采购类别", "component": "select" }]
+          }]
+        },
+        {
+          "key": "attachments",
+          "label": "附件",
+          "children": [{ "id": "fixture-attachments", "component": "ProUploadList", "title": "申请附件", "columns": [{ "code": "name", "label": "文件名", "component": "text" }] }]
+        }
+      ]
+    }
+  ]
+}

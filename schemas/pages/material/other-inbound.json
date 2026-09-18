@@ -1,0 +1,1014 @@
+{
+  "schemaVersion": "pms-page-schema-v2",
+  "policyProfile": "auditable-list-detail-save",
+  "pageCode": "other-inbound",
+  "pageName": "其他入库",
+  "domain": "material",
+  "module": "物资管理",
+  "menuPath": "物资管理/其他入库",
+  "pageType": "list-detail",
+  "template": "tabs-detail-page",
+  "outputPath": "pages/material/other-inbound.html",
+  "businessScenario": "盘盈、期初补录和其他非采购来源库存由用户直接录入物资、入库数量和成本单价，必须维护业务类型、库存地点和业务依据附件，备注按需填写；提交审核不增库存，审核后增加库存并记录物资流水。",
+  "saveDraftEnabled": true,
+  "detailSaveEnabled": true,
+  "saveActionLabel": "保存",
+  "detailSubmitEnabled": true,
+  "submitActionLabel": "提交",
+  "submitNextStatus": "审核",
+  "detailReviewEnabled": false,
+  "detailWorkflowLinksEnabled": false,
+  "detailEditableStatuses": [
+    "新增"
+  ],
+  "auditPendingStatus": "新增",
+  "auditCompletedStatus": "审核",
+  "reverseAuditNextStatus": "新增",
+  "detailOnlyFields": [
+    "purchaseCategory",
+    "purchaseName",
+    "specification",
+    "unit",
+    "storageBin",
+    "inventoryQuantity",
+    "costUnitPrice",
+    "costAmount",
+    "lineRemark"
+  ],
+  "uiConstraints": {
+    "listPageSize": 5,
+    "detailFormColumns": 3,
+    "tabSectionTitles": true
+  },
+  "resourceReference": {
+    "center": "prototype-resources/index.html",
+    "baseline": "pms-resource-center-v1",
+    "pageSamples": [
+      "列表详情一体",
+      "物资出库",
+      "采购申请可编辑明细"
+    ],
+    "components": [
+      "PageHeader",
+      "ProSearchForm",
+      "ProTable",
+      "ProTabsDetail",
+      "DetailForm",
+      "EditableTable",
+      "ProUploadList",
+      "Card",
+      "Modal",
+      "Result",
+      "Tag"
+    ]
+  },
+  "pageActions": [
+    {
+      "code": "audit",
+      "requiresSingleSelection": true,
+      "enabledSelectionStatuses": [
+        "新增"
+      ],
+      "nextStatus": "审核",
+      "label": "审核",
+      "type": "primary",
+      "fieldUpdates": {
+        "auditUser": "管理员",
+        "auditTime": "$currentDateTime"
+      }
+    },
+    {
+      "code": "reverse-audit",
+      "requiresSingleSelection": true,
+      "enabledSelectionStatuses": [
+        "审核"
+      ],
+      "nextStatus": "新增",
+      "label": "反审核",
+      "fieldUpdates": {
+        "auditUser": "",
+        "auditTime": ""
+      }
+    },
+    {
+      "code": "create",
+      "label": "新增",
+      "type": "primary",
+      "target": "other-inbound-detail"
+    }
+  ],
+  "regions": [
+    {
+      "id": "other-inbound-search",
+      "component": "ProSearchForm",
+      "fields": [
+        {
+          "code": "inboundNo",
+          "label": "入库单号",
+          "component": "input"
+        },
+        {
+          "code": "status",
+          "label": "状态",
+          "component": "select",
+          "options": [
+            "新增",
+            "审核",
+            "审核"
+          ]
+        },
+        {
+          "code": "inboundDate",
+          "label": "入库日期",
+          "component": "date-range"
+        },
+        {
+          "code": "businessType",
+          "label": "业务类型",
+          "component": "select",
+          "options": [
+            "盘盈入库",
+            "期初补录",
+            "其他入库"
+          ]
+        },
+        {
+          "code": "warehouse",
+          "label": "库存地点",
+          "component": "select",
+          "options": [
+            "武汉中心仓",
+            "长沙项目仓",
+            "德清项目仓",
+            "现场临时仓"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "other-inbound-table",
+      "component": "ProTable",
+      "dataSource": "otherInboundDocuments",
+      "pageSize": 5,
+      "statusCode": "status",
+      "representativeByStatus": false,
+      "showRecordCount": true,
+      "showPageSize": true,
+      "selectable": true,
+      "rowActions": [
+        {
+          "code": "delete",
+          "label": "删除",
+          "type": "link",
+          "enabledStatuses": [
+            "新增"
+          ]
+        }
+      ],
+      "columns": [
+        {
+          "code": "inboundNo",
+          "label": "入库单号",
+          "component": "link",
+          "fixed": "left",
+          "width": 176
+        },
+        {
+          "code": "status",
+          "label": "状态",
+          "component": "tag",
+          "align": "center",
+          "width": 104
+        },
+        {
+          "code": "inboundDate",
+          "label": "入库日期",
+          "component": "date",
+          "width": 136
+        },
+        {
+          "code": "businessType",
+          "label": "业务类型",
+          "component": "text",
+          "width": 120
+        },
+        {
+          "code": "warehouse",
+          "label": "库存地点",
+          "component": "text",
+          "width": 160
+        },
+        {
+          "code": "creator",
+          "label": "创建人",
+          "component": "text",
+          "width": 128
+        },
+        {
+          "code": "createdAt",
+          "label": "创建时间",
+          "component": "datetime",
+          "width": 168
+        }
+      ],
+      "keepOperationColumn": true
+    },
+    {
+      "id": "other-inbound-detail",
+      "component": "ProTabsDetail",
+      "tabs": [
+        {
+          "key": "inbound-info",
+          "label": "入库信息",
+          "children": [
+            {
+              "id": "other-inbound-basic",
+              "component": "DetailForm",
+              "showTitle": false,
+              "fields": [
+                {
+                  "code": "inboundNo",
+                  "label": "入库单号",
+                  "component": "input",
+                  "readonly": true,
+                  "value": "QTRK20260902001"
+                },
+                {
+                  "code": "status",
+                  "label": "状态",
+                  "component": "select",
+                  "readonly": true,
+                  "preserveOnCreate": true,
+                  "options": [
+                    "新增",
+                    "审核",
+                    "审核"
+                  ],
+                  "value": "新增"
+                },
+                {
+                  "code": "inboundDate",
+                  "label": "入库日期",
+                  "component": "date",
+                  "required": true,
+                  "defaultToday": true,
+                  "preserveOnCreate": true,
+                  "value": "2026-09-02"
+                },
+                {
+                  "code": "businessType",
+                  "label": "业务类型",
+                  "component": "select",
+                  "required": true,
+                  "placeholder": "请选择业务类型",
+                  "options": [
+                    "盘盈入库",
+                    "期初补录",
+                    "其他入库"
+                  ],
+                  "value": ""
+                },
+                {
+                  "code": "warehouse",
+                  "label": "库存地点",
+                  "component": "select",
+                  "required": true,
+                  "placeholder": "请选择库存地点",
+                  "options": [
+                    "武汉中心仓",
+                    "长沙项目仓",
+                    "德清项目仓",
+                    "现场临时仓"
+                  ],
+                  "value": "武汉中心仓"
+                },
+                {
+                  "code": "creator",
+                  "label": "创建人",
+                  "component": "input",
+                  "readonly": true,
+                  "preserveOnCreate": true,
+                  "value": "栗磊"
+                },
+                {
+                  "code": "createdAt",
+                  "label": "创建时间",
+                  "component": "input",
+                  "readonly": true,
+                  "preserveOnCreate": true,
+                  "value": "2026-09-02 09:18:26"
+                },
+                {
+                  "code": "auditUser",
+                  "label": "审核人",
+                  "component": "input",
+                  "readonly": true,
+                  "value": ""
+                },
+                {
+                  "code": "auditTime",
+                  "label": "审核时间",
+                  "component": "input",
+                  "readonly": true,
+                  "value": ""
+                },
+                {
+                  "code": "company",
+                  "label": "所属公司",
+                  "component": "input",
+                  "readonly": true,
+                  "preserveOnCreate": true,
+                  "value": "昕彤赋能（武汉）设计研究有限公司"
+                },
+                {
+                  "code": "inboundReason",
+                  "label": "备注",
+                  "component": "input",
+                  "required": false,
+                  "placeholder": "请输入备注，最多500字"
+                }
+              ]
+            },
+            {
+              "id": "other-inbound-items",
+              "component": "EditableTable",
+              "showTitle": true,
+              "dataSource": "otherInboundItems",
+              "pagination": false,
+              "selectable": true,
+              "minWidth": 1480,
+              "footerSummary": {
+                "label": "合计",
+                "columns": [
+                  {
+                    "column": "inventoryQuantity",
+                    "precision": 2
+                  },
+                  {
+                    "column": "costAmount",
+                    "precision": 2
+                  }
+                ]
+              },
+              "actions": [
+                {
+                  "code": "add-row",
+                  "label": "新增明细",
+                  "type": "primary",
+                  "requiresDetailFields": [
+                    "warehouse"
+                  ]
+                },
+                {
+                  "code": "batch-delete",
+                  "type": "danger",
+                  "ghost": true,
+                  "requiresSelection": true
+                }
+              ],
+              "columns": [
+                {
+                  "code": "sequence",
+                  "label": "序号",
+                  "component": "text",
+                  "editable": false,
+                  "align": "center",
+                  "width": 72,
+                  "fixed": "left"
+                },
+                {
+                  "code": "purchaseCategory",
+                  "label": "物资类型",
+                  "component": "select",
+                  "required": true,
+                  "width": 176,
+                  "options": [
+                    "原材料",
+                    "备品备件",
+                    "办公用品",
+                    "固定资产",
+                    "低值易耗品"
+                  ]
+                },
+                {
+                  "code": "purchaseName",
+                  "label": "物资名称",
+                  "component": "input",
+                  "required": true,
+                  "width": 220
+                },
+                {
+                  "code": "specification",
+                  "label": "规格",
+                  "component": "input",
+                  "width": 200
+                },
+                {
+                  "code": "unit",
+                  "label": "单位",
+                  "component": "select",
+                  "required": true,
+                  "width": 104,
+                  "options": [
+                    "件",
+                    "套",
+                    "台",
+                    "项",
+                    "个",
+                    "箱",
+                    "支",
+                    "卷",
+                    "双"
+                  ]
+                },
+                {
+                  "code": "storageBin",
+                  "label": "库位",
+                  "component": "select",
+                  "required": true,
+                  "width": 140,
+                  "placeholder": "请选择库位",
+                  "dependsOnDetailField": "warehouse",
+                  "optionsByDetailField": {
+                    "武汉中心仓": [
+                      "A-01-0101",
+                      "A-03-0302",
+                      "B-01-0104",
+                      "B-04-0401",
+                      "D-01-0101",
+                      "E-01-0101",
+                      "E-02-0102"
+                    ],
+                    "长沙项目仓": [
+                      "B-02-0203",
+                      "D-02-0202"
+                    ],
+                    "德清项目仓": [
+                      "C-01-0102"
+                    ],
+                    "现场临时仓": [
+                      "T-01-0003",
+                      "T-02-0001"
+                    ]
+                  }
+                },
+                {
+                  "code": "inventoryQuantity",
+                  "label": "入库数量",
+                  "component": "number",
+                  "required": true,
+                  "min": 0.01,
+                  "step": 0.01,
+                  "precision": 2,
+                  "align": "right",
+                  "width": 120
+                },
+                {
+                  "code": "costUnitPrice",
+                  "label": "成本单价",
+                  "component": "number",
+                  "required": true,
+                  "min": 0,
+                  "step": 0.0001,
+                  "precision": 4,
+                  "align": "right",
+                  "width": 128
+                },
+                {
+                  "code": "costAmount",
+                  "label": "入库成本",
+                  "component": "money",
+                  "editable": false,
+                  "align": "right",
+                  "width": 144,
+                  "calculatedBy": {
+                    "type": "multiply",
+                    "fields": [
+                      "inventoryQuantity",
+                      "costUnitPrice"
+                    ],
+                    "precision": 2
+                  }
+                },
+                {
+                  "code": "lineRemark",
+                  "label": "备注",
+                  "component": "input",
+                  "width": 220,
+                  "placeholder": "请输入备注"
+                }
+              ],
+              "title": "入库明细"
+            }
+          ]
+        },
+        {
+          "key": "attachments",
+          "label": "附件",
+          "children": [
+            {
+              "component": "Card",
+              "showTitle": false,
+              "children": [
+                {
+                  "id": "other-inbound-attachments",
+                  "component": "ProUploadList",
+                  "showTitle": false,
+                  "dataSource": "attachments",
+                  "columns": [
+                    {
+                      "code": "sequence",
+                      "label": "序号",
+                      "component": "text",
+                      "align": "center",
+                      "width": 72,
+                      "fixed": "left"
+                    },
+                    {
+                      "code": "name",
+                      "label": "文件名",
+                      "component": "text",
+                      "width": 300
+                    },
+                    {
+                      "code": "size",
+                      "label": "大小",
+                      "component": "text",
+                      "width": 100
+                    },
+                    {
+                      "code": "uploader",
+                      "label": "上传人",
+                      "component": "text",
+                      "width": 128
+                    },
+                    {
+                      "code": "uploadedAt",
+                      "label": "上传时间",
+                      "component": "datetime",
+                      "width": 168
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "overlays": [],
+  "detailLinkages": [],
+  "interactions": [
+    {
+      "trigger": "warehouse.change",
+      "effect": "已有明细时变更库存地点需确认，明细库位选项同步切换为当前库存地点下库位。"
+    },
+    {
+      "trigger": "item.add",
+      "effect": "选择库存地点后可新增物资行，物资名称和规格允许人工填写。"
+    },
+    {
+      "trigger": "quantityOrPrice.change",
+      "effect": "入库数量或成本单价变化时实时计算行入库成本，并同步更新明细合计行。"
+    },
+    {
+      "trigger": "submit.click",
+      "effect": "校验业务类型、库存地点、附件和明细后进入审核，不增加库存。"
+    },
+    {
+      "trigger": "audit.click",
+      "effect": "列表单选审核单据后审核，状态变为审核并增加库存。"
+    },
+    {
+      "trigger": "reverseAudit.click",
+      "effect": "列表单选审核单据后反审核；若库存已被后续使用则业务规则阻止反审核。"
+    }
+  ],
+  "rules": [
+    {
+      "id": "R01",
+      "action": "save",
+      "type": "tableMinimumRows",
+      "table": "otherInboundItems",
+      "minimum": 1,
+      "message": "请至少新增一条入库明细"
+    },
+    {
+      "id": "R02",
+      "description": "业务类型、库存地点和业务依据附件必填；备注非必填。"
+    },
+    {
+      "id": "R03",
+      "description": "入库数量必须大于0，成本单价不得小于0，入库成本等于入库数量乘以成本单价。"
+    },
+    {
+      "id": "R04",
+      "description": "库位选项按库存地点联动；库存地点变更后原明细库位不得继续保留。"
+    },
+    {
+      "id": "R05",
+      "description": "保存新增不增加库存；提交进入审核；审核后增加库存；反审核前检查后续占用。"
+    }
+  ],
+  "relations": [
+    {
+      "from": "盘点/期初/其他业务依据",
+      "to": "其他入库单",
+      "type": "受控录入",
+      "description": "无标准采购来源时保留具体原因和附件依据。"
+    },
+    {
+      "from": "其他入库单",
+      "to": "即时物资",
+      "type": "审核入账",
+      "description": "审核确认后按物资、库存地点和库位增加库存。"
+    },
+    {
+      "from": "其他入库单",
+      "to": "物资流水",
+      "type": "库存追溯",
+      "description": "记录业务类型、数量、成本和审计信息。"
+    }
+  ],
+  "mockData": {
+    "otherInboundDocuments": [
+      {
+        "id": "OI001",
+        "inboundNo": "QTRK2026090001",
+        "status": "新增",
+        "inboundDate": "2026-09-02",
+        "businessType": "盘盈入库",
+        "warehouse": "武汉中心仓",
+        "responsibilityDepartment": "数字化中心",
+        "totalQuantity": 6,
+        "totalCostAmount": 771.36,
+        "creator": "栗磊",
+        "createdAt": "2026-09-02 09:26:18",
+        "auditUser": "",
+        "auditTime": "",
+        "inboundReason": "月末盘点盘盈补录",
+        "otherInboundItems": [
+          {
+            "purchaseCategory": "原材料",
+            "purchaseName": "不锈钢管",
+            "specification": "DN50×3.0mm",
+            "unit": "支",
+            "storageBin": "A-01-0101",
+            "inventoryQuantity": 6,
+            "costUnitPrice": 128.56,
+            "costAmount": 771.36,
+            "lineRemark": "月末盘点盘盈补录"
+          }
+        ]
+      },
+      {
+        "id": "OI002",
+        "inboundNo": "QTRK2026090002",
+        "status": "审核",
+        "inboundDate": "2026-09-02",
+        "businessType": "其他入库",
+        "warehouse": "长沙项目仓",
+        "responsibilityDepartment": "采购管理部",
+        "totalQuantity": 2,
+        "totalCostAmount": 1520.7,
+        "creator": "周敏",
+        "createdAt": "2026-09-02 10:26:18",
+        "auditUser": "",
+        "auditTime": "",
+        "inboundReason": "其他非采购来源补录",
+        "otherInboundItems": [
+          {
+            "purchaseCategory": "备品备件",
+            "purchaseName": "机械密封",
+            "specification": "MG1/35-G60",
+            "unit": "套",
+            "storageBin": "D-02-0202",
+            "inventoryQuantity": 2,
+            "costUnitPrice": 760.35,
+            "costAmount": 1520.7,
+            "lineRemark": "其他非采购来源补录"
+          }
+        ]
+      },
+      {
+        "id": "OI003",
+        "inboundNo": "QTRK2026090003",
+        "status": "审核",
+        "inboundDate": "2026-09-02",
+        "businessType": "期初补录",
+        "warehouse": "德清项目仓",
+        "responsibilityDepartment": "工程管理部",
+        "totalQuantity": 10,
+        "totalCostAmount": 1980,
+        "creator": "刘洋",
+        "createdAt": "2026-09-02 11:26:18",
+        "auditUser": "李主管",
+        "auditTime": "2026-09-02 16:35:20",
+        "inboundReason": "系统上线期初库存补录",
+        "otherInboundItems": [
+          {
+            "purchaseCategory": "办公用品",
+            "purchaseName": "打印纸",
+            "specification": "A4 80g 500张",
+            "unit": "箱",
+            "storageBin": "C-01-0102",
+            "inventoryQuantity": 10,
+            "costUnitPrice": 198,
+            "costAmount": 1980,
+            "lineRemark": "系统上线期初库存补录"
+          }
+        ]
+      },
+      {
+        "id": "OI004",
+        "inboundNo": "QTRK2026090004",
+        "status": "新增",
+        "inboundDate": "2026-09-02",
+        "businessType": "盘盈入库",
+        "warehouse": "现场临时仓",
+        "responsibilityDepartment": "综合管理部",
+        "totalQuantity": 1,
+        "totalCostAmount": 2860.13,
+        "creator": "王工",
+        "createdAt": "2026-09-02 12:26:18",
+        "auditUser": "",
+        "auditTime": "",
+        "inboundReason": "月末盘点盘盈补录",
+        "otherInboundItems": [
+          {
+            "purchaseCategory": "固定资产",
+            "purchaseName": "工业交换机",
+            "specification": "千兆管理型24口",
+            "unit": "台",
+            "storageBin": "T-02-0001",
+            "inventoryQuantity": 1,
+            "costUnitPrice": 2860.1256,
+            "costAmount": 2860.13,
+            "lineRemark": "月末盘点盘盈补录"
+          }
+        ]
+      },
+      {
+        "id": "OI005",
+        "inboundNo": "QTRK2026090005",
+        "status": "审核",
+        "inboundDate": "2026-09-02",
+        "businessType": "其他入库",
+        "warehouse": "武汉中心仓",
+        "responsibilityDepartment": "数字化中心",
+        "totalQuantity": 12,
+        "totalCostAmount": 429.6,
+        "creator": "栗磊",
+        "createdAt": "2026-09-02 13:26:18",
+        "auditUser": "",
+        "auditTime": "",
+        "inboundReason": "其他非采购来源补录",
+        "otherInboundItems": [
+          {
+            "purchaseCategory": "低值易耗品",
+            "purchaseName": "安全帽",
+            "specification": "ABS V型 白色",
+            "unit": "个",
+            "storageBin": "D-01-0101",
+            "inventoryQuantity": 12,
+            "costUnitPrice": 35.8,
+            "costAmount": 429.6,
+            "lineRemark": "其他非采购来源补录"
+          }
+        ]
+      },
+      {
+        "id": "OI006",
+        "inboundNo": "QTRK2026090006",
+        "status": "审核",
+        "inboundDate": "2026-09-02",
+        "businessType": "盘盈入库",
+        "warehouse": "长沙项目仓",
+        "responsibilityDepartment": "采购管理部",
+        "totalQuantity": 1,
+        "totalCostAmount": 3250,
+        "creator": "周敏",
+        "createdAt": "2026-09-02 14:26:18",
+        "auditUser": "李主管",
+        "auditTime": "2026-09-02 16:35:20",
+        "inboundReason": "盘点发现探头盘盈",
+        "otherInboundItems": [
+          {
+            "purchaseCategory": "备品备件",
+            "purchaseName": "溶氧仪探头",
+            "specification": "DO-700 光学型",
+            "unit": "个",
+            "storageBin": "D-02-0202",
+            "inventoryQuantity": 1,
+            "costUnitPrice": 3250,
+            "costAmount": 3250,
+            "lineRemark": "系统上线期初库存补录"
+          }
+        ]
+      },
+      {
+        "id": "OI007",
+        "inboundNo": "QTRK2026090007",
+        "status": "新增",
+        "inboundDate": "2026-09-01",
+        "businessType": "盘盈入库",
+        "warehouse": "德清项目仓",
+        "responsibilityDepartment": "工程管理部",
+        "totalQuantity": 3,
+        "totalCostAmount": 2569.5,
+        "creator": "刘洋",
+        "createdAt": "2026-09-01 15:26:18",
+        "auditUser": "",
+        "auditTime": "",
+        "inboundReason": "月末盘点盘盈补录",
+        "otherInboundItems": [
+          {
+            "purchaseCategory": "原材料",
+            "purchaseName": "控制电缆",
+            "specification": "KVVP 4×1.5mm²",
+            "unit": "卷",
+            "storageBin": "C-01-0102",
+            "inventoryQuantity": 3,
+            "costUnitPrice": 856.5,
+            "costAmount": 2569.5,
+            "lineRemark": "月末盘点盘盈补录"
+          }
+        ]
+      },
+      {
+        "id": "OI008",
+        "inboundNo": "QTRK2026090008",
+        "status": "审核",
+        "inboundDate": "2026-09-01",
+        "businessType": "其他入库",
+        "warehouse": "现场临时仓",
+        "responsibilityDepartment": "综合管理部",
+        "totalQuantity": 4,
+        "totalCostAmount": 0,
+        "creator": "王工",
+        "createdAt": "2026-09-01 16:26:18",
+        "auditUser": "",
+        "auditTime": "",
+        "inboundReason": "其他非采购来源补录",
+        "otherInboundItems": [
+          {
+            "purchaseCategory": "办公用品",
+            "purchaseName": "控制柜标识牌",
+            "specification": "亚克力激光雕刻",
+            "unit": "套",
+            "storageBin": "T-02-0001",
+            "inventoryQuantity": 4,
+            "costUnitPrice": 0,
+            "costAmount": 0,
+            "lineRemark": "其他非采购来源补录"
+          }
+        ]
+      },
+      {
+        "id": "OI009",
+        "inboundNo": "QTRK2026090009",
+        "status": "审核",
+        "inboundDate": "2026-09-01",
+        "businessType": "期初补录",
+        "warehouse": "武汉中心仓",
+        "responsibilityDepartment": "数字化中心",
+        "totalQuantity": 8,
+        "totalCostAmount": 522,
+        "creator": "栗磊",
+        "createdAt": "2026-09-01 09:26:18",
+        "auditUser": "李主管",
+        "auditTime": "2026-09-02 16:35:20",
+        "inboundReason": "系统上线期初库存补录",
+        "otherInboundItems": [
+          {
+            "purchaseCategory": "低值易耗品",
+            "purchaseName": "绝缘手套",
+            "specification": "12kV",
+            "unit": "双",
+            "storageBin": "A-03-0302",
+            "inventoryQuantity": 8,
+            "costUnitPrice": 65.25,
+            "costAmount": 522,
+            "lineRemark": "系统上线期初库存补录"
+          }
+        ]
+      },
+      {
+        "id": "OI010",
+        "inboundNo": "QTRK2026090010",
+        "status": "新增",
+        "inboundDate": "2026-09-01",
+        "businessType": "盘盈入库",
+        "warehouse": "长沙项目仓",
+        "responsibilityDepartment": "采购管理部",
+        "totalQuantity": 1,
+        "totalCostAmount": 42800,
+        "creator": "周敏",
+        "createdAt": "2026-09-01 10:26:18",
+        "auditUser": "",
+        "auditTime": "",
+        "inboundReason": "月末盘点盘盈补录",
+        "otherInboundItems": [
+          {
+            "purchaseCategory": "固定资产",
+            "purchaseName": "边缘计算服务器",
+            "specification": "2U机架式 32核",
+            "unit": "台",
+            "storageBin": "D-02-0202",
+            "inventoryQuantity": 1,
+            "costUnitPrice": 42800,
+            "costAmount": 42800,
+            "lineRemark": "月末盘点盘盈补录"
+          }
+        ]
+      },
+      {
+        "id": "OI011",
+        "inboundNo": "QTRK2026090011",
+        "status": "审核",
+        "inboundDate": "2026-09-01",
+        "businessType": "其他入库",
+        "warehouse": "德清项目仓",
+        "responsibilityDepartment": "工程管理部",
+        "totalQuantity": 5,
+        "totalCostAmount": 433.75,
+        "creator": "刘洋",
+        "createdAt": "2026-09-01 11:26:18",
+        "auditUser": "",
+        "auditTime": "",
+        "inboundReason": "其他非采购来源补录",
+        "otherInboundItems": [
+          {
+            "purchaseCategory": "原材料",
+            "purchaseName": "不锈钢管",
+            "specification": "DN25×2.5mm",
+            "unit": "支",
+            "storageBin": "C-01-0102",
+            "inventoryQuantity": 5,
+            "costUnitPrice": 86.75,
+            "costAmount": 433.75,
+            "lineRemark": "其他非采购来源补录"
+          }
+        ]
+      },
+      {
+        "id": "OI012",
+        "inboundNo": "QTRK2026090012",
+        "status": "审核",
+        "inboundDate": "2026-09-01",
+        "businessType": "其他入库",
+        "warehouse": "现场临时仓",
+        "responsibilityDepartment": "综合管理部",
+        "totalQuantity": 2,
+        "totalCostAmount": 9300,
+        "creator": "王工",
+        "createdAt": "2026-09-01 12:26:18",
+        "auditUser": "李主管",
+        "auditTime": "2026-09-02 16:35:20",
+        "inboundReason": "非采购来源设备补录",
+        "otherInboundItems": [
+          {
+            "purchaseCategory": "备品备件",
+            "purchaseName": "变频器",
+            "specification": "15kW 380V",
+            "unit": "台",
+            "storageBin": "T-02-0001",
+            "inventoryQuantity": 2,
+            "costUnitPrice": 4650,
+            "costAmount": 9300,
+            "lineRemark": "系统上线期初库存补录"
+          }
+        ]
+      }
+    ],
+    "otherInboundItems": [
+      {
+        "purchaseCategory": "原材料",
+        "purchaseName": "不锈钢管",
+        "specification": "DN50×3.0mm",
+        "unit": "支",
+        "storageBin": "A-01-0101",
+        "inventoryQuantity": 6,
+        "costUnitPrice": 128.56,
+        "costAmount": 771.36,
+        "lineRemark": "月末盘点盘盈补录"
+      }
+    ],
+    "attachments": [
+      {
+        "id": "ATT-OI-001",
+        "name": "盘盈库存确认单.pdf",
+        "size": "382 KB",
+        "uploader": "栗磊",
+        "uploadedAt": "2026-09-02 09:28:36"
+      }
+    ]
+  },
+  "createStatus": "新增",
+  "primaryDeleteEnabledStatuses": [
+    "新增"
+  ],
+  "workflowActions": false,
+  "approvalOverlay": false
+}

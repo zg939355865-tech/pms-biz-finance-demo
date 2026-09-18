@@ -1,0 +1,14 @@
+{
+  "id": "workflow-list-detail",
+  "pageTypes": ["list-detail"],
+  "workflowActions": true,
+  "auditFields": true,
+  "saveDraft": true,
+  "detailSaveEnabled": true,
+  "detailSubmitEnabled": true,
+  "detailReviewEnabled": true,
+  "detailWorkflowLinksEnabled": true,
+  "submitReturnsToList": true,
+  "saveReturnsToList": true,
+  "toastEnabled": false
+}

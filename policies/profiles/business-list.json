@@ -1,0 +1,8 @@
+{
+  "id": "business-list",
+  "pageTypes": ["list", "list-detail"],
+  "workflowActions": false,
+  "auditFields": false,
+  "saveDraft": false,
+  "toastEnabled": false
+}

@@ -1,0 +1,6 @@
+{
+  "version": "pms-policy-exceptions-v1",
+  "allowed": [
+    "interaction.toast-explicit-feedback"
+  ]
+}

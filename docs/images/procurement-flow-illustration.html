@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>采购业务流程图（插画版）— PMS 业财一体化</title>
+<style>
+  :root {
+    --ink: #1f2937;
+    --muted: #6b7280;
+    --bg: #f7f8fa;
+    --card: #ffffff;
+    --c1: #4c6fff;  /* 采购申请 */
+    --c2: #7c5cff;  /* 采购订单 */
+    --c3: #00a896;  /* 采购入库 */
+    --c4: #f59e0b;  /* 采购收票 */
+    --c5: #f96167;  /* 采购付款 */
+    --c6: #2c5f2d;  /* 付款核销 */
+    --biz-zone: #eef2ff;
+    --fin-zone: #fff7ed;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    padding: 32px 20px 48px;
+  }
+  .wrap { max-width: 1280px; margin: 0 auto; }
+  header { margin-bottom: 8px; }
+  h1 { font-size: 24px; font-weight: 700; letter-spacing: 0.5px; }
+  .subtitle { color: var(--muted); font-size: 14px; margin-top: 6px; }
+  .diagram {
+    background: var(--card);
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
+    margin-top: 20px;
+    padding: 12px;
+  }
+  svg { width: 100%; height: auto; display: block; }
+  .caption {
+    margin-top: 16px;
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--ink);
+  }
+  .caption strong { color: #111827; }
+  .caption .tag {
+    display: inline-block;
+    padding: 1px 8px;
+    border-radius: 10px;
+    font-size: 12px;
+    margin-right: 4px;
+  }
+  .tag-biz { background: var(--biz-zone); color: #3730a3; }
+  .tag-fin { background: var(--fin-zone); color: #9a3412; }
+  @media (max-width: 700px) {
+    body { padding: 20px 12px 32px; }
+    h1 { font-size: 19px; }
+    .diagram { padding: 6px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>采购业务全流程（申请 → 核销）</h1>
+    <p class="subtitle">PMS 业财一体化 · 采购域六步闭环：业务执行流与财务处理流无缝衔接</p>
+  </header>
+
+  <div class="diagram">
+    <svg viewBox="0 0 1280 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="采购申请到付款核销的六步流程图">
+      <defs>
+        <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="#9ca3af"/>
+        </marker>
+        <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.10"/>
+        </filter>
+      </defs>
+
+      <!-- ====== 流区分带 ====== -->
+      <rect x="20" y="56" width="612" height="330" rx="14" fill="#eef2ff" opacity="0.55"/>
+      <rect x="656" y="56" width="600" height="330" rx="14" fill="#fff7ed" opacity="0.65"/>
+      <text x="42" y="86" font-size="13" font-weight="700" fill="#4338ca">业务执行流</text>
+      <text x="678" y="86" font-size="13" font-weight="700" fill="#c2410c">财务处理流</text>
+
+      <!-- ====== 节点间箭头（图标层 y=170，止于下一节点圆边缘） ====== -->
+      <g stroke="#9ca3af" stroke-width="2" fill="none" marker-end="url(#arrow)">
+        <line x1="162" y1="170" x2="270" y2="170"/>
+        <line x1="374" y1="170" x2="482" y2="170"/>
+        <line x1="586" y1="170" x2="694" y2="170"/>
+        <line x1="798" y1="170" x2="906" y2="170"/>
+        <line x1="1010" y1="170" x2="1118" y2="170"/>
+      </g>
+      <!-- 箭头标签（白底防压线，位于两段圆之间的空隙中点） -->
+      <g font-size="11" fill="#4b5563" text-anchor="middle">
+        <rect x="186" y="140" width="60" height="18" rx="9" fill="#ffffff" stroke="none"/>
+        <text x="216" y="153">审批通过</text>
+        <rect x="398" y="140" width="60" height="18" rx="9" fill="#ffffff" stroke="none"/>
+        <text x="428" y="153">按单发货</text>
+        <rect x="610" y="140" width="60" height="18" rx="9" fill="#ffffff" stroke="none"/>
+        <text x="640" y="153">到货验收</text>
+        <rect x="814" y="140" width="76" height="18" rx="9" fill="#ffffff" stroke="none"/>
+        <text x="852" y="153">发票校验通过</text>
+        <rect x="1034" y="140" width="60" height="18" rx="9" fill="#ffffff" stroke="none"/>
+        <text x="1064" y="153">付款完成</text>
+      </g>
+
+      <!-- ====== 节点 1：采购申请 ====== -->
+      <g>
+        <circle cx="110" cy="170" r="46" fill="#4c6fff" filter="url(#soft)"/>
+        <!-- icon: 文档 + 笔 -->
+        <g stroke="#ffffff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="96" y="152" width="24" height="30" rx="3"/>
+          <line x1="102" y1="161" x2="114" y2="161"/>
+          <line x1="102" y1="168" x2="114" y2="168"/>
+          <line x1="102" y1="175" x2="110" y2="175"/>
+          <line x1="118" y1="186" x2="128" y2="176"/>
+        </g>
+        <line x1="110" y1="216" x2="110" y2="234" stroke="#c7d2fe" stroke-width="2"/>
+        <rect x="30" y="234" width="160" height="136" rx="10" fill="#ffffff" stroke="#e0e7ff" filter="url(#soft)"/>
+        <text x="110" y="260" text-anchor="middle" font-size="16" font-weight="700" fill="#1f2937">采购申请</text>
+        <text x="110" y="284" text-anchor="middle" font-size="12" fill="#6b7280">需求部门提出采购需求</text>
+        <line x1="46" y1="300" x2="174" y2="300" stroke="#eef0f3" stroke-width="1"/>
+        <text x="110" y="322" text-anchor="middle" font-size="12" fill="#4c6fff">单据：采购申请单</text>
+        <text x="110" y="344" text-anchor="middle" font-size="11" fill="#9ca3af">触发预算占用校验</text>
+      </g>
+
+      <!-- ====== 节点 2：采购订单 ====== -->
+      <g>
+        <circle cx="322" cy="170" r="46" fill="#7c5cff" filter="url(#soft)"/>
+        <!-- icon: 购物车 -->
+        <g stroke="#ffffff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M 304 156 L 310 156 L 316 178 L 338 178 L 342 164 L 312 164"/>
+          <circle cx="319" cy="186" r="2.6" fill="#ffffff"/>
+          <circle cx="334" cy="186" r="2.6" fill="#ffffff"/>
+        </g>
+        <line x1="322" y1="216" x2="322" y2="234" stroke="#ddd6fe" stroke-width="2"/>
+        <rect x="242" y="234" width="160" height="136" rx="10" fill="#ffffff" stroke="#e9e4ff" filter="url(#soft)"/>
+        <text x="322" y="260" text-anchor="middle" font-size="16" font-weight="700" fill="#1f2937">采购订单</text>
+        <text x="322" y="284" text-anchor="middle" font-size="12" fill="#6b7280">审批后向供应商下单</text>
+        <line x1="258" y1="300" x2="386" y2="300" stroke="#eef0f3" stroke-width="1"/>
+        <text x="322" y="322" text-anchor="middle" font-size="12" fill="#7c5cff">单据：采购订单</text>
+        <text x="322" y="344" text-anchor="middle" font-size="11" fill="#9ca3af">关联合同与供应商</text>
+      </g>
+
+      <!-- ====== 节点 3：采购入库 ====== -->
+      <g>
+        <circle cx="534" cy="170" r="46" fill="#00a896" filter="url(#soft)"/>
+        <!-- icon: 箱子 + 向下箭头 -->
+        <g stroke="#ffffff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M 518 164 L 534 156 L 550 164 L 550 182 L 534 190 L 518 182 Z"/>
+          <line x1="518" y1="164" x2="534" y2="172"/>
+          <line x1="550" y1="164" x2="534" y2="172"/>
+          <line x1="534" y1="172" x2="534" y2="190"/>
+        </g>
+        <line x1="534" y1="216" x2="534" y2="234" stroke="#99f6e4" stroke-width="2"/>
+        <rect x="454" y="234" width="160" height="136" rx="10" fill="#ffffff" stroke="#ccfbf1" filter="url(#soft)"/>
+        <text x="534" y="260" text-anchor="middle" font-size="16" font-weight="700" fill="#1f2937">采购入库</text>
+        <text x="534" y="284" text-anchor="middle" font-size="12" fill="#6b7280">货物验收合格后入库</text>
+        <line x1="470" y1="300" x2="598" y2="300" stroke="#eef0f3" stroke-width="1"/>
+        <text x="534" y="322" text-anchor="middle" font-size="12" fill="#00a896">单据：入库单</text>
+        <text x="534" y="344" text-anchor="middle" font-size="11" fill="#9ca3af">更新库存 暂估应付</text>
+      </g>
+
+      <!-- ====== 节点 4：采购收票 ====== -->
+      <g>
+        <circle cx="746" cy="170" r="46" fill="#f59e0b" filter="url(#soft)"/>
+        <!-- icon: 发票 -->
+        <g stroke="#ffffff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M 732 152 L 760 152 L 760 186 L 755 182 L 751 186 L 746 182 L 741 186 L 737 182 L 732 186 Z"/>
+          <line x1="738" y1="161" x2="754" y2="161"/>
+          <line x1="738" y1="168" x2="754" y2="168"/>
+          <line x1="738" y1="175" x2="748" y2="175"/>
+        </g>
+        <line x1="746" y1="216" x2="746" y2="234" stroke="#fde68a" stroke-width="2"/>
+        <rect x="666" y="234" width="160" height="136" rx="10" fill="#ffffff" stroke="#fdeccd" filter="url(#soft)"/>
+        <text x="746" y="260" text-anchor="middle" font-size="16" font-weight="700" fill="#1f2937">采购收票</text>
+        <text x="746" y="284" text-anchor="middle" font-size="12" fill="#6b7280">接收并校验供应商发票</text>
+        <line x1="682" y1="300" x2="810" y2="300" stroke="#eef0f3" stroke-width="1"/>
+        <text x="746" y="322" text-anchor="middle" font-size="12" fill="#d97706">单据：进项发票</text>
+        <text x="746" y="344" text-anchor="middle" font-size="11" fill="#9ca3af">票单匹配 确认应付</text>
+      </g>
+
+      <!-- ====== 节点 5：采购付款 ====== -->
+      <g>
+        <circle cx="958" cy="170" r="46" fill="#f96167" filter="url(#soft)"/>
+        <!-- icon: 钱币 ¥ -->
+        <g stroke="#ffffff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="958" cy="170" r="16"/>
+          <path d="M 951 163 L 958 170 L 965 163"/>
+          <line x1="958" y1="170" x2="958" y2="178"/>
+          <line x1="952" y1="173" x2="964" y2="173"/>
+        </g>
+        <line x1="958" y1="216" x2="958" y2="234" stroke="#fecaca" stroke-width="2"/>
+        <rect x="878" y="234" width="160" height="136" rx="10" fill="#ffffff" stroke="#fee2e2" filter="url(#soft)"/>
+        <text x="958" y="260" text-anchor="middle" font-size="16" font-weight="700" fill="#1f2937">采购付款</text>
+        <text x="958" y="284" text-anchor="middle" font-size="12" fill="#6b7280">按合同账期支付货款</text>
+        <line x1="894" y1="300" x2="1022" y2="300" stroke="#eef0f3" stroke-width="1"/>
+        <text x="958" y="322" text-anchor="middle" font-size="12" fill="#f96167">单据：付款单</text>
+        <text x="958" y="344" text-anchor="middle" font-size="11" fill="#9ca3af">自动生成付款凭证</text>
+      </g>
+
+      <!-- ====== 节点 6：付款核销 ====== -->
+      <g>
+        <circle cx="1170" cy="170" r="46" fill="#2c5f2d" filter="url(#soft)"/>
+        <!-- icon: 对勾章 -->
+        <g stroke="#ffffff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="1170" cy="168" r="15"/>
+          <path d="M 1163 168 L 1168 174 L 1178 162"/>
+          <line x1="1158" y1="188" x2="1182" y2="188"/>
+        </g>
+        <line x1="1170" y1="216" x2="1170" y2="234" stroke="#bbf7d0" stroke-width="2"/>
+        <rect x="1090" y="234" width="160" height="136" rx="10" fill="#ffffff" stroke="#dcfce7" filter="url(#soft)"/>
+        <text x="1170" y="260" text-anchor="middle" font-size="16" font-weight="700" fill="#1f2937">付款核销</text>
+        <text x="1170" y="284" text-anchor="middle" font-size="12" fill="#6b7280">票货款三单匹配核销</text>
+        <line x1="1106" y1="300" x2="1234" y2="300" stroke="#eef0f3" stroke-width="1"/>
+        <text x="1170" y="322" text-anchor="middle" font-size="12" fill="#2c5f2d">单据：核销记录</text>
+        <text x="1170" y="344" text-anchor="middle" font-size="11" fill="#9ca3af">应付清零 流程闭环</text>
+      </g>
+
+      <!-- ====== 底部业财对应说明 ====== -->
+      <text x="356" y="416" text-anchor="middle" font-size="12" fill="#6366f1">业务单据驱动：申请单 → 订单 → 入库单（数量与金额源头）</text>
+      <text x="974" y="416" text-anchor="middle" font-size="12" fill="#ea580c">财务自动生成：应付确认 → 付款凭证 → 核销（业财一一对应）</text>
+    </svg>
+  </div>
+
+  <p class="caption">
+    <span class="tag tag-biz">业务执行流</span><strong>采购申请 → 采购订单 → 采购入库</strong>：由需求部门发起，经审批后向供应商下单，货物验收合格后入库。此阶段产生全部业务源头单据，并在申请环节触发预算占用校验、入库环节形成暂估应付。
+  </p>
+  <p class="caption">
+    <span class="tag tag-fin">财务处理流</span><strong>采购收票 → 采购付款 → 付款核销</strong>：接收供应商发票并与订单、入库单匹配后确认应付；按合同账期付款，业务单据自动生成财务凭证；最终完成票、货、款三单匹配核销，应付清零，实现业财链路闭环。
+  </p>
+</div>
+</body>
+</html>

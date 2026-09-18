@@ -1,0 +1,482 @@
+{
+  "run_status": "slides_recorded",
+  "deck_name": "集团跨公司协同处理方案",
+  "selected_backend": "built-in image tool",
+  "sample_generation_method": {
+    "backend_used": "built-in image tool",
+    "tool_name": "image_gen",
+    "mode": "generate",
+    "prompt_source": "sample_slide_10_prompt.md and approved group governance blueprint revision",
+    "size": "16:9 landscape",
+    "quality": "built-in default",
+    "approved_sample_path": "D:\\项目AI协作\\4、PMS业财一体化\\inputs\\跨公司协调方案\\origin_image\\slide_10.png",
+    "input_context_preparation": "inspect the approved sample with view_image and include it as a style-only reference for every remaining slide",
+    "handoff_rule": "Subagents must use the built-in image_gen tool in generate or style-reference mode and return a blocker if unavailable."
+  },
+  "max_concurrent_slides": 6,
+  "slides": [
+    {
+      "slide_id": "slide_01",
+      "number": 1,
+      "title": "PMS集团跨公司协同处理方案",
+      "job": "prompts/slide_01.json",
+      "out": "origin_image/slide_01.png",
+      "input_images": [
+        {
+          "path": "D:\\项目AI协作\\4、PMS业财一体化\\inputs\\跨公司协调方案\\origin_image\\slide_10.png",
+          "role": "approved sample slide style reference",
+          "fidelity": "match palette, typography mood, spacing, governance-diagram language and information density only; do not copy the exact layout or content"
+        }
+      ],
+      "requires_context_images": true,
+      "status": "recorded",
+      "dispatch": {
+        "agent_id": "019f8a46-2e9d-7062-918f-3be92dadee20",
+        "agent_nickname": "Raman",
+        "prompt": "prompts/slide_01.json",
+        "prompt_sha256": "66a1c9d3c8c22dcea3d81d1497eaaea8c621eba6c10da340f8874589f05216f6",
+        "dispatched_at": "2026-07-22T14:41:39Z"
+      },
+      "result": {
+        "agent_id": "019f8a46-2e9d-7062-918f-3be92dadee20",
+        "backend_used": "built-in image tool",
+        "selected_source": "D:\\Program Files\\.codex\\generated_images\\019f8a46-2e9d-7062-918f-3be92dadee20\\exec-3b69b62a-6f6b-481b-a160-eec971c2d793.png",
+        "selected_source_sha256": "6eb38ed1cbdf2017ac35c94f02d7d8585d664dfbaaab89f09bde6272439e4b6a",
+        "final_image": "origin_image/slide_01.png",
+        "final_image_sha256": "6eb38ed1cbdf2017ac35c94f02d7d8585d664dfbaaab89f09bde6272439e4b6a",
+        "expected_backend": "built-in image tool",
+        "expected_backend_labels": [
+          "built-in image tool",
+          "image_gen"
+        ],
+        "sample_generation_method_matched": true,
+        "qa_note": "封面中文清晰，集团治理蓝图风一致，结构完整。",
+        "recorded_at": "2026-07-22T14:46:36Z"
+      },
+      "blocker": null
+    },
+    {
+      "slide_id": "slide_02",
+      "number": 2,
+      "title": "本次需要解决的核心问题",
+      "job": "prompts/slide_02.json",
+      "out": "origin_image/slide_02.png",
+      "input_images": [
+        {
+          "path": "D:\\项目AI协作\\4、PMS业财一体化\\inputs\\跨公司协调方案\\origin_image\\slide_10.png",
+          "role": "approved sample slide style reference",
+          "fidelity": "match palette, typography mood, spacing, governance-diagram language and information density only; do not copy the exact layout or content"
+        }
+      ],
+      "requires_context_images": true,
+      "status": "recorded",
+      "dispatch": {
+        "agent_id": "019f8a46-44e6-77d2-b9dc-a9ac76a37b9c",
+        "agent_nickname": "Beauvoir",
+        "prompt": "prompts/slide_02.json",
+        "prompt_sha256": "d2ab96754718bdaeb9fed86741fb98aa9663de4b3cacde4ea92ab2b3224e92d8",
+        "dispatched_at": "2026-07-22T14:41:40Z"
+      },
+      "result": {
+        "agent_id": "019f8a46-44e6-77d2-b9dc-a9ac76a37b9c",
+        "backend_used": "built-in image tool",
+        "selected_source": "D:\\Program Files\\.codex\\generated_images\\019f8a46-44e6-77d2-b9dc-a9ac76a37b9c\\exec-42f56e4e-8f9a-49f5-8f4c-c3c3e38f7464.png",
+        "selected_source_sha256": "42cf7eed0726836104832a15f636e09ca8f4036990a058cea7f1da87537c7b5b",
+        "final_image": "origin_image/slide_02.png",
+        "final_image_sha256": "42cf7eed0726836104832a15f636e09ca8f4036990a058cea7f1da87537c7b5b",
+        "expected_backend": "built-in image tool",
+        "expected_backend_labels": [
+          "built-in image tool",
+          "image_gen"
+        ],
+        "sample_generation_method_matched": true,
+        "qa_note": "四类核心问题和治理结论清晰，无虚构数据。",
+        "recorded_at": "2026-07-22T14:51:53Z"
+      },
+      "blocker": null
+    },
+    {
+      "slide_id": "slide_03",
+      "number": 3,
+      "title": "典型场景暴露出的管理难题",
+      "job": "prompts/slide_03.json",
+      "out": "origin_image/slide_03.png",
+      "input_images": [
+        {
+          "path": "D:\\项目AI协作\\4、PMS业财一体化\\inputs\\跨公司协调方案\\origin_image\\slide_10.png",
+          "role": "approved sample slide style reference",
+          "fidelity": "match palette, typography mood, spacing, governance-diagram language and information density only; do not copy the exact layout or content"
+        }
+      ],
+      "requires_context_images": true,
+      "status": "recorded",
+      "dispatch": {
+        "agent_id": "019f8a46-43f4-7942-93c5-9db67a9252a3",
+        "agent_nickname": "Faraday",
+        "prompt": "prompts/slide_03.json",
+        "prompt_sha256": "6dca216792f1d45ff03665d7e0840c5ede5538e18d1c35af17d7d21b9afc7658",
+        "dispatched_at": "2026-07-22T14:41:41Z"
+      },
+      "result": {
+        "agent_id": "019f8a46-43f4-7942-93c5-9db67a9252a3",
+        "backend_used": "built-in image tool",
+        "selected_source": "D:\\Program Files\\.codex\\generated_images\\019f8a46-43f4-7942-93c5-9db67a9252a3\\exec-2f601bc3-0245-463f-aade-dc2948566916.png",
+        "selected_source_sha256": "18e97b5204e6d59726f827fb09b29eb6966476bcb45673de5934822c3690b23f",
+        "final_image": "origin_image/slide_03.png",
+        "final_image_sha256": "18e97b5204e6d59726f827fb09b29eb6966476bcb45673de5934822c3690b23f",
+        "expected_backend": "built-in image tool",
+        "expected_backend_labels": [
+          "built-in image tool",
+          "image_gen"
+        ],
+        "sample_generation_method_matched": true,
+        "qa_note": "三公司关系和三类冲突清晰，无截断。",
+        "recorded_at": "2026-07-22T14:46:36Z"
+      },
+      "blocker": null
+    },
+    {
+      "slide_id": "slide_04",
+      "number": 4,
+      "title": "未来业务形态：一条主线、两类任务、一个跟踪视图",
+      "job": "prompts/slide_04.json",
+      "out": "origin_image/slide_04.png",
+      "input_images": [
+        {
+          "path": "D:\\项目AI协作\\4、PMS业财一体化\\inputs\\跨公司协调方案\\origin_image\\slide_10.png",
+          "role": "approved sample slide style reference",
+          "fidelity": "match palette, typography mood, spacing, governance-diagram language and information density only; do not copy the exact layout or content"
+        }
+      ],
+      "requires_context_images": true,
+      "status": "recorded",
+      "dispatch": {
+        "agent_id": "019f8a46-51cc-7230-bed9-2ab160900160",
+        "agent_nickname": "Kepler",
+        "prompt": "prompts/slide_04.json",
+        "prompt_sha256": "c498e2f75e33707a7873849f1ccc6e2ebd49f987237f7b84b44006c609a8a48d",
+        "dispatched_at": "2026-07-22T14:41:41Z"
+      },
+      "result": {
+        "agent_id": "019f8a46-51cc-7230-bed9-2ab160900160",
+        "backend_used": "built-in image tool",
+        "selected_source": "D:\\Program Files\\.codex\\generated_images\\019f8a46-51cc-7230-bed9-2ab160900160\\exec-dbb323c5-b4d7-40fc-974b-9017a7b20baa.png",
+        "selected_source_sha256": "f7352899ab5b93a3de7221e6c4899cdc16539aed832767c7243be7b4bfc0cf1e",
+        "final_image": "origin_image/slide_04.png",
+        "final_image_sha256": "f7352899ab5b93a3de7221e6c4899cdc16539aed832767c7243be7b4bfc0cf1e",
+        "expected_backend": "built-in image tool",
+        "expected_backend_labels": [
+          "built-in image tool",
+          "image_gen"
+        ],
+        "sample_generation_method_matched": true,
+        "qa_note": "一条主线、两类任务、一个跟踪视图表达清楚。",
+        "recorded_at": "2026-07-22T14:46:36Z"
+      },
+      "blocker": null
+    },
+    {
+      "slide_id": "slide_05",
+      "number": 5,
+      "title": "项目需求坚持一个入口、一张单据",
+      "job": "prompts/slide_05.json",
+      "out": "origin_image/slide_05.png",
+      "input_images": [
+        {
+          "path": "D:\\项目AI协作\\4、PMS业财一体化\\inputs\\跨公司协调方案\\origin_image\\slide_10.png",
+          "role": "approved sample slide style reference",
+          "fidelity": "match palette, typography mood, spacing, governance-diagram language and information density only; do not copy the exact layout or content"
+        }
+      ],
+      "requires_context_images": true,
+      "status": "recorded",
+      "dispatch": {
+        "agent_id": "019f8a46-5658-7160-b6ff-e46a39122817",
+        "agent_nickname": "Einstein",
+        "prompt": "prompts/slide_05.json",
+        "prompt_sha256": "8bad8a30e6b9216047f93817530eeb8465e0bc2c2333ca9ff4d56c186a83a800",
+        "dispatched_at": "2026-07-22T14:41:43Z"
+      },
+      "result": {
+        "agent_id": "019f8a46-5658-7160-b6ff-e46a39122817",
+        "backend_used": "built-in image tool",
+        "selected_source": "D:\\Program Files\\.codex\\generated_images\\019f8a46-5658-7160-b6ff-e46a39122817\\exec-014cf47e-a846-449f-adb4-23cb95d21d56.png",
+        "selected_source_sha256": "c6a925b1ec83850e75afad024ce72945f133a7f6fe2e1d16363d2eb6af99f9a1",
+        "final_image": "origin_image/slide_05.png",
+        "final_image_sha256": "c6a925b1ec83850e75afad024ce72945f133a7f6fe2e1d16363d2eb6af99f9a1",
+        "expected_backend": "built-in image tool",
+        "expected_backend_labels": [
+          "built-in image tool",
+          "image_gen"
+        ],
+        "sample_generation_method_matched": true,
+        "qa_note": "一个入口、一张单据、两个权限视图表达准确。",
+        "recorded_at": "2026-07-22T14:57:24Z"
+      },
+      "blocker": null
+    },
+    {
+      "slide_id": "slide_06",
+      "number": 6,
+      "title": "项目主责公司：管理完整项目链路",
+      "job": "prompts/slide_06.json",
+      "out": "origin_image/slide_06.png",
+      "input_images": [
+        {
+          "path": "D:\\项目AI协作\\4、PMS业财一体化\\inputs\\跨公司协调方案\\origin_image\\slide_10.png",
+          "role": "approved sample slide style reference",
+          "fidelity": "match palette, typography mood, spacing, governance-diagram language and information density only; do not copy the exact layout or content"
+        }
+      ],
+      "requires_context_images": true,
+      "status": "recorded",
+      "dispatch": {
+        "agent_id": "019f8a46-6a54-70e1-8768-cf9681e8324b",
+        "agent_nickname": "Avicenna",
+        "prompt": "prompts/slide_06.json",
+        "prompt_sha256": "b76f5e849a09406f931acda3dbb013bb291b2131e0a7b489cd7e710d4789f690",
+        "dispatched_at": "2026-07-22T14:41:44Z"
+      },
+      "result": {
+        "agent_id": "019f8a46-6a54-70e1-8768-cf9681e8324b",
+        "backend_used": "built-in image tool",
+        "selected_source": "D:\\Program Files\\.codex\\generated_images\\019f8a46-6a54-70e1-8768-cf9681e8324b\\exec-6f8689c5-061b-436a-9061-ebc452c020ec.png",
+        "selected_source_sha256": "5935b6377206d92569c817ce3b24142d4d7b68bd4f85efb4387f5be5b78094db",
+        "final_image": "origin_image/slide_06.png",
+        "final_image_sha256": "5935b6377206d92569c817ce3b24142d4d7b68bd4f85efb4387f5be5b78094db",
+        "expected_backend": "built-in image tool",
+        "expected_backend_labels": [
+          "built-in image tool",
+          "image_gen"
+        ],
+        "sample_generation_method_matched": true,
+        "qa_note": "修复后已移除所有虚构数字，八阶段链路和定性驾驶舱标签准确。",
+        "recorded_at": "2026-07-22T15:06:20Z"
+      },
+      "blocker": null
+    },
+    {
+      "slide_id": "slide_07",
+      "number": 7,
+      "title": "跨公司协同方：只接任务，不进入主流程",
+      "job": "prompts/slide_07.json",
+      "out": "origin_image/slide_07.png",
+      "input_images": [
+        {
+          "path": "D:\\项目AI协作\\4、PMS业财一体化\\inputs\\跨公司协调方案\\origin_image\\slide_10.png",
+          "role": "approved sample slide style reference",
+          "fidelity": "match palette, typography mood, spacing, governance-diagram language and information density only; do not copy the exact layout or content"
+        }
+      ],
+      "requires_context_images": true,
+      "status": "recorded",
+      "dispatch": {
+        "agent_id": "019f8a4e-98d4-7173-b886-8a8f0bcb58bb",
+        "agent_nickname": "Pauli",
+        "prompt": "prompts/slide_07.json",
+        "prompt_sha256": "562c6a627519e0e61e255833ac055d981eacc83b8eb5868b06c4cc4b7bb0603a",
+        "dispatched_at": "2026-07-22T14:50:45Z"
+      },
+      "result": {
+        "agent_id": "019f8a4e-98d4-7173-b886-8a8f0bcb58bb",
+        "backend_used": "built-in image tool",
+        "selected_source": "D:\\Program Files\\.codex\\generated_images\\019f8a4e-98d4-7173-b886-8a8f0bcb58bb\\exec-b410b43e-3473-465b-9b4d-73074cabe192.png",
+        "selected_source_sha256": "3b086488d50206612df6e2410c138d0aa0a773063ec08ec20edc4d92d1d09199",
+        "final_image": "origin_image/slide_07.png",
+        "final_image_sha256": "3b086488d50206612df6e2410c138d0aa0a773063ec08ec20edc4d92d1d09199",
+        "expected_backend": "built-in image tool",
+        "expected_backend_labels": [
+          "built-in image tool",
+          "image_gen"
+        ],
+        "sample_generation_method_matched": true,
+        "qa_note": "跨公司任务六步闭环和成果自动回写表达准确。",
+        "recorded_at": "2026-07-22T14:55:15Z"
+      },
+      "blocker": null
+    },
+    {
+      "slide_id": "slide_08",
+      "number": 8,
+      "title": "任务级资料包：调研问卷如何安全共享",
+      "job": "prompts/slide_08.json",
+      "out": "origin_image/slide_08.png",
+      "input_images": [
+        {
+          "path": "D:\\项目AI协作\\4、PMS业财一体化\\inputs\\跨公司协调方案\\origin_image\\slide_10.png",
+          "role": "approved sample slide style reference",
+          "fidelity": "match palette, typography mood, spacing, governance-diagram language and information density only; do not copy the exact layout or content"
+        }
+      ],
+      "requires_context_images": true,
+      "status": "recorded",
+      "dispatch": {
+        "agent_id": "019f8a4e-a67e-7561-8935-36c5cac5c49e",
+        "agent_nickname": "Hubble",
+        "prompt": "prompts/slide_08.json",
+        "prompt_sha256": "45ffac8370dc858f2b154f3eaa7b1609097d2e7d0ca4e5d5f959c0398bb48737",
+        "dispatched_at": "2026-07-22T14:50:46Z"
+      },
+      "result": {
+        "agent_id": "019f8a4e-a67e-7561-8935-36c5cac5c49e",
+        "backend_used": "built-in image tool",
+        "selected_source": "D:\\Program Files\\.codex\\generated_images\\019f8a4e-a67e-7561-8935-36c5cac5c49e\\exec-9e5b5d40-b1f4-40ce-b268-f1a2d0036fe3.png",
+        "selected_source_sha256": "83721239951c7988015c4bd3f359bd198d98696902d0edce5bbe09a68d208ebb",
+        "final_image": "origin_image/slide_08.png",
+        "final_image_sha256": "83721239951c7988015c4bd3f359bd198d98696902d0edce5bbe09a68d208ebb",
+        "expected_backend": "built-in image tool",
+        "expected_backend_labels": [
+          "built-in image tool",
+          "image_gen"
+        ],
+        "sample_generation_method_matched": true,
+        "qa_note": "任务级资料包、版本冻结和任务内只读表达清晰。",
+        "recorded_at": "2026-07-22T15:03:47Z"
+      },
+      "blocker": null
+    },
+    {
+      "slide_id": "slide_09",
+      "number": 9,
+      "title": "需求来源公司：知道过程，不介入内部管理",
+      "job": "prompts/slide_09.json",
+      "out": "origin_image/slide_09.png",
+      "input_images": [
+        {
+          "path": "D:\\项目AI协作\\4、PMS业财一体化\\inputs\\跨公司协调方案\\origin_image\\slide_10.png",
+          "role": "approved sample slide style reference",
+          "fidelity": "match palette, typography mood, spacing, governance-diagram language and information density only; do not copy the exact layout or content"
+        }
+      ],
+      "requires_context_images": true,
+      "status": "recorded",
+      "dispatch": {
+        "agent_id": "019f8a4e-a871-7841-8990-88270a3211b7",
+        "agent_nickname": "Averroes",
+        "prompt": "prompts/slide_09.json",
+        "prompt_sha256": "a6858e6741094f17dd8a176df03aac54e13f43aff402ed3f7d1e6847ec10afbb",
+        "dispatched_at": "2026-07-22T14:50:46Z"
+      },
+      "result": {
+        "agent_id": "019f8a4e-a871-7841-8990-88270a3211b7",
+        "backend_used": "built-in image tool",
+        "selected_source": "D:\\Program Files\\.codex\\generated_images\\019f8a4e-a871-7841-8990-88270a3211b7\\exec-7dde6cfc-753c-4727-81b5-df537991892f.png",
+        "selected_source_sha256": "89a2499dfb4c5c40efefda179f5fa3c4df2edaf6bbe8e12414f65e9a0810f493",
+        "final_image": "origin_image/slide_09.png",
+        "final_image_sha256": "89a2499dfb4c5c40efefda179f5fa3c4df2edaf6bbe8e12414f65e9a0810f493",
+        "expected_backend": "built-in image tool",
+        "expected_backend_labels": [
+          "built-in image tool",
+          "image_gen"
+        ],
+        "sample_generation_method_matched": true,
+        "qa_note": "来源方可见、任务办理和内部不可见边界清晰。",
+        "recorded_at": "2026-07-22T14:55:58Z"
+      },
+      "blocker": null
+    },
+    {
+      "slide_id": "slide_10",
+      "number": 10,
+      "title": "典型场景全流程：无锡、武汉、长沙如何协同",
+      "job": "prompts/slide_10.json",
+      "out": "origin_image/slide_10.png",
+      "input_images": [
+        {
+          "path": "D:\\项目AI协作\\4、PMS业财一体化\\inputs\\跨公司协调方案\\origin_image\\slide_10.png",
+          "role": "approved sample slide style reference",
+          "fidelity": "match palette, typography mood, spacing, governance-diagram language and information density only; do not copy the exact layout or content"
+        }
+      ],
+      "requires_context_images": true,
+      "status": "accepted",
+      "dispatch": null,
+      "result": {
+        "final_image": "origin_image/slide_10.png",
+        "accepted_sample": true
+      },
+      "blocker": null
+    },
+    {
+      "slide_id": "slide_11",
+      "number": 11,
+      "title": "权限与数据边界",
+      "job": "prompts/slide_11.json",
+      "out": "origin_image/slide_11.png",
+      "input_images": [
+        {
+          "path": "D:\\项目AI协作\\4、PMS业财一体化\\inputs\\跨公司协调方案\\origin_image\\slide_10.png",
+          "role": "approved sample slide style reference",
+          "fidelity": "match palette, typography mood, spacing, governance-diagram language and information density only; do not copy the exact layout or content"
+        }
+      ],
+      "requires_context_images": true,
+      "status": "recorded",
+      "dispatch": {
+        "agent_id": "019f8a50-4366-7a02-994d-baefdf5f35bd",
+        "agent_nickname": "Gauss",
+        "prompt": "prompts/slide_11.json",
+        "prompt_sha256": "84f5c23db49803f48601a14425a50314a6fc6426f6994b164f0b1fa60a9f4342",
+        "dispatched_at": "2026-07-22T14:52:25Z"
+      },
+      "result": {
+        "agent_id": "019f8a50-4366-7a02-994d-baefdf5f35bd",
+        "backend_used": "built-in image tool",
+        "selected_source": "D:\\Program Files\\.codex\\generated_images\\019f8a50-4366-7a02-994d-baefdf5f35bd\\exec-24ce61cd-3c48-4885-8304-113c5123311b.png",
+        "selected_source_sha256": "36404069c9688031eb67905c940740da50528b53c384330d184e363f1d8778cb",
+        "final_image": "origin_image/slide_11.png",
+        "final_image_sha256": "36404069c9688031eb67905c940740da50528b53c384330d184e363f1d8778cb",
+        "expected_backend": "built-in image tool",
+        "expected_backend_labels": [
+          "built-in image tool",
+          "image_gen"
+        ],
+        "sample_generation_method_matched": true,
+        "qa_note": "权限矩阵清晰，使用定性标签，无虚构数据。",
+        "recorded_at": "2026-07-22T14:57:25Z"
+      },
+      "blocker": null
+    },
+    {
+      "slide_id": "slide_12",
+      "number": 12,
+      "title": "落地后的管理价值与实施建议",
+      "job": "prompts/slide_12.json",
+      "out": "origin_image/slide_12.png",
+      "input_images": [
+        {
+          "path": "D:\\项目AI协作\\4、PMS业财一体化\\inputs\\跨公司协调方案\\origin_image\\slide_10.png",
+          "role": "approved sample slide style reference",
+          "fidelity": "match palette, typography mood, spacing, governance-diagram language and information density only; do not copy the exact layout or content"
+        }
+      ],
+      "requires_context_images": true,
+      "status": "recorded",
+      "dispatch": {
+        "agent_id": "019f8a52-e352-7fa2-b247-c4296a4bae60",
+        "agent_nickname": "Volta",
+        "prompt": "prompts/slide_12.json",
+        "prompt_sha256": "0025468b1ec5ececd5a3f2d2d87b6bf8edb16d08200200e73fca2d6afae5fafd",
+        "dispatched_at": "2026-07-22T14:55:18Z"
+      },
+      "result": {
+        "agent_id": "019f8a52-e352-7fa2-b247-c4296a4bae60",
+        "backend_used": "built-in image tool",
+        "selected_source": "D:\\Program Files\\.codex\\generated_images\\019f8a52-e352-7fa2-b247-c4296a4bae60\\exec-175b54a1-7624-4708-b05b-c8bf51314d6d.png",
+        "selected_source_sha256": "014aad146daa6e59968e9dfb54b2d8b3ec93827a2b9799184e6eddd4acac207b",
+        "final_image": "origin_image/slide_12.png",
+        "final_image_sha256": "014aad146daa6e59968e9dfb54b2d8b3ec93827a2b9799184e6eddd4acac207b",
+        "expected_backend": "built-in image tool",
+        "expected_backend_labels": [
+          "built-in image tool",
+          "image_gen"
+        ],
+        "sample_generation_method_matched": true,
+        "qa_note": "四项管理价值和三阶段路线图清晰，无虚构日期或指标。",
+        "recorded_at": "2026-07-22T15:02:53Z"
+      },
+      "blocker": null
+    }
+  ],
+  "updated_at": "2026-07-22T15:06:20Z"
+}

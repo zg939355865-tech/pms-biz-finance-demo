@@ -1,0 +1,8 @@
+{
+  "id": "utility-page",
+  "pageTypes": ["workbench", "dashboard"],
+  "workflowActions": false,
+  "auditFields": false,
+  "saveDraft": false,
+  "toastEnabled": false
+}

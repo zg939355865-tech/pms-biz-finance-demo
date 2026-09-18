@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir \"d:\\\\项目AI协作\\\\4、PMS业财一体化\\\\docs\\\\需求\")"
+    ]
+  }
+}

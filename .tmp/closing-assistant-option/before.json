@@ -1,0 +1,210 @@
+{
+  "schemaVersion": "pms-page-schema-v2",
+  "policyProfile": "utility-page",
+  "policyVersion": "pms-policy-v1",
+  "pageCode": "closing-assistant",
+  "pageName": "结账助手",
+  "domain": "period-close",
+  "module": "期末结账",
+  "menuPath": "期末结账/结账助手",
+  "pageType": "dashboard",
+  "template": "workbench-page",
+  "outputPath": "pages/period-close/closing-assistant.html",
+  "businessScenario": "围绕当前已启动会计期间，集中检查物资、收入、采购单据完成情况，定位未完成单据及责任人并持续复检直至全部通过。",
+  "workflowActions": false,
+  "toastEnabled": false,
+  "resourceReference": {
+    "center": "prototype-resources/index.html",
+    "baseline": "pms-resource-center-v1",
+    "pageSamples": ["工作台页", "标准列表页", "结果页"],
+    "components": ["PageHeader", "Space", "Descriptions", "ProTable", "Tag", "ProResult", "ProDetailDrawer", "ProDescriptionList", "Alert"]
+  },
+  "uiConstraints": {
+    "noPageSizeSelector": true,
+    "desktopOnly": true,
+    "noBusinessPageVerticalScroll": true
+  },
+  "periodCloseConfig": {
+    "mode": "closing-assistant",
+    "activeAccountingPeriod": "202609",
+    "activeAccountingYear": "2026",
+    "activeAccountingMonth": "9",
+    "rangeBoundary": "inclusive",
+    "businessDomains": ["物资", "收入", "采购"],
+    "checkAction": "run-closing-check",
+    "passStatus": "全部通过",
+    "blockingStatus": "未通过",
+    "invalidateOnSourceChange": true
+  },
+  "pageActions": [
+    {
+      "code": "run-closing-check",
+      "label": "开始检查",
+      "type": "primary",
+      "icon": "fa-play"
+    }
+  ],
+  "regions": [
+    {
+      "id": "current-period-info",
+      "component": "Descriptions",
+      "title": "当前会计期间",
+      "layoutColumns": 2,
+      "record": {
+        "company": "昕彤赋能（武汉）设计研究有限公司",
+        "accountingYear": "2026",
+        "accountingPeriod": "9",
+        "dateRange": "2026-09-01 至 2026-09-30",
+        "checker": "财务-李婷"
+      },
+      "fields": [
+        { "code": "company", "label": "核算主体" },
+        { "code": "accountingYear", "label": "年度" },
+        { "code": "accountingPeriod", "label": "会计期间" },
+        { "code": "dateRange", "label": "期间范围" },
+        { "code": "checker", "label": "检查人" }
+      ]
+    },
+    {
+      "id": "closing-check-config-table",
+      "component": "EditableTable",
+      "title": "结账检查配置",
+      "pageSize": 5,
+      "pagination": false,
+      "showPageSize": true,
+      "selectable": false,
+      "inlineEditMode": true,
+      "headerActions": true,
+      "operationColumnWidth": 144,
+      "actions": [
+        { "code": "add-row", "label": "新增配置", "type": "primary", "icon": "fa-plus" }
+      ],
+      "rowActions": [
+        { "code": "edit-row", "label": "编辑", "type": "link" },
+        { "code": "remove-row", "label": "删除", "type": "link" }
+      ],
+      "columns": [
+        { "code": "sequence", "label": "序号", "component": "text", "editable": false, "align": "center", "width": 72, "fixed": "left" },
+        { "code": "checkModule", "label": "检查模块", "component": "select", "editable": true, "required": true, "options": ["采购", "物资", "收入"], "width": 140 },
+        { "code": "checkItem", "label": "检查事项", "component": "input", "editable": true, "required": true, "width": 220 },
+        { "code": "sqlScript", "label": "执行SQL脚本", "component": "input", "editable": true, "required": true, "width": 250 },
+        { "code": "checkTime", "label": "检查时间", "component": "datetime", "editable": false, "width": 180 },
+        { "code": "checkResult", "label": "检查结果", "component": "tag", "editable": false, "align": "center", "width": 120 },
+        { "code": "affectsClosing", "label": "影响结账？", "component": "tag", "editable": false, "align": "center", "width": 120 },
+        { "code": "configuredBy", "label": "配置人", "component": "text", "editable": false, "width": 120 }
+      ],
+      "rows": [
+        { "id": "CFG01", "checkModule": "物资", "checkItem": "物资出入库单审核完成性", "sqlScript": "CLOSE_MATERIAL_DOCUMENT_CHECK", "checkTime": "2026-09-03 10:20:33", "checkResult": "未通过", "affectsClosing": "是", "configuredBy": "财务-李婷" },
+        { "id": "CFG02", "checkModule": "收入", "checkItem": "收入确认单审核完成性", "sqlScript": "CLOSE_INCOME_RECOGNITION_CHECK", "checkTime": "2026-09-03 10:20:34", "checkResult": "未通过", "affectsClosing": "是", "configuredBy": "财务-李婷" },
+        { "id": "CFG03", "checkModule": "采购", "checkItem": "采购订单、入库及收票完成性", "sqlScript": "CLOSE_PURCHASE_DOCUMENT_CHECK", "checkTime": "2026-09-03 10:20:36", "checkResult": "未通过", "affectsClosing": "是", "configuredBy": "财务-李婷" }
+      ]
+    },
+    {
+      "id": "unfinished-documents",
+      "component": "Space",
+      "children": [
+            {
+              "id": "unfinished-document-table",
+              "component": "ProTable",
+              "title": "待完成单据",
+              "pageSize": 5,
+              "showPageSize": true,
+              "selectable": false,
+              "headerActions": true,
+              "actions": [
+                { "code": "export", "label": "导出", "type": "default", "icon": "fa-download" }
+              ],
+              "rowActions": [],
+              "columns": [
+                { "code": "sequence", "label": "序号", "component": "text", "align": "center", "width": 72, "fixed": "left" },
+                { "code": "checkModule", "label": "检查模块", "component": "text", "width": 140 },
+                { "code": "documentType", "label": "单据类型", "component": "text", "width": 160 },
+                { "code": "documentNo", "label": "单据号", "component": "text", "width": 180 },
+                { "code": "businessDate", "label": "业务日期", "component": "date", "width": 140 },
+                { "code": "documentStatus", "label": "状态", "component": "tag", "align": "center", "width": 120 }
+              ],
+              "rows": [
+                { "id": "U01", "checkModule": "物资", "documentType": "物资出库", "documentNo": "OUT20260902001", "businessDate": "2026-09-02", "documentStatus": "待审核" },
+                { "id": "U02", "checkModule": "物资", "documentType": "其他入库", "documentNo": "OIN20260901003", "businessDate": "2026-09-01", "documentStatus": "草稿" },
+                { "id": "U03", "checkModule": "收入", "documentType": "收入合同", "documentNo": "SR20260901002", "businessDate": "2026-09-01", "documentStatus": "待审核" },
+                { "id": "U04", "checkModule": "采购", "documentType": "采购订单", "documentNo": "PO20260901005", "businessDate": "2026-09-01", "documentStatus": "草稿" },
+                { "id": "U05", "checkModule": "采购", "documentType": "采购入库", "documentNo": "GR20260902004", "businessDate": "2026-09-02", "documentStatus": "待审核" },
+                { "id": "U06", "checkModule": "采购", "documentType": "采购收票", "documentNo": "PI20260902002", "businessDate": "2026-09-02", "documentStatus": "待审核" }
+              ]
+            },
+            {
+              "id": "assistant-all-passed-result",
+              "component": "ProResult",
+              "status": "success",
+              "title": "当前会计期间已全部检查通过",
+              "description": "物资、收入、采购未完成单据均已清零，可以进入期末结账。",
+              "initiallyHidden": true,
+              "actions": [
+                {
+                  "code": "open-period-close",
+                  "label": "进入期末结账",
+                  "type": "primary",
+                  "navigation": {
+                    "path": "period-close/period-close.html",
+                    "moduleName": "期末结账",
+                    "pageName": "期末结账",
+                    "fixedQuery": { "accountingPeriod": "202609" }
+                  }
+                }
+              ]
+            }
+      ]
+    }
+  ],
+  "overlays": [
+    {
+      "id": "check-detail-drawer",
+      "component": "ProDetailDrawer",
+      "title": "检查结果详情",
+      "children": [
+        {
+          "component": "Alert",
+          "type": "warning",
+          "message": "当前检查存在阻断项",
+          "description": "请进入对应源单据完成处理后，再返回结账助手重新检查。"
+        },
+        {
+          "component": "ProDescriptionList",
+          "title": "检查项信息",
+          "layoutColumns": 2,
+          "record": {
+            "ruleCode": "CLOSE-MAT-001",
+            "ruleName": "物资单据审核完成性",
+            "domain": "物资",
+            "completionRule": "期间内影响库存的单据均已审核并生成库存流水",
+            "checkResult": "未通过",
+            "unfinishedCount": "2"
+          },
+          "fields": [
+            { "code": "ruleCode", "label": "检查项编码" },
+            { "code": "ruleName", "label": "检查项名称" },
+            { "code": "domain", "label": "业务域" },
+            { "code": "completionRule", "label": "完成口径" },
+            { "code": "checkResult", "label": "检查结果" },
+            { "code": "unfinishedCount", "label": "未完成单据数" }
+          ]
+        }
+      ],
+      "actions": [
+        { "code": "close", "label": "关闭" }
+      ]
+    }
+  ],
+  "rules": [
+    { "id": "R01", "description": "仅检查业务日期处于当前会计期间开始日期至结束日期闭区间内的物资、收入、采购单据。" },
+    { "id": "R02", "description": "任一阻断项存在未完成单据时，总体检查状态为未通过。" },
+    { "id": "R03", "description": "三个业务域全部检查成功且阻断项清零后，总体状态才为全部通过。" },
+    { "id": "R04", "description": "全部通过后若期间内源单据发生影响结论的变化，原通过结论失效并要求重新检查。" },
+    { "id": "R05", "description": "源单据穿透不扩大当前用户的数据权限和操作权限。" }
+  ],
+  "interactions": [
+    { "trigger": "run-closing-check.click", "effect": "按钮进入检查中状态，完成后刷新结账检查配置和未完成单据；演示数据切换为全部通过。" },
+    { "trigger": "unfinished-document.open", "effect": "通过 iframe 标签打开源业务单据，返回后保留页码。" },
+    { "trigger": "all-passed", "effect": "未完成单据表隐藏，显示全部通过结果和进入期末结账入口。" }
+  ]
+}
