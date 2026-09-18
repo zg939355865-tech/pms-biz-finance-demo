@@ -1,5 +1,0 @@
-script:Y
-standalone:Y
-IIFE:Y
-click:Y
-replace:Y

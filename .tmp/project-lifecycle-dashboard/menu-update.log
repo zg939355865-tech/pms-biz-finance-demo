@@ -1,3 +1,0 @@
-{"kind":"table","sheet":"菜单明细","address":"A58:D64","rows":7,"cols":4,"values":[["报表管理","智能体状态监控",510,"是"],["报表管理","需求跟踪表",520,"是"],["报表管理","库存价格汇总",521,"是"],["使用指南",null,530,"是"],["物资管理","库存地点",315,"是"],["报表管理","项目运维记录",495,"是"],["报表管理","项目全生命周期驾驶舱",485,"是"]]}
-{"kind":"notice","message":"Cell search matched 0 entries."}
-Inspect result written to file: D:/项目AI协作/4、PMS业财一体化/.tmp/project-lifecycle-dashboard/menu-simple.updated.xlsx.inspect.ndjson
